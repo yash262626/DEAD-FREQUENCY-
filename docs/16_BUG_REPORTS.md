@@ -24,12 +24,19 @@ Every defect found during development, with severity, how it showed up, the fix,
 | B-018 | S2 | Resolution setting resized the test window before test mode was flagged (inputs dropped) | Run `systems` | Test mode is detected before settings are applied | `systems` |
 | B-019 | S2 | Ch 11 voiceprint reel stand sealed a floor cell | Walk Stack A | Stand moved into the aisle | `layout` |
 | B-020 | S3 | Test runner: `continue` inside `match` falls through in GDScript 3 | Walkthrough steps "choice"/"crate" | Rewritten with if/elif | `play` |
+| B-021 | S3 | Settings: the controls footer overlapped the last settings rows at 720p | Open Settings at 1280×720 | Controls moved into a three-column table inside the scrolling list | `gallery` (98_settings.png) |
+| B-022 | S2 | Fresh checkout: textures not imported, so tests and CI logged engine errors; `godot --editor --quit` exits before importing | Clone, run any suite | `tools/import_assets.sh` runs the editor until every source has its cache entry; CI step added | CI `test` job |
+| B-023 | S2 | Alt-tabbing during play left the game running — the Listener could catch an absent player | Alt-tab near the Listener | Focus loss opens the pause menu (not during cinematics) | `flow` (2 checks) |
+| B-024 | S2 | Release builds did not carry the licence texts of Godot's bundled third-party libraries (FreeType, etc.) | Inspect the build folder | `licenses/` generated from the engine's copyright data and shipped by `package_release.sh`; FreeType credit line in notices and README | `licenses` utility |
+| B-025 | S3 | The smoke test would have written its run into the player's play-time log | Run `--smoketest` | Smoke test uses its own log file | smoke test |
 
 ## Open issues (not defects in code, but release blockers)
 | ID | Sev | Issue | Status |
 |---|---|---|---|
-| K1 | S1 | Campaign length below the 10–15 h target; no human playtests yet | expansion in progress (tracker) |
+| K1 | S1 | Campaign length unmeasured (model 3.9–10.1 h main path, 5.4–14.0 h with optional content); no human playtests yet | play-time log + report tool ready; awaiting playtesters |
 | K2 | S2 | No recorded voice acting | recording package prepared; awaiting cast |
-| K3 | S2 | Art is stylised procedural stand-ins | visual upgrade in progress |
-| K4 | S2 | Windows build never launched on Windows hardware | checklist in 13_TESTING_PLAN.md |
+| K3 | S2 | Stylised real-time 3D with CC0 PBR materials; not photoreal | by design for this engine; see 19 |
+| K4 | S2 | Windows build passed the smoke test under Wine only; never launched on Windows hardware | checklist in 13_TESTING_PLAN.md §9.2 |
 | K5 | S3 | Steamworks not integrated | needs Steam App ID + GodotSteam build |
+| K6 | S3 | Exe has no embedded icon/version resource and is not code-signed | rcedit + certificate at release time |
+| K7 | S2 | GPU performance unmeasured | needs real hardware |

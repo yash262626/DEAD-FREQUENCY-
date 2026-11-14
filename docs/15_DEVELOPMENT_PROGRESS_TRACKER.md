@@ -2,7 +2,7 @@
 
 Status key: **Tested** = implemented and covered by a passing automated test · **Implemented** = in the game and exercised by playthrough/visual checks, no dedicated assertion · **Partial** · **Planned** · **Blocked** (cannot be done in this environment) · **Awaiting external** (needs people, money or hardware outside this project).
 
-Latest full regression: validate 257/0 · flags 161/0 · layout 18/0 · save 17/0 · systems 29/0 · ai 12/0 · flow 13/0 · endings 26/0 · play 225/0 · ngplus 15/0 · vo 4/0 (with a fixture recording) · introtime 135 s.
+Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 — 780 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
 
 ## Final deliverables (as requested)
 | # | Deliverable | Status |
@@ -12,8 +12,8 @@ Latest full regression: validate 257/0 · flags 161/0 · layout 18/0 · save 17/
 | 3 | New Game+ | **Tested** — cross-run memory, bounded adaptations, 88.0 thread, encounter variants, postscripts |
 | 4 | Improved graphics | **Partial** — CC0 PBR materials, fixtures and light shafts, particles, water, new creature, first-person hands, textured exterior, better human figures. Still procedural geometry; **not photoreal** |
 | 5 | Improved audio | **Partial** — adaptive music, silence logic, surface footsteps, creature sounds, fear breathing, VO hook; all sound still synthesised placeholders. No recorded audio |
-| 6 | Improved cinematics | **Partial** — new creature and figures appear in every cinematic; title reveal, second reveal, cards and endings unchanged in structure (see 07_CINEMATIC_SCRIPT.md) |
-| 7 | Updated Windows build | **Implemented** — exported from the final code; Wine smoke test (see 13_TESTING_PLAN.md); **not run on real Windows** |
+| 6 | Improved cinematics | **Partial** — new creature and figures in every cinematic; second reveal rebuilt as a CRT terminal (text unchanged, last line turns red); SIGNAL LOST, pause and settings screens polished. Camera work and timing unchanged; no motion-captured or hand-animated performances |
+| 7 | Updated Windows build | **Implemented** — exported from the final code; `--smoketest` 15/15 under Wine 9.0; clean release zip with licences and checksums (`tools/package_release.sh`); **not run on real Windows**; exe icon/version resource and code signing pending |
 | 8 | Automated test reports | **Tested** — 13_TESTING_PLAN.md, 16_BUG_REPORTS.md |
 | 9 | Updated GDD | **Implemented** — 01 |
 | 10 | Updated Story Bible | **Implemented** — 02 (incl. New Game+ canon) |
@@ -29,8 +29,8 @@ Latest full regression: validate 257/0 · flags 161/0 · layout 18/0 · save 17/
 | 3 New Game+ | **Done — Tested** |
 | 4 Graphics and characters | **Partial** — everything achievable with code + CC0 libraries in this environment is in; authored characters/environments need artists (11_ASSET_PRODUCTION_LIST.md) |
 | 5 Sound and music | **Partial** — systems done; content needs a sound designer, composer and actors (18_AUDIO_PRODUCTION_PLAN.md, docs/vo/) |
-| 6 Cinematics and UI | **Partial** — functional and tested; a dedicated polish pass with real assets is pending |
-| 7 Performance and Windows | **Partial** — CPU-side measured; GPU and real-Windows testing awaiting hardware |
+| 6 Cinematics and UI | **Partial** — polish pass done on the second reveal, game over, pause and settings; title reveal, cards and credits reviewed (gallery); further polish needs real art/animation |
+| 7 Performance and Windows | **Partial** — built-in smoke test; Windows exe passes it under Wine; release package; CI Wine job; pause on focus loss. GPU performance and real-Windows testing awaiting hardware |
 | 8 Release preparation | **Done (docs)** — publishing, Steamworks and App ID **awaiting owner** |
 
 ## Feature status
@@ -48,6 +48,10 @@ Latest full regression: validate 257/0 · flags 161/0 · layout 18/0 · save 17/
 | Objectives, journal, subtitles, prompts, HUD | Implemented |
 | Save/load/checkpoints, atomic saves + backup fallback | Tested |
 | Menus, chapter select, settings (incl. resolution), pause | Tested |
+| Pause on window focus loss | Tested |
+| Local play-time log (per chapter time, deaths, completion) + report tool | Tested (log); report tool run on sample data only |
+| Built-in `--smoketest` | Tested (source on Linux; exported exe under Wine) |
+| Release package (exe, README, credits, notices, licences, checksums) | Implemented |
 | Gamepad | Implemented (bindings); **not tested with hardware** |
 | Opening cinematic + first title reveal (2 min 15 s) | Tested |
 | Second title reveal "SIGNAL IDENTIFIED / SUBJECT: DANIEL ARLEN / STATUS: ALREADY INSIDE" | Tested |
@@ -64,7 +68,7 @@ Latest full regression: validate 257/0 · flags 161/0 · layout 18/0 · save 17/
 | Professional characters and animation | Procedural rigs with code animation | Needs a character artist/animator |
 | 10–15 h campaign | Modelled 5.4–14 h incl. optional content, unmeasured | Playtests first; then scope more content where players finish fastest |
 | Professional audio, soundtrack, VO | Systems ready; placeholders only | Sound designer (credited: Ajay Gohil), composer, voice cast |
-| Windows verification | Exported; Wine smoke test only | Run the build on Windows 10/11 (`--smoketest`, checklist in 13) |
+| Windows verification | Exported; smoke test passes under Wine only | Run the build on Windows 10/11 (`--smoketest`, checklist in 13 §9.2) |
 | Steam | Package prepared | Owner's Steamworks account and App ID |
 
 ## Roadmap

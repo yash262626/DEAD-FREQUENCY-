@@ -9,23 +9,23 @@ First-person psychological horror for Windows PC. October 17, 1998, 02:43: the H
 ![Title](docs/screenshots/00_title.png)
 
 ## What's in this repository
-- A complete, playable campaign in **Godot 3.5**: 2-minute opening cinematic, 13 chapters, 4 endings, end credits.
-- The radio system (four bands plus hidden carriers, directional antenna, battery, exposure), a sound-hunting enemy that learns, stealth, puzzles, saves, menus, settings, subtitles, controller support.
-- 15 production documents in [`docs/`](docs/) and an automated test suite that plays the whole campaign.
+- A complete, playable campaign in **Godot 3.5**: 2-minute opening cinematic, 13 chapters with optional wings, 4 endings, New Game+ ("Second Signal"), end credits.
+- The radio system (four bands plus hidden carriers, directional antenna, battery, exposure), a sound-hunting enemy that learns (and remembers between runs), stealth, puzzles, saves, menus, settings, subtitles, controller support.
+- CC0 PBR materials (ambientCG), procedural audio with adaptive music, a voice-over recording package ready for actors.
+- 20 production documents in [`docs/`](docs/), an automated test suite that plays the whole campaign, and a built-in `--smoketest` for release builds.
 
-All art and audio are generated in code (original, licence-clean stand-ins). See the [progress tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md) for an honest list of what is done and what is not — notably the campaign is currently an estimated 4.5–7 hours against a 10–15 hour target (expansion in progress), there is no recorded voice acting, and the Windows build has been exported but not yet launched on Windows hardware.
+What is **not** done, plainly: the campaign length is a model (3.9–10.1 h main path, 5.4–14.0 h with optional content) until playtests measure it — the 10–15 hour target is not claimed; there is no recorded voice acting (placeholder radio voice + full subtitles); the look is stylised, not photoreal; the Windows build has passed a smoke test under Wine but has **not** been run on real Windows hardware; Steamworks is not integrated. Details: [progress tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md).
 
 ## Play from source
 1. Install **Godot 3.5.x** (standard build) from godotengine.org, or `sudo apt install godot3` on Ubuntu.
 2. Open `game/project.godot` and press **F5**, or run `godot3 --path game` (`--menu` skips the opening).
 
-## Build the Windows .exe
+## Build the Windows release
 Install the Godot 3.5.2 export templates, then:
 ```
-cd game
-godot3 --no-window --export "Windows Desktop" ../build/windows/DeadFrequency.exe
+tools/package_release.sh --export     # → build/DeadFrequency-<version>-Windows-x64.zip
 ```
-Or run the **build** workflow from the GitHub Actions tab (tests first, then Windows and Linux artifacts).
+After a fresh clone, `tools/import_assets.sh` imports the textures (the script above does it automatically). Or run the **build** workflow from the GitHub Actions tab (tests, Windows/Linux export, Wine smoke test, release zip).
 
 ## Controls
 | Action | Keyboard / mouse | Gamepad |
@@ -44,14 +44,15 @@ Or run the **build** workflow from the GitHub Actions tab (tests first, then Win
 tools/test.sh validate   # data integrity: maps, commands, markers, sounds, credits
 tools/test.sh flags      # every story flag read is set somewhere
 tools/test.sh layout     # no prop blocks a passage
-tools/test.sh save       # save/load, ending logic, checkpoints
+tools/test.sh save       # save/load, damaged-save fallback, ending logic, checkpoints, play-time log
 tools/test.sh systems    # movement, flashlight, radio, doors, health, menus
 tools/test.sh ai         # the Listener's senses, states and learning
-tools/test.sh flow       # intro → menu → new game → pause → continue → chapter select → death → reload
+tools/test.sh flow       # intro → menu → new game → focus-loss pause → continue → chapter select → death → reload
 tools/test.sh endings    # all four endings + credits
+tools/test.sh ngplus     # New Game+ memory, 88.0 content, Listener adaptations
 tools/test.sh play       # the full campaign, chapter 1 → ending D
 ```
-Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`).
+Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`). Latest results: [13_TESTING_PLAN.md](docs/13_TESTING_PLAN.md).
 
 ## Documents
 | # | Document |
@@ -71,6 +72,12 @@ Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`).
 | 13 | [Testing Plan & Results](docs/13_TESTING_PLAN.md) |
 | 14 | [Release Plan (Steam)](docs/14_RELEASE_PLAN.md) |
 | 15 | [Development Progress Tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md) |
+| 16 | [Bug Reports](docs/16_BUG_REPORTS.md) |
+| 17 | [Campaign Time Budget (model)](docs/17_TIME_BUDGET.md) |
+| 18 | [Audio Production Plan & VO](docs/18_AUDIO_PRODUCTION_PLAN.md) — recording script in [`docs/vo/`](docs/vo/) |
+| 19 | [Engine Migration Assessment](docs/19_ENGINE_MIGRATION_ASSESSMENT.md) |
+| 20 | [Steam Release Package](docs/20_STEAM_RELEASE_PACKAGE.md) |
+|  | [Third-Party Notices](docs/THIRD_PARTY_NOTICES.md) · [Privacy](docs/PRIVACY.md) |
 |  | [Changelog](CHANGELOG.md) |
 
 Docs 04–08 are generated from the game data (`python3 tools/gen_docs.py <export.json> docs`), so they always match what ships.
@@ -78,4 +85,4 @@ Docs 04–08 are generated from the game data (`python3 tools/gen_docs.py <expor
 ## Credits
 Developed by **YASH AIL** · Sound Effects by **AJAY GOHIL** · Game Design & Creative Support **ADARSH GUPTA** · Gameplay Testing & Quality Assurance **TANISH SHETTY** · Environment Design & Production Support **SHUBHAM GAONKAR**
 
-Built with Godot Engine (MIT). Fonts: Liberation (SIL Open Font License).
+Built with Godot Engine (MIT). Fonts: Liberation (SIL Open Font License). Surface textures: ambientCG (CC0). Full notices and licence texts: [`docs/THIRD_PARTY_NOTICES.md`](docs/THIRD_PARTY_NOTICES.md), [`licenses/`](licenses/).

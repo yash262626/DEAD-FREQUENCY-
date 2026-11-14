@@ -61,7 +61,7 @@ Full gamepad support (Xbox layout; works with XInput and most DirectInput pads).
 | CPU | 4-core, 2.5 GHz | 6-core, 3.5 GHz |
 | RAM | 4 GB | 8 GB |
 | GPU | OpenGL 3.3 capable, 2 GB (GTX 750 Ti / RX 460 class), **Low/Medium preset** | GTX 1060 / RX 580 class, **High preset** |
-| Storage | 300 MB | 300 MB |
+| Storage | 300 MB (the build is ~85 MB) | 300 MB |
 | Audio | Stereo headphones strongly recommended | |
 These numbers are estimates: GPU performance has **not** been measured yet (only CPU-side cost on a software renderer — see 12_TECHNICAL_DOCUMENTATION.md).
 
@@ -70,7 +70,8 @@ Subtitles (on by default, speaker names, three sizes) · reduce flashing · FOV 
 
 ## Privacy and licensing
 - **Privacy:** the game collects no personal data, has no telemetry, no accounts and makes no network connections. Saves and settings stay on the player's computer. See docs/PRIVACY.md.
-- **Third-party licences:** Godot Engine (MIT), Liberation fonts (SIL OFL 1.1), ambientCG materials (CC0). See docs/THIRD_PARTY_NOTICES.md; include it and Godot's licence text in the release package.
+- **Third-party licences:** Godot Engine (MIT) and the libraries compiled into it (FreeType, etc.), Liberation fonts (SIL OFL 1.1), ambientCG materials (CC0). `tools/package_release.sh` ships THIRD_PARTY_NOTICES.txt, `licenses/GODOT_ENGINE_LICENSE.txt` and `licenses/LIBERATION_FONTS_OFL.txt` with every build; the same files go into the Steam depot.
+- **Local files:** `playtest.json` (play time and deaths per chapter) is written locally only; Auto-Cloud should not sync it.
 - **EULA:** use Steam's default Subscriber Agreement unless the owner wants a custom EULA.
 
 ## Steam integration (investigated, not implemented)
@@ -81,7 +82,10 @@ Subtitles (on by default, speaker names, three sizes) · reduce flashing · FOV 
 
 ## Release checklist
 See 14_RELEASE_PLAN.md → Release checklist, plus:
-- [ ] Windows launch test on real hardware (the `--smoketest` option writes a log and screenshots)
+- [x] Release package script (exe, README, credits, notices, licences, checksums): `tools/package_release.sh --export`
+- [x] `--smoketest` passes for the Windows exe under Wine 9.0 (13_TESTING_PLAN.md §9.1)
+- [ ] Windows launch test on real hardware — checklist in 13_TESTING_PLAN.md §9.2
+- [ ] Embed icon and version resource in the exe (enable `application/modify_resources`, configure `rcedit` in the editor settings); code-sign the exe (certificate needed)
 - [ ] GPU performance measured; system requirements confirmed
 - [ ] Human playtests confirm campaign length before quoting hours on the store page
 - [ ] Voice-over recorded (or store page states "subtitled, no voice acting")

@@ -87,18 +87,20 @@ Saves are versioned JSON (`v`). Patches must only add fields; a migration step i
 
 ## Build & deployment
 1. `tools/test.sh` — all suites green.
-2. Export Windows (`game/export_presets.cfg` → "Windows Desktop") — locally or via GitHub Actions (`build` workflow, manual or `v*` tag).
-3. Smoke-test the `.exe` on Windows 10 and 11 (fresh user, controller and KB/M).
+2. Export and package Windows: `tools/package_release.sh --export` → `build/DeadFrequency-<version>-Windows-x64.zip` — locally or via GitHub Actions (`build` workflow, manual or `v*` tag; it also runs the Wine smoke test).
+3. Smoke-test the `.exe` on Windows 10 and 11: `DeadFrequency.exe --smoketest`, then the checklist in 13_TESTING_PLAN.md §9.2 (fresh user, controller and KB/M).
 4. Upload with SteamPipe (`steamcmd +run_app_build app_build.vdf`) to a beta branch; promote after QA.
 
 ## Release checklist
 - [ ] Measure GPU performance on min-spec and recommended hardware; tune presets.
-- [ ] Launch-test the Windows build on real hardware (exported, not yet launched).
+- [ ] Launch-test the Windows build on real hardware (passes `--smoketest` under Wine; not yet run on Windows).
 - [ ] Human playtests (13_TESTING_PLAN.md) and tuning.
 - [ ] Content expansion toward the 10–15 h campaign target (15_DEVELOPMENT_PROGRESS_TRACKER.md).
 - [ ] Art pass (characters, creature, environment kits) and voice-over recording.
 - [ ] Music score.
 - [ ] Integrate Steamworks (achievements, cloud saves, overlay) — GodotSteam for Godot 3.5.
 - [ ] Steam page: capsules, trailer, screenshots, store copy, age rating questionnaire (IARC), content descriptors (horror themes, no gore).
-- [ ] EULA / privacy (no data collection), third-party notices (Godot MIT licence, Liberation fonts SIL OFL).
+- [x] Privacy statement (no data collection) and third-party notices with full licence texts, shipped in the release package.
+- [ ] EULA decision (Steam default or custom).
+- [ ] Exe icon/version resource (rcedit) and code signing.
 - [ ] Release-candidate build on beta branch; final regression run; launch.

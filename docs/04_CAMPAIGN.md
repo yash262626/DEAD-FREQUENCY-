@@ -57,6 +57,7 @@ October 17, 1998, 02:43. A storm over the mountain. Inside HELIX-9, Dr. Evelyn V
 
 **Discoveries**
 
+- Document — Northline dispatch slip
 - Tape — Security log — Hale, Oct 12 1998
 - Document — Gate Log — Oct 16, 1998
 - Item — Power cell
@@ -92,11 +93,13 @@ The administration wing, where the night shift stopped mid-sentence. First full 
 
 **Puzzles & gates**
 
+- Hidden carrier **88 MHz** — “88.0 — the second signal (1 of 6)”
 - Keypad `SUPERVISOR'S OFFICE — CODE` — code **4406**
 - Door locked by item — needs **Medical wing keycard**
 
 **Discoveries**
 
+- Transmission 88 MHz — 88.0 — the second signal (1 of 6)
 - Item — Glass bottle
 - Item — Power cell
 - Transmission 89.1 MHz — Pell — the stranger (1 of 4)
@@ -143,6 +146,7 @@ The medical wing. A patient file with Daniel's birthday. Evelyn's first recordin
 
 - Tape — Brandt — quarantine
 - Tape — Dr. Voss — hearing assessment **(Evelyn — counts toward ending D)**
+- Document — Mira's notebook — page 1 of 5
 - Document — Reception — night log
 - Item — Power cell
 - Document — Patient file — VOSS, D.
@@ -178,6 +182,7 @@ Residential quarters. Mira's note says 96.1. Something knocks on the laundry doo
 
 **Puzzles & gates**
 
+- Hidden carrier **88 MHz** — “88.0 — the second signal (2 of 6)”
 - Keypad `QUARTERS 2 — VOSS — CODE` — code **0814**
 - Door locked by item — needs **Quarters master key**
 - Keypad `CARETAKER — CODE` — code **0309**
@@ -186,6 +191,7 @@ Residential quarters. Mira's note says 96.1. Something knocks on the laundry doo
 
 **Discoveries**
 
+- Transmission 88 MHz — 88.0 — the second signal (2 of 6)
 - Tape — Dr. Voss — personal log (lullaby) **(Evelyn — counts toward ending D)**
 - Document — Residents' directory
 - Item — Power cell
@@ -231,6 +237,7 @@ The power station. A man who calls himself Marcus Hale answers on 103.7 and dire
 
 **Discoveries**
 
+- Document — Mira's notebook — page 2 of 5
 - Tape — Dr. Voss — Run 7 **(Evelyn — counts toward ending D)**
 - Document — Shaft maintenance log
 - Item — Hand crank
@@ -263,6 +270,7 @@ The stairwell collapses: no way back. Flood tunnels where water doubles every fo
 
 **Puzzles & gates**
 
+- Hidden carrier **88 MHz** — “88.0 — the second signal (3 of 6)”
 - Door gated by story state `solved_valves` — “Floodgate. The water on the far side is holding it shut. Drain the section first.”
 - Door gated by story state `solved_valves` — “Office door. There's a wall of water behind it. Drain the section first.”
 - 107.9-only writing: “SHE SAID NO”
@@ -274,6 +282,7 @@ The stairwell collapses: no way back. Flood tunnels where water doubles every fo
 
 **Discoveries**
 
+- Transmission 88 MHz — 88.0 — the second signal (3 of 6)
 - Tape — Okafor — personal
 - Document — Directorate memo — liaison's briefcase
 - Item — Power cell
@@ -313,6 +322,7 @@ The Communications Centre. A numbers station on 99.7 and a 1998 echo give the st
 **Discoveries**
 
 - Document — Sticky note on the storeroom shelf
+- Document — Mira's notebook — page 3 of 5
 - Tape — Dr. Voss — Run 18 **(Evelyn — counts toward ending D)**
 - Item — Power cell
 - Document — Taped to Haddad's monitor
@@ -340,24 +350,41 @@ The research labs. The 1996 Project ECHO briefing: the Aperture was never a rece
 
 1. Find out what HELIX-9 was for. Then find a way through to the transport line.
 1. Hide. Now.
-1. Find a way out of the labs. The south corridor exit needs a research keycard.
+1. Find a way out: the transport exit needs a research keycard, and the lab lockdown lifted at the release console.
 1. The transport line is through the door at the east end of the south corridor.
+1. A hidden door under the cold room. Whatever the Directorate kept down here, it's behind it.
+1. Lockdown's lifted and you have the keycard. The transport line is at the east end of the south corridor.
+1. Lockdown's lifted. Now the research keycard — try the cold room off the south corridor.
+1. The annex's inner door has power.
 
 **Puzzles & gates**
 
+- Hidden carrier **88 MHz** — “88.0 — the second signal (4 of 6)”
 - Keypad `COLD ROOM — CODE` — code **6024**
 - Door locked by item — needs **Research keycard**
+- Door gated by story state `c8_lockdown` — “Lockdown shutter. The lab won't release the transport airlock until both lockdown keys are turned at the release console.”
+- Door gated by story state `solved_annex` — “Inner door. Dead — the annex has no power of its own.”
+- Door gated by story state `c8_annex_found` — “Just wall. Except it rings hollow when I knock on it.”
 - 107.9-only writing: “COLD ROOM / 6 0 2 4”
+- 107.9-only writing: “THE ANNEX IS BELOW / PULL THE SHELF”
+- Physics: push the crate onto the treadle plate
+- Hidden carrier **93.3 MHz** — “93.3 — Long Ear”
 - Rotation puzzle `proto` — Turn tap I: position 1 of 4; Turn tap II: position 3 of 4; Turn tap III: position 2 of 4
+- Rotation puzzle `annex` — Turn relay wheel I: position 2 of 4; Turn relay wheel II: position 1 of 4; Turn relay wheel III: position 3 of 4
 
 **Discoveries**
 
+- Transmission 88 MHz — 88.0 — the second signal (4 of 6)
+- Tape — Directorate — Long Ear status
+- Document — Cell 2 — preparation order
 - Tape — Dr. Voss — the night before Run 19 **(Evelyn — counts toward ending D)**
 - Document — Lab 2 — response trials, Subject D
 - Transmission 101.3 MHz — Forecast — the lights
 - Item — Research keycard
 - Document — Evelyn's desk calendar
 - Document — Prototype calibration card
+- Document — Annex power protocol
+- Transmission 93.3 MHz — 93.3 — Long Ear
 
 **The Listener** — patrol from `Z` once `c8_loose`
 
@@ -387,6 +414,7 @@ The transport line. Mira sings the first line of the lullaby; Daniel finishes it
 
 **Discoveries**
 
+- Document — Mira's notebook — page 4 of 5
 - Tape — Cross — transport
 - Document — Last service manifest
 - Item — Power cell
@@ -417,11 +445,13 @@ Containment. The Listener is invisible here except on 107.9. At the bulkhead, tw
 
 **Puzzles & gates**
 
+- Hidden carrier **88 MHz** — “88.0 — the second signal (5 of 6)”
 - Door locked by item — needs **Hale's security badge**
 - Door gated by story state `c10_choice` — “Archive lift corridor. Interlocked until the bulkhead cycle completes.”
 
 **Discoveries**
 
+- Transmission 88 MHz — 88.0 — the second signal (5 of 6)
 - Tape — Dr. Voss — the rule **(Evelyn — counts toward ending D)**
 - Item — Hale's security badge
 - Document — Bulkhead log
@@ -442,14 +472,17 @@ The Archive. Ines Duarte's sealed statement explains how a baby called Daniel le
 
 **Objectives (in order shown to the player)**
 
-1. Find the archive keycard for the deep lift. Look for the vaults.
-1. Take the deep lift at the east end of the stacks.
+1. The deep lift needs the archive keycard and the Director's voiceprint. Read the index card. Look for the vaults.
+1. Keycard and voiceprint. The deep-lift control is at the east end of the stacks.
+1. The deep lift also wants the Director's voice. The index card says Stack A.
+1. The deep lift is open. East end of the stacks.
 
 **Puzzles & gates**
 
 - 107.9-only writing: “BOX 19 / STACK E — ROW 3”
-- Door locked by item — needs **Archive keycard**
+- Door gated by story state `c11_lift` — “Deep lift. 'APERTURE LEVEL — KEYCARD AND VOICEPRINT.' The control panel is beside the doors.”
 - Keypad `VAULT D — DIRECTOR — CODE` — code **0243**
+- “Deep lift control — play the voiceprint” — needs **Voiceprint reel — E. Voss**
 - Keypad `VAULT S — SECURITY — CODE` — code **5119**
 - 107.9-only writing: “VAULT S / HALE, M.  —  5 1 1 9”
 
@@ -457,12 +490,14 @@ The Archive. Ines Duarte's sealed statement explains how a baby called Daniel le
 
 - Transmission 89.1 MHz — Pell — the forty-second
 - Tape — Dr. Voss — for Daniel **(Evelyn — counts toward ending D)**
+- Document — Mira's notebook — page 5 of 5
 - Document — Sealed statement — Cpl. I. Duarte
 - Document — Taped to the Director's vault
 - Tape — Marcus Hale — last report
 - Transmission 89.1 MHz — Pell — the stranger (4 of 4)
 - Item — Archive keycard
 - Document — Archive index card
+- Item — Voiceprint reel — E. Voss
 - Item — Dr. Voss's shutdown key
 
 **The Listener** — ambush from `Z`
@@ -486,7 +521,12 @@ The Aperture ring. Three emitters replay the last eight minutes of 1998. At the 
 
 **Puzzles & gates**
 
+- Hidden carrier **88 MHz** — “88.0 — the second signal (6 of 6)”
 - Door gated by story state `c12_all` — “The chamber seal. All three emitters have to be live.”
+
+**Discoveries**
+
+- Transmission 88 MHz — 88.0 — the second signal (6 of 6)
 
 **The Listener** — patrol from `P` until `c12_all`
 
@@ -504,6 +544,10 @@ The Door. Mira beside him, twenty-eight years to the left. Evelyn at the seal in
 **Objectives (in order shown to the player)**
 
 1. The Aperture console.
+
+**Discoveries**
+
+- Document — Mira's notebook — the last page
 
 **The Listener** — scripted appearances only
 

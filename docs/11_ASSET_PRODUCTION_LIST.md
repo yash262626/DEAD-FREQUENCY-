@@ -1,17 +1,18 @@
 # DEAD FREQUENCY — Asset Production List
 
-The current build ships **zero imported art or audio**: geometry, materials, characters and every sound are generated in code. This keeps the repository original and licence-clean, but it is a stand-in for the commercial target. This list separates what exists from what a release needs. Priority: **P1** blocks a commercial release · **P2** strongly expected · **P3** polish.
+The current build's only imported art is **20 CC0 PBR material sets from ambientCG** (listed in THIRD_PARTY_NOTICES.md); geometry, characters and every sound are generated in code. This keeps the repository original and licence-clean, but it is a stand-in for the commercial target. This list separates what exists from what a release needs. Priority: **P1** blocks a commercial release · **P2** strongly expected · **P3** polish.
 
-## What exists now (procedural)
+## What exists now
 | Area | Implementation | Quality today |
 |---|---|---|
 | Level geometry | grid-built walls, floors, ceilings, trim bands; auto pipe runs and debris | Functional, blocky |
-| Materials | triplanar noise albedo + normal maps per palette | Readable, not photoreal |
+| Materials | 20 CC0 PBR sets (albedo, normal, packed AO/roughness/metal), world-space triplanar on walls/floors/ceilings, per-prop material choice (`mats.gd`); flat colours on the Low preset | Convincing surfaces up close; not photoreal |
+| Lighting & effects | fixtures with emissive tubes, volumetric light cones, dust, sparks, steam, drips, water shader (`fx.gd`) | Good atmosphere |
 | Props (37 types) | primitive compositions in `props.gd` — desks, lockers, consoles, tanks, turbines, racks, beds, cribs, valves, dishes, tram, the Aperture… | Recognisable silhouettes |
-| Characters | articulated primitive figures; translucent "shades" | Stand-ins |
-| The Listener | primitive body with dish head, animated limbs and dish | Strong silhouette, no detail |
+| Characters | articulated figures with tapered limbs, coats, heads and hair; translucent "shades"; first-person hands with torch and HX-7 receiver | Stand-ins |
+| The Listener | rebuilt body (ribs, jointed arms and legs, fingers, dish head with struts) with code animation: gait, torso pitch, dish snapping toward sounds, signal-stutter; rim-lit skin shader | Strong silhouette, limited detail |
 | Exterior | mountains, snow caps, bunker portal, mast, truck, rain, lightning | Atmospheric, low detail |
-| Audio | ~33 synthesised sounds: drones ×4, static, hum, rain, thunder, steps (dry/wet), door, knock, clicks, screech, alarm, breath, heartbeat, glitch, impact, beeps, voice texture, whisper, metal, splash, tram, power up/down | Original, serviceable; no music score, no VO |
+| Audio | 39 synthesised sounds incl. per-surface footsteps (concrete, metal, tile), creature rasp and dish snaps, tension and chase music layers, fear breathing; adaptive mix with ducking | Original, serviceable; no composed score, no VO |
 | Fonts | Liberation Sans / Mono (SIL Open Font License) | Fine |
 | UI | code-drawn HUD, receiver face, menus, shaders (grain, vignette, damage, interference, metallic glitch title, fog) | Good |
 
@@ -35,7 +36,7 @@ Entrance & security · administration · medical · residential · power station
 PBR sets (albedo/normal/roughness/AO) per kit: painted concrete, tiled floors, rubber, brushed steel, rust, water-stained ceilings, lab tile, carpet, archive paper. Decals: water damage, scorch, signage, warning stripes, handwritten notes.
 
 ### Audio (P1)
-- **Voice-over**: 538 lines across 23 speaker tags (script: 06_DIALOGUE_AND_AUDIO_SCRIPT.md). Radio processing presets per band.
+- **Voice-over**: 640 lines, 7,673 words, 24 characters — recording script with file names, direction and processing per line in `docs/vo/` (plan: 18_AUDIO_PRODUCTION_PLAN.md).
 - **Music**: main theme, menu loop, per-area ambient beds (12), chase, the four ending cues, credits theme, the lullaby (solo voice).
 - **SFX**: replace/upgrade the procedural set; add per-surface footsteps (concrete, metal grate, carpet, water, tile), cloth, receiver foley (dial clicks, antenna, squelch), creature voice set.
 - **Credit**: sound design credited to **Ajay Gohil** in the end credits as specified by the project owner.

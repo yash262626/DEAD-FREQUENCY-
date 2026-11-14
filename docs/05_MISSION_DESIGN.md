@@ -41,16 +41,17 @@
 
 1. Trigger `w`
 2. Document — “Patient file — VOSS, D.”
-3. Tune **89.1 MHz** near the source and face it — Pell — the stranger (2 of 4)
-4. Document — “Memo — S. Lind”
-5. Tape — “Dr. Voss — hearing assessment”
-6. Trigger `1`
-7. Push the crate onto the pressure plate
-8. Door
-9. Pickup — Ceramic fuse
-10. Door (code 2711)
-11. Tape — “Brandt — quarantine”
-12. Interaction — “Fit fuse and call the service lift”
+3. Document — “Mira's notebook — page 1 of 5”
+4. Tune **89.1 MHz** near the source and face it — Pell — the stranger (2 of 4)
+5. Document — “Memo — S. Lind”
+6. Tape — “Dr. Voss — hearing assessment”
+7. Trigger `1`
+8. Push the crate onto the pressure plate
+9. Door
+10. Pickup — Ceramic fuse
+11. Door (code 2711)
+12. Tape — “Brandt — quarantine”
+13. Interaction — “Fit fuse and call the service lift”
 
 **Mission objectives**: Search the medical wing. The service lift is somewhere along the main corridor. → Find a way down. The service lift is at the east end of the corridor. → Fit the fuse in the service lift panel at the east end of the corridor. → Something heard the tape. Hide, and wait for it to leave.
 
@@ -76,19 +77,20 @@
 ## CHAPTER 05 — THE VOICES
 
 1. Trigger `1`
-2. Tape — “Dr. Voss — Run 7”
-3. Tune **89.1 MHz** near the source and face it — Breaker gallery, 1998
-4. Interaction — “Close breaker C”
-5. Interaction — “Close breaker A”
-6. Interaction — “Close breaker D”
-7. Interaction — “Close breaker B”
-8. Pickup — Hydraulic fluid
-9. Pickup — Hand crank
-10. Door
-11. Tape — “Ruiz — workshop”
-12. Interaction — “Refill and prime the accumulator”
-13. Trigger `w`
-14. Door
+2. Document — “Mira's notebook — page 2 of 5”
+3. Tape — “Dr. Voss — Run 7”
+4. Tune **89.1 MHz** near the source and face it — Breaker gallery, 1998
+5. Interaction — “Close breaker C”
+6. Interaction — “Close breaker A”
+7. Interaction — “Close breaker D”
+8. Interaction — “Close breaker B”
+9. Pickup — Hydraulic fluid
+10. Pickup — Hand crank
+11. Door
+12. Tape — “Ruiz — workshop”
+13. Interaction — “Refill and prime the accumulator”
+14. Trigger `w`
+15. Door
 
 **Mission objectives**: Cross the turbine hall to the power station control room. Stay away from the clicking. → Restore main power (breaker gallery) and prime the tunnel door's hydraulics (Ruiz's workshop) — in either order. → Power's up and the door is primed. The tunnel door is at the east end of the turbine hall. → Door's primed. Now the main bus — the breaker gallery is east of the control room. → RUN. The tunnel door — east end of the turbine hall. → Main power is up and the door is primed. The tunnel door is at the east end of the turbine hall. → Main power is up. The tunnel door's hydraulics still need priming — Ruiz's workshop, under the control room.
 
@@ -118,17 +120,18 @@
 3. Tune **99.7 MHz** near the source and face it — 99.7 — numbers
 4. Door (code 7225)
 5. Pickup — Tuning crystal
-6. Document — “Sticky note on the storeroom shelf”
-7. Tune **104.4 MHz** near the source and face it — 104.4 — Rami's last broadcast
-8. Interaction — “Turn the north feed horn”
+6. Document — “Mira's notebook — page 3 of 5”
+7. Document — “Sticky note on the storeroom shelf”
+8. Tune **104.4 MHz** near the source and face it — 104.4 — Rami's last broadcast
 9. Interaction — “Turn the north feed horn”
-10. Interaction — “Turn the east feed horn”
+10. Interaction — “Turn the north feed horn”
 11. Interaction — “Turn the east feed horn”
 12. Interaction — “Turn the east feed horn”
-13. Interaction — “Turn the south feed horn”
-14. Tape — “Dr. Voss — Run 18”
-15. Interaction — “Bring the uplink online”
-16. Door
+13. Interaction — “Turn the east feed horn”
+14. Interaction — “Turn the south feed horn”
+15. Tape — “Dr. Voss — Run 18”
+16. Interaction — “Bring the uplink online”
+17. Door
 
 **Mission objectives**: Bring the uplink online: align the feed horns and find a tuning crystal. → The research labs are through the door at the east end of the corridor. → Fit a tuning crystal and bring the uplink online in the Signal Room.
 
@@ -142,31 +145,49 @@
 6. Document — “Lab 2 — response trials, Subject D”
 7. Door (code 6024)
 8. Pickup — Research keycard
-9. Door
-10. Document — “Prototype calibration card”
-11. Interaction — “Turn tap I”
-12. Interaction — “Turn tap II”
-13. Interaction — “Turn tap II”
-14. Interaction — “Turn tap II”
-15. Interaction — “Turn tap III”
-16. Interaction — “Turn tap III”
-17. Door
+9. Interaction — “Pull the shelf”
+10. Door
+11. Interaction — “Turn relay wheel I”
+12. Interaction — “Turn relay wheel I”
+13. Interaction — “Turn relay wheel II”
+14. Interaction — “Turn relay wheel III”
+15. Interaction — “Turn relay wheel III”
+16. Interaction — “Turn relay wheel III”
+17. Tune **93.3 MHz** near the source and face it — 93.3 — Long Ear
+18. Document — “Annex power protocol”
+19. Door
+20. Interaction — “Directorate terminal” (code 5270)
+21. Tape — “Directorate — Long Ear status”
+22. Document — “Cell 2 — preparation order”
+23. Push the crate onto the pressure plate
+24. Interaction — “Turn the lockdown release key”
+25. Door
+26. Document — “Prototype calibration card”
+27. Interaction — “Turn tap I”
+28. Interaction — “Turn tap II”
+29. Interaction — “Turn tap II”
+30. Interaction — “Turn tap II”
+31. Interaction — “Turn tap III”
+32. Interaction — “Turn tap III”
+33. Door
+34. Door
 
-**Mission objectives**: Find out what HELIX-9 was for. Then find a way through to the transport line. → Hide. Now. → Find a way out of the labs. The south corridor exit needs a research keycard. → The transport line is through the door at the east end of the south corridor.
+**Mission objectives**: Find out what HELIX-9 was for. Then find a way through to the transport line. → Hide. Now. → Find a way out: the transport exit needs a research keycard, and the lab lockdown lifted at the release console. → The transport line is through the door at the east end of the south corridor. → A hidden door under the cold room. Whatever the Directorate kept down here, it's behind it. → Lockdown's lifted and you have the keycard. The transport line is at the east end of the south corridor. → Lockdown's lifted. Now the research keycard — try the cold room off the south corridor. → The annex's inner door has power.
 
 ## CHAPTER 09 — DEAD LINE
 
 1. Tune **89.1 MHz** near the source and face it — Transport, 1998
-2. Interaction — “Throw the yard traction switch”
-3. Interaction — “Throw the booth traction switch”
-4. Interaction — “Throw the platform traction switch”
-5. Door
-6. Document — “Last service manifest”
-7. Tape — “Cross — transport”
-8. Pickup — Traction fuse
-9. Interaction — “Fit the traction fuse”
-10. Trigger `R`
-11. Interaction — “Start the tram”
+2. Document — “Mira's notebook — page 4 of 5”
+3. Interaction — “Throw the yard traction switch”
+4. Interaction — “Throw the booth traction switch”
+5. Interaction — “Throw the platform traction switch”
+6. Door
+7. Document — “Last service manifest”
+8. Tape — “Cross — transport”
+9. Pickup — Traction fuse
+10. Interaction — “Fit the traction fuse”
+11. Trigger `R`
+12. Interaction — “Start the tram”
 
 **Mission objectives**: Restore traction power: three switches in the right order, and a traction fuse on the platform. → Fuse is in. Now the traction switches: the order is on the operator's channel. → Get on the tram! → Board the tram on the platform. → Find a traction fuse. The depot office is off the yard.
 
@@ -195,13 +216,16 @@
 6. Door (code 5119)
 7. Tape — “Marcus Hale — last report”
 8. Door (code 0243)
-9. Tape — “Dr. Voss — for Daniel”
-10. Pickup — Dr. Voss's shutdown key
-11. Interaction — “Search the shelf — Box 19”
-12. Pickup — Archive keycard
-13. Door
+9. Document — “Mira's notebook — page 5 of 5”
+10. Tape — “Dr. Voss — for Daniel”
+11. Pickup — Dr. Voss's shutdown key
+12. Interaction — “Search the shelf — Box 19”
+13. Pickup — Archive keycard
+14. Pickup — Voiceprint reel — E. Voss
+15. Interaction — “Deep lift control — play the voiceprint”
+16. Door
 
-**Mission objectives**: Find the archive keycard for the deep lift. Look for the vaults. → Take the deep lift at the east end of the stacks.
+**Mission objectives**: The deep lift needs the archive keycard and the Director's voiceprint. Read the index card. Look for the vaults. → Keycard and voiceprint. The deep-lift control is at the east end of the stacks. → The deep lift also wants the Director's voice. The index card says Stack A. → The deep lift is open. East end of the stacks.
 
 ## CHAPTER 12 — 02:43
 
@@ -218,7 +242,8 @@
 ## CHAPTER 13 — THE LAST TRANSMISSION
 
 1. *(choice for the next decision: option 3)*
-2. Interaction — “The Aperture console”
+2. Document — “Mira's notebook — the last page”
+3. Interaction — “The Aperture console”
 
 **Mission objectives**: The Aperture console.
 

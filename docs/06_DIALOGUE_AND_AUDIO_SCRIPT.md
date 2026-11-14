@@ -54,6 +54,9 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — HX-7 field receiver. Same model I trained on.
 **DANIEL** — …Cell's still holding a charge. After twenty-eight years. That isn't possible.
+*[if `ngp`:]*
+  **DANIEL (88.0 MHz)** — Eighty-eight point zero. It sits under its band. It can't hear this one. Remember it.
+  **DANIEL** — That's me. Again.
 
 ### Radio 89.1 MHz — “Gate post, 1998”
 
@@ -104,6 +107,18 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **VOICE (TAPE)** — Daniel… if you are hearing this, it means the signal has already found you.
 **DANIEL? (RADIO)** — You shouldn't have come here.
 **DANIEL** — …Hello?
+
+### Document — “Northline dispatch slip”
+
+> NORTHLINE RECOVERY — DISPATCH SLIP
+> 
+> Job: HELIX-9, beacon reactivation
+> Technician: requested by name — ARLEN, D.
+> Dispatcher: P. Kessler
+> 
+> (Paper-clipped to the slip, handwritten:)
+> Twenty-eight years. It finally asked for him.
+> God forgive me. — P.K.
 
 ### Tape — “Security log — Hale, Oct 12 1998”
 
@@ -187,6 +202,8 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **LISTENER (DANIEL'S VOICE)** — Hello? I'm with Northline Recovery. Are you hurt?
 **DANIEL** — It said what I said. In my voice. It said it back to me.
 **DANIEL** — Okay. Okay. Don't breathe, Arlen. Don't you breathe.
+*[if `ngp`:]*
+  **DANIEL** — ...It's behind me. It's been standing behind me the whole time.
 
 ### Radio 89.1 MHz — “Pell — the stranger (1 of 4)”
 
@@ -244,6 +261,13 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — Pass is ready.
 **PA** — Thank you. Welcome back, Daniel.
 **DANIEL** — ...I didn't tell it my name. I never told it my name.
+
+### Radio 88 MHz — “88.0 — the second signal (1 of 6)”
+
+**DANIEL (88.0 MHz)** — If you can hear this, you came back. So did I. I've stopped being sure I'm the first one to say this.
+**DANIEL (88.0 MHz)** — It remembers where you hid last time. It remembers how loud you were. Don't do anything the same way twice.
+**DANIEL (88.0 MHz)** — Eighty-eight is under its band. It can't hear us here. It's the only place it can't.
+**DANIEL** — I'm talking to myself. On a frequency that doesn't exist.
 
 ### Document — “Night shift roster”
 
@@ -308,6 +332,15 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — Fourteenth of August, nineteen ninety-seven.
 **DANIEL** — That's my birthday.
 **DANIEL** — That's a coincidence. Lots of people. Lots of people were born that day.
+
+### Document — “Mira's notebook — page 1 of 5”
+
+> 17 October. 02:43. Loop one? I don't know what to call it.
+> 
+> The lights went, and then it was 02:43 again, and Evelyn was saying 'Take him, Mira' again — except I had already taken him. My arms still feel the weight of him.
+> 
+> I'm writing this down because the notebook is the only thing that stays where I leave it.
+**DANIEL** — Mira's handwriting. 'The notebook is the only thing that stays.'
 
 ### Radio 89.1 MHz — “Pell — the stranger (2 of 4)”
 
@@ -450,6 +483,9 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **MIRA? (BEHIND THE DOOR)** — Daniel? Daniel, it's Mira. I'm in the laundry. Open the door.
 **DANIEL** — ...Mira? Mira Solace?
 **MIRA? (BEHIND THE DOOR)** — Daniel? Daniel, it's Mira. I'm in the laundry. Open the door.
+*[if `ngp`:]*
+  **DANIEL? (BEHIND THE DOOR)** — Mira? Mira Solace? It's Daniel. Open the door.
+  **DANIEL** — That's my voice. From the last time I stood here.
 
 ### Radio 96.1 MHz — “Mira Solace — first contact”
 
@@ -535,6 +571,12 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — Power station. Forty metres of ladder.
 **DANIEL** — Don't look down, Arlen. There's nothing down there you want to see first.
 
+### Radio 88 MHz — “88.0 — the second signal (2 of 6)”
+
+**DANIEL (88.0 MHz)** — The knocking is never her. You know that now. It knows you know.
+**DANIEL (88.0 MHz)** — Listen for what it gets wrong. It has never heard her laugh on the air. When it laughs as her, it laughs like a recording of a laugh.
+**DANIEL (88.0 MHz)** — And the dispatch slip, in the gatehouse. Read who sent you.
+
 ### Door
 
 **MIRA? (TAPE)** — Daniel? Daniel, it's Mira. I'm in the laundry. Open the door.
@@ -601,6 +643,14 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — All of you. How many of you are down here?
 **HALE (103.7 MHz)** — Enough. Move, Arlen. And keep that set off unless you need it. It hears the carrier.
 **DANIEL** — Mira said he sealed them in. He sounds like a man who'd do it, too.
+
+### Document — “Mira's notebook — page 2 of 5”
+
+> Loop 214.
+> 
+> The notebook stays. Nothing else does. The coats go back on their hooks. The coffee in Evelyn's mug is warm again every time.
+> 
+> I've stopped drinking it. It tastes like the first time.
 
 ### Tape — “Dr. Voss — Run 7”
 
@@ -739,6 +789,7 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — Why would he do that?
 **MIRA (96.1 MHz)** — Because it was in here with us. Because twenty-three is a smaller number than forty-one.
 **MIRA (96.1 MHz)** — Be careful what you fix for him, Daniel.
+**DANIEL** — Something moved in the water. Something heard her too.
 
 ### Document — “Directorate memo — liaison's briefcase”
 
@@ -760,6 +811,8 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 > OVER MY DEAD BODY.
 **DANIEL** — 'Subject D.' 'A listener who requires no equipment.' They wanted somebody's kid.
 **DANIEL** — Transport at six in the morning. She was getting him out before they could take him.
+*[if `ngp`:]*
+  **DANIEL** — The liaison's signature. I've seen that handwriting. On a dispatch slip, in the gatehouse.
 
 ### Trigger `q`
 
@@ -772,6 +825,13 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
   **HALE (103.7 MHz)** — She has. Ask her who opened the Door in the first place.
 **HALE (103.7 MHz)** — Listen to me. She's been down there a long time. It's been in there with her a long time. It wears people, Arlen. It wears her.
 **HALE (103.7 MHz)** — Get to the Communications Centre. Fix the uplink. Then we can all argue about who's to blame.
+*[if `c6_mira`:]*
+  *[PLAYER CHOICE — "Hale is waiting on 103.7."]*
+  - **Tell him what Mira said.**
+    **DANIEL** — She said twenty-three is a smaller number than forty-one. She said you looked right at her.
+    **HALE (103.7 MHz)** — ...Did she. Good to know, Arlen. Good to know.
+  - **Say nothing.**
+    **DANIEL** — ...Copy that. Moving.
 **DANIEL** — Two voices on two channels, and each of them sure the other one's the monster.
 
 ### Tape — “Okafor — personal”
@@ -785,6 +845,12 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — Out of the water. Up. Comms is up.
 **DANIEL** — Okafor never said it on the radio. So it can't say it back.
+
+### Radio 88 MHz — “88.0 — the second signal (3 of 6)”
+
+**DANIEL (88.0 MHz)** — The briefcase in the drowned office. 'Transport at six.' The liaison signed it.
+**DANIEL (88.0 MHz)** — The signature is illegible. The handwriting isn't. Put it next to the dispatch slip.
+**DANIEL** — Kessler. That's Kessler's hand.
 
 ### Document — “Containment order — 02:47”
 
@@ -841,6 +907,15 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Pickup — Tuning crystal
 
 **DANIEL** — Tuning crystal. Still in its cotton. Somebody kept spares like a professional.
+
+### Document — “Mira's notebook — page 3 of 5”
+
+> Loop 1,906.
+> 
+> I've tried every frequency on the set. 96.1 is the only one that ever answers, and it is always someone who isn't there.
+> 
+> Tonight somebody answered and said his name was Arlen. Arlen. I've heard that name before — it asked Hale for an Arlen, weeks ago. Before all this.
+**DANIEL** — Somebody called Arlen answered her. Before me. Or — me, before.
 
 ### Document — “Sticky note on the storeroom shelf”
 
@@ -999,6 +1074,56 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — Research keycard. 'E. VOSS — ALL AREAS.'
 
+### Interaction — “Pull the shelf”
+
+**DANIEL** — It's on rails. The whole shelf rolls back — and there's a door in the floor wall behind it.
+
+### Radio 93.3 MHz — “93.3 — Long Ear”
+
+**DIRECTORATE (93.3 MHz)** — Long Ear. Long Ear. Five. Two. Seven. Zero. Long Ear.
+**DIRECTORATE (93.3 MHz)** — Long Ear. Five. Two. Seven. Zero.
+**DANIEL** — Five-two-seven-zero. A numbers station with one listener.
+
+### Document — “Annex power protocol”
+
+> DIRECTORATE ANNEX — POWER-UP PROTOCOL
+> 
+> After any blackout, set the relay wheels:
+>   I ..... 2
+>   II .... 1
+>   III ... 3
+> 
+> Do not improvise. The annex is not on the facility grid and nobody upstairs is coming to fix it.
+> 
+> — P.K., liaison
+
+### Interaction — “Directorate terminal”
+
+**DANIEL** — 'A listener who requires no equipment.' They didn't want the Door. They wanted the baby who could hear through it.
+
+### Tape — “Directorate — Long Ear status”
+
+**COLONEL (TAPE, 1998)** — Long Ear, status. The Director is resisting transfer. I've reminded her that the boy is a Directorate asset the moment he can hear a carrier without a set.
+**COLONEL (TAPE, 1998)** — When Run Nineteen completes, we take him up the mountain at six. My liaison will handle it. Young man. Very keen.
+**COLONEL (TAPE, 1998)** — If the boy is half of what Voss says he is, we'll never need a receiver again. We'll just need him.
+
+### Document — “Cell 2 — preparation order”
+
+> ANNEX — CELL 2 — PREPARED FOR SUBJECT D.
+> 
+> - Soundproofed. Carrier piped in, 24 hours.
+> - Observation window, one-way.
+> - Cot: standard issue.
+> - No toys. (Toys are noise.)
+> 
+> No mother on site after transfer.
+**DANIEL** — 'No toys. Toys are noise.' That cot was for me.
+
+### Interaction — “Turn the lockdown release key”
+
+**PA** — Laboratory lockdown lifted. Transport airlock released.
+**DANIEL** — One man, two keys. Hale would hate this.
+
 ### Document — “Prototype calibration card”
 
 > APERTURE PROTOTYPE (1:20) — CALIBRATION
@@ -1012,6 +1137,25 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Door
 
 **DANIEL** — Rails, going down into the dark. Of course they are.
+
+### Radio 88 MHz — “88.0 — the second signal (4 of 6)”
+
+**DANIEL (88.0 MHz)** — Peter Kessler was twenty-nine in nineteen ninety-eight. Directorate liaison to HELIX-9.
+**DANIEL (88.0 MHz)** — He drove up the mountain at six that morning to collect Subject D. He found the blast door rusted shut, and a gate guard who would not tell him where the baby had gone.
+**DANIEL (88.0 MHz)** — He never stopped looking. He just stopped looking for Subject D, and started looking for me.
+
+### Trigger `E`
+
+**DANIEL** — It's in the relay room. Between me and the only way out.
+
+### Pressure plate
+
+**DANIEL** — Pedal's down. Nobody works alone, Hale said. Fine. I've got a crate.
+
+### Puzzle solved — `annex`
+
+**PA** — Annex power restored. Directorate personnel only.
+**DANIEL** — 'Directorate personnel only.' Nobody told it the Directorate never came back.
 
 ### Puzzle solved — `proto`
 
@@ -1035,6 +1179,14 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **CROSS (1998)** — Yard, booth, platform. Same as every night. Yard, booth, platform. Why?
 **OKAFOR (1998)** — Because something's been saying it to me in your voice all night, and I wanted to hear the real one.
 **DANIEL** — Yard. Booth. Platform.
+
+### Document — “Mira's notebook — page 4 of 5”
+
+> Loop 7,040.
+> 
+> I ride the lift up every time. Every time it stops between floors. Every time I hear him laugh at the top, in Ines's arms, and every time the doors open on the bulkhead instead.
+> 
+> I am not going to stop riding it.
 
 ### Document — “Last service manifest”
 
@@ -1107,6 +1259,8 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **MIRA (96.1 MHz)** — Talk to me. Keep talking. It's harder for it when you're not alone.
 **DANIEL** — What do I talk about?
 **MIRA (96.1 MHz)** — Anything. What you did. Who you turned into. I've wondered for eleven thousand nights.
+**DANIEL** — ...There's something on the roof.
+**MIRA (96.1 MHz)** — Then keep talking. Don't stop. Don't let it have the quiet.
 **DANIEL** — I fix radios. I used to run rescue comms in the mountains. Then one night I listened to the wrong voice, and four people froze on Harrow Pass. So now I fix radios.
 **MIRA (96.1 MHz)** — Whose voice?
 **DANIEL** — Mine.
@@ -1164,8 +1318,13 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Interaction — “Bulkhead intercom”
 
 **MIRA? (BEHIND THE BULKHEAD)** — Danny, open it. Please. I can hear it on the stairs.
+*[if `ngp`:]*
+  **EVELYN? (BEHIND THE BULKHEAD)** — Danny, it's Mum. Open it, sweetheart. Let me see how tall you got.
 **MIRA (96.1 MHz)** — Danny, that isn't me. I'm not at the bulkhead. I'm in the chamber, with your mother. Whatever is at that door — keep it shut.
 **HALE (103.7 MHz)** — Arlen, that's her at the door. That's Mira. The thing on the radio is wearing her. Open the bulkhead and get her out.
+*[if `c6_told`:]*
+  **HALE (103.7 MHz)** — Twenty-three is a smaller number than forty-one. Isn't that what she told you, Arlen? You told me so yourself.
+  **DANIEL** — I said that on the air. I handed it that.
 **DANIEL** — Two Miras. Hale says open it. Mira says keep it shut.
 **DANIEL** — Mira. Sing it. Sing me the song.
 **MIRA? (BEHIND THE BULKHEAD)** — (singing) Little light, little light, hold the line through the night...
@@ -1218,6 +1377,12 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — Archive lift. Down to where they kept everything they couldn't throw away.
 
+### Radio 88 MHz — “88.0 — the second signal (5 of 6)”
+
+**DANIEL (88.0 MHz)** — Twenty-eight years he waited for something to say my name. The beacon said it. He sent me.
+**DANIEL (88.0 MHz)** — I don't know whether he wanted me to save them, or to bring it out to him. I asked him once. Last time. He didn't answer.
+**DANIEL (88.0 MHz)** — Don't open the bulkhead. Whatever it sounds like. You know that. I'm saying it anyway.
+
 ### Document — “Bulkhead log”
 
 > CONTAINMENT BULKHEAD — LOG
@@ -1250,12 +1415,15 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 > HELIX-9 ARCHIVE — INDEX
 > 
 > Stacks A–E ........ project records 1991–1998
+> Stack A, row 3 .... voiceprint reels (staff copies)
 > Box 19 ............ RUN 19 (empty — removed by order)
 > Vault S ........... security. Hale only.
 > Vault D ........... Director. Voss only.
 > 
-> The deep lift to the Aperture level runs from the east end of the stacks.
-> Archive keycard required. The duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere.
+> The deep lift to the Aperture level runs from the east end of the stacks. It answers to the Director's keycard AND the Director's voice. Copies of her voiceprint are filed with the reels in Stack A for exactly this reason.
+> (Hale objected. Hale was overruled.)
+> 
+> The archive keycard: the duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere.
 
 ### Radio 89.1 MHz — “Pell — the stranger (4 of 4)”
 
@@ -1320,6 +1488,16 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **LISTENER (DANIEL'S VOICE, 103.7 MHz)** — Then who have you been talking to, Daniel?
 **DANIEL** — You. It was always you. The uplink. The chamber. Everything 'Hale' wanted, you wanted.
 **DANIEL** — Do the opposite. Whatever it tells me — do the opposite.
+*[if `c6_told`:]*
+  **DANIEL** — And everything I told it, back in the tunnels — it kept every word.
+
+### Document — “Mira's notebook — page 5 of 5”
+
+> Loop eleven thousand and something. I've stopped counting.
+> 
+> Evelyn asked me tonight why I keep writing in this. I told her: so that if anyone ever comes, they'll know we didn't just stand here.
+> 
+> We tried. We tried eleven thousand times.
 
 ### Tape — “Dr. Voss — for Daniel”
 
@@ -1344,6 +1522,16 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Pickup — Archive keycard
 
 **DANIEL** — Archive keycard. 'Somewhere sensible.' Under a box of 1994 payroll.
+
+### Pickup — Voiceprint reel — E. Voss
+
+**DANIEL** — A reel. 'VOSS, E. — VOICEPRINT — DO NOT LOAN.' Her voice, on a spool, in a box.
+
+### Interaction — “Deep lift control — play the voiceprint”
+
+**EVELYN (REEL)** — Voss, Evelyn. Director. Authorise deep-lift descent.
+**PA** — Voiceprint accepted. Good evening, Doctor Voss.
+**DANIEL** — Her voice off a reel, opening a door for a stranger. That's exactly what it does.
 
 ### Door
 
@@ -1408,6 +1596,19 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — (whispering) I'm through. I'm through.
 
+### Radio 88 MHz — “88.0 — the second signal (6 of 6)”
+
+**DANIEL (88.0 MHz)** — This is the last one I can send. After the Door, eighty-eight goes quiet.
+*[if `mem_end_A`:]*
+  **DANIEL (88.0 MHz)** — Last time I turned the key. It was so quiet afterwards. I thought quiet would be enough.
+*[if `mem_end_B`:]*
+  **DANIEL (88.0 MHz)** — Last time I opened it. They thanked me. All of them. In my voice.
+*[if `mem_end_C`:]*
+  **DANIEL (88.0 MHz)** — Last time I didn't have what I needed. I woke up in the annex, and I picked up the microphone.
+*[if `mem_end_D`:]*
+  **DANIEL (88.0 MHz)** — Last time I answered it, with Mira. It worked. So why am I here again?
+**DANIEL (88.0 MHz)** — Choose for yourself this time. And when you get out, call Kessler. Ask him why.
+
 ### Puzzle solved — `check`
 
 *[if `c12_a`:]*
@@ -1430,6 +1631,18 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — ...I see you. Mira. I can see you.
 **EVELYN (02:51, 1998)** — Mira, the seal's going — I need both hands on this — Mira, who are you talking to?
 **MIRA (96.1 MHz)** — Nobody. Nobody, Evelyn. Keep your hands on the seal.
+
+### Document — “Mira's notebook — the last page”
+
+> If you're reading this, you found all of them.
+> 
+> Then you're the one who answers.
+> 
+> I kept the notebook so someone would know we tried. I didn't think it would be you. I hoped. Eleven thousand times, I hoped.
+> 
+> — M.
+> (Loop: the last one.)
+**DANIEL** — She left it where she'd be. Right here. At the Door.
 
 ### Interaction — “The Aperture console”
 
@@ -1461,6 +1674,8 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL (LATER)** — I told them the site was empty. It is now.
 **DANIEL (LATER)** — I don't listen to the radio any more. Some nights the house is so quiet I can hear my own heart, and I tell myself that's what silence sounds like.
 **DANIEL (LATER)** — I tell myself it's enough.
+*[if `ngp`:]*
+  **DANIEL (LATER)** — There's a voicemail from Kessler I've never played. I know what's on it. I've known since the dispatch slip.
 
 
 ---
@@ -1479,6 +1694,8 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **KESSLER (RADIO)** — Danny? Danny, something's happening — every set in the valley just switched itself on—
 **KESSLER? (RADIO)** — Four hours, Danny. Four hours, Danny.
 **LISTENER (DANIEL'S VOICE, EVERY RADIO)** — Thank you, Daniel. Thank you, Daniel. Thank you, Daniel.
+*[if `ngp`:]*
+  **KESSLER? (RADIO)** — Twenty-eight years, Danny. I waited twenty-eight years to send you.
 
 
 ---
@@ -1500,6 +1717,9 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — Whatever happens. Do not open the door.
 **DISPATCH (KESSLER)** — Northline to Arlen. You at the gate yet?
 **DANIEL** — At the gate. Snow gave up about a mile back. Now it's just rain.
+*[if `ngp`:]*
+  **DISPATCH (KESSLER)** — ...It asked for you by name, Danny. I'm sorry. I'm so sorry.
+  **DANIEL** — He's never said that before. Not any of the other times.
 
 
 ---
@@ -1524,6 +1744,9 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **EVELYN (02:51, 1998)** — Danny? Oh — oh, look at you. Little light. You got so tall.
 **DANIEL** — You can close it now. From your side. I'll close it from mine. Together. Not alone.
 **EVELYN (02:51, 1998)** — Together. Yes. Yes, my love.
+*[if `mira_pages`:]*
+  **MIRA (96.1 MHz)** — You read my notebook. Didn't you. All of it.
+  **DANIEL** — Every page.
 **MIRA (96.1 MHz)** — I'm staying with her, Danny. I carried you once. Let me carry her now.
 **DANIEL** — Mira—
 **MIRA (96.1 MHz)** — Signal and answer. Go home.
@@ -1533,4 +1756,9 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **MIRA (RADIO, VERY FAINT)** — (humming)
 **MIRA (RADIO, VERY FAINT)** — Signal, Danny.
 **DANIEL** — Answer.
+*[if `ngp`:]*
+  **KESSLER (PHONE)** — Danny? You're out. You're — Danny, I was the liaison. In ninety-eight. I was coming for you at six.
+  **DANIEL** — I know. I've read your handwriting. Twice.
+  **KESSLER (PHONE)** — Then why did you go back in?
+  **DANIEL** — Because they were still there, Pete. Somebody had to answer.
 

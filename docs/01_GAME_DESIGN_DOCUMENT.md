@@ -55,5 +55,14 @@ Hear it before you see it: positional clicks and footsteps, the radio as a const
 ## Business
 Premium single purchase; target price ₹799–₹999 (to be confirmed by market research once the playtime and art targets are met — see 14_RELEASE_PLAN.md). No microtransactions, no pay-to-win, no ads.
 
+## New Game+ — "Second Signal"
+Unlocked by finishing any ending. The Listener keeps the previous run's *habits*, not its knowledge, at half strength: lockers it found you in are searched more often (never certainly), heavy radio use is heard from further away (still capped at +50 %), a lure-heavy run makes it ignore repeated bottles, sprint escapes make its hunts faster (still slower than a sprint; chases stay time-capped). New content: transmissions on 88.0 MHz (below the band, so listening makes no noise), the dispatcher Kessler's thread with postscripts after each ending, encounter variants. Achievement: Second Signal. Spec and tests: 09_ENEMY_AI.md, `tools/test.sh ngplus`.
+
+## Presentation
+- Real-time 3D in Godot 3.5 with CC0 PBR materials (ambientCG), light fixtures with volumetric shafts, dust, sparks, steam, drips, water; a stylised look rather than photoreal (engine assessment: 19_ENGINE_MIGRATION_ASSESSMENT.md).
+- Adaptive music: tension and chase layers follow the Listener's state; everything ducks to near-silence when it is close but has not found you. Footsteps change with the floor. Recorded voice-over drops in by file name (docs/vo/), with the processed radio voice as the placeholder.
+- Second reveal: a CRT terminal types SIGNAL IDENTIFIED / SUBJECT: DANIEL ARLEN / STATUS: ALREADY INSIDE, the last line turns red, then DEAD FREQUENCY.
+- The pause menu opens automatically when the window loses focus.
+
 ## Current status vs. target (honest)
-All systems, all 13 chapters, the prologue, both title reveals, chapter cards, four endings and credits are implemented and pass automated tests. Estimated first playthrough today: **≈ 4.5–7 hours** after expansion passes 1–3 (≈ 64 min of it scripted dialogue and documents). The **10–15 hour target is not yet met**; 15_DEVELOPMENT_PROGRESS_TRACKER.md lists the expansion plan. Visuals are stylised procedural stand-ins, not the photoreal target; there is no recorded voice acting yet.
+All systems, all 13 chapters with optional wings, the prologue, both title reveals, chapter cards, four endings, New Game+ and credits are implemented and pass automated tests (780 checks). Campaign length is **modelled, not measured**: 3.9–10.1 h main path, 5.4–14.0 h with all optional content (17_TIME_BUDGET.md). The **10–15 hour target is not claimed** until playtests (the game now logs play time per chapter locally for exactly this) show it. Visuals are stylised, not photoreal; there is no recorded voice acting yet; the Windows build passes its smoke test under Wine but has not been run on Windows hardware.

@@ -203,7 +203,12 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **DANIEL** — Okay. Okay. Don't breathe, Arlen. Don't you breathe.
 *ACHIEVEMENT — It Has No Face — survive the first sighting*
 *(story flag `c2_loose`)*
-*THE LISTENER — spawn at `Z` (patrol)*
+*[if `ngp`:]*
+  *THE LISTENER — spawn at `7` (stalk)*
+  *SFX — clicks (positional, at `7`)*
+  **DANIEL** — ...It's behind me. It's been standing behind me the whole time.
+*[otherwise:]*
+  *THE LISTENER — spawn at `Z` (patrol)*
 *MUSIC — drone_b*
 *HINT — 94.6 MHz — PROXIMITY. Faster beeps: closer. A sharper tone: you are facing it.*
 *HINT — Lockers hide you. If it watches you get in, the locker is not a hiding place.*
@@ -466,6 +471,16 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 *(story flag `c8_brief`)*
 *— control returns to the player —*
 
+### Interaction — “Directorate terminal”
+
+*— cinematic begins (player control locked, subtitles, skip enabled) —*
+*MONITOR — types out: DIRECTORATE OF SIGNAL RESEARCH / PROJECT LONG EAR / OBJECTIVE: A LISTENER WHO REQUIRES NO EQUIPMENT / SUBJECT: D.  (14 MONTHS) / TRANSFER: 17 OCT 1998 — 06:00 / LIAISON: P. K—*
+**DANIEL** — 'A listener who requires no equipment.' They didn't want the Door. They wanted the baby who could hear through it.
+*JOURNAL — "Project Long Ear"*
+*(story flag `c8_longear`)*
+*ACHIEVEMENT — Long Ear — find the Directorate annex*
+*— control returns to the player —*
+
 ### Door
 
 *— cinematic begins (player control locked, subtitles, skip enabled) —*
@@ -545,6 +560,14 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **MIRA (96.1 MHz)** — Talk to me. Keep talking. It's harder for it when you're not alone.
 **DANIEL** — What do I talk about?
 **MIRA (96.1 MHz)** — Anything. What you did. Who you turned into. I've wondered for eleven thousand nights.
+*SFX — metal*
+*CAMERA SHAKE*
+*(beat — 1s)*
+*SFX — step*
+*(beat — 0.6s)*
+*SFX — step*
+**DANIEL** — ...There's something on the roof.
+**MIRA (96.1 MHz)** — Then keep talking. Don't stop. Don't let it have the quiet.
 **DANIEL** — I fix radios. I used to run rescue comms in the mountains. Then one night I listened to the wrong voice, and four people froze on Harrow Pass. So now I fix radios.
 **MIRA (96.1 MHz)** — Whose voice?
 **DANIEL** — Mine.
@@ -567,12 +590,17 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 *— cinematic begins (player control locked, subtitles, skip enabled) —*
 *SFX — stop knock*
 **MIRA? (BEHIND THE BULKHEAD)** — Danny, open it. Please. I can hear it on the stairs.
+*[if `ngp`:]*
+  **EVELYN? (BEHIND THE BULKHEAD)** — Danny, it's Mum. Open it, sweetheart. Let me see how tall you got.
 *RADIO — the receiver switches itself on, 96.1 MHz*
 *SFX — glitch*
 **MIRA (96.1 MHz)** — Danny, that isn't me. I'm not at the bulkhead. I'm in the chamber, with your mother. Whatever is at that door — keep it shut.
 *RADIO — the receiver switches itself on, 103.7 MHz*
 *SFX — glitch*
 **HALE (103.7 MHz)** — Arlen, that's her at the door. That's Mira. The thing on the radio is wearing her. Open the bulkhead and get her out.
+*[if `c6_told`:]*
+  **HALE (103.7 MHz)** — Twenty-three is a smaller number than forty-one. Isn't that what she told you, Arlen? You told me so yourself.
+  **DANIEL** — I said that on the air. I handed it that.
 *RADIO — off*
 **DANIEL** — Two Miras. Hale says open it. Mira says keep it shut.
 **DANIEL** — Mira. Sing it. Sing me the song.
@@ -785,6 +813,8 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **DANIEL (LATER)** — I tell myself it's enough.
 *(beat — 2s)*
 *FADE TO BLACK (2.5s)*
+*[if `ngp`:]*
+  **DANIEL (LATER)** — There's a voicemail from Kessler I've never played. I know what's on it. I've known since the dispatch slip.
 *CARD — ENDING A — SILENCE*
 *TITLE — DEAD FREQUENCY (glitch reveal, bass impact)*
 *→ END CREDITS*
@@ -823,6 +853,8 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **KESSLER? (RADIO)** — Four hours, Danny. Four hours, Danny.
 **LISTENER (DANIEL'S VOICE, EVERY RADIO)** — Thank you, Daniel. Thank you, Daniel. Thank you, Daniel.
 *FADE TO BLACK (2.5s)*
+*[if `ngp`:]*
+  **KESSLER? (RADIO)** — Twenty-eight years, Danny. I waited twenty-eight years to send you.
 *CARD — ENDING B — THE OPEN DOOR*
 *TITLE — DEAD FREQUENCY (glitch reveal, bass impact)*
 *→ END CREDITS*
@@ -869,6 +901,9 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **DISPATCH (KESSLER)** — Northline to Arlen. You at the gate yet?
 **DANIEL** — At the gate. Snow gave up about a mile back. Now it's just rain.
 *FADE TO BLACK (2.5s)*
+*[if `ngp`:]*
+  **DISPATCH (KESSLER)** — ...It asked for you by name, Danny. I'm sorry. I'm so sorry.
+  **DANIEL** — He's never said that before. Not any of the other times.
 *CARD — ENDING C — THE LOOP*
 *TITLE — DEAD FREQUENCY (glitch reveal, bass impact)*
 *→ END CREDITS*
@@ -909,6 +944,9 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **EVELYN (02:51, 1998)** — Danny? Oh — oh, look at you. Little light. You got so tall.
 **DANIEL** — You can close it now. From your side. I'll close it from mine. Together. Not alone.
 **EVELYN (02:51, 1998)** — Together. Yes. Yes, my love.
+*[if `mira_pages`:]*
+  **MIRA (96.1 MHz)** — You read my notebook. Didn't you. All of it.
+  **DANIEL** — Every page.
 **MIRA (96.1 MHz)** — I'm staying with her, Danny. I carried you once. Let me carry her now.
 **DANIEL** — Mira—
 **MIRA (96.1 MHz)** — Signal and answer. Go home.
@@ -929,6 +967,11 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 **MIRA (RADIO, VERY FAINT)** — Signal, Danny.
 **DANIEL** — Answer.
 *FADE TO BLACK (3s)*
+*[if `ngp`:]*
+  **KESSLER (PHONE)** — Danny? You're out. You're — Danny, I was the liaison. In ninety-eight. I was coming for you at six.
+  **DANIEL** — I know. I've read your handwriting. Twice.
+  **KESSLER (PHONE)** — Then why did you go back in?
+  **DANIEL** — Because they were still there, Pete. Somebody had to answer.
 *CARD — ENDING D — THE LAST TRANSMISSION*
 *TITLE — DEAD FREQUENCY (glitch reveal, bass impact)*
 *→ END CREDITS*
