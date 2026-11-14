@@ -378,16 +378,20 @@ func _play_chapter(n: int):
 		var kind = "go"; var key = s
 		if typeof(s) == TYPE_ARRAY:
 			kind = s[0]; key = s[1] if s.size() > 1 else ""
-		match kind:
-			"choice":
-				G.flags["_test_choice"] = int(key); continue
-			"wait":
-				yield(frames(int(float(key) * 60)), "completed"); continue
-			"crate":
-				var c = _ent(lv, key); var pl = _ent(lv, s[2])
-				ok(_reach(lv, c.pos, pl.pos), "ch%02d: crate %s can be pushed to plate %s" % [n, key, s[2]])
-				c.node.global_transform.origin = pl.pos + Vector3(0, 0.6, 0); c.node.linear_velocity = Vector3()
-				yield(_settle(lv), "completed"); continue
+		# NB: GDScript 3 'continue' inside 'match' falls through to the next pattern, so use if/elif here
+		if kind == "choice":
+			G.flags["_test_choice"] = int(key)
+			continue
+		elif kind == "wait":
+			yield(frames(int(float(key) * 60)), "completed")
+			continue
+		elif kind == "crate":
+			var c = _ent(lv, key); var pl = _ent(lv, s[2])
+			ok(_reach(lv, c.pos, pl.pos), "ch%02d: crate %s can be pushed to plate %s" % [n, key, s[2]])
+			c.node.global_transform.origin = pl.pos + Vector3(0, 0.6, 0); c.node.linear_velocity = Vector3()
+			yield(_settle(lv), "completed")
+			ok(G.flag(pl.d.get("flag", "")) or pl.done, "ch%02d: plate %s pressed" % [n, s[2]])
+			continue
 		var e = _ent(lv, key)
 		if e == null:
 			ok(false, "ch%02d: walkthrough step '%s' has no entity" % [n, key]); continue

@@ -836,6 +836,11 @@ static func validate(d: Dictionary) -> Array:
 		if l.t == "tape": _val_ev(l.lines, chars, errs, ch, d)
 		if l.t == "radio" and l.has("lines"): _val_ev(l.lines, chars, errs, ch, d)
 	_val_ev(d.get("start_ev", []), chars, errs, "start_ev", d)
+	_val_ev(d.get("pre_ev", []), chars, errs, "pre_ev", d)
+	_val_ev(d.get("resume_ev", []), chars, errs, "resume_ev", d)
+	for g in d.get("groups", {}): _val_ev(d.groups[g], chars, errs, "group " + g, d)
+	for s in d.get("ai", []):
+		if not chars.has(s.at): errs.append("ai spawn marker '%s' missing" % s.at)
 	return errs
 
 static func _val_ev(evs: Array, chars: Dictionary, errs: Array, where: String, d: Dictionary):
