@@ -188,6 +188,14 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — It said what I said. In my voice. It said it back to me.
 **DANIEL** — Okay. Okay. Don't breathe, Arlen. Don't you breathe.
 
+### Radio 89.1 MHz — “Pell — the stranger (1 of 4)”
+
+**PELL (1998)** — Records to Okafor. Tunde, there's a man in the open-plan office. Orange jacket. Not one of ours.
+**OKAFOR (1998)** — Nobody's come down tonight, Jonah. The gate would have called it in.
+**PELL (1998)** — He's standing by Haddad's desk. He looks lost. He looks — tired.
+**OKAFOR (1998)** — Stay in records. Lock the door. I'll tell Hale.
+**DANIEL** — Orange jacket. Northline orange.
+
 ### Trigger `w`
 
 **DANIEL** — Northline, this is Arlen. Kessler, do you copy?
@@ -300,6 +308,13 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — Fourteenth of August, nineteen ninety-seven.
 **DANIEL** — That's my birthday.
 **DANIEL** — That's a coincidence. Lots of people. Lots of people were born that day.
+
+### Radio 89.1 MHz — “Pell — the stranger (2 of 4)”
+
+**PELL (1998)** — Records to medical. Doctor Lind? The man in the orange jacket — he's in your records office. He's reading the files.
+**LIND (1998)** — Jonah, there's nobody in my office. I'm standing in it.
+**PELL (1998)** — He's at the boy's file. He's just holding it. Sara, I think he's crying.
+**DANIEL** — He's describing me. Right now. From twenty-eight years ago.
 
 ### Document — “Memo — S. Lind”
 
@@ -809,6 +824,13 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **OKAFOR (1998)** — It'll steal your voice. Then it'll ask me for the card in your voice.
 **DANIEL** — North two. East three. South one.
 
+### Radio 89.1 MHz — “Pell — the stranger (3 of 4)”
+
+**PELL (1998)** — Okafor. He's in the Signal Room now. He's at the uplink console, talking to someone. He keeps saying 'Northline'.
+**OKAFOR (1998)** — There is no Northline, Jonah.
+**PELL (1998)** — He says he's been gone nine days. Tunde, he says it like it's bad news.
+**DANIEL** — Nine days. He heard me say that. Before I'd said it.
+
 ### Radio 99.7 MHz — “99.7 — numbers”
 
 **HADDAD (99.7 MHz)** — Test, test. This is Rami's very serious numbers station, for very serious spies.
@@ -1234,6 +1256,23 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 > 
 > The deep lift to the Aperture level runs from the east end of the stacks.
 > Archive keycard required. The duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere.
+
+### Radio 89.1 MHz — “Pell — the stranger (4 of 4)”
+
+**PELL (1998)** — I followed him down to the Archive. He's in the stacks, looking for Box nineteen.
+**OKAFOR (1998)** — Jonah. Come back up. Please.
+**PELL (1998)** — He has her eyes, Tunde. The Director's. That same way of standing still when he listens.
+**DANIEL** — Her eyes.
+
+### Radio 89.1 MHz — “Pell — the forty-second”
+
+**PELL (1998)** — Tunde. I asked him his name.
+**OKAFOR (1998)** — And?
+**PELL (1998)** — He said Arlen. Then he said, 'Is anyone still there?' — and he wasn't. He just wasn't, Tunde. Like a station going off the air.
+**OKAFOR (1998)** — ...Forty-two.
+**PELL (1998)** — What?
+**OKAFOR (1998)** — I've counted forty-two all night. Now I know who the extra one was.
+**DANIEL** — They could see me. All night, in nineteen ninety-eight, they could see me walking through their building.
 
 ### Document — “Sealed statement — Cpl. I. Duarte”
 

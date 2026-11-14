@@ -6,7 +6,7 @@ const DATA = {
 		"##############################",
 		"#....#.............#.........#",
 		"#.S..#..c...c...c..#..T...L..#",
-		"#....#.....L.......#.........#",
+		"#....#.....L...j...#.........#",
 		"#.L..#..x...U...c..#..n......#",
 		"##D#######D#############D#####",
 		"#....L......P.......L....P...M",
@@ -85,6 +85,13 @@ const DATA = {
 		"b": {"t": "use", "p": "dish", "cycle": 4, "target": 3, "group": "arr", "label": "Feed horns", "prompt": "Turn the east feed horn"},
 		"g": {"t": "use", "p": "dish", "cycle": 4, "target": 1, "group": "arr", "label": "Feed horns", "prompt": "Turn the south feed horn"},
 		"e": {"t": "item", "id": "battery"},
+		"j": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (3 of 4)", "flag": "pell3", "lines": [
+			["PELL (1998)", "Okafor. He's in the Signal Room now. He's at the uplink console, talking to someone. He keeps saying 'Northline'."],
+			["OKAFOR (1998)", "There is no Northline, Jonah."],
+			["PELL (1998)", "He says he's been gone nine days. Tunde, he says it like it's bad news."],
+			["DANIEL", "Nine days. He heard me say that. Before I'd said it."],
+			["if", "pell1", [["if", "pell2", [["if", "pell3", [["if", "pell4", [["flag", "pell_all"], ["toast", "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."]]]]]]]]],
+		]},
 		"N": {"t": "note", "title": "Sticky note on the storeroom shelf", "text": "Rami —\n\nIf anything happens tonight, where do I listen for you?\n— M.\n\n(Underneath, in Rami's handwriting:)\n104.4. Only you know it. Don't tell Hale. Don't tell anybody.\nAnd Mira — if it's me but it doesn't sound like a joke, it isn't me."},
 		"w": {"t": "radio", "f": 104.4, "r": 14.0, "title": "104.4 — Rami's last broadcast", "flag": "c7_rami", "lines": [
 			["HADDAD (104.4 MHz, 02:47)", "Mira. If you're hearing this, it's Rami. No jokes. Listen."],
@@ -107,5 +114,5 @@ const DATA = {
 		["DANIEL", "Uplink, then Northline. Then out. Whatever 'out' means now."],
 		["obj", "Bring the uplink online: align the feed horns and find a tuning crystal."],
 	],
-	"walk": [["radio", "x"], ["radio", "r"], "K", "k", "N", ["radio", "w"], "a", "a", "b", "b", "b", "g", "T", "U", "M"],
+	"walk": [["radio", "x"], ["radio", "j"], ["radio", "r"], "K", "k", "N", ["radio", "w"], "a", "a", "b", "b", "b", "g", "T", "U", "M"],
 }

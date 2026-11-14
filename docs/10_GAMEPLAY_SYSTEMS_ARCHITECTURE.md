@@ -45,7 +45,7 @@ Each chapter (`game/data/chNN.gd`) is a dictionary: palette, map (ASCII grid), l
 | Settings | ui.gd + g.gd | volumes (master/music/effects+voice), sensitivity, invert Y, FOV 60–100, brightness, graphics preset Low/Medium/High/Ultra, subtitles on/off + size, fullscreen, V-Sync, head-bob, toggle crouch, reduce flashing |
 | Cinematics | level.gd + ui.gd | marker-to-marker camera dollies, NPC movement, lighting/sound cues, subtitles, hold-to-skip |
 | Endings | g.gd `ending_id()` | B open · D answer + trust + Hale + ≥5 tapes + key · A silence + key · C otherwise |
-| Achievements | g.gd + story.gd | 13 achievements, profile-persistent; Steamworks mapping planned (see release plan) |
+| Achievements | g.gd + story.gd | 14 achievements, profile-persistent; Steamworks mapping planned (see release plan) |
 | Audio | snd.gd | every sound synthesised at first launch (cached): drones, static, hum, rain, thunder, steps, doors, clicks, screech, voices, knock, alarm… 3D positional players, reverb on the effects bus |
 
 ## Input map (keyboard / mouse / gamepad)

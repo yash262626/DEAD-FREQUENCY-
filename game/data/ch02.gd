@@ -6,7 +6,7 @@ const DATA = {
 		"##############################",
 		"#....#.......................#",
 		"#.S..D..d...d...d...d....L...#",
-		"#....#.......................#",
+		"#....#........j..............#",
 		"#.L..#..c.......c.........H..#",
 		"#.t..#...L.......L.......1...#",
 		"#....#.......................#",
@@ -81,6 +81,14 @@ const DATA = {
 		]},
 		"e": {"t": "item", "id": "battery"}, "b": {"t": "item", "id": "bottle", "n": 2}, "m": {"t": "item", "id": "medkit"},
 		"K": {"t": "door"},
+		"j": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (1 of 4)", "flag": "pell1", "lines": [
+			["PELL (1998)", "Records to Okafor. Tunde, there's a man in the open-plan office. Orange jacket. Not one of ours."],
+			["OKAFOR (1998)", "Nobody's come down tonight, Jonah. The gate would have called it in."],
+			["PELL (1998)", "He's standing by Haddad's desk. He looks lost. He looks — tired."],
+			["OKAFOR (1998)", "Stay in records. Lock the door. I'll tell Hale."],
+			["DANIEL", "Orange jacket. Northline orange."],
+			["if", "pell1", [["if", "pell2", [["if", "pell3", [["if", "pell4", [["flag", "pell_all"], ["toast", "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."]]]]]]]]],
+		]},
 		"q": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Okafor's office, 1998", "flag": "c2_okafor", "lines": [
 			["OKAFOR (1998)", "Surface patch, this is Okafor, signals. Put me through to Halden — Corner House. Yes, at this hour."],
 			["ADA (1998, PATCH)", "Tunde? It's two in the morning."],
@@ -116,5 +124,5 @@ const DATA = {
 		["DANIEL", "Fine. The uplink can wait. Medical's on the site plan — first-aid station, maybe a hard line to the surface."],
 		["obj", "Cross the administration wing to the medical gate."],
 	],
-	"walk": ["1", "w", ["radio", "y"], "G", "k", "K", ["radio", "q"], "U", "n", "M"],
+	"walk": ["1", ["radio", "j"], "w", ["radio", "y"], "G", "k", "K", ["radio", "q"], "U", "n", "M"],
 }

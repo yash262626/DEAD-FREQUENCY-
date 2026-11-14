@@ -404,6 +404,10 @@ func _play_chapter(n: int):
 				if lv.is_floor(int(c.x), int(c.y)) and _reach(lv, pp, target + o):
 					reach = true; target = target + o; break
 		ok(reach, "ch%02d: step '%s' reachable from %s" % [n, key, str(lv.cell_of(pp))])
+		if kind == "radio" and not lv._cond(e.d):
+			# gated on earlier chapters: only a chapter-select (mid-campaign) start may lack it
+			ok(G.flag("cs_run"), "ch%02d: transmission '%s' is unlocked by earlier play" % [n, key])
+			continue
 		if kind == "radio":
 			lv.player.global_transform.origin = target + Vector3(0, 0.1, 0)
 			lv.radio.on = true; lv.radio.f = e.d.f; G.has_radio = true; G.radio_batt = 100

@@ -99,6 +99,7 @@ The administration wing, where the night shift stopped mid-sentence. First full 
 
 - Item — Glass bottle
 - Item — Power cell
+- Transmission 89.1 MHz — Pell — the stranger (1 of 4)
 - Item — Medical wing keycard
 - Item — Medkit
 - Document — Photo on Okafor's desk
@@ -146,6 +147,7 @@ The medical wing. A patient file with Daniel's birthday. Evelyn's first recordin
 - Item — Power cell
 - Document — Patient file — VOSS, D.
 - Item — Glass bottle
+- Transmission 89.1 MHz — Pell — the stranger (2 of 4)
 - Item — Medkit
 - Document — Morgue register
 - Document — Staff hearing survey
@@ -314,6 +316,7 @@ The Communications Centre. A numbers station on 99.7 and a 1998 echo give the st
 - Tape — Dr. Voss — Run 18 **(Evelyn — counts toward ending D)**
 - Item — Power cell
 - Document — Taped to Haddad's monitor
+- Transmission 89.1 MHz — Pell — the stranger (3 of 4)
 - Item — Tuning crystal
 - Document — Alignment card
 - Transmission 99.7 MHz — 99.7 — numbers
@@ -452,10 +455,12 @@ The Archive. Ines Duarte's sealed statement explains how a baby called Daniel le
 
 **Discoveries**
 
+- Transmission 89.1 MHz — Pell — the forty-second
 - Tape — Dr. Voss — for Daniel **(Evelyn — counts toward ending D)**
 - Document — Sealed statement — Cpl. I. Duarte
 - Document — Taped to the Director's vault
 - Tape — Marcus Hale — last report
+- Transmission 89.1 MHz — Pell — the stranger (4 of 4)
 - Item — Archive keycard
 - Document — Archive index card
 - Item — Dr. Voss's shutdown key

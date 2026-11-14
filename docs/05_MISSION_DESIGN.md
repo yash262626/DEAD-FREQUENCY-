@@ -24,15 +24,16 @@
 ## CHAPTER 02 — THE SILENT WING
 
 1. Trigger `1`
-2. Trigger `w`
-3. Tune **89.1 MHz** near the source and face it — Records, 1998
-4. Door (code 4406)
-5. Pickup — Medical wing keycard
-6. Door
-7. Tune **89.1 MHz** near the source and face it — Okafor's office, 1998
-8. Interaction — “Okafor's desk drawer” (code 1104)
-9. Document — “Photo on Okafor's desk”
-10. Door
+2. Tune **89.1 MHz** near the source and face it — Pell — the stranger (1 of 4)
+3. Trigger `w`
+4. Tune **89.1 MHz** near the source and face it — Records, 1998
+5. Door (code 4406)
+6. Pickup — Medical wing keycard
+7. Door
+8. Tune **89.1 MHz** near the source and face it — Okafor's office, 1998
+9. Interaction — “Okafor's desk drawer” (code 1104)
+10. Document — “Photo on Okafor's desk”
+11. Door
 
 **Mission objectives**: Cross the administration wing to the medical gate. → Get into the supervisor's office. The records room might know the door code. → The medical gate is at the east end of the lower hall.
 
@@ -40,15 +41,16 @@
 
 1. Trigger `w`
 2. Document — “Patient file — VOSS, D.”
-3. Document — “Memo — S. Lind”
-4. Tape — “Dr. Voss — hearing assessment”
-5. Trigger `1`
-6. Push the crate onto the pressure plate
-7. Door
-8. Pickup — Ceramic fuse
-9. Door (code 2711)
-10. Tape — “Brandt — quarantine”
-11. Interaction — “Fit fuse and call the service lift”
+3. Tune **89.1 MHz** near the source and face it — Pell — the stranger (2 of 4)
+4. Document — “Memo — S. Lind”
+5. Tape — “Dr. Voss — hearing assessment”
+6. Trigger `1`
+7. Push the crate onto the pressure plate
+8. Door
+9. Pickup — Ceramic fuse
+10. Door (code 2711)
+11. Tape — “Brandt — quarantine”
+12. Interaction — “Fit fuse and call the service lift”
 
 **Mission objectives**: Search the medical wing. The service lift is somewhere along the main corridor. → Find a way down. The service lift is at the east end of the corridor. → Fit the fuse in the service lift panel at the east end of the corridor. → Something heard the tape. Hide, and wait for it to leave.
 
@@ -112,20 +114,21 @@
 ## CHAPTER 07 — THE SIGNAL ROOM
 
 1. Tune **89.1 MHz** near the source and face it — Signal Room, 1998
-2. Tune **99.7 MHz** near the source and face it — 99.7 — numbers
-3. Door (code 7225)
-4. Pickup — Tuning crystal
-5. Document — “Sticky note on the storeroom shelf”
-6. Tune **104.4 MHz** near the source and face it — 104.4 — Rami's last broadcast
-7. Interaction — “Turn the north feed horn”
+2. Tune **89.1 MHz** near the source and face it — Pell — the stranger (3 of 4)
+3. Tune **99.7 MHz** near the source and face it — 99.7 — numbers
+4. Door (code 7225)
+5. Pickup — Tuning crystal
+6. Document — “Sticky note on the storeroom shelf”
+7. Tune **104.4 MHz** near the source and face it — 104.4 — Rami's last broadcast
 8. Interaction — “Turn the north feed horn”
-9. Interaction — “Turn the east feed horn”
+9. Interaction — “Turn the north feed horn”
 10. Interaction — “Turn the east feed horn”
 11. Interaction — “Turn the east feed horn”
-12. Interaction — “Turn the south feed horn”
-13. Tape — “Dr. Voss — Run 18”
-14. Interaction — “Bring the uplink online”
-15. Door
+12. Interaction — “Turn the east feed horn”
+13. Interaction — “Turn the south feed horn”
+14. Tape — “Dr. Voss — Run 18”
+15. Interaction — “Bring the uplink online”
+16. Door
 
 **Mission objectives**: Bring the uplink online: align the feed horns and find a tuning crystal. → The research labs are through the door at the east end of the corridor. → Fit a tuning crystal and bring the uplink online in the Signal Room.
 
@@ -185,16 +188,18 @@
 ## CHAPTER 11 — EVERY VOICE EVER LOST
 
 1. Document — “Archive index card”
-2. Document — “Sealed statement — Cpl. I. Duarte”
-3. Document — “Taped to the Director's vault”
-4. Door (code 5119)
-5. Tape — “Marcus Hale — last report”
-6. Door (code 0243)
-7. Tape — “Dr. Voss — for Daniel”
-8. Pickup — Dr. Voss's shutdown key
-9. Interaction — “Search the shelf — Box 19”
-10. Pickup — Archive keycard
-11. Door
+2. Tune **89.1 MHz** near the source and face it — Pell — the stranger (4 of 4)
+3. Tune **89.1 MHz** near the source and face it — Pell — the forty-second
+4. Document — “Sealed statement — Cpl. I. Duarte”
+5. Document — “Taped to the Director's vault”
+6. Door (code 5119)
+7. Tape — “Marcus Hale — last report”
+8. Door (code 0243)
+9. Tape — “Dr. Voss — for Daniel”
+10. Pickup — Dr. Voss's shutdown key
+11. Interaction — “Search the shelf — Box 19”
+12. Pickup — Archive keycard
+13. Door
 
 **Mission objectives**: Find the archive keycard for the deep lift. Look for the vaults. → Take the deep lift at the east end of the stacks.
 

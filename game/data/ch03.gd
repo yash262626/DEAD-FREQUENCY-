@@ -4,7 +4,7 @@ const DATA = {
 	"pal": "medical", "sub": "SUBLEVEL 2 — MEDICAL", "music": "drone_c", "amb_loop": "hum", "amb_db": -26.0, "face": 180,
 	"map": [
 		"##################################",
-		"#......#.........#.......#.......#",
+		"#......#.........#....k..#.......#",
 		"#..S...#.b..b..b.#..f....#..T....#",
 		"#......#.........#.......#......j#",
 		"#..a...#.b..b..b.#..L..H.#....L..#",
@@ -79,6 +79,13 @@ const DATA = {
 			["DANIEL", "Paging a doctor who's been gone twenty-eight years."],
 		]},
 		"x": {"t": "pcrate"},
+		"k": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (2 of 4)", "flag": "pell2", "lines": [
+			["PELL (1998)", "Records to medical. Doctor Lind? The man in the orange jacket — he's in your records office. He's reading the files."],
+			["LIND (1998)", "Jonah, there's nobody in my office. I'm standing in it."],
+			["PELL (1998)", "He's at the boy's file. He's just holding it. Sara, I think he's crying."],
+			["DANIEL", "He's describing me. Right now. From twenty-eight years ago."],
+			["if", "pell1", [["if", "pell2", [["if", "pell3", [["if", "pell4", [["flag", "pell_all"], ["toast", "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."]]]]]]]]],
+		]},
 		"X": {"t": "door", "code": "2711", "label": "QUARANTINE — CODE"},
 		"J": {"t": "ghost", "text": "LET ME OUT\n2 7 1 1", "r": 7.0},
 		"N": {"t": "tape", "title": "Brandt — quarantine", "flag": "tape_brandt", "lines": [
@@ -118,5 +125,5 @@ const DATA = {
 		["DANIEL", "Lift down is on this level. Find it, find power, find a phone."],
 		["obj", "Search the medical wing. The service lift is somewhere along the main corridor."],
 	],
-	"walk": ["w", "f", "t", "T", "1", ["crate", "x", "p"], "Q", "z", "X", "N", "Y"],
+	"walk": ["w", "f", ["radio", "k"], "t", "T", "1", ["crate", "x", "p"], "Q", "z", "X", "N", "Y"],
 }

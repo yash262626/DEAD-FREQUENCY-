@@ -6,14 +6,14 @@ Run with `tools/test.sh <suite>`. A suite fails if any check fails **or** the en
 | Suite | What it proves | Result (latest run) |
 |---|---|---|
 | `validate` | Every chapter/ending: map rows equal width, start present, every map char has a legend and vice-versa, every event command known, every marker/sound referenced exists; exact credit names and order | 253 checks, 0 failures |
-| `flags` | Every story flag that is read anywhere is set somewhere; ending flags settable; 7 Evelyn tapes exist | 56 / 0 |
+| `flags` | Every story flag that is read anywhere is set somewhere; ending flags settable; 7 Evelyn tapes exist | 73 / 0 |
 | `layout` | No prop or blocking object cuts off any floor area (BFS with props as walls) | 18 / 0 |
 | `save` | Save → reset → load round-trip; version handling; ending logic for every flag combination; checkpoint respawn position; power state restore | 12 / 0 |
 | `systems` | Walk/sprint speeds, stamina drain and winded state, crouch, lean, flashlight toggle/drain/auto-reload, radio toggle, 0.1 MHz tuning, battery drain, 107.9 reveal, 94.6 band, directional transmission reception, lockers, doors (powered, key-locked), damage, medkit, pause menu, settings apply, journal | 28 / 0 |
 | `ai` | Dormant ignores out-of-range noise; loud noise → investigate → search; doesn't home in on a silent player; sight escalates to hunt; loses a hidden/silent player; catch wounds then retreats; habitual lockers searched more; fresh lockers mostly safe; learning bounded | 12 / 0 |
 | `flow` | Opening cinematic → menu; menu items and lock states; New Game writes a save; pause → main menu; Continue; chapter select unlocks; death → game over → reload checkpoint | 13 / 0 |
 | `endings` | Each flag combination produces the right ending (A, B, C×2, D), reaches the credits, credits contain every contributor and the final card, credits finish with return-to-menu, completion saved | 26 / 0 |
-| `play` | **Full campaign**: plays chapters 1→13 on the critical path (teleporting between steps but verifying A* reachability of every step), receives every required transmission, solves every puzzle, makes the choices, reaches ending D and the credits; includes every optional wing | 188 / 0 (all 7 tapes, ending D) |
+| `play` | **Full campaign**: plays chapters 1→13 on the critical path (teleporting between steps but verifying A* reachability of every step), receives every required transmission, solves every puzzle, makes the choices, reaches ending D and the credits; includes every optional wing and Pell's calls | 198 / 0 (all 7 tapes, ending D) |
 | `introtime` | Opening cinematic + title reveal real-time length | 135 s (target 120–180 s) |
 | `gallery` | Renders 18 reference images (`docs/screenshots/`) for visual QA | images reviewed |
 

@@ -12,9 +12,9 @@ const DATA = {
 		"######D###########Y#######Q#####",
 		"#................g.............#",
 		"#.zzzz.zzzz.zzzz.zzzz.zzzz..H..#",
-		"#....P.........Z........P......#",
+		"#....P....j....Z........P......#",
 		"#.zzzz.zzzz.zzzz.zzzz.zzzz..L..M",
-		"#..............................#",
+		"#............................J.#",
 		"#.zzzz.zzzz.zzzz.zzzz.zBzz.k...#",
 		"#H.......L..........L..........#",
 		"################################",
@@ -22,6 +22,24 @@ const DATA = {
 	"leg": {
 		"z": {"t": "prop", "p": "shelf", "block": true}, "Z": {"t": "mark"},
 		"G": {"t": "ghost", "text": "BOX 19\nSTACK E — ROW 3", "r": 8.0},
+		"j": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (4 of 4)", "flag": "pell4", "lines": [
+			["PELL (1998)", "I followed him down to the Archive. He's in the stacks, looking for Box nineteen."],
+			["OKAFOR (1998)", "Jonah. Come back up. Please."],
+			["PELL (1998)", "He has her eyes, Tunde. The Director's. That same way of standing still when he listens."],
+			["DANIEL", "Her eyes."],
+			["if", "pell1", [["if", "pell2", [["if", "pell3", [["if", "pell4", [["flag", "pell_all"], ["toast", "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."]]]]]]]]],
+		]},
+		"J": {"t": "radio", "f": 89.1, "r": 12.0, "if": "pell_all", "title": "Pell — the forty-second", "flag": "pell_end", "lines": [
+			["PELL (1998)", "Tunde. I asked him his name."],
+			["OKAFOR (1998)", "And?"],
+			["PELL (1998)", "He said Arlen. Then he said, 'Is anyone still there?' — and he wasn't. He just wasn't, Tunde. Like a station going off the air."],
+			["OKAFOR (1998)", "...Forty-two."],
+			["PELL (1998)", "What?"],
+			["OKAFOR (1998)", "I've counted forty-two all night. Now I know who the extra one was."],
+			["ach", "pell"],
+			["journal", "The forty-second", "In 1998, Jonah Pell followed a man in an orange jacket through HELIX-9 — the open-plan office, Lind's records, the Signal Room, the Archive. He asked the man his name. The man said Arlen.\n\nOkafor had counted forty-two people all night. The forty-second was me."],
+			["DANIEL", "They could see me. All night, in nineteen ninety-eight, they could see me walking through their building."],
+		]},
 		"B": {"t": "use", "p": "shelf", "block": true, "prompt": "Search the shelf — Box 19", "ev": [
 			["journal", "Run 19 — operational order", "RUN 19 — OPERATIONAL ORDER\nAuthorised: E. Voss, Director\nSecurity sign-off: REFUSED — M. Hale\n\nHale: 'I will not sign. There is a child on this level, and a thing on this channel that asks for him by a name he doesn't have yet. If you run it, Evelyn, run it without him.'\n\nVoss (pencil): 'Mira takes him up at 02:40. You have my word.'\n\nRun commenced: 02:40.\nNo record of the child leaving the level before 02:43."],
 			["give", "battery"], ["give", "medkit"], ["sfx", "pickup", -6], ["toast", "Taken: Power cell, Medkit"],
@@ -87,5 +105,5 @@ const DATA = {
 		["toast", "It has learned how you hide and where you go. Now it waits for you."],
 		["obj", "Find the archive keycard for the deep lift. Look for the vaults."],
 	],
-	"walk": ["n", "d", "e", "Y", "h", "Q", "T", "s", "B", "k", "M"],
+	"walk": ["n", ["radio", "j"], ["radio", "J"], "d", "e", "Y", "h", "Q", "T", "s", "B", "k", "M"],
 }

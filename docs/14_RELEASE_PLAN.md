@@ -68,6 +68,7 @@ Minimum 5, target 8, 1920×1080, no HUD except where the receiver is the subject
 | no_hunt | Quiet Feet — finish a chapter without being hunted |
 | unseen | 107.9 — reveal ten hidden things |
 | hale | The Man at the Door — hear Marcus Hale's last tape |
+| pell | The Forty-Second — follow Jonah Pell's calls to the end |
 | all_tapes | Her Voice — find every recording by Dr. Voss |
 | end_A / end_B / end_C / end_D | the four endings |
 | all_endings | The Signal Never Ends — see all four endings |

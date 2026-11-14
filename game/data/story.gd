@@ -21,6 +21,7 @@ const ACH = {
 	"hale": "The Man at the Door — hear Marcus Hale's last tape",
 	"unseen": "107.9 — reveal ten hidden things",
 	"no_hunt": "Quiet Feet — finish a chapter without being hunted",
+	"pell": "The Forty-Second — follow Jonah Pell's calls to the end",
 	"end_A": "Ending — Silence", "end_B": "Ending — The Open Door", "end_C": "Ending — The Loop", "end_D": "Ending — The Last Transmission",
 	"all_endings": "The Signal Never Ends — see all four endings",
 }
