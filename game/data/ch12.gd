@@ -17,12 +17,21 @@ const DATA = {
 		"#..############G#############..#",
 		"#..............................#",
 		"#.......L......R.......L.......#",
-		"#.......P......S.......H......c#",
+		"#.......P......S8......H......c#",
 		"#V.............................#",
 		"################################",
 	],
 	"leg": {
 		"x": {"t": "mark"},
+		"8": {"t": "radio", "f": 88.0, "r": 14.0, "ngp": true, "title": "88.0 — the second signal (6 of 6)", "flag": "ss6", "lines": [
+			["DANIEL (88.0 MHz)", "This is the last one I can send. After the Door, eighty-eight goes quiet."],
+			["if", "mem_end_A", [["DANIEL (88.0 MHz)", "Last time I turned the key. It was so quiet afterwards. I thought quiet would be enough."]]],
+			["if", "mem_end_B", [["DANIEL (88.0 MHz)", "Last time I opened it. They thanked me. All of them. In my voice."]]],
+			["if", "mem_end_C", [["DANIEL (88.0 MHz)", "Last time I didn't have what I needed. I woke up in the annex, and I picked up the microphone."]]],
+			["if", "mem_end_D", [["DANIEL (88.0 MHz)", "Last time I answered it, with Mira. It worked. So why am I here again?"]]],
+			["DANIEL (88.0 MHz)", "Choose for yourself this time. And when you get out, call Kessler. Ask him why."],
+			["if", "ss1", [["if", "ss2", [["if", "ss3", [["if", "ss4", [["if", "ss5", [["if", "ss6", [["ach", "static_between"], ["toast", "88.0 is quiet now. Every message is in the journal."]]]]]]]]]]]]],
+		]},
 		"h": {"t": "ghost", "p": "shade", "r": 12.0},
 		"w": {"t": "use", "p": "terminal", "prompt": "Operator's log terminal", "ev": [
 			["cine", true],

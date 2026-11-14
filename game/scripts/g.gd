@@ -25,6 +25,8 @@ var unlocked := 1
 var endings := []
 var achievements := []
 var intro_seen := false
+var ng_unlocked := false
+var memory := {}           # selected habits of the last completed run (New Game+ "Second Signal")
 var settings := {
 	"master": 0.9, "music": 0.8, "sfx": 1.0,
 	"sens": 1.0, "invert_y": false, "fov": 75.0,
@@ -113,7 +115,7 @@ func save_profile():
 	var f = File.new()
 	if f.open(PROFILE, File.WRITE) == OK:
 		f.store_string(to_json({"settings": settings, "unlocked": unlocked, "endings": endings,
-			"achievements": achievements, "intro_seen": intro_seen}))
+			"achievements": achievements, "intro_seen": intro_seen, "ng_unlocked": ng_unlocked, "memory": memory}))
 		f.close()
 
 func load_profile():
@@ -128,6 +130,8 @@ func load_profile():
 	settings.quality = int(settings.quality); settings.sub_size = int(settings.sub_size)
 	unlocked = int(d.get("unlocked", 1)); endings = d.get("endings", [])
 	achievements = d.get("achievements", []); intro_seen = d.get("intro_seen", false)
+	ng_unlocked = d.get("ng_unlocked", false)
+	memory = d.get("memory", {}) if typeof(d.get("memory", {})) == TYPE_DICTIONARY else {}
 
 func achieve(id):
 	if not id in achievements:
@@ -143,6 +147,30 @@ func new_run(ch := 1):
 		inv = {"battery": 1, "medkit": 1}
 		# chapter-select runs get neutral story defaults
 		flags = {"cs_run": true}
+
+# ---------------------------------------------------------------- New Game+ memory
+# What the Listener keeps between runs is deliberately partial: habits, not knowledge.
+func snapshot_memory():
+	var hides = {}
+	for k in flags:
+		if str(k).begins_with("m_hide_") and int(flags[k]) > 0: hides[k] = int(flags[k])
+	memory = {"radio": int(flags.get("m_radio", 0)), "hunts": int(flags.get("m_hunts", 0)), "hides": hides,
+		"bottles": int(flags.get("m_bottles", 0)), "sprint_escapes": int(flags.get("m_sprint_esc", 0)),
+		"ending": ending_id(), "runs": int(memory.get("runs", 0)) + 1}
+	ng_unlocked = true
+	save_profile()
+
+func new_run_plus():
+	new_run(1)
+	flags["ngp"] = true
+	flags["mem_end_" + str(memory.get("ending", "C"))] = true
+	# carried at half strength: it remembers, but not perfectly
+	flags["m_radio"] = int(memory.get("radio", 0) / 2)
+	var hides = memory.get("hides", {})
+	for k in hides: flags[k] = int(ceil(float(hides[k]) / 2.0))
+	flags["m_hunts"] = int(min(2, memory.get("hunts", 0)))
+	flags["mem_bottles"] = int(memory.get("bottles", 0))
+	flags["mem_sprint"] = int(memory.get("sprint_escapes", 0))
 
 func flag(n) -> bool: return flags.get(n, false)
 func set_flag(n, v := true): flags[n] = v

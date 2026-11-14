@@ -126,16 +126,18 @@ func _process(dt):
 	elif b == 107.9:
 		level.reveal_on = true; loud = 15.0
 		sig = max(sig, 0.5)
+	if abs(f - 88.0) < TOL:
+		loud = 0.0   # 88.0 sits below the Listener's band: the one channel it cannot hear
 	# noise bed
 	Snd.loop("static", "static", lerp(-10.0, -26.0, sig) + near * 6.0, 0.8 + (f - 87.5) / 30.0)
 	# exposure: the carrier gives you away
 	_emit -= dt
 	if _emit <= 0:
 		_emit = 1.2
-		level.noise(pp, loud, "radio")
+		if loud > 0.0: level.noise(pp, loud, "radio")
 	var hm = 1.0
 	if level.listener and is_instance_valid(level.listener): hm = level.listener.hear_mult("radio")
-	exposure = clamp(1.3 - ld / (loud * hm), 0.0, 1.0) if ld < 900 else 0.0
+	exposure = clamp(1.3 - ld / (loud * hm), 0.0, 1.0) if (ld < 900 and loud > 0.0) else 0.0
 	rs.sig = sig; rs.danger = max(exposure, near)
 
 func _receive(e):

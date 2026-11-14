@@ -10,7 +10,7 @@ const DATA = {
 		"#S...t#a.c.V#H.H.b#....o######",
 		"#.....D.....D.....D.....######",
 		"#..A..#..R..#..i..#..R..######",
-		"#.....#.....#...x.#.....######",
+		"#N....#.....#...x.#.....######",
 		"###D######E###################",
 		"#....#..........F.........w..#",
 		"#.j..#......1.........y...2..#",
@@ -36,7 +36,14 @@ const DATA = {
 			["DANIEL", "…Cell's still holding a charge. After twenty-eight years. That isn't possible."],
 			["toast", "R / Right-click: receiver on-off.   Mouse wheel / ← →: tune."],
 			["obj", "Try the receiver. The dial is marked at 89.1 MHz."],
+			["if", "ngp", [
+				["radio_on", true, 88.0], ["sfx", "glitch", -8],
+				["DANIEL (88.0 MHz)", "Eighty-eight point zero. It sits under its band. It can't hear this one. Remember it."],
+				["DANIEL", "That's me. Again."], ["radio_on", false],
+				["journal", "88.0", "A transmission in my own voice, below the Listener's band: 'Eighty-eight point zero. It can't hear this one. Remember it.'\n\nI've been here before. I don't remember it. Something does."],
+			]],
 		]},
+		"N": {"t": "note", "ngp": true, "title": "Northline dispatch slip", "text": "NORTHLINE RECOVERY — DISPATCH SLIP\n\nJob: HELIX-9, beacon reactivation\nTechnician: requested by name — ARLEN, D.\nDispatcher: P. Kessler\n\n(Paper-clipped to the slip, handwritten:)\nTwenty-eight years. It finally asked for him.\nGod forgive me. — P.K."},
 		"x": {"t": "radio", "f": 89.1, "r": 16.0, "title": "Gate post, 1998", "flag": "first_signal", "lines": [
 			["GUARD (1998)", "Post Two to Hale. Chief, the lower doors just cycled. By themselves."],
 			["MARCUS (1998)", "Say again, Two."],

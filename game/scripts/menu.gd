@@ -48,13 +48,16 @@ func _fill(items: Array):
 	if first: first.call_deferred("grab_focus")
 
 func _main_list():
-	_fill([["NEW GAME", "new"], ["CONTINUE", "continue", not G.has_save()], ["CHAPTER SELECTION", "chapters", G.unlocked < 2],
-		["SETTINGS", "settings"], ["CREDITS", "credits"], ["EXIT GAME", "exit"]])
+	var items = [["NEW GAME", "new"], ["CONTINUE", "continue", not G.has_save()]]
+	if G.ng_unlocked: items.append(["NEW GAME+  —  SECOND SIGNAL", "ngplus"])
+	items += [["CHAPTER SELECTION", "chapters", G.unlocked < 2], ["SETTINGS", "settings"], ["CREDITS", "credits"], ["EXIT GAME", "exit"]]
+	_fill(items)
 
 func _act(id):
 	Snd.play("click", -4)
 	match id:
 		"new": _go("new_game")
+		"ngplus": _go("new_game_plus")
 		"continue": _go("continue_game")
 		"chapters":
 			var items = []

@@ -5,9 +5,9 @@ const DATA = {
 	"map": [
 		"##############################",
 		"#....#.......................#",
-		"#.S..D..d...d...d...d....L...#",
+		"#.S..D..d...d...d...d.7..L...#",
 		"#....#........j..............#",
-		"#.L..#..c.......c.........H..#",
+		"#.L8.#..c.......c.........H..#",
 		"#.t..#...L.......L.......1...#",
 		"#....#.......................#",
 		"###########.#######gggg#######",
@@ -29,7 +29,14 @@ const DATA = {
 	"leg": {
 		"d": {"t": "prop", "p": "desk"}, "c": {"t": "prop", "p": "coat"},
 		"g": {"t": "prop", "p": "glass", "rot": 0, "block": true},
-		"z": {"t": "mark"}, "Z": {"t": "mark"},
+		"z": {"t": "mark"}, "Z": {"t": "mark"}, "7": {"t": "mark"},
+		"8": {"t": "radio", "f": 88.0, "r": 14.0, "ngp": true, "title": "88.0 — the second signal (1 of 6)", "flag": "ss1", "lines": [
+			["DANIEL (88.0 MHz)", "If you can hear this, you came back. So did I. I've stopped being sure I'm the first one to say this."],
+			["DANIEL (88.0 MHz)", "It remembers where you hid last time. It remembers how loud you were. Don't do anything the same way twice."],
+			["DANIEL (88.0 MHz)", "Eighty-eight is under its band. It can't hear us here. It's the only place it can't."],
+			["DANIEL", "I'm talking to myself. On a frequency that doesn't exist."],
+			["if", "ss1", [["if", "ss2", [["if", "ss3", [["if", "ss4", [["if", "ss5", [["if", "ss6", [["ach", "static_between"], ["toast", "88.0 is quiet now. Every message is in the journal."]]]]]]]]]]]]],
+		]},
 		"t": {"t": "note", "title": "Annex duty sheet", "text": "COMMS ANNEX — DUTY SHEET — 16 OCT 1998\n\n18:00  Haddad on. Uplink nominal.\n21:15  Uplink drifting. Haddad realigned the north array. Nominal.\n23:50  Dr. Voss left a tape on the annex machine. Label reads:\n       FOR DANIEL — DO NOT ERASE.\n       Nobody on site called Daniel. Left it where it was. She was very clear.\n01:30  Annex radio opened squelch by itself four times. Logged.\n02:38  Haddad says the monitor is printing tomorrow's date. Then a date that isn't tomorrow.\n02:41  Going down to find Hale."},
 		"r": {"t": "note", "title": "Night shift roster", "text": "NIGHT SHIFT — 16/17 OCTOBER 1998\n\nSignals supervisor ........ T. Okafor\nRecords ................... J. Pell\nComms ..................... M. Solace, R. Haddad\nGate (Post One) ........... Cpl. I. Duarte\nSublevel 1 security ....... Sgt. P. Brandt\nMedical on call ........... Dr. S. Lind\nPower ..................... A. Ruiz\nDirector on site .......... Dr. E. Voss (+1 — not on roster, see Hale)\nChief of security ......... M. Hale\n\nTOTAL ON SITE AT 02:00 ..... 41\n\n(Pencil, different hand:) forty-two."},
 		"y": {"t": "radio", "f": 89.1, "r": 14.0, "title": "Records, 1998", "flag": "c2_code", "lines": [
@@ -61,7 +68,12 @@ const DATA = {
 			["pulse"], ["sfx", "screech", -8, 0.7, "z"], ["wait", 1.4], ["listener", "despawn"], ["wait", 0.6], ["lights", true], ["camoff"],
 			["DANIEL", "It said what I said. In my voice. It said it back to me."],
 			["DANIEL", "Okay. Okay. Don't breathe, Arlen. Don't you breathe."],
-			["ach", "seen"], ["flag", "c2_loose"], ["listener", "spawn", "Z", "patrol"], ["music", "drone_b", -12],
+			["ach", "seen"], ["flag", "c2_loose"],
+			["if", "ngp", [
+				["listener", "spawn", "7", "stalk"], ["sfx", "clicks", 2, 0.5, "7"],
+				["DANIEL", "...It's behind me. It's been standing behind me the whole time."],
+			], [["listener", "spawn", "Z", "patrol"]]],
+			["music", "drone_b", -12],
 			["toast", "94.6 MHz — PROXIMITY. Faster beeps: closer. A sharper tone: you are facing it."],
 			["toast", "Lockers hide you. If it watches you get in, the locker is not a hiding place."],
 			["obj", "Get into the supervisor's office. The records room might know the door code."],

@@ -43,6 +43,18 @@ var _saw_hide = null
 var _check_hide = null
 var _rng := RandomNumberGenerator.new()
 var heat := {}               # patrol marker index -> how often noise was heard nearby
+# New Game+ ("Second Signal"): bounded adaptations from the previous completed run
+var ngp := false
+var hunt_speed := 4.4        # never reaches the player's sprint speed (5.3)
+var hunt_cap := 40.0
+var lure_wise := false
+var _last_lure := -100.0
+const MIMIC_NGP = {
+	"A": ["DANIEL?", "I'm sorry. I'm so sorry."],
+	"B": ["DANIEL?", "Everyone comes home."],
+	"C": ["DANIEL?", "Daniel. Whatever happens. Do not open the door."],
+	"D": ["MIRA?", "Signal, Danny."],
+}
 var trace := []              # test hook: state history
 
 func setup(lv, p, u, pos: Vector3, mode: String):
@@ -53,6 +65,11 @@ func setup(lv, p, u, pos: Vector3, mode: String):
 	snd = AudioStreamPlayer3D.new(); snd.stream = Snd.bank["clicks"]; snd.unit_db = 2; snd.unit_size = 4.0; snd.max_distance = 26
 	snd.bus = "SFX"; snd.translation.y = 2.4; add_child(snd); snd.play()
 	cloaked = level.data.get("cloaked", false)
+	ngp = G.flag("ngp")
+	if ngp:
+		hunt_cap = 45.0
+		if int(G.flags.get("mem_sprint", 0)) >= 2: hunt_speed = 4.6
+		lure_wise = int(G.flags.get("mem_bottles", 0)) >= 3
 	command(mode, pos)
 
 func command(mode: String, pos := Vector3()):
@@ -90,6 +107,14 @@ func hear(pos: Vector3, loud: float, kind: String):
 	if kind == "radio": G.flags["m_radio"] = int(G.flags.get("m_radio", 0)) + 1
 	if d > loud * hear_mult(kind): return
 	if st == S.HUNT or st == S.RETREAT: return
+	if kind == "object" and lure_wise:
+		# a Listener that was fooled by bottles last time is slower to fall for the same trick twice in a row
+		var now = OS.get_ticks_msec() / 1000.0
+		var repeat = now - _last_lure < 20.0
+		_last_lure = now
+		if repeat and _rng.randf() < 0.35:
+			alert = min(1.0, alert + 0.15)
+			return
 	# blurred: the further the sound, the worse its fix
 	var err = clamp(d * 0.18, 0.0, 5.0)
 	var guess = level.random_floor_near(pos, err) if err > 0.8 else pos
@@ -101,6 +126,10 @@ func hear(pos: Vector3, loud: float, kind: String):
 	if st in [S.DORMANT, S.PATROL, S.SEARCH, S.INVESTIGATE, S.STALK]:
 		if st != S.INVESTIGATE: Snd.play3d("clicks", level, global_transform.origin + Vector3(0, 2, 0), 4, 1.5)
 		_go(S.INVESTIGATE)
+
+func _escaped():
+	G.flags["m_escapes"] = int(G.flags.get("m_escapes", 0)) + 1
+	if player.sprint_recent > 0.0: G.flags["m_sprint_esc"] = int(G.flags.get("m_sprint_esc", 0)) + 1
 
 func _heat(pos: Vector3):
 	var pts = level.markers.get("P", [])
@@ -205,7 +234,7 @@ func _physics_process(dt):
 	else:
 		lost_t += dt
 		alert = max(0.0, alert - dt * 0.05)
-	var speed = SPEED[st]
+	var speed = hunt_speed if st == S.HUNT else SPEED[st]
 	match st:
 		S.DORMANT:
 			if not passive and (alert > 0.5 or st_t > 25.0): _go(S.PATROL)
@@ -243,6 +272,10 @@ func _physics_process(dt):
 				if _mimic_cd <= 0 and dist < 16.0 and level.running == 0 and not ui.in_cine:
 					_mimic_cd = _rng.randf_range(22.0, 40.0)
 					var m = MIMIC[_rng.randi() % MIMIC.size()]
+					var me_end = ""
+					for k in ["A", "B", "C", "D"]:
+						if G.flag("mem_end_" + k): me_end = k
+					if ngp and me_end != "" and _rng.randf() < 0.5: m = MIMIC_NGP[me_end]
 					Snd.play3d("whisper", level, me + Vector3(0, 2, 0), 6, 0.8)
 					ui.say(m[0], m[1])
 			if st_t > 22.0: _go(S.AMBUSH if _rng.randf() < 0.4 else S.RETREAT)
@@ -256,8 +289,11 @@ func _physics_process(dt):
 				return
 			if player.hidden and _saw_hide == player.hide_ent and (me - player.hide_ent.pos).length() < 1.8:
 				_drag_out(); return
-			if lost_t > 4.5: _go(S.SEARCH)
-			if st_t > 40.0: _go(S.RETREAT)   # fairness valve: no endless chases
+			if lost_t > 4.5:
+				_escaped()
+				_go(S.SEARCH)
+			elif st_t > hunt_cap:
+				_go(S.RETREAT)   # fairness valve: no endless chases
 		S.AMBUSH:
 			if route.size() == 0:
 				speed = 0.0

@@ -252,7 +252,7 @@ func t_ai():
 
 # ------------------------------------------------------------ cross-chapter flag + layout validation
 const NONSOLID = ["paper", "debris", "coat", "figure", "shade", "lamp", "board", "vent", "pipes", "glass"]
-const AUTO_FLAGS = ["cs_run", "radio_tut", "m_radio", "m_hunts", "m_unseen", "hunts_start"]
+const AUTO_FLAGS = ["cs_run", "radio_tut", "m_radio", "m_hunts", "m_unseen", "hunts_start", "ngp", "mem_end_A", "mem_end_B", "mem_end_C", "mem_end_D", "mem_bottles", "mem_sprint"]
 
 func _walk_ev(evs, sets: Dictionary, refs: Array, where: String):
 	for e in evs:
@@ -640,3 +640,72 @@ func t_perf():
 		for i in 120: yield(get_tree(), "idle_frame")
 		var fps = (Engine.get_frames_drawn() - f0) * 1000.0 / max(1, OS.get_ticks_msec() - t1)
 		print("  ch%02d  build %4d ms   %.1f fps   (%s, quality %d)" % [n, build_ms, fps, str(OS.window_size), G.settings.quality])
+
+# ------------------------------------------------------------ New Game+ ("Second Signal")
+func _receive(lv, key: String) -> bool:
+	var e = lv.ent_at(key)
+	if e == null: return false
+	lv.player.global_transform.origin = e.pos + Vector3(0, 0.1, 0)
+	lv.radio.on = true; lv.radio.f = e.d.f; G.has_radio = true; G.radio_batt = 100
+	for i in 600:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if e.done: break
+	lv.radio.on = false
+	yield(_settle(lv), "completed")
+	return e.done
+
+func t_ngplus():
+	G.test_god = true
+	# 1. a completed first run: hid in one locker a lot, leaned on the radio, threw bottles, escaped by sprinting, opened the Door
+	G.new_run(13)
+	G.flags["m_hide_c2_H1"] = 6; G.flags["m_radio"] = 300; G.flags["m_hunts"] = 4; G.flags["m_bottles"] = 5; G.flags["m_sprint_esc"] = 3
+	G.set_flag("final_open")
+	G.snapshot_memory()
+	ok(G.ng_unlocked and G.memory.ending == "B" and int(G.memory.runs) >= 1, "finishing a run unlocks New Game+ and remembers the ending")
+	main.show_menu(); yield(frames(3), "completed")
+	var labels = []
+	for b in main.menu.list.get_children(): labels.append(b.text)
+	ok("NEW GAME+  —  SECOND SIGNAL" in labels, "menu offers New Game+ once unlocked (%s)" % str(labels))
+	# 2. start New Game+
+	main.new_game_plus(); yield(frames(5), "completed")
+	ok(G.flag("ngp") and G.flag("mem_end_B") and main.level.data.n == 1, "New Game+ starts at chapter 1 remembering ending B")
+	ok(int(G.flags.get("m_hide_c2_H1", 0)) == 3 and int(G.flags.get("m_radio", 0)) == 150 and int(G.flags.get("m_hunts", 0)) == 2, "habits carried over at half strength")
+	ok(main.level.ent_at("N") != null, "the dispatch slip exists in New Game+")
+	# 3. chapter 2 in New Game+: 88.0 content present, adaptations bounded
+	G.set_flag("started2"); G.chapter = 2; main.start_chapter(2); yield(frames(8), "completed")
+	var lv = main.level
+	ok(lv.ent_at("8") != null, "88.0 transmission exists in New Game+")
+	lv.spawn_listener("Z", "patrol"); var L = lv.listener
+	ok(L.ngp and L.hunt_speed < lv.player.SPRINT, "remembered sprint escapes make it faster, but still slower than a sprint (%.1f < %.1f)" % [L.hunt_speed, lv.player.SPRINT])
+	ok(L.hunt_cap <= 45.0, "chases stay time-capped")
+	ok(L.lure_wise, "a bottle-heavy previous run makes it lure-wise")
+	ok(L.hear_mult("radio") <= 1.5, "radio learning still capped at +50%")
+	var h = lv.ent_at("H"); L.last_known = h.pos
+	var picks = 0
+	for i in 400:
+		L._next_search()
+		if L._check_hide == h: picks += 1
+	ok(picks > 40 and picks < 300, "remembered locker is checked more often but never certainly (%d/400)" % picks)
+	# 88.0 is silent: listening there never reaches the Listener
+	var r0 = int(G.flags.get("m_radio", 0))
+	L.global_transform.origin = lv.ent_at("8").pos + Vector3(2, 0, 0); L.command("dormant")
+	var got = yield(_receive(lv, "8"), "completed")
+	ok(got and G.flag("ss1"), "88.0 transmission received")
+	ok(int(G.flags.get("m_radio", 0)) == r0, "88.0 is below its band: no radio noise reached it")
+	# 4. a normal run never builds New Game+ content
+	G.new_run(2); G.set_flag("started2"); main.start_chapter(2); yield(frames(8), "completed")
+	ok(main.level.ent_at("8") == null and not G.flag("ngp"), "normal runs have no 88.0 content")
+	# 5. finishing New Game+ grants its achievement and still reaches an ending
+	G.new_run_plus(); G.chapter = 13; G.set_flag("started13"); G.has_radio = true; G.flags["_test_choice"] = 1
+	main.start_chapter(13)
+	lv = main.level
+	for i in 600:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if lv.running == 0: break
+	lv.interact(lv.ent_at("U"))
+	var reached = false
+	for i in 4000:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if main.credits != null and is_instance_valid(main.credits):
+			reached = true; break
+	ok(reached and "second_signal" in G.achievements, "New Game+ reaches an ending and awards Second Signal")

@@ -49,6 +49,9 @@ const DATA = {
 			["DANIEL (LATER)", "I don't listen to the radio any more. Some nights the house is so quiet I can hear my own heart, and I tell myself that's what silence sounds like."],
 			["DANIEL (LATER)", "I tell myself it's enough."],
 			["wait", 2.0], ["fade", true, 2.5],
+			["if", "ngp", [
+				["DANIEL (LATER)", "There's a voicemail from Kessler I've never played. I know what's on it. I've known since the dispatch slip."],
+			]],
 			["text", "ENDING A — SILENCE", 3.0, 34],
 			["title", ""], ["credits"],
 		],
@@ -74,6 +77,9 @@ const DATA = {
 			["KESSLER? (RADIO)", "Four hours, Danny. Four hours, Danny."],
 			["LISTENER (DANIEL'S VOICE, EVERY RADIO)", "Thank you, Daniel. Thank you, Daniel. Thank you, Daniel."],
 			["fade", true, 2.5],
+			["if", "ngp", [
+				["KESSLER? (RADIO)", "Twenty-eight years, Danny. I waited twenty-eight years to send you."],
+			]],
 			["text", "ENDING B — THE OPEN DOOR", 3.0, 34],
 			["title", ""], ["credits"],
 		],
@@ -102,6 +108,10 @@ const DATA = {
 			["DISPATCH (KESSLER)", "Northline to Arlen. You at the gate yet?"],
 			["DANIEL", "At the gate. Snow gave up about a mile back. Now it's just rain."],
 			["fade", true, 2.5],
+			["if", "ngp", [
+				["DISPATCH (KESSLER)", "...It asked for you by name, Danny. I'm sorry. I'm so sorry."],
+				["DANIEL", "He's never said that before. Not any of the other times."],
+			]],
 			["text", "ENDING C — THE LOOP", 3.0, 34],
 			["title", ""], ["credits"],
 		],
@@ -143,6 +153,12 @@ const DATA = {
 			["MIRA (RADIO, VERY FAINT)", "Signal, Danny."],
 			["DANIEL", "Answer."],
 			["fade", true, 3.0],
+			["if", "ngp", [
+				["KESSLER (PHONE)", "Danny? You're out. You're — Danny, I was the liaison. In ninety-eight. I was coming for you at six."],
+				["DANIEL", "I know. I've read your handwriting. Twice."],
+				["KESSLER (PHONE)", "Then why did you go back in?"],
+				["DANIEL", "Because they were still there, Pete. Somebody had to answer."],
+			]],
 			["text", "ENDING D — THE LAST TRANSMISSION", 3.0, 34],
 			["title", ""], ["credits"],
 		],

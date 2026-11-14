@@ -73,6 +73,10 @@ func new_game():
 func continue_game():
 	if G.load_game(): start_chapter(G.chapter)
 
+func new_game_plus():
+	G.new_run_plus(); G.has_radio = false
+	start_chapter(1)
+
 func select_chapter(n: int):
 	G.new_run(n)
 	start_chapter(n)
@@ -122,7 +126,8 @@ func play_ending():
 	if not id in G.endings: G.endings.append(id)
 	G.achieve("end_" + id)
 	if G.endings.size() >= 4: G.achieve("all_endings")
-	G.save_profile()
+	if G.flag("ngp"): G.achieve("second_signal")
+	G.snapshot_memory()
 	var d = Story.ending(id)
 	_load(d)
 	ui.set_cine(true); level.player.locked = true

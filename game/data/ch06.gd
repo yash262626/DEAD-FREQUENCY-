@@ -4,7 +4,7 @@ const DATA = {
 	"pal": "flooded", "sub": "SUBLEVEL 4 — FLOOD TUNNELS", "music": "drone_b", "amb_loop": "drip", "amb_db": -18.0, "face": -90,
 	"map": [
 		"##############################",
-		"#...#.........#######.......Y#",
+		"#.8.#.........#######.......Y#",
 		"B.S.D....A....#.....#..T..L..#",
 		"#...#.........#..m..#........#",
 		"#####........n#..P..#....H...#",
@@ -45,11 +45,18 @@ const DATA = {
 		"w": {"t": "use", "p": "valve", "cycle": 4, "target": 2, "group": "valves", "label": "Drain valves", "prompt": "Turn the east valve"},
 		"x": {"t": "ghost", "text": "III", "r": 6.0}, "y": {"t": "ghost", "text": "I", "r": 6.0}, "z": {"t": "ghost", "text": "II", "r": 6.0},
 		"e": {"t": "item", "id": "battery"}, "k": {"t": "item", "id": "medkit"},
+		"8": {"t": "radio", "f": 88.0, "r": 14.0, "ngp": true, "title": "88.0 — the second signal (3 of 6)", "flag": "ss3", "lines": [
+			["DANIEL (88.0 MHz)", "The briefcase in the drowned office. 'Transport at six.' The liaison signed it."],
+			["DANIEL (88.0 MHz)", "The signature is illegible. The handwriting isn't. Put it next to the dispatch slip."],
+			["DANIEL", "Kessler. That's Kessler's hand."],
+			["if", "ss1", [["if", "ss2", [["if", "ss3", [["if", "ss4", [["if", "ss5", [["if", "ss6", [["ach", "static_between"], ["toast", "88.0 is quiet now. Every message is in the journal."]]]]]]]]]]]]],
+		]},
 		"W": {"t": "door", "needflag": "solved_valves", "msg": "Office door. There's a wall of water behind it. Drain the section first."},
 		"g": {"t": "ghost", "text": "SHE SAID NO", "r": 7.0},
 		"b": {"t": "note", "title": "Directorate memo — liaison's briefcase", "flag": "c6_memo", "text": "DIRECTORATE OF SIGNAL RESEARCH\nLIAISON OFFICE — EYES ONLY — 16 OCT 1998\n\nTo: Dr. E. Voss, Director, HELIX-9\nRe: Phase III / Subject D\n\nThe Directorate has reviewed your reports on Subject D. A listener who requires no equipment is of greater strategic value than the Aperture itself.\n\nOn completion of Run 19, Subject D will be transferred to Directorate care for continued study. Transport is arranged for 06:00, 17 October.\n\nThis is not a request.\n\n— Liaison (signature illegible)\n\n(Across the page, in Evelyn Voss's handwriting, pressed hard enough to tear:)\nOVER MY DEAD BODY.", "ev": [
 			["DANIEL", "'Subject D.' 'A listener who requires no equipment.' They wanted somebody's kid."],
 			["DANIEL", "Transport at six in the morning. She was getting him out before they could take him."],
+			["if", "ngp", [["DANIEL", "The liaison's signature. I've seen that handwriting. On a dispatch slip, in the gatehouse."]]],
 		]},
 		"G": {"t": "door", "needflag": "solved_valves", "msg": "Floodgate. The water on the far side is holding it shut. Drain the section first."},
 		"q": {"t": "trig", "r": 2.2, "ev": [

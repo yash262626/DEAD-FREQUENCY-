@@ -316,6 +316,7 @@ func _build_entities():
 			var d = legend_of(data, ch)
 			if d == null: continue
 			counts[ch] = counts.get(ch, 0) + 1
+			if d.get("ngp", false) and not G.flag("ngp"): continue   # New Game+ only content
 			var e = {"d": d, "ch": ch, "kind": d.t, "pos": c, "cell": Vector2(cx, cz), "uid": "c%d_%s%d" % [data.n, ch, counts[ch]],
 				"node": null, "body": null, "done": false, "open": false}
 			e.done = G.flag("u:" + e.uid)

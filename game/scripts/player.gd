@@ -32,6 +32,7 @@ var _pre_hide: Vector3
 var moving_speed := 0.0
 var in_water := false
 var _hurt_cd := 0.0
+var sprint_recent := 0.0     # seconds since the player last sprinted (for the Listener's habit memory)
 
 func setup(lv, u):
 	level = lv; ui = u
@@ -151,7 +152,9 @@ func _physics_process(dt):
 	head.translation.x = lean * 0.42; head.rotation.z = -lean * 0.22
 	# sprint / stamina
 	sprinting = not busy and Input.is_action_pressed("sprint") and inp.y < -0.2 and not crouching and not _winded
+	sprint_recent = max(0.0, sprint_recent - dt)
 	if sprinting:
+		sprint_recent = 5.0
 		stamina -= dt * 16.0
 		if stamina <= 0:
 			stamina = 0; _winded = true
@@ -199,6 +202,7 @@ func _physics_process(dt):
 
 func _throw():
 	G.take("bottle")
+	G.flags["m_bottles"] = int(G.flags.get("m_bottles", 0)) + 1
 	var rb = RigidBody.new(); rb.mass = 0.4; rb.contact_monitor = true; rb.contacts_reported = 1
 	var cs = CollisionShape.new(); var sh = SphereShape.new(); sh.radius = 0.07; cs.shape = sh; rb.add_child(cs)
 	var mi = MeshInstance.new(); var cm = CylinderMesh.new(); cm.top_radius = 0.03; cm.bottom_radius = 0.045; cm.height = 0.22

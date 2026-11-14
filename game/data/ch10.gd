@@ -7,7 +7,7 @@ const DATA = {
 		"################################",
 		"#.....#......#.........g.......#",
 		"#.S...D.o.o..D.1.L.....K...x...#",
-		"#..L..#o..o..#.........g..o....#",
+		"#..L8.#o..o..#.........g..o....#",
 		"#.....##D#####..Q.U....#.......#",
 		"#######......#.........#....R..#",
 		"#######..T...#......R..#...o...#",
@@ -20,6 +20,12 @@ const DATA = {
 	],
 	"leg": {
 		"o": {"t": "prop", "p": "coat"}, "x": {"t": "mark"}, "Z": {"t": "mark"},
+		"8": {"t": "radio", "f": 88.0, "r": 14.0, "ngp": true, "title": "88.0 — the second signal (5 of 6)", "flag": "ss5", "lines": [
+			["DANIEL (88.0 MHz)", "Twenty-eight years he waited for something to say my name. The beacon said it. He sent me."],
+			["DANIEL (88.0 MHz)", "I don't know whether he wanted me to save them, or to bring it out to him. I asked him once. Last time. He didn't answer."],
+			["DANIEL (88.0 MHz)", "Don't open the bulkhead. Whatever it sounds like. You know that. I'm saying it anyway."],
+			["if", "ss1", [["if", "ss2", [["if", "ss3", [["if", "ss4", [["if", "ss5", [["if", "ss6", [["ach", "static_between"], ["toast", "88.0 is quiet now. Every message is in the journal."]]]]]]]]]]]]],
+		]},
 		"N": {"t": "door", "lock": "hale_badge", "msg": "Badge reader. 'CONTAINMENT RECORDS — SECURITY CHIEF ONLY.'"},
 		"h": {"t": "ghost", "p": "shade", "r": 10.0},
 		"r": {"t": "note", "title": "Containment roll call — 02:49", "flag": "c10_rollcall", "text": "CONTAINMENT — ROLL CALL — 17 OCT 1998 — 02:49\nPersons inside the bulkhead: 23\n\nVoss, E.        Solace, M.      Okafor, T.\nKowalczyk, J.   Mensah, A.      Ferreira, L.\nVarga, P.       Ito, K.         Nyberg, H.\nAchterberg, R.  Fofanah, K.     Quist, D.\nRomano, G.      Abiodun, F.     Park, S.\nLaine, T.       Moreau, C.      Haugen, I.\nDube, N.        Silva, R.       Kerr, A.\nTanaka, M.      Rowe, B.\n\nCounted by M. Hale, through the glass.\n\n(Below, in a different hand:)\nWhoever finds this — don't count them on the last channel. They count back.", "ev": [
@@ -43,6 +49,7 @@ const DATA = {
 		"U": {"t": "use", "p": "console", "prompt": "Bulkhead intercom", "ev": [
 			["cine", true], ["unloop3d", "knock"],
 			["MIRA? (BEHIND THE BULKHEAD)", "Danny, open it. Please. I can hear it on the stairs."],
+			["if", "ngp", [["EVELYN? (BEHIND THE BULKHEAD)", "Danny, it's Mum. Open it, sweetheart. Let me see how tall you got."]]],
 			["radio_on", true, 96.1], ["sfx", "glitch", -10],
 			["MIRA (96.1 MHz)", "Danny, that isn't me. I'm not at the bulkhead. I'm in the chamber, with your mother. Whatever is at that door — keep it shut."],
 			["radio_on", true, 103.7], ["sfx", "glitch", -8],

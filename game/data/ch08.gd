@@ -6,7 +6,7 @@ const DATA = {
 		"################################",
 		"#....#...............K.#.......#",
 		"#.S..D..u...u...u...L..D..T..L.#",
-		"#.L..#.................#..n....#",
+		"#.L8.#.................#..n....#",
 		"######..u...u...u...H..#.......#",
 		"#....#.........1.......#########",
 		"#.m..#..u...u...u...f..#.......#",
@@ -27,6 +27,12 @@ const DATA = {
 		"u": {"t": "prop", "p": "tank"},
 		"Q": {"t": "door"}, "o": {"t": "prop", "p": "dish"},
 		"x": {"t": "pcrate"},
+		"8": {"t": "radio", "f": 88.0, "r": 14.0, "ngp": true, "title": "88.0 — the second signal (4 of 6)", "flag": "ss4", "lines": [
+			["DANIEL (88.0 MHz)", "Peter Kessler was twenty-nine in nineteen ninety-eight. Directorate liaison to HELIX-9."],
+			["DANIEL (88.0 MHz)", "He drove up the mountain at six that morning to collect Subject D. He found the blast door rusted shut, and a gate guard who would not tell him where the baby had gone."],
+			["DANIEL (88.0 MHz)", "He never stopped looking. He just stopped looking for Subject D, and started looking for me."],
+			["if", "ss1", [["if", "ss2", [["if", "ss3", [["if", "ss4", [["if", "ss5", [["if", "ss6", [["ach", "static_between"], ["toast", "88.0 is quiet now. Every message is in the journal."]]]]]]]]]]]]],
+		]},
 		"w": {"t": "plate", "flag": "c8_hold", "ev": [["sfx", "metal", -2, 0.7, "w"], ["toast", "The far pedal is held down."], ["DANIEL", "Pedal's down. Nobody works alone, Hale said. Fine. I've got a crate."]]},
 		"K": {"t": "use", "p": "console", "prompt": "Turn the lockdown release key", "if": "c8_hold", "fail": "Two-person lockdown release. The key here and a foot pedal by the far wall have to be held at the same time. There's one of me.", "ev": [
 			["sfx", "power_up", -2, 1.2], ["flag", "c8_lockdown"], ["listener", "seek", "K"],

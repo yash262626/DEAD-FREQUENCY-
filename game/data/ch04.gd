@@ -7,7 +7,7 @@ const DATA = {
 		"#.....#......#.......#.........#",
 		"#..S..#..b...#..b..c.#..b......#",
 		"#.....#......#.......#.....Z...#",
-		"#..L..#...L..#...L...#...L.....#",
+		"#.8L..#...L..#...L...#...L.....#",
 		"#..d..#..t...#.f..T..#.h....q..#",
 		"##D#####A#######B#######E#######",
 		"#..............................#",
@@ -28,6 +28,12 @@ const DATA = {
 	"leg": {
 		"b": {"t": "prop", "p": "bed"}, "c": {"t": "prop", "p": "crib"}, "o": {"t": "prop", "p": "coat"},
 		"X": {"t": "prop", "p": "recorder"}, "Z": {"t": "mark"},
+		"8": {"t": "radio", "f": 88.0, "r": 14.0, "ngp": true, "title": "88.0 — the second signal (2 of 6)", "flag": "ss2", "lines": [
+			["DANIEL (88.0 MHz)", "The knocking is never her. You know that now. It knows you know."],
+			["DANIEL (88.0 MHz)", "Listen for what it gets wrong. It has never heard her laugh on the air. When it laughs as her, it laughs like a recording of a laugh."],
+			["DANIEL (88.0 MHz)", "And the dispatch slip, in the gatehouse. Read who sent you."],
+			["if", "ss1", [["if", "ss2", [["if", "ss3", [["if", "ss4", [["if", "ss5", [["if", "ss6", [["ach", "static_between"], ["toast", "88.0 is quiet now. Every message is in the journal."]]]]]]]]]]]]],
+		]},
 		"A": {"t": "door"}, "E": {"t": "door"}, "W": {"t": "door"}, "G": {"t": "door"}, "x": {"t": "prop", "p": "console"},
 		"n": {"t": "note", "title": "Radio club — station log", "text": "SUBLEVEL 3 AMATEUR RADIO CLUB — STATION LOG\n\n02 Feb 98  Antenna re-strung. Lovely clean return off the shelf. Picked up a 1961 shipping forecast.\n14 Mar 98  02:43. Weak voice on 101.3, no call sign:\n           'Is anyone still there? This is Arlen.'\n           Asked for a call sign. Static. (B.O.)\n15 Mar 98  Nobody on site called Arlen. Hale asked me not to write it down again.\n02 Oct 98  Club cabinet code now changes weekly. I read it out on my request show, 92.3, after the one record. Members only — you know who you are.\n\n— B. Ostrowski, Caretaker & Club Secretary", "ev": [
 			["DANIEL", "'Is anyone still there? This is Arlen.' March, ninety-eight."],
@@ -50,6 +56,10 @@ const DATA = {
 			["MIRA? (BEHIND THE DOOR)", "Daniel? Daniel, it's Mira. I'm in the laundry. Open the door."],
 			["DANIEL", "...Mira? Mira Solace?"],
 			["MIRA? (BEHIND THE DOOR)", "Daniel? Daniel, it's Mira. I'm in the laundry. Open the door."],
+			["if", "ngp", [
+				["DANIEL? (BEHIND THE DOOR)", "Mira? Mira Solace? It's Daniel. Open the door."],
+				["DANIEL", "That's my voice. From the last time I stood here."],
+			]],
 			["obj", "Someone is knocking on the laundry door. Her note said: 96.1."],
 		]},
 		"K": {"t": "door", "ev": [

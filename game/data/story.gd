@@ -24,7 +24,12 @@ const ACH = {
 	"pell": "The Forty-Second — follow Jonah Pell's calls to the end",
 	"end_A": "Ending — Silence", "end_B": "Ending — The Open Door", "end_C": "Ending — The Loop", "end_D": "Ending — The Last Transmission",
 	"all_endings": "The Signal Never Ends — see all four endings",
+	"second_signal": "Second Signal — finish New Game+",
+	"static_between": "Static Between — hear every transmission on 88.0",
 }
+
+# Achievements whose name and description stay hidden until earned (Steam "hidden" flag).
+const HIDDEN_ACH = ["pell", "second_signal", "static_between", "unseen"]
 
 # Exact names and roles supplied by the project owner.
 const CREDITS = [
