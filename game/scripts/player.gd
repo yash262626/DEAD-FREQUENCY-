@@ -101,7 +101,7 @@ func _process(dt):
 	ui.stat.cells = int(G.inv.get("battery", 0)); ui.stat.hidden = hidden
 	if health < 40: Snd.loop("heart", "heart", -6.0 - health * 0.2, 1.0 + (40 - health) * 0.01)
 	else: Snd.unloop("heart")
-	if _busy():
+	if _busy() or ui.closed_this_frame():
 		ui.prompt(""); return
 	# gamepad look
 	var jl = Vector2(Input.get_action_strength("look_r") - Input.get_action_strength("look_l"),
@@ -169,7 +169,9 @@ func _physics_process(dt):
 	var tv = dir * sp
 	vel.x = lerp(vel.x, tv.x, 12 * dt); vel.z = lerp(vel.z, tv.z, 12 * dt)
 	vel.y = vel.y - 18.0 * dt if not is_on_floor() else -0.5
-	if hidden: vel = Vector3()
+	if hidden:
+		vel = Vector3(); moving_speed = 0.0
+		return
 	vel = move_and_slide(vel, Vector3.UP, true, 4, 0.8, false)
 	for i in get_slide_count():
 		var col = get_slide_collision(i)
@@ -232,7 +234,7 @@ func toggle_hide(e):
 		if level.listener and is_instance_valid(level.listener): level.listener.player_hid(e)
 
 func hurt(amount: float):
-	if _hurt_cd > 0 or level.dead: return
+	if _hurt_cd > 0 or level.dead or G.test_god: return
 	_hurt_cd = 1.5
 	health -= amount; shake = 0.7
 	Snd.play("impact", -2, 1.6)

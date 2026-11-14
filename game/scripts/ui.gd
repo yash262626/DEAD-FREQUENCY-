@@ -341,7 +341,12 @@ func _open_modal(c: Control, pause := true):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if pause: get_tree().paused = true
 
+var _closed_at := -1
+func closed_this_frame() -> bool:
+	return _closed_at == Engine.get_idle_frames()
+
 func close_modal(unpause := true):
+	_closed_at = Engine.get_idle_frames()
 	if modal and is_instance_valid(modal): modal.queue_free()
 	modal = null; modals = max(0, modals - 1)
 	if unpause: get_tree().paused = false
@@ -381,6 +386,7 @@ func read(title: String, text: String):
 	v.add_child(r)
 	var b = _btn("Close  [F / Esc]", self, "close_modal"); b.add_color_override("font_color", Color(0.3, 0.1, 0.08))
 	b.add_color_override("font_color_hover", Color(0.5, 0.1, 0.08)); v.add_child(b)
+	d.set_meta("readable", true)
 	_open_modal(d); b.grab_focus()
 	Snd.play("pickup", -8)
 
@@ -393,6 +399,7 @@ func choice(text: String, options: Array):
 	for i in options.size():
 		var b = _btn(options[i], self, "_choose", [i]); v.add_child(b)
 		if first == null: first = b
+	d.set_meta("noclose", true)
 	_open_modal(d, false); first.grab_focus()
 
 func _choose(i):
@@ -424,6 +431,7 @@ func game_over():
 	var t = _lbl("SIGNAL LOST", 44, "b", Color(0.75, 0.15, 0.12)); t.align = Label.ALIGN_CENTER; v.add_child(t)
 	var b = _btn("Resume from last checkpoint", self, "_menu", ["reload"]); v.add_child(b)
 	v.add_child(_btn("Main menu", self, "_menu", ["mainmenu"]))
+	d.set_meta("noclose", true)
 	_open_modal(d); d.color.a = 0.9; b.grab_focus()
 
 func pause_menu():
@@ -449,6 +457,8 @@ func _menu(id):
 
 func _input(ev):
 	if modal == null: return
+	if modal.has_meta("readable") and ev.is_action_pressed("interact") and (ev is InputEventKey or ev is InputEventJoypadButton):
+		get_tree().set_input_as_handled(); close_modal(); return
 	if ev.is_action_pressed("pause") or (ev.is_action_pressed("journal") and not _kp_edit_focus()):
 		if modal.has_meta("noclose"): return
 		get_tree().set_input_as_handled()

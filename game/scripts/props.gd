@@ -37,7 +37,7 @@ const PAPER = Color(0.85, 0.82, 0.72)
 const WOOD = Color(0.3, 0.22, 0.15)
 
 # props that should be pushed against the nearest wall
-const WALL_PROPS = ["locker", "shelf", "console", "switch", "terminal", "rack", "cabinet", "breaker", "board", "bed", "desk", "vent"]
+const WALL_PROPS = ["locker", "shelf", "console", "switch", "terminal", "rack", "cabinet", "breaker", "board", "bed", "desk", "vent", "ladder", "valve"]
 
 static func make(type: String, tint := Color(1, 1, 1)) -> Spatial:
 	var n = Spatial.new()
@@ -198,6 +198,16 @@ static func make(type: String, tint := Color(1, 1, 1)) -> Spatial:
 		"coat":
 			box(n, Vector3(0.6, 0.06, 1.3), Vector3(0, 0.04, 0), Color(0.8, 0.8, 0.76)).rotation_degrees.y = 30
 			box(n, Vector3(0.3, 0.05, 0.5), Vector3(0.3, 0.05, 0.4), Color(0.75, 0.75, 0.7)).rotation_degrees.y = -20
+		"ladder":
+			for sx in [-0.25, 0.25]: box(n, Vector3(0.06, 3.2, 0.06), Vector3(sx, 1.6, 0), STEEL, 0, false, 0.6)
+			for i in 10: box(n, Vector3(0.5, 0.04, 0.04), Vector3(0, 0.25 + i * 0.3, 0), STEEL, 0, false, 0.6)
+			box(n, Vector3(0.7, 0.3, 0.7), Vector3(0, 0.15, 0.2), Color(0, 0, 0, 0), 0, true).visible = false
+		"valve":
+			cyl(n, 0.1, 0.5, Vector3(0, 1.2, 0.1), STEEL, 0, true, Vector3(90, 0, 0))
+			var wheel = cyl(n, 0.32, 0.05, Vector3(0, 1.2, 0.36), Color(0.6, 0.12, 0.08), 0, false, Vector3(90, 0, 0))
+			for i in 3: box(n, Vector3(0.62, 0.04, 0.04), Vector3(0, 1.2, 0.37), Color(0.6, 0.12, 0.08)).rotation_degrees.z = i * 60
+			cyl(n, 0.12, 3.0, Vector3(0, 1.5, -0.1), RUST)
+			box(n, Vector3(0.05, 0.3, 0.05), Vector3(0, 1.52, 0.4), Color(0.95, 0.9, 0.7), 0.8)
 		"lamp":
 			cyl(n, 0.03, 1.5, Vector3(0, 0.75, 0), STEEL)
 			box(n, Vector3(0.3, 0.2, 0.3), Vector3(0, 1.6, 0), Color(1.0, 0.9, 0.6), 2.0)

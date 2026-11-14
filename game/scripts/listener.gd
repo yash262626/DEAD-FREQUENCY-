@@ -31,6 +31,7 @@ var lost_t := 0.0
 var cloaked := false         # only visible on 107.9 (containment chapters)
 var leash := Vector3()
 var passive := false         # scripted "watch only" mode: never attacks
+var blind := false           # final approach: it can only hear
 var body: Spatial
 var snd: AudioStreamPlayer3D
 var _anim := 0.0
@@ -61,7 +62,16 @@ func command(mode: String, pos := Vector3()):
 		"patrol": _go(S.PATROL)
 		"hunt":
 			last_known = player.global_transform.origin; _go(S.HUNT)
-		"stalk": _go(S.STALK)
+		"stalk":
+			last_known = level.random_floor_near(player.global_transform.origin, 4.0); _go(S.STALK)
+		"seek":
+			target = pos; last_known = pos; _go(S.INVESTIGATE)
+		"face":
+			var d = player.global_transform.origin - global_transform.origin
+			rotation.y = atan2(-d.x, -d.z); passive = true
+			if st != S.DORMANT: _go(S.DORMANT)
+		"blind": blind = true
+		"sighted": blind = false
 		"retreat": _go(S.RETREAT)
 		"ambush": _go(S.AMBUSH)
 		"watch":
@@ -167,6 +177,7 @@ func _can_see() -> bool:
 	var to = pp - me; to.y = 0
 	var d = to.length()
 	if player.hidden: return false
+	if blind: return d < 1.2
 	var rng = 8.0
 	if player.light_on: rng += 7.0
 	if player.crouching: rng *= 0.55

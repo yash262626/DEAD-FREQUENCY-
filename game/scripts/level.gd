@@ -21,7 +21,7 @@ const PALETTES = {
 }
 const CMDS = ["wait", "obj", "flag", "sfx", "music", "lights", "card", "title", "fade", "cine", "cam", "camoff", "give", "take",
 	"checkpoint", "next", "ending", "choice", "if", "ifnot", "unlock", "listener", "hurt", "shake", "toast", "journal", "look",
-	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse"]
+	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d"]
 const BUILTIN = {
 	"S": {"t": "start"}, "L": {"t": "light"}, "F": {"t": "light", "flicker": true}, "R": {"t": "light", "red": true},
 	"P": {"t": "patrol"}, "H": {"t": "hide"}, "V": {"t": "save"}, "D": {"t": "door"},
@@ -52,6 +52,9 @@ var _rng := RandomNumberGenerator.new()
 var _cam_tw: Tween
 var running := 0
 var dead := false
+var noise_mult := 1.0
+var _loops3d := {}
+var _outside := false
 
 # ---------------------------------------------------------------- static helpers
 static func legend_of(data: Dictionary, ch: String):
@@ -123,7 +126,7 @@ func build(d: Dictionary, main_ref, ui_ref):
 	_build_entities()
 	if d.get("exterior", false):
 		ext = load("res://scripts/exterior.gd").new(); add_child(ext)
-		ext.translation = Vector3(0, 0, -600); ext.env = env; ext.build(d.get("ext_mode", "storm"))
+		ext.translation = Vector3(0, 0, -600); ext.build(d.get("ext_mode", "storm"))
 		for k in ext.points: ext_points["@" + k] = ext.translation + ext.points[k]
 	cine_cam = Camera.new(); cine_cam.far = 400; add_child(cine_cam)
 	_cam_tw = Tween.new(); add_child(_cam_tw)
@@ -138,6 +141,7 @@ func build(d: Dictionary, main_ref, ui_ref):
 	_apply_power(true)
 	G.connect("settings_changed", self, "_apply_quality")
 	_apply_quality()
+	_apply_ai()
 	if d.has("amb_loop"): Snd.loop("amb", d.amb_loop, d.get("amb_db", -14.0))
 	Snd.music(d.get("music", "drone_a"), -10)
 
@@ -154,6 +158,23 @@ func _build_env():
 	env.glow_enabled = true; env.glow_intensity = 0.6; env.glow_bloom = 0.08; env.glow_hdr_threshold = 0.9
 	env.adjustment_enabled = true; env.adjustment_contrast = 1.08; env.adjustment_saturation = 0.9
 	var we = WorldEnvironment.new(); we.environment = env; add_child(we)
+
+func _env_mode(outside: bool):
+	if outside == _outside: return
+	_outside = outside
+	if outside and ext:
+		ext.apply_env(env)
+	else:
+		env.background_color = Color(0, 0, 0); env.fog_color = pal.fog
+		env.fog_depth_begin = 2.0; env.fog_depth_end = pal.fog_end
+		env.ambient_light_color = pal.amb
+		_apply_power(true)
+
+func _apply_ai():
+	for s in data.get("ai", []):
+		if _cond(s):
+			spawn_listener(s.at, s.get("mode", "patrol"))
+			break
 
 func _apply_quality():
 	var q = int(G.settings.quality)
@@ -300,6 +321,7 @@ func _build_entities():
 			by_char[ch].append(e)
 			ents.append(e)
 			call("_mk_" + d.t, e, cx, cz)
+			if d.get("block", false): astar.set_point_disabled(pid(cx, cz), true)
 
 func _mk_start(_e, _x, _z): pass
 func _mk_mark(_e, _x, _z): pass
@@ -354,7 +376,10 @@ func _mk_item(e, cx, cz):
 func _mk_use(e, cx, cz):
 	var p = e.d.get("p", "switch")
 	var n = Props.make(p, e.d.get("tint", Color(1, 1, 1)))
-	_place(n, cx, cz, e.d, e.d.get("depth", 0.7 if p != "switch" and p != "breaker" else 0.16), true); e.node = n
+	_place(n, cx, cz, e.d, e.d.get("depth", 0.7 if p != "switch" and p != "breaker" else 0.16), not e.d.has("cycle")); e.node = n
+	if e.d.has("cycle"):
+		e.base_rot = n.rotation.y
+		n.rotation.y += TAU * int(G.flags.get("cyc_" + e.uid, e.d.get("init", 0))) / float(e.d.cycle)
 	_ibody(e, e.d.get("size", Vector3(1.4, 1.8, 1.2)), 1.0)
 
 func _mk_save(e, cx, cz):
@@ -382,7 +407,8 @@ func _mk_plate(e, cx, cz):
 	n.translation = e.pos; add_child(n); e.node = n
 
 func _mk_pcrate(e, cx, cz):
-	var rb = RigidBody.new(); rb.mass = 18.0; rb.linear_damp = 0.6; rb.angular_damp = 0.9; rb.friction = 0.8
+	var rb = RigidBody.new(); rb.mass = 18.0; rb.linear_damp = 0.6; rb.angular_damp = 0.9
+	rb.physics_material_override = PhysicsMaterial.new(); rb.physics_material_override.friction = 0.8
 	rb.axis_lock_angular_x = true; rb.axis_lock_angular_z = true
 	var cs = CollisionShape.new(); var sh = BoxShape.new(); sh.extents = Vector3(0.45, 0.45, 0.45); cs.shape = sh; rb.add_child(cs)
 	Props.box(rb, Vector3(0.9, 0.9, 0.9), Vector3(), Props.WOOD)
@@ -461,6 +487,8 @@ func _physics_process(dt):
 				_done(e)
 				if e.d.has("flag"): G.set_flag(e.d.flag)
 				if e.d.has("journal"): G.add_journal(e.d.journal, e.d.get("text", ""), "note")
+				G.flags["m_unseen"] = int(G.flags.get("m_unseen", 0)) + 1
+				if G.flags.m_unseen >= 10: G.achieve("unseen")
 				Snd.play("whisper", -8)
 				run(e.d.get("ev", []))
 
@@ -473,6 +501,7 @@ func _done(e):
 	e.done = true; G.set_flag("u:" + e.uid)
 
 func noise(pos: Vector3, loud: float, kind := "step"):
+	if kind == "step": loud *= noise_mult
 	if listener and is_instance_valid(listener): listener.hear(pos, loud, kind)
 
 # ---------------------------------------------------------------- interaction
@@ -486,7 +515,10 @@ func prompt_for(e) -> String:
 		"door":
 			if e.open: return ""
 			return "Open door" if not e.locked else ("Enter code" if d.has("code") else "Door (locked)")
-		"use": return "" if (e.done and d.get("once", true)) else d.get("prompt", "Use")
+		"use":
+			if d.has("seq"): return "" if G.flag("solved_" + d.seq) else d.get("prompt", "Throw switch")
+			if d.has("cycle"): return "" if G.flag("solved_" + d.group) else d.get("prompt", "Turn")
+			return "" if (e.done and d.get("once", true)) else d.get("prompt", "Use")
 		"save": return "Emergency log terminal — save"
 		"hide": return "Leave locker" if player.hidden else "Hide"
 	return ""
@@ -505,9 +537,11 @@ func interact(e):
 					run(d.ev)
 		"tape":
 			var txt = ""
-			for l in d.lines: txt += "%s: %s\n\n" % [l[0], l[1]]
+			for l in d.lines:
+				if l.size() > 1 and typeof(l[1]) == TYPE_STRING and str(l[0]) != str(l[0]).to_lower(): txt += "%s: %s\n\n" % [l[0], l[1]]
 			G.add_journal(d.title, txt, "tape")
 			if d.has("flag"): G.set_flag(d.flag)
+			if G.count("tape_ev") >= 7: G.achieve("all_tapes")
 			Snd.play("click", 0)
 			var first = not e.done
 			_done(e)
@@ -550,6 +584,10 @@ func interact(e):
 			if d.has("ev") and not G.flag("e:" + e.uid):
 				G.set_flag("e:" + e.uid); run(d.ev)
 		"use":
+			if d.has("seq"):
+				return _seq(e)
+			if d.has("cycle"):
+				return _cycle(e)
 			if e.done and d.get("once", true): return
 			if not _cond(d) or (d.has("needflag") and not G.flag(d.needflag)) or (d.has("need") and not G.has(d.need)):
 				Snd.play("locked", -4)
@@ -563,6 +601,48 @@ func interact(e):
 		"hide":
 			player.toggle_hide(e)
 
+func _group_total(key: String, g: String) -> int:
+	var n = 0
+	for x in ents:
+		if x.kind == "use" and x.d.get(key, "") == g: n += 1
+	return n
+
+func _seq(e):
+	# ordered-switch puzzle: steps 1..N must be thrown in order; a mistake resets the group (loudly)
+	var d = e.d; var k = "seq_" + d.seq
+	var cur = int(G.flags.get(k, 0)); var total = _group_total("seq", d.seq)
+	if cur >= total: return
+	Snd.play3d("metal", self, e.pos + Vector3(0, 1.2, 0), -2, 1.4)
+	if int(d.step) == cur + 1:
+		G.flags[k] = cur + 1
+		Snd.play("beep", -6, 1.0 + 0.12 * d.step)
+		if cur + 1 == total:
+			G.set_flag("solved_" + d.seq)
+			run(data.groups[d.seq])
+	else:
+		G.flags[k] = 0
+		Snd.play("locked", 0); noise(e.pos, 9.0, "door")
+		run(data.get("groups", {}).get(d.seq + "_fail", [["DANIEL", "Wrong order. Everything's reset."]]))
+
+func _cycle(e):
+	# rotating-array puzzle: every member of the group must be turned to its target notch
+	var d = e.d
+	if G.flag("solved_" + d.group): return
+	var k = "cyc_" + e.uid
+	var v = (int(G.flags.get(k, d.get("init", 0))) + 1) % int(d.cycle)
+	G.flags[k] = v
+	e.node.rotation.y = e.base_rot + TAU * v / float(d.cycle)
+	Snd.play3d("metal", self, e.pos + Vector3(0, 1.4, 0), -4, 1.1); noise(e.pos, 5.0, "door")
+	var right = 0; var total = 0
+	for x in ents:
+		if x.kind == "use" and x.d.get("group", "") == d.group:
+			total += 1
+			if int(G.flags.get("cyc_" + x.uid, x.d.get("init", 0))) == int(x.d.target): right += 1
+	ui.toast("%s — alignment %d of %d" % [d.get("label", "Array"), right, total])
+	if right == total:
+		G.set_flag("solved_" + d.group)
+		run(data.groups[d.group])
+
 func checkpoint(marker: String):
 	G.checkpoint = marker
 	G.health = player.health; G.save_game()
@@ -572,6 +652,7 @@ func ent_at(ch: String):
 
 # ---------------------------------------------------------------- power
 func _apply_power(instant := false):
+	if _outside: return
 	env.ambient_light_energy = pal.amb_e * (1.0 if power_on else 0.35)
 	if not instant: Snd.play("power_up" if power_on else "power_down", 0)
 
@@ -673,6 +754,15 @@ func _exec(e: Array):
 				if x.node: x.node.visible = true
 		"ext":
 			if ext: ext.set_mode(e[1])
+		"noise_mult": noise_mult = float(e[1])
+		"loop3d":
+			if _loops3d.has(e[1]) and is_instance_valid(_loops3d[e[1]]): _loops3d[e[1]].queue_free()
+			_loops3d[e[1]] = Snd.play3d(e[2], self, pos_of(e[3]) + Vector3(0, 1.4, 0), e[4] if e.size() > 4 else 0.0, 1.0, 26.0)
+		"unloop3d":
+			if _loops3d.has(e[1]) and is_instance_valid(_loops3d[e[1]]): _loops3d[e[1]].queue_free()
+			_loops3d.erase(e[1])
+		"close":
+			for x in by_char.get(e[1], []): _door_close(x)
 		"pulse":
 			# emergency state: all normal lights die, red ones keep pulsing
 			power_on = false; _apply_power(true); Snd.play("power_down", 2)
@@ -703,6 +793,7 @@ func _cam(e: Array):
 	if e.size() > 4 and e[4] != "": b = pos_of(e[4]) + (Vector3(0, hgt, 0) if not e[4].begins_with("@") else Vector3())
 	cine_cam.current = true
 	cine_cam.fov = 55
+	_env_mode(e[1].begins_with("@"))
 	_cam_tw.remove_all()
 	cine_cam.look_at_from_position(a, look, Vector3.UP)
 	if G.skip or e[3] <= 0:
@@ -722,6 +813,7 @@ func _cam_step(t: float):
 
 func _cam_off():
 	_cam_tw.remove_all()
+	_env_mode(false)
 	if player: player.cam.current = true
 
 # ---------------------------------------------------------------- validation (used by tests)
@@ -759,8 +851,11 @@ static func _val_ev(evs: Array, chars: Dictionary, errs: Array, where: String, d
 			"cam":
 				for i in [1, 2, 4]:
 					if e.size() > i and e[i] != "" and not str(e[i]).begins_with("@") and not chars.has(e[i]): errs.append("%s: cam marker '%s' missing" % [where, e[i]])
-			"tp", "look", "checkpoint", "unlock", "lock", "hide_ent", "show_ent":
+			"tp", "look", "checkpoint", "unlock", "lock", "hide_ent", "show_ent", "close":
 				if not chars.has(e[1]): errs.append("%s: %s marker '%s' missing" % [where, c, e[1]])
+			"loop3d":
+				if not chars.has(e[3]): errs.append("%s: loop3d marker '%s' missing" % [where, e[3]])
+				if not e[2] in Snd.NAMES: errs.append("%s: unknown sound '%s'" % [where, e[2]])
 			"listener":
 				if e.size() > 2 and not chars.has(e[2]): errs.append("%s: listener marker '%s' missing" % [where, e[2]])
 			"if":

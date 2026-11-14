@@ -249,3 +249,187 @@ func t_ai():
 	ok(picks < 60, "fresh hiding spots are mostly safe (%d/200)" % picks)
 	ok(L.hear_mult("radio") >= 1.0 and L.hear_mult("radio") <= 1.5, "radio learning is bounded")
 	Engine.time_scale = 1.0
+
+# ------------------------------------------------------------ cross-chapter flag + layout validation
+const NONSOLID = ["paper", "debris", "coat", "figure", "shade", "lamp", "board", "vent", "pipes", "glass"]
+const AUTO_FLAGS = ["cs_run", "radio_tut", "m_radio", "m_hunts", "m_unseen", "hunts_start"]
+
+func _walk_ev(evs, sets: Dictionary, refs: Array, where: String):
+	for e in evs:
+		if typeof(e) != TYPE_ARRAY or e.size() == 0: continue
+		var c = str(e[0])
+		match c:
+			"flag": sets[e[1]] = true
+			"if", "ifnot":
+				refs.append([e[1], where]); _walk_ev(e[2], sets, refs, where)
+				if e.size() > 3: _walk_ev(e[3], sets, refs, where)
+			"choice":
+				for o in e[2]: _walk_ev(o[1], sets, refs, where)
+
+func _uids(d: Dictionary) -> Array:
+	var out = []; var counts = {}
+	for row in d.map:
+		for ch in row:
+			if ch in ["#", " ", "."]: continue
+			if LevelScript.legend_of(d, ch) == null: continue
+			counts[ch] = counts.get(ch, 0) + 1
+			out.append("c%d_%s%d" % [d.n, ch, counts[ch]])
+	return out
+
+func _all_data() -> Array:
+	var all = []
+	for n in chapters(): all.append(Story.chapter(n))
+	if ResourceLoader.exists("res://data/endings.gd"):
+		for id in ["A", "B", "C", "D"]: all.append(Story.ending(id))
+	return all
+
+func t_flags():
+	var sets = {}; var refs = []
+	for f in AUTO_FLAGS: sets[f] = true
+	for d in _all_data():
+		var where = "ch%02d" % d.n
+		sets["power%d" % d.n] = true
+		for u in _uids(d):
+			sets["u:" + u] = true; sets["o:" + u] = true; sets["e:" + u] = true
+		for n in range(0, 15): sets["started%d" % n] = true
+		for g in d.get("groups", {}): sets["solved_" + g] = true
+		for ch in d.leg:
+			var l = d.leg[ch]
+			if l.has("flag"): sets[l.flag] = true
+			for k in ["if", "ifnot", "needflag", "hidden"]:
+				if l.has(k): refs.append([l[k], where + " '" + ch + "'"])
+			for k in ["ev", "lines"]:
+				if l.has(k): _walk_ev(l[k], sets, refs, where + " '" + ch + "'")
+		for k in ["start_ev", "pre_ev", "resume_ev"]: _walk_ev(d.get(k, []), sets, refs, where + " " + k)
+		for g in d.get("groups", {}): _walk_ev(d.groups[g], sets, refs, where + " group " + g)
+		for s in d.get("ai", []):
+			for k in ["if", "ifnot"]:
+				if s.has(k): refs.append([s[k], where + " ai"])
+	for r in refs:
+		ok(sets.has(r[0]), "flag '%s' referenced in %s is never set anywhere" % r)
+	# every story flag the ending logic reads must be settable somewhere
+	for f in ["final_open", "final_send", "final_silence", "trust_mira", "hale_truth", "shutdown_key"]:
+		ok(sets.has(f), "ending flag '%s' is never set" % f)
+	var tapes = 0
+	for f in sets:
+		if str(f).begins_with("tape_ev"): tapes += 1
+	ok(tapes >= 7, "seven Evelyn tapes exist (%d)" % tapes)
+
+func _bfs(d: Dictionary, blocked: Dictionary) -> Dictionary:
+	var grid = d.map; var seen = {}; var q = []
+	for z in grid.size():
+		var x = grid[z].find("S")
+		if x >= 0: q.append(Vector2(x, z))
+	while q.size():
+		var c = q.pop_back()
+		if seen.has(c): continue
+		seen[c] = true
+		for o in [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]:
+			var nb = c + o
+			if nb.y < 0 or nb.y >= grid.size() or nb.x < 0 or nb.x >= grid[nb.y].length(): continue
+			var ch = grid[nb.y][nb.x]
+			if ch == "#" or ch == " " or blocked.has(nb) or seen.has(nb): continue
+			q.append(nb)
+	return seen
+
+func t_layout():
+	for d in _all_data():
+		var solid = {}
+		for z in d.map.size():
+			for x in d.map[z].length():
+				var l = LevelScript.legend_of(d, d.map[z][x])
+				if l == null: continue
+				var t = l.t
+				if t in ["use", "save", "hide", "note", "tape", "item"] or l.get("block", false) or (t == "prop" and not l.p in NONSOLID):
+					solid[Vector2(x, z)] = d.map[z][x]
+		var before = _bfs(d, {}); var after = _bfs(d, solid)
+		var cut = []
+		for c in before:
+			if not solid.has(c) and not after.has(c): cut.append(c)
+		ok(cut.size() == 0, "%s: props cut off %d floor cells (first %s)" % [d.title, cut.size(), str(cut.slice(0, 2))])
+
+# ------------------------------------------------------------ automated critical-path playthrough
+func _ent(lv, key: String):
+	var ch = key; var idx = 0
+	if "#" in key:
+		ch = key.split("#")[0]; idx = int(key.split("#")[1]) - 1
+	var l = lv.by_char.get(ch, [])
+	return l[idx] if idx < l.size() else null
+
+func _reach(lv, from: Vector3, to: Vector3) -> bool:
+	var p = lv.path(from, to)
+	return p.size() > 0 and lv.cell_of(p[p.size() - 1]) == lv.cell_of(to)
+
+func _settle(lv):
+	for i in 2000:
+		yield(get_tree(), "physics_frame")
+		G.skip = true
+		if not is_instance_valid(lv) or (lv.running == 0 and main.ui.modal == null): break
+	yield(frames(6), "completed")
+
+func _play_chapter(n: int):
+	var lv = main.level
+	var d = lv.data
+	var steps = d.get("walk", [])
+	ok(steps.size() > 0, "ch%02d has a walkthrough" % n)
+	yield(_settle(lv), "completed")
+	for s in steps:
+		if not is_instance_valid(lv) or main.level != lv: break
+		var kind = "go"; var key = s
+		if typeof(s) == TYPE_ARRAY:
+			kind = s[0]; key = s[1] if s.size() > 1 else ""
+		match kind:
+			"choice":
+				G.flags["_test_choice"] = int(key); continue
+			"wait":
+				yield(frames(int(float(key) * 60)), "completed"); continue
+			"crate":
+				var c = _ent(lv, key); var pl = _ent(lv, s[2])
+				ok(_reach(lv, c.pos, pl.pos), "ch%02d: crate %s can be pushed to plate %s" % [n, key, s[2]])
+				c.node.global_transform.origin = pl.pos + Vector3(0, 0.6, 0); c.node.linear_velocity = Vector3()
+				yield(_settle(lv), "completed"); continue
+		var e = _ent(lv, key)
+		if e == null:
+			ok(false, "ch%02d: walkthrough step '%s' has no entity" % [n, key]); continue
+		var pp = lv.player.global_transform.origin
+		var target = e.pos
+		var reach = _reach(lv, pp, target)
+		if not reach and e.kind == "door":
+			for o in [Vector3(2, 0, 0), Vector3(-2, 0, 0), Vector3(0, 0, 2), Vector3(0, 0, -2)]:
+				var c = lv.cell_of(target + o)
+				if lv.is_floor(int(c.x), int(c.y)) and _reach(lv, pp, target + o):
+					reach = true; target = target + o; break
+		ok(reach, "ch%02d: step '%s' reachable from %s" % [n, key, str(lv.cell_of(pp))])
+		if kind == "radio":
+			lv.player.global_transform.origin = target + Vector3(0, 0.1, 0)
+			lv.radio.on = true; lv.radio.f = e.d.f; G.has_radio = true; G.radio_batt = 100
+			for i in 600:
+				yield(get_tree(), "physics_frame"); G.skip = true
+				if e.done: break
+			ok(e.done, "ch%02d: transmission '%s' received" % [n, key])
+			lv.radio.on = false
+		else:
+			lv.player.global_transform.origin = (e.pos if e.kind != "door" else target) + Vector3(0, 0.1, 0)
+			if e.kind != "trig" and e.kind != "mark":
+				yield(frames(2), "completed")
+				lv.interact(e)
+		yield(_settle(lv), "completed")
+	ok(main.level != lv or G.chapter != n, "ch%02d completes (chapter now %d)" % [n, G.chapter])
+
+func t_play():
+	G.test_god = true
+	var from = int(OS.get_environment("DF_FROM")) if OS.has_environment("DF_FROM") else 1
+	var to = int(OS.get_environment("DF_TO")) if OS.has_environment("DF_TO") else 13
+	G.new_run(from); G.has_radio = from > 1
+	G.flags["_test_choice"] = int(OS.get_environment("DF_CHOICE")) if OS.has_environment("DF_CHOICE") else 0
+	main.start_chapter(from)
+	for n in range(from, to + 1):
+		var t0 = OS.get_ticks_msec()
+		yield(frames(10), "completed")
+		if main.level == null or G.chapter != n:
+			ok(false, "chapter %d did not load" % n); break
+		yield(_play_chapter(n), "completed")
+		for i in 600:
+			yield(get_tree(), "idle_frame"); G.skip = true
+			if main.level and is_instance_valid(main.level) and main.level.player and main.level.data.n != n: break
+		print("  ch%02d played in %.1fs, flags=%d, journal=%d" % [n, (OS.get_ticks_msec() - t0) / 1000.0, G.flags.size(), G.journal.size()])

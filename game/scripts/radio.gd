@@ -146,7 +146,7 @@ func _receive(e):
 	if e.d.has("lines"):
 		var txt = ""
 		for l in e.d.lines:
-			if str(l[0]) != str(l[0]).to_lower() or str(l[0]) == "": txt += "%s: %s\n\n" % [l[0], l[1]]
+			if l.size() > 1 and typeof(l[1]) == TYPE_STRING and (str(l[0]) != str(l[0]).to_lower() or str(l[0]) == ""): txt += "%s: %s\n\n" % [l[0], l[1]]
 		if e.d.has("title"): G.add_journal("%.1f MHz — %s" % [e.d.f, e.d.title], txt, "tape")
 		yield(level.run(e.d.lines), "completed")
 	if e.d.has("ev"): level.run(e.d.ev)

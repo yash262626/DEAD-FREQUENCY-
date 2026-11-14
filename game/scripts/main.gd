@@ -71,7 +71,8 @@ func start_chapter(n: int):
 	if not G.flag(key):
 		G.set_flag(key); G.checkpoint = ""; G.health = level.player.health
 		G.save_game()
-		yield(level.run([["cine", true], ["card"], ["fade", false, 2.0]] + d.get("start_ev", []) + [["cine", false]]), "completed")
+		G.flags["hunts_start"] = int(G.flags.get("m_hunts", 0))
+		yield(level.run([["cine", true]] + d.get("pre_ev", []) + [["card"], ["fade", false, 2.0]] + d.get("start_ev", []) + [["cine", false]]), "completed")
 	else:
 		if ui.objective_text != "": ui.objective(ui.objective_text)
 		for e in d.get("resume_ev", []): level._exec(e)
@@ -79,6 +80,7 @@ func start_chapter(n: int):
 
 func next_chapter():
 	var n = G.chapter + 1
+	if G.chapter >= 2 and int(G.flags.get("m_hunts", 0)) == int(G.flags.get("hunts_start", -1)): G.achieve("no_hunt")
 	G.unlock_chapter(n)
 	G.checkpoint = ""
 	if level and level.player: G.health = max(level.player.health, 40.0)

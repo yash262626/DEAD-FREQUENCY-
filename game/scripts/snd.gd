@@ -3,7 +3,7 @@ extends Node
 # first launch and cached in user://, so the project ships no audio assets.
 
 const RATE := 22050
-const CACHE_VER := 3
+const CACHE_VER := 4
 var bank := {}
 var _pool := []
 var _loops := {}
@@ -250,15 +250,22 @@ func _gen(name: String):
 			for i in n:
 				var t = float(i) / n
 				o[i] *= 1.2 * exp(-t * 5) * min(1.0, t * 30)
+		"knock":
+			n = int(RATE * 3.2); o.resize(n); var nzk = _noise(n, 0.15)
+			for i in n:
+				var t = float(i) / RATE; var e3 = 0.0
+				for k in [0.0, 0.32, 0.64]:
+					if t >= k: e3 += exp(-(t - k) * 38.0)
+				o[i] = (0.9 * sin(95 * T * i) + nzk[i] * 1.5) * e3 * 0.8
 		"tram":
 			n = RATE * 2; o = _noise(n, 0.06)
 			for i in n:
 				o[i] = o[i] * 3.0 * (0.7 + 0.3 * sin(TAU * 4 * float(i) / n)) + 0.15 * sin(70 * T * i)
-	return _mk(o, name in ["static", "hum", "drone_a", "drone_b", "drone_c", "drone_d", "rain", "heart", "clicks", "alarm", "breath", "tram"])
+	return _mk(o, name in ["static", "hum", "drone_a", "drone_b", "drone_c", "drone_d", "rain", "heart", "clicks", "alarm", "breath", "tram", "knock"])
 
 const NAMES = ["static", "hum", "drone_a", "drone_b", "drone_c", "drone_d", "rain", "thunder", "step", "step_wet",
 	"door", "locked", "click", "beep", "beep_hi", "pickup", "impact", "glitch", "voice", "whisper", "heart", "drip",
-	"clicks", "screech", "alarm", "breath", "tune", "power_down", "power_up", "metal", "splash", "tram"]
+	"clicks", "screech", "alarm", "breath", "tune", "power_down", "power_up", "metal", "splash", "tram", "knock"]
 
 func _build_bank():
 	var dir = Directory.new()

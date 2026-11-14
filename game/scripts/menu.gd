@@ -14,7 +14,7 @@ func setup(m, u):
 	env.fog_enabled = true; env.fog_depth_enabled = true; env.glow_enabled = true
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	var we = WorldEnvironment.new(); we.environment = env; add_child(we)
-	ext = load("res://scripts/exterior.gd").new(); add_child(ext); ext.env = env; ext.build("storm")
+	ext = load("res://scripts/exterior.gd").new(); add_child(ext); ext.build("storm"); ext.apply_env(env)
 	cam = Camera.new(); cam.far = 500; cam.fov = 50; add_child(cam); cam.current = true
 	cam.look_at_from_position(ext.points.menu, ext.points.gate + Vector3(6, 6, 0), Vector3.UP)
 	Snd.loop("amb", "rain", -12); Snd.music("drone_a", -9)

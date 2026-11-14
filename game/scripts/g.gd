@@ -35,6 +35,7 @@ var settings := {
 
 var skip := false          # cinematic fast-forward
 var test_mode := false
+var test_god := false
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
