@@ -91,6 +91,8 @@ PASS  ending A plays through to the credits
 PASS  screenshot user://smoke_credits.png
 RESULT: 0 failures, 203.4 s
 ```
+Re-run on the final export of this build (code of commit 3ad9ce9, exe SHA-256 starting `3673cfd972aba939`): again 15/15 passed, 200.1 s, 1.6 fps on High. The release zip `build/DeadFrequency-0.9.0-Windows-x64.zip` (48 MB) was packaged from that exe.
+
 The screenshots show textured, lit scenes, the HUD and the radio as on Linux. Wine reported no audio device (`WASAPI: init_render_device error`), as expected in a container without sound hardware; the game continued silently. Save files were written to `C:\users\<user>\AppData\Roaming\Godot\app_userdata\DEAD FREQUENCY\`.
 
 This proves the Windows executable starts, renders through WGL/OpenGL, runs its scripts, reads its embedded data and writes saves through the Windows file APIs as implemented by Wine. **It is not verification on Windows**: real GPU drivers, Windows audio devices, DPI scaling, Defender/SmartScreen and real performance are untested.
