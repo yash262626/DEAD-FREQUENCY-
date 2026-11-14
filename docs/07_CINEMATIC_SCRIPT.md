@@ -45,7 +45,12 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 *AMBIENCE — loop alarm*
 *MUSIC — drone_b*
 *CAMERA — from `4` looking at `k`, dolly to `5` over 4s*
+*[move k#1 5 3.2]*
+*[move k#2 4 2.6]*
+*SFX — step (positional, at `k`)*
+*SFX — step (positional, at `4`)*
 **PA** — Attention. Containment fault, sublevel four. All personnel remain at your stations.
+*[move n 2 4]*
 **MARCUS (RADIO)** — Hale to all posts. Seal the lower levels. Nobody opens the Door. Nobody.
 *CAMERA — from `2` looking at `e` over 4s*
 **EVELYN** — Mayday, mayday. This is HELIX-9 to any station. Can anyone hear me?

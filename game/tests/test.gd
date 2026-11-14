@@ -621,3 +621,18 @@ func t_introtime():
 	var secs = (OS.get_ticks_msec() - t0) / 1000.0
 	print("  opening cinematic + title reveal: %.1f s" % secs)
 	ok(secs > 100 and secs < 200, "opening sequence runs 2–3 minutes (%.0f s)" % secs)
+
+# ------------------------------------------------------------ performance sample (software renderer here; real GPUs will differ)
+func t_perf():
+	G.test_god = true
+	for n in [1, 5, 8, 11, 13]:
+		G.new_run(n); G.set_flag("started%d" % n); G.set_flag("power%d" % n)
+		var t0 = OS.get_ticks_msec()
+		main.start_chapter(n)
+		var build_ms = OS.get_ticks_msec() - t0
+		main.ui.fade_rect.color.a = 0
+		yield(frames(30), "completed")
+		var f0 = Engine.get_frames_drawn(); var t1 = OS.get_ticks_msec()
+		for i in 120: yield(get_tree(), "idle_frame")
+		var fps = (Engine.get_frames_drawn() - f0) * 1000.0 / max(1, OS.get_ticks_msec() - t1)
+		print("  ch%02d  build %4d ms   %.1f fps   (%s, quality %d)" % [n, build_ms, fps, str(OS.window_size), G.settings.quality])
