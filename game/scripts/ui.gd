@@ -334,25 +334,70 @@ func title_node(w: int, h: int, size: int) -> TextureRect:
 	return tr
 
 # ------------------------------------------------------------ monitor overlay
+var _wave_amp := 0.0
 func monitor(lines: Array, hold := 2.5):
-	var c = ColorRect.new(); c.color = Color(0.0, 0.03, 0.01, 0.96); c.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	var c = ColorRect.new(); c.color = Color(0.0, 0.035, 0.012, 0.97); c.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var l = _lbl("", 34, "m", Color(0.45, 1.0, 0.55)); l.align = Label.ALIGN_CENTER; l.valign = Label.VALIGN_CENTER
-	l.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.add_child(l)
-	root.add_child(c); root.move_child(c, fade_rect.get_index() + 1)
-	var txt = ""
+	var v = VBoxContainer.new(); v.anchor_right = 1; v.anchor_top = 0.5; v.anchor_bottom = 0.5
+	v.margin_top = -150; v.margin_bottom = 150; v.alignment = BoxContainer.ALIGN_CENTER
+	v.add_constant_override("separation", 26); v.mouse_filter = Control.MOUSE_FILTER_IGNORE; c.add_child(v)
+	var green = Color(0.45, 1.0, 0.55)
+	var labels = []
 	for ln in lines:
-		for ch in ln:
-			txt += ch; l.text = txt + "█"
+		var l = _lbl("", 36, "m", green); l.align = Label.ALIGN_CENTER
+		l.add_color_override("font_color_shadow", Color(0.3, 1.0, 0.45, 0.22))
+		l.add_constant_override("shadow_as_outline", 1); l.add_constant_override("shadow_offset_x", 0); l.add_constant_override("shadow_offset_y", 0)
+		v.add_child(l); labels.append(l)
+	var wave = Control.new(); wave.rect_min_size = Vector2(0, 60); wave.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wave.connect("draw", self, "_draw_wave", [wave]); v.add_child(wave)
+	var crt = ColorRect.new(); crt.set_anchors_and_margins_preset(Control.PRESET_WIDE); crt.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var cm = ShaderMaterial.new(); cm.shader = Shader.new(); cm.shader.code = CRT_SHADER; crt.material = cm; c.add_child(crt)
+	cm.set_shader_param("flicker", 0.0 if G.settings.reduce_flashes else 1.0)
+	root.add_child(c); root.move_child(c, fade_rect.get_index() + 1)
+	_wave_amp = 0.15
+	for i in lines.size():
+		var txt = ""
+		for ch in lines[i]:
+			txt += ch; labels[i].text = txt + "█"
+			_wave_amp = 0.9; wave.update()
 			if not G.skip and ch != " ":
 				Snd.play("click", -16, 1.6)
 				yield(wait(0.045), "completed")
-		txt += "\n\n"
+			_wave_amp = 0.25; wave.update()
+		labels[i].text = txt
 		yield(wait(0.7), "completed")
-	l.text = txt
-	yield(wait(hold), "completed")
+	# the last line is the one that matters
+	var last = labels[labels.size() - 1]
+	last.add_color_override("font_color", Color(1.0, 0.24, 0.2))
+	last.add_color_override("font_color_shadow", Color(1.0, 0.2, 0.15, 0.28))
+	Snd.play("glitch", -6)
+	if not G.settings.reduce_flashes and not G.skip:
+		for k in 6:
+			v.rect_position.x = (randf() - 0.5) * 18.0; cm.set_shader_param("glitch", 1.0)
+			_wave_amp = 1.6; wave.update()
+			yield(wait(0.05), "completed")
+		v.rect_position.x = 0
+	cm.set_shader_param("glitch", 0.0)
+	var t = 0.0
+	while t < hold:
+		_wave_amp = 0.12 + 0.1 * sin(t * 9.0); wave.update()
+		yield(wait(0.05), "completed"); t += 0.05
+		if G.skip: break
 	Snd.play("glitch", -2)
 	c.queue_free()
+
+func _draw_wave(w: Control):
+	# a live trace of the carrier under the readout
+	var pts = PoolVector2Array()
+	var cx = w.rect_size.x * 0.5; var span = 520.0; var mid = w.rect_size.y * 0.5
+	var t = OS.get_ticks_msec() / 1000.0
+	for i in 131:
+		var x = -span / 2 + span * i / 130.0
+		var env = 1.0 - pow(abs(x) / (span / 2), 2)
+		var y = sin(x * 0.11 + t * 13.0) * 0.6 + sin(x * 0.37 - t * 7.0) * 0.4 + (randf() - 0.5) * 0.9
+		pts.append(Vector2(cx + x, mid + y * env * 22.0 * _wave_amp))
+	w.draw_polyline(pts, Color(0.45, 1.0, 0.55, 0.75), 2.0, true)
+	w.draw_line(Vector2(cx - span / 2, mid), Vector2(cx + span / 2, mid), Color(0.45, 1.0, 0.55, 0.12), 1.0)
 
 # ------------------------------------------------------------ modals
 func _open_modal(c: Control, pause := true):
@@ -446,20 +491,26 @@ func _kp_cancel():
 
 func game_over():
 	var d = ColorRect.new(); d.color = Color(0, 0, 0, 0.0); d.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	var fx = ColorRect.new(); fx.set_anchors_and_margins_preset(Control.PRESET_WIDE); fx.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var fm = ShaderMaterial.new(); fm.shader = Shader.new(); fm.shader.code = LOST_SHADER; fx.material = fm; d.add_child(fx)
 	var v = VBoxContainer.new(); v.anchor_left = 0.5; v.anchor_right = 0.5; v.anchor_top = 0.5; v.anchor_bottom = 0.5
 	v.margin_left = -200; v.margin_right = 200; v.margin_top = -90; v.margin_bottom = 90; d.add_child(v)
-	var t = _lbl("SIGNAL LOST", 44, "b", Color(0.75, 0.15, 0.12)); t.align = Label.ALIGN_CENTER; v.add_child(t)
-	var b = _btn("Resume from last checkpoint", self, "_menu", ["reload"]); v.add_child(b)
-	v.add_child(_btn("Main menu", self, "_menu", ["mainmenu"]))
+	v.add_constant_override("separation", 10)
+	var t = _lbl("SIGNAL LOST", 48, "b", Color(0.8, 0.16, 0.12)); t.align = Label.ALIGN_CENTER; v.add_child(t)
+	var b = _btn("Resume from last checkpoint", self, "_menu", ["reload"]); b.align = Button.ALIGN_CENTER; v.add_child(b)
+	var b2 = _btn("Main menu", self, "_menu", ["mainmenu"]); b2.align = Button.ALIGN_CENTER; v.add_child(b2)
 	d.set_meta("noclose", true)
 	_open_modal(d); d.color.a = 0.9; b.grab_focus()
 
 func pause_menu():
 	if modal != null: return
-	var d = _dim(); var p = _panel(420, 400); d.add_child(p)
+	var d = _dim(); var p = _panel(440, 330); d.add_child(p)
 	var v = VBoxContainer.new(); p.add_child(v)
+	v.add_constant_override("separation", 6)
 	v.add_child(_lbl("PAUSED", 30, "b"))
 	var o = _lbl(objective_text, 15, "r", Color(0.6, 0.62, 0.6)); o.autowrap = true; v.add_child(o)
+	var secs = int(G.run_seconds())
+	v.add_child(_lbl("Time played: %d h %02d min" % [secs / 3600, (secs / 60) % 60], 14, "r", Color(0.5, 0.52, 0.53)))
 	var b = _btn("Resume", self, "close_modal"); v.add_child(b)
 	v.add_child(_btn("Journal", self, "_menu", ["journal"]))
 	v.add_child(_btn("Settings", self, "_menu", ["settings"]))
@@ -531,12 +582,22 @@ const SET_SPEC = [
 	["invert_y", "Invert Y axis", "check"], ["head_bob", "Head bob", "check"], ["toggle_crouch", "Toggle crouch", "check"],
 	["reduce_flashes", "Reduce flashing effects", "check"],
 ]
+const CONTROLS = [
+	["Action", "Keyboard / mouse", "Gamepad"],
+	["Move · look", "W A S D · mouse", "left · right stick"], ["Sprint", "Shift", "L3"], ["Crouch", "Ctrl or C", "B"],
+	["Lean", "Q · E", "LB · RB"], ["Interact", "F or left click", "A"], ["Flashlight", "T or middle click", "Y"],
+	["Radio on / off", "R or right click", "X"], ["Tune", "mouse wheel or ← →", "D-pad ← →"],
+	["Throw a bottle", "G", "D-pad ↓"], ["Medkit", "H", "D-pad ↑"], ["Journal · pause", "Tab · Esc", "Back · Start"],
+	["Skip a cinematic", "hold Space or Enter", "hold A"],
+]
 func settings_menu():
 	var d = _dim(); var p = _panel(760, 640); d.add_child(p)
 	var v = VBoxContainer.new(); p.add_child(v)
 	v.add_child(_lbl("SETTINGS", 28, "b"))
-	var sc = ScrollContainer.new(); sc.size_flags_vertical = Control.SIZE_EXPAND_FILL; v.add_child(sc)
-	var g = GridContainer.new(); g.columns = 2; g.size_flags_horizontal = Control.SIZE_EXPAND_FILL; sc.add_child(g)
+	var sc = ScrollContainer.new(); sc.size_flags_vertical = Control.SIZE_EXPAND_FILL; sc.scroll_horizontal_enabled = false; v.add_child(sc)
+	var inner = VBoxContainer.new(); inner.size_flags_horizontal = Control.SIZE_EXPAND_FILL; sc.add_child(inner)
+	inner.add_constant_override("separation", 14)
+	var g = GridContainer.new(); g.columns = 2; g.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inner.add_child(g)
 	g.add_constant_override("hseparation", 30); g.add_constant_override("vseparation", 8)
 	var first = null
 	for s in SET_SPEC:
@@ -555,8 +616,14 @@ func settings_menu():
 				c = CheckBox.new(); c.pressed = G.settings[s[0]]; c.connect("toggled", self, "_set", [s[0]])
 		g.add_child(c)
 		if first == null: first = c
-	var ctl = _lbl("Controls — WASD move · Shift sprint · Ctrl/C crouch · Q/E lean · F/LMB interact · T flashlight · R/RMB radio · Wheel/←→ tune · G throw · H medkit · Tab journal\nGamepad — sticks move/look · A interact · B crouch · X radio · Y flashlight · L3 sprint · LB/RB lean · D-pad ←→ tune, ↑ medkit, ↓ throw", 13, "r", Color(0.55, 0.57, 0.58))
-	ctl.autowrap = true; v.add_child(ctl)
+	inner.add_child(_lbl("CONTROLS", 20, "b", Color(0.75, 0.2, 0.15)))
+	var cg = GridContainer.new(); cg.columns = 3; inner.add_child(cg)
+	cg.add_constant_override("hseparation", 26); cg.add_constant_override("vseparation", 5)
+	for row in CONTROLS:
+		for i in 3:
+			var cl = _lbl(row[i], 15, "b" if i == 0 and row[0] == "Action" else "r", Color(0.85, 0.87, 0.88) if i == 0 else Color(0.62, 0.64, 0.65))
+			if i == 0: cl.rect_min_size.x = 200
+			cg.add_child(cl)
 	var b = _btn("Back", self, "_set_close"); v.add_child(b)
 	_open_modal(d); first.grab_focus()
 func _set(val, key):
@@ -603,6 +670,31 @@ void fragment(){
 	float al = max(body, max(ar, ab) * 0.4);
 	col *= 0.9 + 0.1 * sin(uv.y * 320.0 + TIME * 6.0);
 	COLOR = vec4(col, al * reveal);
+}"""
+const CRT_SHADER = """
+shader_type canvas_item;
+uniform float glitch = 0.0; uniform float flicker = 1.0;
+float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
+void fragment(){
+	vec2 p = UV - 0.5;
+	float scan = 0.5 + 0.5 * sin(UV.y * 720.0 * 3.14159);
+	float roll = smoothstep(0.0, 0.02, abs(fract(UV.y - TIME * 0.07) - 0.5) - 0.47);
+	float n = h(UV * vec2(1280.0, 720.0) + fract(TIME) * 61.0);
+	float vig = smoothstep(0.3, 0.85, length(p * vec2(1.0, 1.25)));
+	float band = step(0.9, h(vec2(floor(UV.y * 40.0), floor(TIME * 20.0)))) * glitch;
+	float a = scan * 0.22 + vig * 0.85 + n * 0.06 + band * 0.4 + roll * 0.04 * flicker;
+	a += flicker * 0.03 * sin(TIME * 60.0);
+	COLOR = vec4(vec3(0.0, 0.02 + band * 0.3, 0.01), clamp(a, 0.0, 1.0));
+}"""
+const LOST_SHADER = """
+shader_type canvas_item;
+float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
+void fragment(){
+	vec2 p = UV - 0.5;
+	float n = h(UV * vec2(640.0, 360.0) + fract(TIME) * 77.0);
+	float vig = smoothstep(0.15, 0.8, length(p * vec2(1.0, 1.3)));
+	vec3 c = mix(vec3(0.0), vec3(0.22, 0.0, 0.0), vig) + vec3(n * 0.05);
+	COLOR = vec4(c, 0.55 + vig * 0.35);
 }"""
 const FOG_SHADER = """
 shader_type canvas_item;

@@ -85,6 +85,17 @@ func t_save():
 	ok(not G.flag("alpha"), "state cleared")
 	ok(G.load_game(), "load ok")
 	ok(G.flag("alpha") and G.inv.fuse == 2 and G.journal.size() == 1 and G.health == 61.0 and G.checkpoint == "o" and G.chapter == 3, "state restored")
+	# local play-time log: survives save/load, records time, deaths, completion and the ending per run
+	G.new_run(1); G.stats_begin("new"); G.chapter = 3
+	G.stats_tick(12.5); G.stats_event("death"); G.stats_event("done")
+	var rid = G.run_id
+	ok(G.save_game(), "save with play-time run id")
+	G.run_id = "other"; ok(G.load_game() and G.run_id == rid, "load restores the play-time run id")
+	G.stats_tick(2.0); G.stats_event("ending", "D")
+	var pf = File.new(); pf.open(G.STATS, File.READ); var st = parse_json(pf.get_as_text()); pf.close()
+	ok(typeof(st) == TYPE_DICTIONARY and st.has(rid) and st[rid].mode == "new", "play-time log written (user://test_playtest.json)")
+	ok(abs(float(st[rid].ch["3"].t) - 14.5) < 0.01 and int(st[rid].ch["3"].deaths) == 1 and st[rid].ch["3"].done and st[rid].ending == "D", "per-chapter seconds, deaths, completion and ending recorded")
+	ok(abs(G.run_seconds() - 14.5) < 0.01, "run time available to the pause menu")
 	# corrupted saves: fall back to the previous good save, never crash, never load garbage
 	G.new_run(4); G.set_flag("good_a"); G.chapter = 4; ok(G.save_game(), "first save")
 	G.set_flag("good_b"); G.chapter = 5; ok(G.save_game(), "second save (first becomes .bak)")
@@ -532,6 +543,13 @@ func t_flow():
 	for i in 3000:
 		yield(get_tree(), "physics_frame"); G.skip = true
 		if main.level.running == 0: break
+	G.skip = false
+	main.focus_lost(); yield(frames(2), "completed")
+	ok(main.ui.modal != null and get_tree().paused, "losing window focus during play opens the pause menu")
+	main.ui.close_modal(); yield(frames(2), "completed")
+	main.ui.set_cine(true); main.focus_lost(); yield(frames(2), "completed")
+	ok(main.ui.modal == null, "but not during a cinematic")
+	main.ui.set_cine(false)
 	main.ui.pause_menu(); yield(frames(2), "completed")
 	main.ui._menu("mainmenu"); yield(frames(5), "completed")
 	ok(main.menu != null and main.level == null, "pause → main menu returns to the menu")
@@ -610,6 +628,19 @@ func t_gallery():
 		main.ui.chapter_card(2, "THE SILENT WING", "SUBLEVEL 1 — ADMINISTRATION")
 		yield(frames(120), "completed"); _save(out + "/00_card.png")
 		yield(frames(400), "completed")
+	if only == "" or only == "monitor":
+		main._clear(); main.ui.fade_rect.color.a = 0
+		main.ui.monitor(["SIGNAL IDENTIFIED", "SUBJECT: DANIEL ARLEN", "STATUS: ALREADY INSIDE"], 2.2)
+		yield(frames(400), "completed"); _save(out + "/00_second_reveal.png")
+		yield(frames(300), "completed")
+	if only == "" or only == "ui":
+		G.new_run(3); G.set_flag("started3"); G.set_flag("power3"); main.start_chapter(3)
+		yield(frames(10), "completed"); main.ui.fade_rect.color.a = 0
+		main.ui.objective("Find a way into the lower wards.")
+		main.ui.pause_menu(); yield(frames(20), "completed"); _save(out + "/98_pause.png")
+		main.ui.close_modal(); main.ui.settings_menu(); yield(frames(20), "completed"); _save(out + "/98_settings.png")
+		main.ui.close_modal(); main.ui.game_over(); yield(frames(30), "completed"); _save(out + "/98_game_over.png")
+		main.ui.close_modal()
 	if only == "" or only == "credits":
 		G.test_mode = false
 		main.play_credits(); yield(frames(5), "completed")
@@ -629,6 +660,24 @@ func t_export():
 		all.chapters.append(d)
 	var f = File.new(); f.open(OS.get_environment("DF_OUT"), File.WRITE); f.store_string(to_json(all)); f.close()
 	print("  exported ", all.chapters.size(), " scripts")
+
+# ------------------------------------------------------------ Godot's licence and its third-party notices, from the engine itself
+func t_licenses():
+	var v = Engine.get_version_info()
+	var out = "Godot Engine — https://godotengine.org\nVersion: %d.%d.%d-%s\n\n" % [v.major, v.minor, v.patch, v.status]
+	out += Engine.get_license_text() + "\n\n"
+	out += "=" .repeat(72) + "\nThird-party components included in Godot Engine\n" + "=".repeat(72) + "\n"
+	for c in Engine.get_copyright_info():
+		out += "\n%s\n" % c.name
+		for part in c.parts:
+			for cr in part.copyright: out += "  Copyright (c) %s\n" % cr
+			out += "  License: %s\n" % part.license
+	out += "\n" + "=".repeat(72) + "\nLicence texts\n" + "=".repeat(72) + "\n"
+	var li = Engine.get_license_info()
+	var names = li.keys(); names.sort()
+	for n in names: out += "\n----- %s -----\n%s\n" % [n, li[n]]
+	var f = File.new(); f.open(OS.get_environment("DF_OUT"), File.WRITE); f.store_string(out); f.close()
+	ok(Engine.get_copyright_info().size() > 10 and out.length() > 20000, "licence text written (%d components, %d chars)" % [Engine.get_copyright_info().size(), out.length()])
 
 # ------------------------------------------------------------ real-time length of the opening cinematic (no skipping)
 func t_introtime():

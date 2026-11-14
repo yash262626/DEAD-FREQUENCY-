@@ -3,6 +3,7 @@ extends Node
 
 var SAVE := "user://save.json"
 var PROFILE := "user://profile.json"
+var STATS := "user://playtest.json"
 const SAVE_VERSION := 1
 const LAST_CHAPTER := 13
 const RESOLUTIONS = [Vector2(1280, 720), Vector2(1600, 900), Vector2(1920, 1080), Vector2(2560, 1440)]
@@ -45,9 +46,9 @@ func _ready():
 	if OS.has_environment("DF_TEST"):
 		# automated tests never touch the player's real save, profile or window
 		test_mode = true
-		SAVE = "user://test_save.json"; PROFILE = "user://test_profile.json"
+		SAVE = "user://test_save.json"; PROFILE = "user://test_profile.json"; STATS = "user://test_playtest.json"
 		var d = Directory.new()
-		for f in [SAVE, SAVE + ".bak", SAVE + ".tmp", PROFILE]:
+		for f in [SAVE, SAVE + ".bak", SAVE + ".tmp", PROFILE, STATS]:
 			if d.file_exists(f): d.remove(f)
 	_setup_input()
 	_setup_buses()
@@ -203,7 +204,7 @@ var load_error := ""
 
 func save_game():
 	# Atomic: write a temp file, verify it parses, keep the previous save as .bak, then swap.
-	var d = {"v": SAVE_VERSION, "flags": flags, "inv": inv, "journal": journal, "chapter": chapter,
+	var d = {"v": SAVE_VERSION, "run": run_id, "flags": flags, "inv": inv, "journal": journal, "chapter": chapter,
 		"checkpoint": checkpoint, "health": health, "battery": battery, "radio_batt": radio_batt,
 		"has_radio": has_radio, "has_light": has_light}
 	var tmp = SAVE + ".tmp"
@@ -245,7 +246,66 @@ func load_game() -> bool:
 	health = float(d.get("health", 100)); battery = float(d.get("battery", 100))
 	radio_batt = float(d.get("radio_batt", 100)); has_radio = d.get("has_radio", false)
 	has_light = d.get("has_light", true)
+	run_id = str(d.get("run", ""))
 	return true
+
+# ---------------------------------------------------------------- local play-time log (for playtests)
+# user://playtest.json — per run and per chapter: seconds of unpaused play, deaths, completion, ending.
+# It stays on this computer; nothing is ever sent anywhere. Playtesters attach it to their feedback, and
+# tools/playtest_report.py turns a pile of them into measured chapter times (docs/17_TIME_BUDGET.md).
+var run_id := ""
+var _stats := {}
+var _stats_loaded := false
+var _stats_unsaved := 0.0
+
+func _stats_run() -> Dictionary:
+	if not _stats_loaded:
+		_stats_loaded = true
+		var f = File.new()
+		if f.file_exists(STATS) and f.open(STATS, File.READ) == OK:
+			var txt = f.get_as_text(); f.close()
+			if validate_json(txt) == "" and typeof(parse_json(txt)) == TYPE_DICTIONARY: _stats = parse_json(txt)
+	if run_id == "": run_id = "run_%d_%04d" % [OS.get_unix_time(), randi() % 10000]
+	if not _stats.has(run_id):
+		_stats[run_id] = {"mode": "continued", "build": str(ProjectSettings.get_setting("application/config/version")),
+			"started": OS.get_unix_time(), "ch": {}, "ending": ""}
+	return _stats[run_id]
+
+func _stats_ch() -> Dictionary:
+	var r = _stats_run()
+	var c = str(chapter)
+	if not r.ch.has(c): r.ch[c] = {"t": 0.0, "deaths": 0, "done": false}
+	return r.ch[c]
+
+func stats_begin(mode: String):
+	run_id = ""
+	_stats_run().mode = mode
+	stats_flush()
+
+func stats_tick(dt: float):
+	_stats_ch().t = float(_stats_ch().t) + dt
+	_stats_unsaved += dt
+	if _stats_unsaved >= 30.0: stats_flush()
+
+func stats_event(kind: String, value := ""):
+	match kind:
+		"death": _stats_ch().deaths = int(_stats_ch().deaths) + 1
+		"done": _stats_ch().done = true
+		"ending": _stats_run().ending = value
+	stats_flush()
+
+func stats_flush():
+	_stats_unsaved = 0.0
+	if run_id == "" or not _stats_loaded: return
+	var f = File.new()
+	if f.open(STATS, File.WRITE) == OK:
+		f.store_string(to_json(_stats)); f.close()
+
+func run_seconds() -> float:
+	if run_id == "" or not _stats.has(run_id): return 0.0
+	var s = 0.0
+	for c in _stats[run_id].ch: s += float(_stats[run_id].ch[c].t)
+	return s
 
 func unlock_chapter(n):
 	if n > unlocked and n <= LAST_CHAPTER:

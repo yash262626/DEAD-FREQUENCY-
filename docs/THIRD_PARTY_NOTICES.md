@@ -3,10 +3,12 @@
 DEAD FREQUENCY is original work by YASH AIL and contributors. The following third-party components are used under their licences.
 
 ## Godot Engine 3.5 (MIT)
-Copyright (c) 2014-present Godot Engine contributors; (c) 2007-2014 Juan Linietsky, Ariel Manzur. Licensed under the MIT licence — https://godotengine.org/license. The full licence text must accompany distributed builds (`godot_license.txt` in the release package).
+Copyright (c) 2014-present Godot Engine contributors; (c) 2007-2014 Juan Linietsky, Ariel Manzur. Licensed under the MIT licence — https://godotengine.org/license. The full licence text, and the licences of the third-party libraries compiled into the engine, ship with every build as `licenses/GODOT_ENGINE_LICENSE.txt` (generated from the engine's own copyright data by `DF_TEST=licenses`).
+
+Portions of this software are copyright © 2022 The FreeType Project (www.freetype.org). All rights reserved.
 
 ## Liberation Fonts (SIL Open Font License 1.1)
-Liberation Sans and Liberation Mono — https://github.com/liberationfonts. Redistributed unmodified under the SIL OFL 1.1.
+Liberation Sans and Liberation Mono — https://github.com/liberationfonts. Version 2.1.5, redistributed unmodified under the SIL OFL 1.1 (full text: `licenses/LIBERATION_FONTS_OFL.txt`).
 
 ## ambientCG materials (CC0 1.0 Universal)
 
