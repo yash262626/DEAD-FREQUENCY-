@@ -398,7 +398,7 @@ func _play_chapter(n: int):
 		var pp = lv.player.global_transform.origin
 		var target = e.pos
 		var reach = _reach(lv, pp, target)
-		if not reach and e.kind == "door":
+		if not reach and (e.kind == "door" or e.d.get("block", false)):
 			for o in [Vector3(2, 0, 0), Vector3(-2, 0, 0), Vector3(0, 0, 2), Vector3(0, 0, -2)]:
 				var c = lv.cell_of(target + o)
 				if lv.is_floor(int(c.x), int(c.y)) and _reach(lv, pp, target + o):
@@ -413,7 +413,7 @@ func _play_chapter(n: int):
 			ok(e.done, "ch%02d: transmission '%s' received" % [n, key])
 			lv.radio.on = false
 		else:
-			lv.player.global_transform.origin = (e.pos if e.kind != "door" else target) + Vector3(0, 0.1, 0)
+			lv.player.global_transform.origin = (target if (e.kind == "door" or e.d.get("block", false)) else e.pos) + Vector3(0, 0.1, 0)
 			if e.kind != "trig" and e.kind != "mark":
 				yield(frames(2), "completed")
 				lv.interact(e)

@@ -86,6 +86,15 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — That's my voice.
 **DANIEL** — That is my voice.
 
+### Document — “A child's mitten”
+
+> A small red mitten, hand-knitted, one thumb chewed soft. Sewn inside the cuff, a name tape in blue thread:
+> 
+> D. VOSS
+**DANIEL** — A kid's mitten. 'D. Voss.'
+**DANIEL** — Who brings a kid into a place like this?
+**DANIEL** — Forty-two. The PA said forty-two, not forty-one.
+
 ### Interaction — “Press PLAY”
 
 **VOICE (TAPE)** — Daniel… if you are hearing this, it means the signal has already found you.
@@ -121,6 +130,19 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 > 
 > I don't care how it sounds. I care that you go home.
 > — M.H.
+
+### Document — “Lost property — security”
+
+> LOST PROPERTY — SECURITY CLOAKROOM
+> 
+> Unclaimed:
+>   3 gloves (odd)
+>   1 thermos, dented
+>   1 paperback, water-damaged
+>   1 child's mitten, red — DO NOT THROW AWAY. The Director will ask.
+> 
+> Cabinet combination: the number of people on site tonight.
+> (Hale's idea. He says it keeps the night shift counting.)
 
 ### Document — “Work Order NR-2026-1017”
 
@@ -182,6 +204,27 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Pickup — Medical wing keycard
 
 **DANIEL** — Medical wing keycard. Okafor's. There's still a coffee ring on it.
+
+### Radio 89.1 MHz — “Okafor's office, 1998”
+
+**OKAFOR (1998)** — Surface patch, this is Okafor, signals. Put me through to Halden — Corner House. Yes, at this hour.
+**ADA (1998, PATCH)** — Tunde? It's two in the morning.
+**OKAFOR (1998)** — I know. I know. Is Chidi asleep?
+**ADA (1998, PATCH)** — Of course he's asleep. What's wrong?
+**OKAFOR (1998)** — Nothing. Tell him the stamp album's in my desk at work. The drawer combination is his birthday. Eleven, oh-four. He can have the stamps. All of them.
+**ADA (1998, PATCH)** — Tunde, why are you saying it like that?
+**OKAFOR (1998)** — Like what? Goodnight, Ada. Go back to sleep.
+**DANIEL** — Eleven, oh-four. And he never told her he loved her. Not on the radio.
+
+### Interaction — “Okafor's desk drawer”
+
+**DANIEL** — A letter he never sent. 'Nothing I care about goes on the radio.'
+
+### Document — “Photo on Okafor's desk”
+
+> A beach somewhere warm. A woman in a yellow headscarf laughing at the camera; a boy of about ten holding up a stamp album like a trophy.
+> 
+> On the back: 'Ada & Chidi, Lagos, Christmas '97.'
 
 ### Door
 
@@ -289,6 +332,15 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Pickup — Ceramic fuse
 
 **DANIEL** — Lift fuse. Top shelf, like she said.
+
+### Tape — “Brandt — quarantine”
+
+**BRANDT (TAPE)** — Sergeant Paul Brandt. Lind's locked me in. For my own good, she says. I think she's right.
+**BRANDT (TAPE)** — It talks to me in my mother's voice. My mother's been dead eleven years. When I was posted north she called me on the base radio every Sunday.
+**BRANDT (TAPE)** — Every Sunday for six years. On the radio. That's how it got her. It's got everyone who ever called anyone on a radio. That's everyone.
+**BRANDT (TAPE)** — Lind wrote the code on the outside so the next shift could let me out. I scratched it into the paint as well, in case she forgot.
+**BRANDT (TAPE)** — If you're listening to this, don't answer it. Whoever it sounds like. Don't answer.
+**DANIEL** — The door. It just shut behind me.
 
 ### Interaction — “Fit fuse and call the service lift”
 
@@ -433,6 +485,32 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — Master key. 'B.O.' scratched in the fob.
 
+### Radio 92.3 MHz — “92.3 — Bram's request show”
+
+**OSTROWSKI (92.3 MHz, 1998)** — Good evening, sublevel three. This is Bram, and this is the only request show broadcast from under a mountain.
+**OSTROWSKI (92.3 MHz, 1998)** — One record tonight, requested by the canteen crew, for a certain young man who turned one in August. You know who you are, Danny.
+**OSTROWSKI (92.3 MHz, 1998)** — And for club members: the cabinet this week is four. Zero. Nine. One. Four, zero, nine, one. Goodnight, all.
+**DANIEL** — Four-zero-nine-one.
+
+### Document — “Radio club — station log”
+
+> SUBLEVEL 3 AMATEUR RADIO CLUB — STATION LOG
+> 
+> 02 Feb 98  Antenna re-strung. Lovely clean return off the shelf. Picked up a 1961 shipping forecast.
+> 14 Mar 98  02:43. Weak voice on 101.3, no call sign:
+>            'Is anyone still there? This is Arlen.'
+>            Asked for a call sign. Static. (B.O.)
+> 15 Mar 98  Nobody on site called Arlen. Hale asked me not to write it down again.
+> 02 Oct 98  Club cabinet code now changes weekly. I read it out on my request show, 92.3, after the one record. Members only — you know who you are.
+> 
+> — B. Ostrowski, Caretaker & Club Secretary
+**DANIEL** — 'Is anyone still there? This is Arlen.' March, ninety-eight.
+**DANIEL** — Seven months before any of it. Before I was even a year old.
+
+### Interaction — “Club cabinet”
+
+**DANIEL** — Spare cells, a soldering iron, and a bag of mints from nineteen ninety-eight. Bram, you were a good man.
+
 ### Interaction — “Climb down the maintenance shaft”
 
 **DANIEL** — Power station. Forty metres of ladder.
@@ -523,6 +601,18 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **RUIZ (1998)** — Because the turbines are off, and something in here keeps saying it back to me.
 **DANIEL** — C, A, D, B.
 
+### Pickup — Hand crank
+
+**DANIEL** — Hand crank. For a shutter, or a lift, or a very small car.
+
+### Tape — “Ruiz — workshop”
+
+**RUIZ (TAPE)** — Ruiz. Workshop. Two-ten. I'm recording this so I don't lose my mind.
+**RUIZ (TAPE)** — The turbines say my name when they spin down. Not a noise that sounds like my name. My name. In my father's voice.
+**RUIZ (TAPE)** — He used to call me in from the yard on his CB. 'Ana. Ana, dinner.' Every night for twelve years.
+**RUIZ (TAPE)** — That's how it works, I think. It doesn't need to be in the room. Somebody, somewhere, just has to have said your name into a radio once.
+**RUIZ (TAPE)** — Everybody's had their name said into a radio once.
+
 ### Trigger `w`
 
 **DANIEL** — Oh no.
@@ -543,6 +633,19 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 > 17/10  02:44  Power station dark. Turbines spun down in under a minute. That is not possible. They take twenty.
 > 
 > Not going back down. Not tonight. — A. Ruiz
+
+### Document — “Turbine fault board”
+
+> TURBINE FAULT BOARD — A. RUIZ
+> 
+> T1  nominal
+> T2  'talks' at spin-down. Logged as BEARING NOISE per Hale.
+> T3  nominal
+> T4  rattles. Actual bearing noise.
+> T5  says my name. Logged as BEARING NOISE per Hale.
+> T6  nominal
+> 
+> Hale says if it isn't bearing noise it's my imagination, and my imagination isn't on the maintenance schedule.
 
 ### Document — “Main bus restart card”
 
@@ -609,6 +712,27 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **MIRA (96.1 MHz)** — Because it was in here with us. Because twenty-three is a smaller number than forty-one.
 **MIRA (96.1 MHz)** — Be careful what you fix for him, Daniel.
 
+### Document — “Directorate memo — liaison's briefcase”
+
+> DIRECTORATE OF SIGNAL RESEARCH
+> LIAISON OFFICE — EYES ONLY — 16 OCT 1998
+> 
+> To: Dr. E. Voss, Director, HELIX-9
+> Re: Phase III / Subject D
+> 
+> The Directorate has reviewed your reports on Subject D. A listener who requires no equipment is of greater strategic value than the Aperture itself.
+> 
+> On completion of Run 19, Subject D will be transferred to Directorate care for continued study. Transport is arranged for 06:00, 17 October.
+> 
+> This is not a request.
+> 
+> — Liaison (signature illegible)
+> 
+> (Across the page, in Evelyn Voss's handwriting, pressed hard enough to tear:)
+> OVER MY DEAD BODY.
+**DANIEL** — 'Subject D.' 'A listener who requires no equipment.' They wanted somebody's kid.
+**DANIEL** — Transport at six in the morning. She was getting him out before they could take him.
+
 ### Trigger `q`
 
 **HALE (103.7 MHz)** — Arlen. You've been on the girl's channel.
@@ -626,7 +750,7 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **OKAFOR (TAPE)** — Okafor. Personal. If somebody finds this, give it to my wife. Adaeze Okafor. Halden. Corner House, the blue door.
 **OKAFOR (TAPE)** — Ada. It talks in my voice now. Not to me — to the others. Pell came to my office at midnight because I called him on the radio. I never called him.
-**OKAFOR (TAPE)** — I'm going to sit in the pump room where it's loud and wait for the morning shift. If there is a morning shift.
+**OKAFOR (TAPE)** — Tonight I'm going to sit in the pump room where it's loud, until Evelyn needs me for the run. Then I go down with the others.
 **OKAFOR (TAPE)** — I love you. That isn't a thing it can take. I've never once said it on a radio. I made sure.
 
 ### Interaction — “Climb toward the Communications Centre”
@@ -681,6 +805,27 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Pickup — Tuning crystal
 
 **DANIEL** — Tuning crystal. Still in its cotton. Somebody kept spares like a professional.
+
+### Document — “Sticky note on the storeroom shelf”
+
+> Rami —
+> 
+> If anything happens tonight, where do I listen for you?
+> — M.
+> 
+> (Underneath, in Rami's handwriting:)
+> 104.4. Only you know it. Don't tell Hale. Don't tell anybody.
+> And Mira — if it's me but it doesn't sound like a joke, it isn't me.
+
+### Radio 104.4 MHz — “104.4 — Rami's last broadcast”
+
+**HADDAD (104.4 MHz, 02:47)** — Mira. If you're hearing this, it's Rami. No jokes. Listen.
+**HADDAD (104.4 MHz, 02:47)** — Hale is on every channel at once. Security, the PA, my set, the lift phone. Four different conversations. Same minute.
+**HADDAD (104.4 MHz, 02:47)** — Nobody can be on every channel at once, Mira. Nobody. Whatever's talking in his voice, it isn't him.
+**HADDAD (104.4 MHz, 02:47)** — Trust Hale in person. Not on the radio. Never on the radio.
+**DANIEL** — Hale on every channel at once.
+*[if `c5_hale`:]*
+  **DANIEL** — And the Hale I've been talking to has only ever been on the radio.
 
 ### Tape — “Dr. Voss — Run 18”
 
@@ -818,9 +963,24 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — Research keycard. 'E. VOSS — ALL AREAS.'
 
+### Document — “Prototype calibration card”
+
+> APERTURE PROTOTYPE (1:20) — CALIBRATION
+> 
+> Tap I ..... 1
+> Tap II .... 3
+> Tap III ... 2
+> 
+> E.V.: The prototype never opened far enough to transmit. It only ever received one thing, on 101.3, in a voice none of us recognised. I'm keeping the card in case it does it again.
+
 ### Door
 
 **DANIEL** — Rails, going down into the dark. Of course they are.
+
+### Puzzle solved — `proto`
+
+**DANIEL? (101.3 MHz)** — Don't open it. Don't just close it. Answer it. And don't do it alone.
+**DANIEL** — That's me. Me, later. Telling me something I haven't worked out yet.
 
 
 ---
@@ -839,6 +999,32 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **CROSS (1998)** — Yard, booth, platform. Same as every night. Yard, booth, platform. Why?
 **OKAFOR (1998)** — Because something's been saying it to me in your voice all night, and I wanted to hear the real one.
 **DANIEL** — Yard. Booth. Platform.
+
+### Document — “Last service manifest”
+
+> HELIX-9 TRANSPORT — SERVICE 02:30 — CONTAINMENT (STAFF ONLY)
+> 
+> Voss, E. (Director)
+> Okafor, T.
+> Solace, M.  + D. (infant — see below)
+> Kowalczyk, J.
+> Mensah, A.
+> Ferreira, L.
+> Varga, P.
+> Ito, K.
+> Nyberg, H.
+> Achterberg, R.
+> Fofanah, K.
+> 
+> (Operator's note:) D. should NOT be on this tram. Told the Director. She said Mira's taking him up at 02:40.
+> It's 02:30. — L. Cross
+
+### Tape — “Cross — transport”
+
+**CROSS (TAPE)** — Cross. Transport. I'm not supposed to keep a log, so this is a log.
+**CROSS (TAPE)** — Took the Run Nineteen crew down at two-thirty. Eleven and a half, if you count the baby. I counted the baby.
+**CROSS (TAPE)** — Mira had him in a sling, asleep. She saw me looking and said, 'Ten minutes, Lenny. I'm taking him up at two-forty. I promise.'
+**CROSS (TAPE)** — It's two forty-one. Nobody's come back up the line.
 
 ### Trigger `R`
 
@@ -959,6 +1145,26 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — Five-one-one-nine. Hale's badge. Left on the desk, like he took it off on purpose.
 
+### Document — “Containment roll call — 02:49”
+
+> CONTAINMENT — ROLL CALL — 17 OCT 1998 — 02:49
+> Persons inside the bulkhead: 23
+> 
+> Voss, E.        Solace, M.      Okafor, T.
+> Kowalczyk, J.   Mensah, A.      Ferreira, L.
+> Varga, P.       Ito, K.         Nyberg, H.
+> Achterberg, R.  Fofanah, K.     Quist, D.
+> Romano, G.      Abiodun, F.     Park, S.
+> Laine, T.       Moreau, C.      Haugen, I.
+> Dube, N.        Silva, R.       Kerr, A.
+> Tanaka, M.      Rowe, B.
+> 
+> Counted by M. Hale, through the glass.
+> 
+> (Below, in a different hand:)
+> Whoever finds this — don't count them on the last channel. They count back.
+**DANIEL** — Twenty-three names. He counted them through the glass before he shut it.
+
 ### Door
 
 **DANIEL** — Archive lift. Down to where they kept everything they couldn't throw away.
@@ -1065,6 +1271,10 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 **DANIEL** — A key. Brass, warm, like somebody's been holding it for twenty-eight years.
 
+### Interaction — “Search the shelf — Box 19”
+
+**DANIEL** — 'Run it without him.' Hale tried. Hale was the only one who tried.
+
 ### Pickup — Archive keycard
 
 **DANIEL** — Archive keycard. 'Somewhere sensible.' Under a box of 1994 payroll.
@@ -1110,6 +1320,10 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **EVELYN (02:50, 1998)** — Mira? You came back. You stupid, wonderful— where's Danny?
 **MIRA (02:50, 1998)** — Safe. He's safe. He's going down the mountain in Ines's truck.
 **EVELYN (02:51, 1998)** — Then it doesn't get him. Whatever else happens tonight. It doesn't get him.
+
+### Interaction — “Operator's log terminal”
+
+**DANIEL** — 'D. still on level.' She knew. She knew I was still down here when it opened.
 
 ### Trigger `f`
 

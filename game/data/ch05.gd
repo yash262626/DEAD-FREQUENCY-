@@ -15,8 +15,12 @@ const DATA = {
 		"#.e..#.........#.H...........#",
 		"#....#..1..A...#..q..A...r...#",
 		"#..H.#.........D.............#",
-		"#....#..T..V...#.............#",
+		"#c...#..T..V...#.............#",
 		"#.F..#.........#..i..j..k..l.#",
+		"##########O###################",
+		"######.........###############",
+		"######.b...L.n.###############",
+		"######.x.....m.###############",
 		"##############################",
 	],
 	"leg": {
@@ -24,6 +28,17 @@ const DATA = {
 		"u": {"t": "prop", "p": "turbine"}, "g": {"t": "mark"},
 		"a": {"t": "note", "title": "Shaft maintenance log", "text": "MAINTENANCE SHAFT — LOG\n\n17/10  01:55  Ladder inspection. Rungs 40–44 loose. Tagged.\n17/10  02:20  Heard someone climbing below me. Called down. Nobody below me. Called down again. Heard my own voice call back up.\n17/10  02:44  Power station dark. Turbines spun down in under a minute. That is not possible. They take twenty.\n\nNot going back down. Not tonight. — A. Ruiz"},
 		"e": {"t": "item", "id": "battery"},
+		"c": {"t": "item", "id": "crank", "ev": [["DANIEL", "Hand crank. For a shutter, or a lift, or a very small car."]]},
+		"O": {"t": "door", "lock": "crank", "msg": "Workshop shutter. Hand-cranked — and the crank's missing."},
+		"b": {"t": "prop", "p": "table"}, "m": {"t": "item", "id": "medkit"},
+		"n": {"t": "note", "title": "Turbine fault board", "text": "TURBINE FAULT BOARD — A. RUIZ\n\nT1  nominal\nT2  'talks' at spin-down. Logged as BEARING NOISE per Hale.\nT3  nominal\nT4  rattles. Actual bearing noise.\nT5  says my name. Logged as BEARING NOISE per Hale.\nT6  nominal\n\nHale says if it isn't bearing noise it's my imagination, and my imagination isn't on the maintenance schedule."},
+		"x": {"t": "tape", "title": "Ruiz — workshop", "flag": "tape_ruiz", "lines": [
+			["RUIZ (TAPE)", "Ruiz. Workshop. Two-ten. I'm recording this so I don't lose my mind."],
+			["RUIZ (TAPE)", "The turbines say my name when they spin down. Not a noise that sounds like my name. My name. In my father's voice."],
+			["RUIZ (TAPE)", "He used to call me in from the yard on his CB. 'Ana. Ana, dinner.' Every night for twelve years."],
+			["RUIZ (TAPE)", "That's how it works, I think. It doesn't need to be in the room. Somebody, somewhere, just has to have said your name into a radio once."],
+			["RUIZ (TAPE)", "Everybody's had their name said into a radio once."],
+		]},
 		"1": {"t": "trig", "r": 2.2, "ev": [
 			["radio_on", true, 103.7], ["sfx", "glitch", -6],
 			["HALE (103.7 MHz)", "—on this channel. Whoever's in my power station. Identify yourself."],
@@ -109,5 +124,5 @@ const DATA = {
 		["toast", "Crouch to move quietly. Throw a bottle (G) to pull its attention somewhere else."],
 		["obj", "Cross the turbine hall to the power station control room. Stay away from the clicking."],
 	],
-	"walk": ["1", "T", ["radio", "r"], "k", "i", "l", "j", "w", "M"],
+	"walk": ["1", "T", ["radio", "r"], "k", "i", "l", "j", "c", "O", "x", "w", "M"],
 }

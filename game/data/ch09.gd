@@ -15,6 +15,10 @@ const DATA = {
 		"#..e...x..............x...L....#",
 		"#..............................#",
 		"#........P...y.............P...#",
+		"################O###############",
+		"##############..L.....##########",
+		"##############.a...T..##########",
+		"##############.....k..##########",
 		"################################",
 	],
 	"leg": {
@@ -31,7 +35,14 @@ const DATA = {
 		"y": {"t": "use", "p": "switch", "seq": "trac", "step": 1, "prompt": "Throw the yard traction switch"},
 		"b": {"t": "use", "p": "switch", "seq": "trac", "step": 2, "prompt": "Throw the booth traction switch"},
 		"p": {"t": "use", "p": "switch", "seq": "trac", "step": 3, "prompt": "Throw the platform traction switch"},
-		"e": {"t": "item", "id": "battery"},
+		"e": {"t": "item", "id": "battery"}, "O": {"t": "door"}, "k": {"t": "item", "id": "medkit"},
+		"a": {"t": "note", "title": "Last service manifest", "text": "HELIX-9 TRANSPORT — SERVICE 02:30 — CONTAINMENT (STAFF ONLY)\n\nVoss, E. (Director)\nOkafor, T.\nSolace, M.  + D. (infant — see below)\nKowalczyk, J.\nMensah, A.\nFerreira, L.\nVarga, P.\nIto, K.\nNyberg, H.\nAchterberg, R.\nFofanah, K.\n\n(Operator's note:) D. should NOT be on this tram. Told the Director. She said Mira's taking him up at 02:40.\nIt's 02:30. — L. Cross"},
+		"T": {"t": "tape", "title": "Cross — transport", "flag": "tape_cross", "lines": [
+			["CROSS (TAPE)", "Cross. Transport. I'm not supposed to keep a log, so this is a log."],
+			["CROSS (TAPE)", "Took the Run Nineteen crew down at two-thirty. Eleven and a half, if you count the baby. I counted the baby."],
+			["CROSS (TAPE)", "Mira had him in a sling, asleep. She saw me looking and said, 'Ten minutes, Lenny. I'm taking him up at two-forty. I promise.'"],
+			["CROSS (TAPE)", "It's two forty-one. Nobody's come back up the line."],
+		]},
 		"R": {"t": "trig", "r": 2.2, "if": "solved_trac", "ev": [
 			["cine", true], ["music", ""], ["radio_on", true, 96.1], ["sfx", "glitch", -10],
 			["MIRA (96.1 MHz)", "Daniel? You're on the platform. I can hear the rails singing."],
@@ -106,5 +117,5 @@ const DATA = {
 		["DANIEL", "Containment's at the end of the line. So is she."],
 		["obj", "Restore traction power and get the tram moving."],
 	],
-	"walk": [["radio", "o"], "y", "b", "p", "R", "Y"],
+	"walk": [["radio", "o"], "y", "b", "p", "O", "a", "T", "R", "Y"],
 }

@@ -4,7 +4,7 @@ const DATA = {
 	"pal": "archive", "sub": "SUBLEVEL 7 — THE ARCHIVE", "music": "drone_b", "amb_loop": "hum", "amb_db": -30.0, "face": -90,
 	"map": [
 		"################################",
-		"#....#.........#......#........#",
+		"#....#........G#......#........#",
 		"#.S..D...n.....#..h...#..T..s..#",
 		"#....#....L....#..L...#...L....#",
 		"#.L..#.......V.#......#........#",
@@ -15,12 +15,18 @@ const DATA = {
 		"#....P.........Z........P......#",
 		"#.zzzz.zzzz.zzzz.zzzz.zzzz..L..M",
 		"#..............................#",
-		"#.zzzz.zzzz.zzzz.zzzz.zzzz.k...#",
+		"#.zzzz.zzzz.zzzz.zzzz.zBzz.k...#",
 		"#H.......L..........L..........#",
 		"################################",
 	],
 	"leg": {
 		"z": {"t": "prop", "p": "shelf", "block": true}, "Z": {"t": "mark"},
+		"G": {"t": "ghost", "text": "BOX 19\nSTACK E — ROW 3", "r": 8.0},
+		"B": {"t": "use", "p": "shelf", "block": true, "prompt": "Search the shelf — Box 19", "ev": [
+			["journal", "Run 19 — operational order", "RUN 19 — OPERATIONAL ORDER\nAuthorised: E. Voss, Director\nSecurity sign-off: REFUSED — M. Hale\n\nHale: 'I will not sign. There is a child on this level, and a thing on this channel that asks for him by a name he doesn't have yet. If you run it, Evelyn, run it without him.'\n\nVoss (pencil): 'Mira takes him up at 02:40. You have my word.'\n\nRun commenced: 02:40.\nNo record of the child leaving the level before 02:43."],
+			["give", "battery"], ["give", "medkit"], ["sfx", "pickup", -6], ["toast", "Taken: Power cell, Medkit"],
+			["DANIEL", "'Run it without him.' Hale tried. Hale was the only one who tried."],
+		]},
 		"n": {"t": "note", "title": "Archive index card", "text": "HELIX-9 ARCHIVE — INDEX\n\nStacks A–E ........ project records 1991–1998\nBox 19 ............ RUN 19 (empty — removed by order)\nVault S ........... security. Hale only.\nVault D ........... Director. Voss only.\n\nThe deep lift to the Aperture level runs from the east end of the stacks.\nArchive keycard required. The duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere."},
 		"d": {"t": "note", "title": "Sealed statement — Cpl. I. Duarte", "flag": "c11_duarte", "text": "STATEMENT OF CPL. INES DUARTE, POST ONE\nSEALED BY ORDER OF THE DIRECTORATE — 18 OCT 1998\n\nAt approximately 02:46 Technician M. Solace came up in the service lift carrying the Director's son. She was crying. She put him in my arms and pinned a card to his blanket. The card said: HIS NAME IS DANIEL. DON'T LET THEM BRING HIM BACK HERE.\n\nShe said: 'Drive. Don't stop. Don't turn the radio on.'\n\nShe went back down. I watched the lights in the shaft go out floor by floor, like something was eating them.\n\nI drove. I did not turn the radio on. At the bottom of the mountain it turned itself on, and it was her voice, saying thank you.\n\nI did not stop.\n\nThe boy was placed with the county. I asked that his name be changed. I asked that nobody ever tell him where he came from.\n\nI am told the family is called Arlen."},
 		"e": {"t": "note", "title": "Taped to the Director's vault", "text": "VAULT D — DIRECTOR\n\nCombination per Dr. Voss: 'It opens at the moment it all ends.'\n\n(Below, in Hale's hand:)\nThat's not a combination, Evelyn. That's a threat.\n\n(Below that, in hers:)\nIt's both, Marcus. Most things are."},
@@ -81,5 +87,5 @@ const DATA = {
 		["toast", "It has learned how you hide and where you go. Now it waits for you."],
 		["obj", "Find the archive keycard for the deep lift. Look for the vaults."],
 	],
-	"walk": ["n", "d", "e", "Y", "h", "Q", "T", "s", "k", "M"],
+	"walk": ["n", "d", "e", "Y", "h", "Q", "T", "s", "B", "k", "M"],
 }

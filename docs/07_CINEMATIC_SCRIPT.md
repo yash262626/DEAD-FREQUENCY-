@@ -650,6 +650,13 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 
 ## CHAPTER 12 — 02:43
 
+### Interaction — “Operator's log terminal”
+
+*— cinematic begins (player control locked, subtitles, skip enabled) —*
+*MONITOR — types out: RUN 19 — OPERATOR LOG / 02:40  APERTURE 40% / 02:42  APERTURE 80% — CARRIER ANSWERING / 02:43  APERTURE OPENING — NOT US / 02:43  D. STILL ON LEVEL*
+**DANIEL** — 'D. still on level.' She knew. She knew I was still down here when it opened.
+*— control returns to the player —*
+
 ### Trigger `f`
 
 *— cinematic begins (player control locked, subtitles, skip enabled) —*

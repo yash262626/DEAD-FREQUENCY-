@@ -10,10 +10,10 @@ const DATA = {
 		"#..#...........M............#..#",
 		"#..#.....L..........L.......#..#",
 		"#L.#.........x..............#.L#",
-		"#..#........................#..#",
+		"#..#....h.............h.....#..#",
 		"#..#.....R..........R.......#..#",
-		"#..#...........f............#..#",
-		"#..#........................#..#",
+		"#w.#...........f............#..#",
+		"#..#.......h.......h........#..#",
 		"#..############G#############..#",
 		"#..............................#",
 		"#.......L......R.......L.......#",
@@ -23,6 +23,13 @@ const DATA = {
 	],
 	"leg": {
 		"x": {"t": "mark"},
+		"h": {"t": "ghost", "p": "shade", "r": 12.0},
+		"w": {"t": "use", "p": "terminal", "prompt": "Operator's log terminal", "ev": [
+			["cine", true],
+			["monitor", ["RUN 19 — OPERATOR LOG", "02:40  APERTURE 40%", "02:42  APERTURE 80% — CARRIER ANSWERING", "02:43  APERTURE OPENING — NOT US", "02:43  D. STILL ON LEVEL"], 2.0],
+			["DANIEL", "'D. still on level.' She knew. She knew I was still down here when it opened."],
+			["cine", false],
+		]},
 		"a": {"t": "use", "p": "rack", "prompt": "Start the west emitter", "ev": [
 			["flag", "c12_a"], ["sfx", "power_up", 2, 1.3], ["shake", 0.3],
 			["radio_on", true, 89.1], ["loop", "static", "static", -16],
@@ -99,5 +106,5 @@ const DATA = {
 		["radio_on", false],
 		["obj", "Start the three emitters around the ring."],
 	],
-	"walk": ["a", "b", "c", "G", "f", "M"],
+	"walk": ["a", "b", "c", "w", "G", "f", "M"],
 }

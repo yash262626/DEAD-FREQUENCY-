@@ -52,6 +52,7 @@ October 17, 1998, 02:43. A storm over the mountain. Inside HELIX-9, Dr. Evelyn V
 
 - Door locked by item — needs **Comms annex keycard**
 - Door gated by story state `power1` — “Mag-lock. Dead without power. I need the generator running first.”
+- Keypad `LOST PROPERTY CABINET — CODE` — code **0042**
 - “Fit fuse and start generator” — needs **Ceramic fuse**
 
 **Discoveries**
@@ -59,12 +60,15 @@ October 17, 1998, 02:43. A storm over the mountain. Inside HELIX-9, Dr. Evelyn V
 - Tape — Security log — Hale, Oct 12 1998
 - Document — Gate Log — Oct 16, 1998
 - Item — Power cell
+- Item — Medkit
 - Item — Comms annex keycard
 - Item — HX-7 field receiver
 - Item — Ceramic fuse
 - Item — Glass bottle
 - Document — Memo — M. Hale, Chief of Security
+- Document — Lost property — security
 - Document — Work Order NR-2026-1017
+- Document — A child's mitten
 - Transmission 89.1 MHz — Gate post, 1998
 
 **The Listener** — scripted appearances only
@@ -97,6 +101,8 @@ The administration wing, where the night shift stopped mid-sentence. First full 
 - Item — Power cell
 - Item — Medical wing keycard
 - Item — Medkit
+- Document — Photo on Okafor's desk
+- Transmission 89.1 MHz — Okafor's office, 1998
 - Document — Night shift roster
 - Document — Annex duty sheet
 - Transmission 89.1 MHz — Records, 1998
@@ -119,11 +125,14 @@ The medical wing. A patient file with Daniel's birthday. Evelyn's first recordin
 1. Search the medical wing. The service lift is somewhere along the main corridor.
 1. Find a way down. The service lift is at the east end of the corridor.
 1. Fit the fuse in the service lift panel at the east end of the corridor.
+1. Something heard the tape. Hide, and wait for it to leave.
 
 **Puzzles & gates**
 
 - Keypad `PHARMACY — CODE` — code **3118**
+- 107.9-only writing: “LET ME OUT / 2 7 1 1”
 - Door gated by story state `c3_plate` — “Pneumatics are dead. It won't hold open. Lind's memo — weight on the treadle plate.”
+- Keypad `QUARANTINE — CODE` — code **2711**
 - “Fit fuse and call the service lift” — needs **Ceramic fuse**
 - 107.9-only writing: “PHARMACY / 3 1 1 8”
 - 107.9-only writing: “IT ONLY KNOWS WHAT IT HEARS. / SO DON'T LET IT HEAR YOU.”
@@ -131,6 +140,7 @@ The medical wing. A patient file with Daniel's birthday. Evelyn's first recordin
 
 **Discoveries**
 
+- Tape — Brandt — quarantine
 - Tape — Dr. Voss — hearing assessment **(Evelyn — counts toward ending D)**
 - Document — Reception — night log
 - Item — Power cell
@@ -169,6 +179,7 @@ Residential quarters. Mira's note says 96.1. Something knocks on the laundry doo
 - Keypad `QUARTERS 2 — VOSS — CODE` — code **0814**
 - Door locked by item — needs **Quarters master key**
 - Keypad `CARETAKER — CODE` — code **0309**
+- Hidden carrier **92.3 MHz** — “92.3 — Bram's request show”
 - Hidden carrier **96.1 MHz** — “Mira Solace — first contact”
 
 **Discoveries**
@@ -179,8 +190,10 @@ Residential quarters. Mira's note says 96.1. Something knocks on the laundry doo
 - Document — Photograph
 - Document — Unsent letter — M. Hale
 - Item — Quarters master key
+- Document — Radio club — station log
 - Document — Photo on the canteen wall
 - Item — Glass bottle
+- Transmission 92.3 MHz — 92.3 — Bram's request show
 - Document — Note on Mira's mirror
 - Transmission 96.1 MHz — Mira Solace — first contact
 
@@ -207,15 +220,20 @@ The power station. A man who calls himself Marcus Hale answers on 103.7 and dire
 **Puzzles & gates**
 
 - Door gated by story state `power5` — “Tunnel door. No main power, no hydraulics. It won't budge.”
+- Door locked by item — needs **Hand crank**
 - Ordered switches `brk` — correct order: Close breaker C → Close breaker A → Close breaker D → Close breaker B (a mistake resets the board and makes noise)
 
 **Discoveries**
 
 - Tape — Dr. Voss — Run 7 **(Evelyn — counts toward ending D)**
 - Document — Shaft maintenance log
+- Item — Hand crank
 - Item — Power cell
+- Item — Medkit
+- Document — Turbine fault board
 - Document — Main bus restart card
 - Transmission 89.1 MHz — Breaker gallery, 1998
+- Tape — Ruiz — workshop
 
 **The Listener** — patrol from `P` until `solved_brk`; patrol from `g` once `solved_brk`
 
@@ -239,6 +257,8 @@ The stairwell collapses: no way back. Flood tunnels where water doubles every fo
 **Puzzles & gates**
 
 - Door gated by story state `solved_valves` — “Floodgate. The water on the far side is holding it shut. Drain the section first.”
+- Door gated by story state `solved_valves` — “Office door. There's a wall of water behind it. Drain the section first.”
+- 107.9-only writing: “SHE SAID NO”
 - Hidden carrier **96.1 MHz** — “Mira — the bulkhead”
 - 107.9-only writing: “III”
 - 107.9-only writing: “I”
@@ -248,8 +268,10 @@ The stairwell collapses: no way back. Flood tunnels where water doubles every fo
 **Discoveries**
 
 - Tape — Okafor — personal
+- Document — Directorate memo — liaison's briefcase
 - Item — Power cell
 - Document — Containment order — 02:47
+- Item — Medkit
 - Transmission 96.1 MHz — Mira — the bulkhead
 - Document — Pump room procedure
 
@@ -278,16 +300,19 @@ The Communications Centre. A numbers station on 99.7 and a 1998 echo give the st
 - Door gated by story state `c7_uplink` — “Research labs. Locked down until comms report in. Fine. Comms will report in.”
 - “Bring the uplink online” — needs **Tuning crystal**
 - Hidden carrier **99.7 MHz** — “99.7 — numbers”
+- Hidden carrier **104.4 MHz** — “104.4 — Rami's last broadcast”
 - Rotation puzzle `arr` — Turn the north feed horn: position 2 of 4; Turn the east feed horn: position 3 of 4; Turn the south feed horn: position 1 of 4
 
 **Discoveries**
 
+- Document — Sticky note on the storeroom shelf
 - Tape — Dr. Voss — Run 18 **(Evelyn — counts toward ending D)**
 - Item — Power cell
 - Document — Taped to Haddad's monitor
 - Item — Tuning crystal
 - Document — Alignment card
 - Transmission 99.7 MHz — 99.7 — numbers
+- Transmission 104.4 MHz — 104.4 — Rami's last broadcast
 - Transmission 89.1 MHz — Signal Room, 1998
 
 **The Listener** — patrol from `P`
@@ -315,6 +340,7 @@ The research labs. The 1996 Project ECHO briefing: the Aperture was never a rece
 - Keypad `COLD ROOM — CODE` — code **6024**
 - Door locked by item — needs **Research keycard**
 - 107.9-only writing: “COLD ROOM / 6 0 2 4”
+- Rotation puzzle `proto` — Turn tap I: position 1 of 4; Turn tap II: position 3 of 4; Turn tap III: position 2 of 4
 
 **Discoveries**
 
@@ -323,6 +349,7 @@ The research labs. The 1996 Project ECHO briefing: the Aperture was never a rece
 - Transmission 101.3 MHz — Forecast — the lights
 - Item — Research keycard
 - Document — Evelyn's desk calendar
+- Document — Prototype calibration card
 
 **The Listener** — patrol from `Z` once `c8_loose`
 
@@ -349,7 +376,10 @@ The transport line. Mira sings the first line of the lullaby; Daniel finishes it
 
 **Discoveries**
 
+- Tape — Cross — transport
+- Document — Last service manifest
 - Item — Power cell
+- Item — Medkit
 - Document — Transport booth — procedures
 - Transmission 89.1 MHz — Transport, 1998
 
@@ -375,6 +405,7 @@ Containment. The Listener is invisible here except on 107.9. At the bulkhead, tw
 
 **Puzzles & gates**
 
+- Door locked by item — needs **Hale's security badge**
 - Door gated by story state `c10_choice` — “Archive lift corridor. Interlocked until the bulkhead cycle completes.”
 
 **Discoveries**
@@ -382,6 +413,7 @@ Containment. The Listener is invisible here except on 107.9. At the bulkhead, tw
 - Tape — Dr. Voss — the rule **(Evelyn — counts toward ending D)**
 - Item — Hale's security badge
 - Document — Bulkhead log
+- Document — Containment roll call — 02:49
 
 **The Listener** — patrol from `Z` once `c10_choice`. **Cloaked**: visible only on 107.9 or at arm's length.
 
@@ -403,6 +435,7 @@ The Archive. Ines Duarte's sealed statement explains how a baby called Daniel le
 
 **Puzzles & gates**
 
+- 107.9-only writing: “BOX 19 / STACK E — ROW 3”
 - Door locked by item — needs **Archive keycard**
 - Keypad `VAULT D — DIRECTOR — CODE` — code **0243**
 - Keypad `VAULT S — SECURITY — CODE` — code **5119**

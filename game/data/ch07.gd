@@ -15,8 +15,8 @@ const DATA = {
 		"#..a....b....#..k...#..h.....#",
 		"#............#......#....r...#",
 		"#.....g......#..V...#..L.....#",
-		"#..L.........#.e....#.....H..#",
-		"#............#......#........#",
+		"#..L.........#.e..N.#.....H..#",
+		"#............#......#...w....#",
 		"##############################",
 	],
 	"leg": {
@@ -84,6 +84,15 @@ const DATA = {
 		"b": {"t": "use", "p": "dish", "cycle": 4, "target": 3, "group": "arr", "label": "Feed horns", "prompt": "Turn the east feed horn"},
 		"g": {"t": "use", "p": "dish", "cycle": 4, "target": 1, "group": "arr", "label": "Feed horns", "prompt": "Turn the south feed horn"},
 		"e": {"t": "item", "id": "battery"},
+		"N": {"t": "note", "title": "Sticky note on the storeroom shelf", "text": "Rami —\n\nIf anything happens tonight, where do I listen for you?\n— M.\n\n(Underneath, in Rami's handwriting:)\n104.4. Only you know it. Don't tell Hale. Don't tell anybody.\nAnd Mira — if it's me but it doesn't sound like a joke, it isn't me."},
+		"w": {"t": "radio", "f": 104.4, "r": 14.0, "title": "104.4 — Rami's last broadcast", "flag": "c7_rami", "lines": [
+			["HADDAD (104.4 MHz, 02:47)", "Mira. If you're hearing this, it's Rami. No jokes. Listen."],
+			["HADDAD (104.4 MHz, 02:47)", "Hale is on every channel at once. Security, the PA, my set, the lift phone. Four different conversations. Same minute."],
+			["HADDAD (104.4 MHz, 02:47)", "Nobody can be on every channel at once, Mira. Nobody. Whatever's talking in his voice, it isn't him."],
+			["HADDAD (104.4 MHz, 02:47)", "Trust Hale in person. Not on the radio. Never on the radio."],
+			["DANIEL", "Hale on every channel at once."],
+			["if", "c5_hale", [["DANIEL", "And the Hale I've been talking to has only ever been on the radio."]]],
+		]},
 		"M": {"t": "door", "needflag": "c7_uplink", "msg": "Research labs. Locked down until comms report in. Fine. Comms will report in.", "ev": [
 			["cine", true], ["DANIEL", "Labs. Whatever they were really doing down here, it's through this door."], ["fade", true, 1.5], ["next"],
 		]},
@@ -97,5 +106,5 @@ const DATA = {
 		["DANIEL", "Uplink, then Northline. Then out. Whatever 'out' means now."],
 		["obj", "Bring the uplink online: align the feed horns and find a tuning crystal."],
 	],
-	"walk": [["radio", "x"], ["radio", "r"], "K", "k", "a", "a", "b", "b", "b", "g", "T", "U", "M"],
+	"walk": [["radio", "x"], ["radio", "r"], "K", "k", "N", ["radio", "w"], "a", "a", "b", "b", "b", "g", "T", "U", "M"],
 }

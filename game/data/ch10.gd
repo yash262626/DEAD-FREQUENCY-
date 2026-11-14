@@ -13,13 +13,18 @@ const DATA = {
 		"#######..T...#......R..#...o...#",
 		"#######.L..H.#.........#.......#",
 		"#######......#####D#############",
-		"##############b.......n#########",
-		"##############V...Z....W.......M",
-		"##############.....L...#########",
+		"#########N####b.......n#########",
+		"##.h.h.h.L..##V...Z....W.......M",
+		"##.r.h.h.h..##.....L...#########",
 		"################################",
 	],
 	"leg": {
 		"o": {"t": "prop", "p": "coat"}, "x": {"t": "mark"}, "Z": {"t": "mark"},
+		"N": {"t": "door", "lock": "hale_badge", "msg": "Badge reader. 'CONTAINMENT RECORDS — SECURITY CHIEF ONLY.'"},
+		"h": {"t": "ghost", "p": "shade", "r": 10.0},
+		"r": {"t": "note", "title": "Containment roll call — 02:49", "flag": "c10_rollcall", "text": "CONTAINMENT — ROLL CALL — 17 OCT 1998 — 02:49\nPersons inside the bulkhead: 23\n\nVoss, E.        Solace, M.      Okafor, T.\nKowalczyk, J.   Mensah, A.      Ferreira, L.\nVarga, P.       Ito, K.         Nyberg, H.\nAchterberg, R.  Fofanah, K.     Quist, D.\nRomano, G.      Abiodun, F.     Park, S.\nLaine, T.       Moreau, C.      Haugen, I.\nDube, N.        Silva, R.       Kerr, A.\nTanaka, M.      Rowe, B.\n\nCounted by M. Hale, through the glass.\n\n(Below, in a different hand:)\nWhoever finds this — don't count them on the last channel. They count back.", "ev": [
+			["DANIEL", "Twenty-three names. He counted them through the glass before he shut it."],
+		]},
 		"g": {"t": "prop", "p": "glass", "rot": 90, "block": true},
 		"K": {"t": "door", "sealed": true, "c": Color(0.35, 0.12, 0.1), "msg": "The containment bulkhead. Sealed from this side. The release is on the console."},
 		"T": {"t": "tape", "title": "Dr. Voss — the rule", "flag": "tape_ev6", "lines": [
@@ -107,5 +112,5 @@ const DATA = {
 		["toast", "Down here it cannot be seen at all — except on 107.9, or close enough to touch."],
 		["obj", "Find the containment bulkhead."],
 	],
-	"walk": ["T", "1", "U", ["choice", 1], "Q", "b", "W", "M"],
+	"walk": ["T", "1", "U", ["choice", 1], "Q", "b", "N", "r", "W", "M"],
 }

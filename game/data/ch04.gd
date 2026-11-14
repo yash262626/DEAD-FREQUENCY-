@@ -19,12 +19,30 @@ const DATA = {
 		"#......#.........#......#......#",
 		"#..o...#...V.....#..L...#..H...#",
 		"#......#..e......#....H.#....Y.#",
+		"####################G###########",
+		"#################...L....#######",
+		"#################.x.....U#######",
+		"#################.n...r..#######",
 		"################################",
 	],
 	"leg": {
 		"b": {"t": "prop", "p": "bed"}, "c": {"t": "prop", "p": "crib"}, "o": {"t": "prop", "p": "coat"},
 		"X": {"t": "prop", "p": "recorder"}, "Z": {"t": "mark"},
-		"A": {"t": "door"}, "E": {"t": "door"}, "W": {"t": "door"},
+		"A": {"t": "door"}, "E": {"t": "door"}, "W": {"t": "door"}, "G": {"t": "door"}, "x": {"t": "prop", "p": "console"},
+		"n": {"t": "note", "title": "Radio club — station log", "text": "SUBLEVEL 3 AMATEUR RADIO CLUB — STATION LOG\n\n02 Feb 98  Antenna re-strung. Lovely clean return off the shelf. Picked up a 1961 shipping forecast.\n14 Mar 98  02:43. Weak voice on 101.3, no call sign:\n           'Is anyone still there? This is Arlen.'\n           Asked for a call sign. Static. (B.O.)\n15 Mar 98  Nobody on site called Arlen. Hale asked me not to write it down again.\n02 Oct 98  Club cabinet code now changes weekly. I read it out on my request show, 92.3, after the one record. Members only — you know who you are.\n\n— B. Ostrowski, Caretaker & Club Secretary", "ev": [
+			["DANIEL", "'Is anyone still there? This is Arlen.' March, ninety-eight."],
+			["DANIEL", "Seven months before any of it. Before I was even a year old."],
+		]},
+		"r": {"t": "radio", "f": 92.3, "r": 12.0, "title": "92.3 — Bram's request show", "flag": "c4_bram", "lines": [
+			["OSTROWSKI (92.3 MHz, 1998)", "Good evening, sublevel three. This is Bram, and this is the only request show broadcast from under a mountain."],
+			["OSTROWSKI (92.3 MHz, 1998)", "One record tonight, requested by the canteen crew, for a certain young man who turned one in August. You know who you are, Danny."],
+			["OSTROWSKI (92.3 MHz, 1998)", "And for club members: the cabinet this week is four. Zero. Nine. One. Four, zero, nine, one. Goodnight, all."],
+			["DANIEL", "Four-zero-nine-one."],
+		]},
+		"U": {"t": "use", "p": "cabinet", "prompt": "Club cabinet", "code": "4091", "label": "CLUB CABINET — CODE", "ev": [
+			["give", "battery", 2], ["sfx", "pickup", -6], ["toast", "Taken: 2 × Power cell"],
+			["DANIEL", "Spare cells, a soldering iron, and a bag of mints from nineteen ninety-eight. Bram, you were a good man."],
+		]},
 		"d": {"t": "note", "title": "Residents' directory", "text": "SUBLEVEL 3 — RESIDENTIAL\n\nQuarters 1 ........ Solace, M. (signals)\nQuarters 2 ........ Voss, E. (Director) + dependant\nQuarters 3 ........ Hale, M. (security)\nCaretaker ......... Ostrowski, B.\n\nDoor codes are set by residents. Forgotten your code? See the caretaker.\nCaretaker's own office code was set by M. Solace, as Mr. Ostrowski 'does not do numbers'.\n\nLaundry: Tues & Fri. PLEASE stop leaving radios on in the laundry."},
 		"t": {"t": "note", "title": "Note on Mira's mirror", "text": "M —\n\nIf you ever need me and you can't find me: 96.1. I leave a set on it, always, by the bed.\n\nIf it isn't my voice, you'll know. You always know.\n\n— E.\n\n(Underneath, in different handwriting:)\n96.1. She never answers any more."},
 		"2": {"t": "trig", "r": 2.4, "if": "u:c4_t1", "ev": [
@@ -106,5 +124,5 @@ const DATA = {
 		["DANIEL", "That tune in the lift. I've hummed it my whole life. Mum used to ask where I got it."],
 		["obj", "Search the residential level for a way down to the power station."],
 	],
-	"walk": ["t", "2", ["radio", "y"], "B", "f", "T", "O", "k", "M", "Y"],
+	"walk": ["t", "2", ["radio", "y"], "B", "f", "T", "O", "k", "G", ["radio", "r"], "n", "U", "M", "Y"],
 }

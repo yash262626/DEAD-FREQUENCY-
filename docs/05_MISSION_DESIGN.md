@@ -14,7 +14,10 @@
 7. Trigger `w`
 8. Pickup — Comms annex keycard
 9. Door
-10. Interaction — “Press PLAY”
+10. Door (code 0042)
+11. Document — “A child's mitten”
+12. Door
+13. Interaction — “Press PLAY”
 
 **Mission objectives**: Restore auxiliary power. The generator is past the checkpoint. → Try the receiver. The dial is marked at 89.1 MHz. → The checkpoint's inner door has power now. Go deeper. → Find a way into the communications annex. → Enter the communications annex at the end of the corridor.
 
@@ -26,6 +29,10 @@
 4. Door (code 4406)
 5. Pickup — Medical wing keycard
 6. Door
+7. Tune **89.1 MHz** near the source and face it — Okafor's office, 1998
+8. Interaction — “Okafor's desk drawer” (code 1104)
+9. Document — “Photo on Okafor's desk”
+10. Door
 
 **Mission objectives**: Cross the administration wing to the medical gate. → Get into the supervisor's office. The records room might know the door code. → The medical gate is at the east end of the lower hall.
 
@@ -39,9 +46,11 @@
 6. Push the crate onto the pressure plate
 7. Door
 8. Pickup — Ceramic fuse
-9. Interaction — “Fit fuse and call the service lift”
+9. Door (code 2711)
+10. Tape — “Brandt — quarantine”
+11. Interaction — “Fit fuse and call the service lift”
 
-**Mission objectives**: Search the medical wing. The service lift is somewhere along the main corridor. → Find a way down. The service lift is at the east end of the corridor. → Fit the fuse in the service lift panel at the east end of the corridor.
+**Mission objectives**: Search the medical wing. The service lift is somewhere along the main corridor. → Find a way down. The service lift is at the east end of the corridor. → Fit the fuse in the service lift panel at the east end of the corridor. → Something heard the tape. Hide, and wait for it to leave.
 
 ## CHAPTER 04 — BELOW THE SURFACE
 
@@ -54,7 +63,11 @@
 7. Door (code 0309)
 8. Pickup — Quarters master key
 9. Door
-10. Interaction — “Climb down the maintenance shaft”
+10. Tune **92.3 MHz** near the source and face it — 92.3 — Bram's request show
+11. Document — “Radio club — station log”
+12. Interaction — “Club cabinet” (code 4091)
+13. Door
+14. Interaction — “Climb down the maintenance shaft”
 
 **Mission objectives**: Search the residential level for a way down to the power station. → Someone is knocking on the laundry door. Her note said: 96.1. → Caretaker's office — code 0309. Take the master key to the maintenance shaft at the east end. → Open the maintenance shaft at the east end of the corridor. → It's here. Hide, or run.
 
@@ -67,8 +80,11 @@
 5. Interaction — “Close breaker A”
 6. Interaction — “Close breaker D”
 7. Interaction — “Close breaker B”
-8. Trigger `w`
+8. Pickup — Hand crank
 9. Door
+10. Tape — “Ruiz — workshop”
+11. Trigger `w`
+12. Door
 
 **Mission objectives**: Cross the turbine hall to the power station control room. Stay away from the clicking. → Restart the main bus. The breaker gallery is through the east door. → RUN. The tunnel door — east end of the turbine hall. → Main power is up. Get back through the control room — the tunnel door is at the east end of the turbine hall.
 
@@ -83,9 +99,11 @@
 7. Interaction — “Turn the east valve”
 8. Interaction — “Turn the east valve”
 9. Door
-10. Trigger `q`
-11. Tape — “Okafor — personal”
-12. Interaction — “Climb toward the Communications Centre”
+10. Document — “Directorate memo — liaison's briefcase”
+11. Door
+12. Trigger `q`
+13. Tape — “Okafor — personal”
+14. Interaction — “Climb toward the Communications Centre”
 
 **Mission objectives**: Find a way through the flood tunnels toward the Communications Centre. → Drain the section. The pump room is down the west passage, past the bulkhead door. → The floodgate in the pool room should give now.
 
@@ -95,15 +113,17 @@
 2. Tune **99.7 MHz** near the source and face it — 99.7 — numbers
 3. Door (code 7225)
 4. Pickup — Tuning crystal
-5. Interaction — “Turn the north feed horn”
-6. Interaction — “Turn the north feed horn”
-7. Interaction — “Turn the east feed horn”
-8. Interaction — “Turn the east feed horn”
+5. Document — “Sticky note on the storeroom shelf”
+6. Tune **104.4 MHz** near the source and face it — 104.4 — Rami's last broadcast
+7. Interaction — “Turn the north feed horn”
+8. Interaction — “Turn the north feed horn”
 9. Interaction — “Turn the east feed horn”
-10. Interaction — “Turn the south feed horn”
-11. Tape — “Dr. Voss — Run 18”
-12. Interaction — “Bring the uplink online”
-13. Door
+10. Interaction — “Turn the east feed horn”
+11. Interaction — “Turn the east feed horn”
+12. Interaction — “Turn the south feed horn”
+13. Tape — “Dr. Voss — Run 18”
+14. Interaction — “Bring the uplink online”
+15. Door
 
 **Mission objectives**: Bring the uplink online: align the feed horns and find a tuning crystal. → The research labs are through the door at the east end of the corridor. → Fit a tuning crystal and bring the uplink online in the Signal Room.
 
@@ -118,6 +138,14 @@
 7. Door (code 6024)
 8. Pickup — Research keycard
 9. Door
+10. Document — “Prototype calibration card”
+11. Interaction — “Turn tap I”
+12. Interaction — “Turn tap II”
+13. Interaction — “Turn tap II”
+14. Interaction — “Turn tap II”
+15. Interaction — “Turn tap III”
+16. Interaction — “Turn tap III”
+17. Door
 
 **Mission objectives**: Find out what HELIX-9 was for. Then find a way through to the transport line. → Hide. Now. → Find a way out of the labs. The south corridor exit needs a research keycard. → The transport line is through the door at the east end of the south corridor.
 
@@ -127,8 +155,11 @@
 2. Interaction — “Throw the yard traction switch”
 3. Interaction — “Throw the booth traction switch”
 4. Interaction — “Throw the platform traction switch”
-5. Trigger `R`
-6. Interaction — “Start the tram”
+5. Door
+6. Document — “Last service manifest”
+7. Tape — “Cross — transport”
+8. Trigger `R`
+9. Interaction — “Start the tram”
 
 **Mission objectives**: Restore traction power and get the tram moving. → Get on the tram! → Board the tram on the platform.
 
@@ -141,7 +172,9 @@
 5. Interaction — “Bulkhead release”
 6. Pickup — Hale's security badge
 7. Door
-8. Door
+8. Document — “Containment roll call — 02:49”
+9. Door
+10. Door
 
 **Mission objectives**: Find the containment bulkhead. → The bulkhead. Someone is behind it. The console is in the middle of the hall. → Decide. The bulkhead release is beside the intercom. → The archive lift is past the security post, south of the hall.
 
@@ -155,8 +188,9 @@
 6. Door (code 0243)
 7. Tape — “Dr. Voss — for Daniel”
 8. Pickup — Dr. Voss's shutdown key
-9. Pickup — Archive keycard
-10. Door
+9. Interaction — “Search the shelf — Box 19”
+10. Pickup — Archive keycard
+11. Door
 
 **Mission objectives**: Find the archive keycard for the deep lift. Look for the vaults. → Take the deep lift at the east end of the stacks.
 
@@ -165,9 +199,10 @@
 1. Interaction — “Start the west emitter”
 2. Interaction — “Start the east emitter”
 3. Interaction — “Start the south emitter”
-4. Door
-5. Trigger `f`
-6. Interaction — “Release the inner seal”
+4. Interaction — “Operator's log terminal”
+5. Door
+6. Trigger `f`
+7. Interaction — “Release the inner seal”
 
 **Mission objectives**: Start the three emitters around the ring. → Get past it to the inner seal at the north wall. Silently. → The chamber door on the south side of the ring is open.
 

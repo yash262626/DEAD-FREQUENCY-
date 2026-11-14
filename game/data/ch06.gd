@@ -13,10 +13,10 @@ const DATA = {
 		"#.H.D.....D.........#..q.....#",
 		"#...#####.#####.....G..h..P..#",
 		"#####.....###########........#",
-		"#H.......V####################",
-		"#....A....####################",
-		"#.x..y..z.####################",
-		"#.u..v..w.####################",
+		"#H.......V#........###########",
+		"#....A....#..L...g.###########",
+		"#.x..y..z.W.......b###########",
+		"#.u..v..w.#..k.....###########",
 		"##############################",
 	],
 	"leg": {
@@ -44,7 +44,13 @@ const DATA = {
 		"v": {"t": "use", "p": "valve", "cycle": 4, "target": 1, "group": "valves", "label": "Drain valves", "prompt": "Turn the centre valve"},
 		"w": {"t": "use", "p": "valve", "cycle": 4, "target": 2, "group": "valves", "label": "Drain valves", "prompt": "Turn the east valve"},
 		"x": {"t": "ghost", "text": "III", "r": 6.0}, "y": {"t": "ghost", "text": "I", "r": 6.0}, "z": {"t": "ghost", "text": "II", "r": 6.0},
-		"e": {"t": "item", "id": "battery"},
+		"e": {"t": "item", "id": "battery"}, "k": {"t": "item", "id": "medkit"},
+		"W": {"t": "door", "needflag": "solved_valves", "msg": "Office door. There's a wall of water behind it. Drain the section first."},
+		"g": {"t": "ghost", "text": "SHE SAID NO", "r": 7.0},
+		"b": {"t": "note", "title": "Directorate memo — liaison's briefcase", "flag": "c6_memo", "text": "DIRECTORATE OF SIGNAL RESEARCH\nLIAISON OFFICE — EYES ONLY — 16 OCT 1998\n\nTo: Dr. E. Voss, Director, HELIX-9\nRe: Phase III / Subject D\n\nThe Directorate has reviewed your reports on Subject D. A listener who requires no equipment is of greater strategic value than the Aperture itself.\n\nOn completion of Run 19, Subject D will be transferred to Directorate care for continued study. Transport is arranged for 06:00, 17 October.\n\nThis is not a request.\n\n— Liaison (signature illegible)\n\n(Across the page, in Evelyn Voss's handwriting, pressed hard enough to tear:)\nOVER MY DEAD BODY.", "ev": [
+			["DANIEL", "'Subject D.' 'A listener who requires no equipment.' They wanted somebody's kid."],
+			["DANIEL", "Transport at six in the morning. She was getting him out before they could take him."],
+		]},
 		"G": {"t": "door", "needflag": "solved_valves", "msg": "Floodgate. The water on the far side is holding it shut. Drain the section first."},
 		"q": {"t": "trig", "r": 2.2, "ev": [
 			["radio_on", true, 103.7], ["sfx", "glitch", -6],
@@ -66,7 +72,7 @@ const DATA = {
 		"T": {"t": "tape", "title": "Okafor — personal", "flag": "tape_okafor", "lines": [
 			["OKAFOR (TAPE)", "Okafor. Personal. If somebody finds this, give it to my wife. Adaeze Okafor. Halden. Corner House, the blue door."],
 			["OKAFOR (TAPE)", "Ada. It talks in my voice now. Not to me — to the others. Pell came to my office at midnight because I called him on the radio. I never called him."],
-			["OKAFOR (TAPE)", "I'm going to sit in the pump room where it's loud and wait for the morning shift. If there is a morning shift."],
+			["OKAFOR (TAPE)", "Tonight I'm going to sit in the pump room where it's loud, until Evelyn needs me for the run. Then I go down with the others."],
 			["OKAFOR (TAPE)", "I love you. That isn't a thing it can take. I've never once said it on a radio. I made sure."],
 		]},
 		"Y": {"t": "use", "p": "ladder", "prompt": "Climb toward the Communications Centre", "ev": [
@@ -94,5 +100,5 @@ const DATA = {
 		["toast", "Water makes every footstep louder. Move slowly."],
 		["obj", "Find a way through the flood tunnels toward the Communications Centre."],
 	],
-	"walk": ["n", ["radio", "m"], "u", "u", "u", "v", "w", "w", "G", "q", "T", "Y"],
+	"walk": ["n", ["radio", "m"], "u", "u", "u", "v", "w", "w", "W", "b", "G", "q", "T", "Y"],
 }

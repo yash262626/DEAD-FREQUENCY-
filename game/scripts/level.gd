@@ -601,6 +601,14 @@ func interact(e):
 			if d.has("cycle"):
 				return _cycle(e)
 			if e.done and d.get("once", true): return
+			if d.has("code") and not G.test_mode:
+				ui.keypad(d.get("label", "ENTER CODE"))
+				yield(ui, "closed")
+				if ui.keypad_result == "": return
+				if ui.keypad_result != str(d.code):
+					Snd.play("locked", 0); ui.say("", "ACCESS DENIED.", 1.5); noise(e.pos, 6.0, "door")
+					return
+				Snd.play("beep_hi", -4)
 			if not _cond(d) or (d.has("needflag") and not G.flag(d.needflag)) or (d.has("need") and not G.has(d.need)):
 				Snd.play("locked", -4)
 				ui.say("DANIEL", d.get("fail", "Not yet."), 2.6); return

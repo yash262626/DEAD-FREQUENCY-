@@ -20,6 +20,10 @@ const DATA = {
 		"######.####.##################",
 		"#.e...P.....L.....P....H.....#",
 		"#.......b.Z.......F......m...M",
+		"#####K########################",
+		"#....L....d.##################",
+		"#.q.......U.##################",
+		"#.H.....n...##################",
 		"##############################",
 	],
 	"leg": {
@@ -74,6 +78,23 @@ const DATA = {
 			["journal", "Something that repeats", "On the corridor set: Kessler's voice. But only the words he had already said to me at the gate, exactly, like a tape.\n\nThe thing in the supervisor's office did the same with mine.\n\nIt doesn't make words. It takes them. Whatever it says, somebody has already said out loud, over the air."],
 		]},
 		"e": {"t": "item", "id": "battery"}, "b": {"t": "item", "id": "bottle", "n": 2}, "m": {"t": "item", "id": "medkit"},
+		"K": {"t": "door"},
+		"q": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Okafor's office, 1998", "flag": "c2_okafor", "lines": [
+			["OKAFOR (1998)", "Surface patch, this is Okafor, signals. Put me through to Halden — Corner House. Yes, at this hour."],
+			["ADA (1998, PATCH)", "Tunde? It's two in the morning."],
+			["OKAFOR (1998)", "I know. I know. Is Chidi asleep?"],
+			["ADA (1998, PATCH)", "Of course he's asleep. What's wrong?"],
+			["OKAFOR (1998)", "Nothing. Tell him the stamp album's in my desk at work. The drawer combination is his birthday. Eleven, oh-four. He can have the stamps. All of them."],
+			["ADA (1998, PATCH)", "Tunde, why are you saying it like that?"],
+			["OKAFOR (1998)", "Like what? Goodnight, Ada. Go back to sleep."],
+			["DANIEL", "Eleven, oh-four. And he never told her he loved her. Not on the radio."],
+		]},
+		"U": {"t": "use", "p": "cabinet", "prompt": "Okafor's desk drawer", "code": "1104", "label": "DESK DRAWER — COMBINATION", "ev": [
+			["journal", "Okafor's letter", "Ada —\n\nI'm writing this because I won't say it on the radio. Nothing I care about goes on the radio any more. It keeps what it hears.\n\nI love you. I love Chidi. I always meant him to have the stamps.\n\nIf this reaches you and I don't, tell him his father counted heads every night for two years, and the number was always forty-one — and then one night it was forty-two, and nobody could tell me who the extra one was.\n\n— T."],
+			["give", "battery"], ["sfx", "pickup", -6], ["toast", "Taken: Power cell"],
+			["DANIEL", "A letter he never sent. 'Nothing I care about goes on the radio.'"],
+		]},
+		"n": {"t": "note", "title": "Photo on Okafor's desk", "text": "A beach somewhere warm. A woman in a yellow headscarf laughing at the camera; a boy of about ten holding up a stamp album like a trophy.\n\nOn the back: 'Ada & Chidi, Lagos, Christmas '97.'"},
 		"M": {"t": "door", "lock": "med_key", "msg": "Medical gate. Card reader's live. I need a medical keycard.", "ev": [
 			["cine", true],
 			["PA", "Medical wing. Please have your pass ready."],
@@ -93,5 +114,5 @@ const DATA = {
 		["DANIEL", "Fine. The uplink can wait. Medical's on the site plan — first-aid station, maybe a hard line to the surface."],
 		["obj", "Cross the administration wing to the medical gate."],
 	],
-	"walk": ["1", "w", ["radio", "y"], "G", "k", "M"],
+	"walk": ["1", "w", ["radio", "y"], "G", "k", "K", ["radio", "q"], "U", "n", "M"],
 }

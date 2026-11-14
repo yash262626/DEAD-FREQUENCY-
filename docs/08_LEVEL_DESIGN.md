@@ -26,7 +26,7 @@ Legend: `1` marker (camera / spawn point) · `2` marker (camera / spawn point) �
 
 ## CHAPTER 01 — THE ARRIVAL
 
-Palette: **entrance** · ceiling height palette default · grid 30×14 cells (60×28 m) · starts unpowered (emergency lighting only)
+Palette: **entrance** · ceiling height palette default · grid 30×18 cells (60×36 m) · starts unpowered (emergency lighting only)
 
 ```
 ##############################
@@ -42,16 +42,20 @@ Palette: **entrance** · ceiling height palette default · grid 30×14 cells (60
 ############.L...#####.L..3.##
 ############..T.h#####.r....##
 ############.....#####......##
+##############W###############
+##########..f..f..f.#.L.######
+##########.L...q....Q.u.######
+##########.H......e.#.b.######
 ##############################
 ```
-Legend: `1` Trigger `1` · `2` marker (camera / spawn point) · `3` marker (camera / spawn point) · `A` light (always on) · `C` Door · `E` Door · `K` Door · `T` Tape — “Security log — Hale, Oct 12 1998” · `a` Document — “Gate Log — Oct 16, 1998” · `b` Pickup — Power cell · `c` prop: console · `h` Pickup — Comms annex keycard · `i` Pickup — HX-7 field receiver · `j` Pickup — Ceramic fuse · `k` Pickup — Glass bottle · `m` prop: monitor · `n` Document — “Memo — M. Hale, Chief of Security” · `o` Interaction — “Fit fuse and start generator” · `r` Interaction — “Press PLAY” · `t` Document — “Work Order NR-2026-1017” · `w` Trigger `w` · `x` Radio 89.1 MHz — “Gate post, 1998” · `y` marker (camera / spawn point)
+Legend: `1` Trigger `1` · `2` marker (camera / spawn point) · `3` marker (camera / spawn point) · `A` light (always on) · `C` Door · `E` Door · `K` Door · `Q` Door · `T` Tape — “Security log — Hale, Oct 12 1998” · `W` Door · `a` Document — “Gate Log — Oct 16, 1998” · `b` Pickup — Power cell · `c` prop: console · `e` Pickup — Medkit · `f` prop: coat · `h` Pickup — Comms annex keycard · `i` Pickup — HX-7 field receiver · `j` Pickup — Ceramic fuse · `k` Pickup — Glass bottle · `m` prop: monitor · `n` Document — “Memo — M. Hale, Chief of Security” · `o` Interaction — “Fit fuse and start generator” · `q` Document — “Lost property — security” · `r` Interaction — “Press PLAY” · `t` Document — “Work Order NR-2026-1017” · `u` Document — “A child's mitten” · `w` Trigger `w` · `x` Radio 89.1 MHz — “Gate post, 1998” · `y` marker (camera / spawn point)
 
 
 ---
 
 ## CHAPTER 02 — THE SILENT WING
 
-Palette: **security** · ceiling height palette default · grid 30×18 cells (60×36 m)
+Palette: **security** · ceiling height palette default · grid 30×22 cells (60×44 m)
 
 ```
 ##############################
@@ -71,16 +75,20 @@ Palette: **security** · ceiling height palette default · grid 30×18 cells (60
 ######.####.##################
 #.e...P.....L.....P....H.....#
 #.......b.Z.......F......m...M
+#####K########################
+#....L....d.##################
+#.q.......U.##################
+#.H.....n...##################
 ##############################
 ```
-Legend: `1` Trigger `1` · `G` Door · `M` Door · `Z` marker (camera / spawn point) · `b` Pickup — Glass bottle · `c` prop: coat · `d` prop: desk · `e` Pickup — Power cell · `g` prop: glass (blocks navigation) · `k` Pickup — Medical wing keycard · `m` Pickup — Medkit · `r` Document — “Night shift roster” · `t` Document — “Annex duty sheet” · `w` Trigger `w` · `y` Radio 89.1 MHz — “Records, 1998” · `z` marker (camera / spawn point)
+Legend: `1` Trigger `1` · `G` Door · `K` Door · `M` Door · `U` Interaction — “Okafor's desk drawer” · `Z` marker (camera / spawn point) · `b` Pickup — Glass bottle · `c` prop: coat · `d` prop: desk · `e` Pickup — Power cell · `g` prop: glass (blocks navigation) · `k` Pickup — Medical wing keycard · `m` Pickup — Medkit · `n` Document — “Photo on Okafor's desk” · `q` Radio 89.1 MHz — “Okafor's office, 1998” · `r` Document — “Night shift roster” · `t` Document — “Annex duty sheet” · `w` Trigger `w` · `y` Radio 89.1 MHz — “Records, 1998” · `z` marker (camera / spawn point)
 
 
 ---
 
 ## CHAPTER 03 — WHAT REMAINS
 
-Palette: **medical** · ceiling height palette default · grid 34×18 cells (68×36 m)
+Palette: **medical** · ceiling height palette default · grid 34×22 cells (68×44 m)
 
 ```
 ##################################
@@ -99,17 +107,21 @@ Palette: **medical** · ceiling height palette default · grid 34×18 cells (68�
 #...m...#....L....#..........#####
 #..m..H.#..s......#..L.....n.#####
 #.......#.......V.#..........#####
-#.....e.#...h.....#..o.......#####
+#.....e.#...h.J...#..o.......#####
+#############X####################
+#########.b..L..H.################
+#########.......N.################
+#########.m.......################
 ##################################
 ```
-Legend: `1` Trigger `1` · `C` Door · `E` Door · `Q` Door · `T` Tape — “Dr. Voss — hearing assessment” · `Y` Interaction — “Fit fuse and call the service lift” · `Z` marker (camera / spawn point) · `a` Document — “Reception — night log” · `b` prop: bed · `e` Pickup — Power cell · `f` Document — “Patient file — VOSS, D.” · `g` 107.9 writing · `h` Pickup — Glass bottle · `j` 107.9 writing · `m` Pickup — Medkit · `n` Document — “Morgue register” · `o` prop: coat · `p` Pressure plate · `q` Document — “Staff hearing survey” · `s` Document — “Treatment log — Okafor, T.” · `t` Document — “Memo — S. Lind” · `u` prop: gurney · `w` Trigger `w` · `x` physics crate · `z` Pickup — Ceramic fuse
+Legend: `1` Trigger `1` · `C` Door · `E` Door · `J` 107.9 writing · `N` Tape — “Brandt — quarantine” · `Q` Door · `T` Tape — “Dr. Voss — hearing assessment” · `X` Door · `Y` Interaction — “Fit fuse and call the service lift” · `Z` marker (camera / spawn point) · `a` Document — “Reception — night log” · `b` prop: bed · `e` Pickup — Power cell · `f` Document — “Patient file — VOSS, D.” · `g` 107.9 writing · `h` Pickup — Glass bottle · `j` 107.9 writing · `m` Pickup — Medkit · `n` Document — “Morgue register” · `o` prop: coat · `p` Pressure plate · `q` Document — “Staff hearing survey” · `s` Document — “Treatment log — Okafor, T.” · `t` Document — “Memo — S. Lind” · `u` prop: gurney · `w` Trigger `w` · `x` physics crate · `z` Pickup — Ceramic fuse
 
 
 ---
 
 ## CHAPTER 04 — BELOW THE SURFACE
 
-Palette: **residential** · ceiling height palette default · grid 32×17 cells (64×34 m)
+Palette: **residential** · ceiling height palette default · grid 32×21 cells (64×42 m)
 
 ```
 ################################
@@ -128,16 +140,20 @@ Palette: **residential** · ceiling height palette default · grid 32×17 cells 
 #......#.........#......#......#
 #..o...#...V.....#..L...#..H...#
 #......#..e......#....H.#....Y.#
+####################G###########
+#################...L....#######
+#################.x.....U#######
+#################.n...r..#######
 ################################
 ```
-Legend: `2` Trigger `2` · `A` Door · `B` Door · `E` Door · `K` Door · `M` Door · `O` Door · `T` Tape — “Dr. Voss — personal log (lullaby)” · `W` Door · `X` prop: recorder · `Y` Interaction — “Climb down the maintenance shaft” · `Z` marker (camera / spawn point) · `b` prop: bed · `c` prop: crib · `d` Document — “Residents' directory” · `e` Pickup — Power cell · `f` Document — “Photograph” · `h` Document — “Unsent letter — M. Hale” · `k` Pickup — Quarters master key · `o` prop: coat · `p` Document — “Photo on the canteen wall” · `q` Pickup — Glass bottle · `t` Document — “Note on Mira's mirror” · `y` Radio 96.1 MHz — “Mira Solace — first contact”
+Legend: `2` Trigger `2` · `A` Door · `B` Door · `E` Door · `G` Door · `K` Door · `M` Door · `O` Door · `T` Tape — “Dr. Voss — personal log (lullaby)” · `U` Interaction — “Club cabinet” · `W` Door · `X` prop: recorder · `Y` Interaction — “Climb down the maintenance shaft” · `Z` marker (camera / spawn point) · `b` prop: bed · `c` prop: crib · `d` Document — “Residents' directory” · `e` Pickup — Power cell · `f` Document — “Photograph” · `h` Document — “Unsent letter — M. Hale” · `k` Pickup — Quarters master key · `n` Document — “Radio club — station log” · `o` prop: coat · `p` Document — “Photo on the canteen wall” · `q` Pickup — Glass bottle · `r` Radio 92.3 MHz — “92.3 — Bram's request show” · `t` Document — “Note on Mira's mirror” · `x` prop: console · `y` Radio 96.1 MHz — “Mira Solace — first contact”
 
 
 ---
 
 ## CHAPTER 05 — THE VOICES
 
-Palette: **power** · ceiling height palette default · grid 30×15 cells (60×30 m) · starts unpowered (emergency lighting only)
+Palette: **power** · ceiling height palette default · grid 30×19 cells (60×38 m) · starts unpowered (emergency lighting only)
 
 ```
 ##############################
@@ -152,11 +168,15 @@ Palette: **power** · ceiling height palette default · grid 30×15 cells (60×3
 #.e..#.........#.H...........#
 #....#..1..A...#..q..A...r...#
 #..H.#.........D.............#
-#....#..T..V...#.............#
+#c...#..T..V...#.............#
 #.F..#.........#..i..j..k..l.#
+##########O###################
+######.........###############
+######.b...L.n.###############
+######.x.....m.###############
 ##############################
 ```
-Legend: `1` Trigger `1` · `A` light (always on) · `M` Door · `T` Tape — “Dr. Voss — Run 7” · `a` Document — “Shaft maintenance log” · `e` Pickup — Power cell · `g` marker (camera / spawn point) · `i` Interaction — “Close breaker A” · `j` Interaction — “Close breaker B” · `k` Interaction — “Close breaker C” · `l` Interaction — “Close breaker D” · `q` Document — “Main bus restart card” · `r` Radio 89.1 MHz — “Breaker gallery, 1998” · `u` prop: turbine · `w` Trigger `w`
+Legend: `1` Trigger `1` · `A` light (always on) · `M` Door · `O` Door · `T` Tape — “Dr. Voss — Run 7” · `a` Document — “Shaft maintenance log” · `b` prop: table · `c` Pickup — Hand crank · `e` Pickup — Power cell · `g` marker (camera / spawn point) · `i` Interaction — “Close breaker A” · `j` Interaction — “Close breaker B” · `k` Interaction — “Close breaker C” · `l` Interaction — “Close breaker D” · `m` Pickup — Medkit · `n` Document — “Turbine fault board” · `q` Document — “Main bus restart card” · `r` Radio 89.1 MHz — “Breaker gallery, 1998” · `u` prop: turbine · `w` Trigger `w` · `x` Tape — “Ruiz — workshop”
 
 
 ---
@@ -176,13 +196,13 @@ B.S.D....A....#.....#..T..L..#
 #.H.D.....D.........#..q.....#
 #...#####.#####.....G..h..P..#
 #####.....###########........#
-#H.......V####################
-#....A....####################
-#.x..y..z.####################
-#.u..v..w.####################
+#H.......V#........###########
+#....A....#..L...g.###########
+#.x..y..z.W.......b###########
+#.u..v..w.#..k.....###########
 ##############################
 ```
-Legend: `A` light (always on) · `B` Door · `G` Door · `T` Tape — “Okafor — personal” · `Y` Interaction — “Climb toward the Communications Centre” · `e` Pickup — Power cell · `h` Document — “Containment order — 02:47” · `m` Radio 96.1 MHz — “Mira — the bulkhead” · `n` Document — “Pump room procedure” · `q` Trigger `q` · `u` Interaction — “Turn the west valve” · `v` Interaction — “Turn the centre valve” · `w` Interaction — “Turn the east valve” · `x` 107.9 writing · `y` 107.9 writing · `z` 107.9 writing
+Legend: `A` light (always on) · `B` Door · `G` Door · `T` Tape — “Okafor — personal” · `W` Door · `Y` Interaction — “Climb toward the Communications Centre” · `b` Document — “Directorate memo — liaison's briefcase” · `e` Pickup — Power cell · `g` 107.9 writing · `h` Document — “Containment order — 02:47” · `k` Pickup — Medkit · `m` Radio 96.1 MHz — “Mira — the bulkhead” · `n` Document — “Pump room procedure” · `q` Trigger `q` · `u` Interaction — “Turn the west valve” · `v` Interaction — “Turn the centre valve” · `w` Interaction — “Turn the east valve” · `x` 107.9 writing · `y` 107.9 writing · `z` 107.9 writing
 
 
 ---
@@ -204,18 +224,18 @@ Palette: **comms** · ceiling height palette default · grid 30×15 cells (60×3
 #..a....b....#..k...#..h.....#
 #............#......#....r...#
 #.....g......#..V...#..L.....#
-#..L.........#.e....#.....H..#
-#............#......#........#
+#..L.........#.e..N.#.....H..#
+#............#......#...w....#
 ##############################
 ```
-Legend: `K` Door · `M` Door · `T` Tape — “Dr. Voss — Run 18” · `U` Interaction — “Bring the uplink online” · `a` Interaction — “Turn the north feed horn” · `b` Interaction — “Turn the east feed horn” · `c` prop: console · `e` Pickup — Power cell · `g` Interaction — “Turn the south feed horn” · `h` Document — “Taped to Haddad's monitor” · `k` Pickup — Tuning crystal · `n` Document — “Alignment card” · `r` Radio 99.7 MHz — “99.7 — numbers” · `x` Radio 89.1 MHz — “Signal Room, 1998”
+Legend: `K` Door · `M` Door · `N` Document — “Sticky note on the storeroom shelf” · `T` Tape — “Dr. Voss — Run 18” · `U` Interaction — “Bring the uplink online” · `a` Interaction — “Turn the north feed horn” · `b` Interaction — “Turn the east feed horn” · `c` prop: console · `e` Pickup — Power cell · `g` Interaction — “Turn the south feed horn” · `h` Document — “Taped to Haddad's monitor” · `k` Pickup — Tuning crystal · `n` Document — “Alignment card” · `r` Radio 99.7 MHz — “99.7 — numbers” · `w` Radio 104.4 MHz — “104.4 — Rami's last broadcast” · `x` Radio 89.1 MHz — “Signal Room, 1998”
 
 
 ---
 
 ## CHAPTER 08 — THE ECHO PROJECT
 
-Palette: **lab** · ceiling height palette default · grid 32×15 cells (64×30 m)
+Palette: **lab** · ceiling height palette default · grid 32×19 cells (64×38 m)
 
 ```
 ################################
@@ -230,18 +250,22 @@ Palette: **lab** · ceiling height palette default · grid 32×15 cells (64×30 
 #v...#.................#.......#
 ##########D#####################
 #....C.....g..........Z...P....M
-#.k..###########################
-#..V.###########################
+#.k..#######################.###
+#..V.#######################.###
+############################Q###
+##################.....L.....###
+##################.a..o..b..e###
+##################.p.........###
 ################################
 ```
-Legend: `1` Trigger `1` · `C` Door · `M` Door · `T` Tape — “Dr. Voss — the night before Run 19” · `Z` marker (camera / spawn point) · `c` prop: crib · `d` Document — “Lab 2 — response trials, Subject D” · `f` Radio 101.3 MHz — “Forecast — the lights” · `g` 107.9 writing · `k` Pickup — Research keycard · `m` Interaction — “Play the briefing reel” · `n` Document — “Evelyn's desk calendar” · `u` prop: tank · `v` marker (camera / spawn point)
+Legend: `1` Trigger `1` · `C` Door · `M` Door · `Q` Door · `T` Tape — “Dr. Voss — the night before Run 19” · `Z` marker (camera / spawn point) · `a` Interaction — “Turn tap I” · `b` Interaction — “Turn tap II” · `c` prop: crib · `d` Document — “Lab 2 — response trials, Subject D” · `e` Interaction — “Turn tap III” · `f` Radio 101.3 MHz — “Forecast — the lights” · `g` 107.9 writing · `k` Pickup — Research keycard · `m` Interaction — “Play the briefing reel” · `n` Document — “Evelyn's desk calendar” · `o` prop: dish · `p` Document — “Prototype calibration card” · `u` prop: tank · `v` marker (camera / spawn point)
 
 
 ---
 
 ## CHAPTER 09 — DEAD LINE
 
-Palette: **transport** · ceiling height palette default · grid 32×13 cells (64×26 m)
+Palette: **transport** · ceiling height palette default · grid 32×17 cells (64×34 m)
 
 ```
 ################################
@@ -256,9 +280,13 @@ Palette: **transport** · ceiling height palette default · grid 32×13 cells (6
 #..e...x..............x...L....#
 #..............................#
 #........P...y.............P...#
+################O###############
+##############..L.....##########
+##############.a...T..##########
+##############.....k..##########
 ################################
 ```
-Legend: `R` Trigger `R` · `Y` Interaction — “Start the tram” · `Z` marker (camera / spawn point) · `b` Interaction — “Throw the booth traction switch” · `e` Pickup — Power cell · `m` 107.9 writing · `n` Document — “Transport booth — procedures” · `o` Radio 89.1 MHz — “Transport, 1998” · `p` Interaction — “Throw the platform traction switch” · `x` prop: crate · `y` Interaction — “Throw the yard traction switch”
+Legend: `O` Door · `R` Trigger `R` · `T` Tape — “Cross — transport” · `Y` Interaction — “Start the tram” · `Z` marker (camera / spawn point) · `a` Document — “Last service manifest” · `b` Interaction — “Throw the booth traction switch” · `e` Pickup — Power cell · `k` Pickup — Medkit · `m` 107.9 writing · `n` Document — “Transport booth — procedures” · `o` Radio 89.1 MHz — “Transport, 1998” · `p` Interaction — “Throw the platform traction switch” · `x` prop: crate · `y` Interaction — “Throw the yard traction switch”
 
 
 ---
@@ -277,12 +305,12 @@ Palette: **containment** · ceiling height palette default · grid 32×13 cells 
 #######..T...#......R..#...o...#
 #######.L..H.#.........#.......#
 #######......#####D#############
-##############b.......n#########
-##############V...Z....W.......M
-##############.....L...#########
+#########N####b.......n#########
+##.h.h.h.L..##V...Z....W.......M
+##.r.h.h.h..##.....L...#########
 ################################
 ```
-Legend: `1` Trigger `1` · `K` Door · `M` Door · `Q` Interaction — “Bulkhead release” · `T` Tape — “Dr. Voss — the rule” · `U` Interaction — “Bulkhead intercom” · `W` Door · `Z` marker (camera / spawn point) · `b` Pickup — Hale's security badge · `g` prop: glass (blocks navigation) · `n` Document — “Bulkhead log” · `o` prop: coat · `x` marker (camera / spawn point)
+Legend: `1` Trigger `1` · `K` Door · `M` Door · `N` Door · `Q` Interaction — “Bulkhead release” · `T` Tape — “Dr. Voss — the rule” · `U` Interaction — “Bulkhead intercom” · `W` Door · `Z` marker (camera / spawn point) · `b` Pickup — Hale's security badge · `g` prop: glass (blocks navigation) · `h` 107.9 writing · `n` Document — “Bulkhead log” · `o` prop: coat · `r` Document — “Containment roll call — 02:49” · `x` marker (camera / spawn point)
 
 
 ---
@@ -293,7 +321,7 @@ Palette: **archive** · ceiling height palette default · grid 32×15 cells (64�
 
 ```
 ################################
-#....#.........#......#........#
+#....#........G#......#........#
 #.S..D...n.....#..h...#..T..s..#
 #....#....L....#..L...#...L....#
 #.L..#.......V.#......#........#
@@ -304,11 +332,11 @@ Palette: **archive** · ceiling height palette default · grid 32×15 cells (64�
 #....P.........Z........P......#
 #.zzzz.zzzz.zzzz.zzzz.zzzz..L..M
 #..............................#
-#.zzzz.zzzz.zzzz.zzzz.zzzz.k...#
+#.zzzz.zzzz.zzzz.zzzz.zBzz.k...#
 #H.......L..........L..........#
 ################################
 ```
-Legend: `M` Door · `Q` Door · `T` Tape — “Dr. Voss — for Daniel” · `Y` Door · `Z` marker (camera / spawn point) · `d` Document — “Sealed statement — Cpl. I. Duarte” · `e` Document — “Taped to the Director's vault” · `g` 107.9 writing · `h` Tape — “Marcus Hale — last report” · `k` Pickup — Archive keycard · `n` Document — “Archive index card” · `s` Pickup — Dr. Voss's shutdown key · `z` prop: shelf (blocks navigation)
+Legend: `B` Interaction — “Search the shelf — Box 19” · `G` 107.9 writing · `M` Door · `Q` Door · `T` Tape — “Dr. Voss — for Daniel” · `Y` Door · `Z` marker (camera / spawn point) · `d` Document — “Sealed statement — Cpl. I. Duarte” · `e` Document — “Taped to the Director's vault” · `g` 107.9 writing · `h` Tape — “Marcus Hale — last report” · `k` Pickup — Archive keycard · `n` Document — “Archive index card” · `s` Pickup — Dr. Voss's shutdown key · `z` prop: shelf (blocks navigation)
 
 
 ---
@@ -325,10 +353,10 @@ Palette: **chamber** · ceiling height palette default · grid 32×17 cells (64�
 #..#...........M............#..#
 #..#.....L..........L.......#..#
 #L.#.........x..............#.L#
-#..#........................#..#
+#..#....h.............h.....#..#
 #..#.....R..........R.......#..#
-#..#...........f............#..#
-#..#........................#..#
+#w.#...........f............#..#
+#..#.......h.......h........#..#
 #..############G#############..#
 #..............................#
 #.......L......R.......L.......#
@@ -336,7 +364,7 @@ Palette: **chamber** · ceiling height palette default · grid 32×17 cells (64�
 #V.............................#
 ################################
 ```
-Legend: `G` Door · `M` Interaction — “Release the inner seal” · `a` Interaction — “Start the west emitter” · `b` Interaction — “Start the east emitter” · `c` Interaction — “Start the south emitter” · `f` Trigger `f` · `x` marker (camera / spawn point)
+Legend: `G` Door · `M` Interaction — “Release the inner seal” · `a` Interaction — “Start the west emitter” · `b` Interaction — “Start the east emitter” · `c` Interaction — “Start the south emitter” · `f` Trigger `f` · `h` 107.9 writing · `w` Interaction — “Operator's log terminal” · `x` marker (camera / spawn point)
 
 
 ---
