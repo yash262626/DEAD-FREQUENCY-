@@ -71,7 +71,12 @@ func new_game():
 	start_chapter(1)
 
 func continue_game():
-	if G.load_game(): start_chapter(G.chapter)
+	if G.load_game():
+		start_chapter(G.chapter)
+		if G.load_error != "": ui.toast(G.load_error)
+	else:
+		ui.toast(G.load_error if G.load_error != "" else "No saved game found.")
+		ui.fade(false, 0.5)
 
 func new_game_plus():
 	G.new_run_plus(); G.has_radio = false
@@ -117,8 +122,12 @@ func on_death():
 func _on_menu_action(id):
 	match id:
 		"reload":
-			if G.load_game(): start_chapter(G.chapter)
-			else: new_game()
+			if G.load_game():
+				start_chapter(G.chapter)
+				if G.load_error != "": ui.toast(G.load_error)
+			else:
+				show_menu()
+				ui.toast(G.load_error if G.load_error != "" else "No checkpoint to return to.")
 		"mainmenu": show_menu()
 
 func play_ending():

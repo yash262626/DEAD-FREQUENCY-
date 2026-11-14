@@ -514,6 +514,7 @@ const SET_SPEC = [
 	["sens", "Look sensitivity", "slider", 0.2, 3], ["fov", "Field of view", "slider", 60, 100],
 	["brightness", "Brightness", "slider", 0.6, 1.8],
 	["quality", "Graphics preset", "opt", ["Low", "Medium", "High", "Ultra"]],
+	["resolution", "Window resolution", "opt", ["1280 × 720", "1600 × 900", "1920 × 1080", "2560 × 1440"]],
 	["sub_size", "Subtitle size", "opt", ["Small", "Medium", "Large"]],
 	["fullscreen", "Fullscreen", "check"], ["vsync", "V-Sync", "check"], ["subtitles", "Subtitles", "check"],
 	["invert_y", "Invert Y axis", "check"], ["head_bob", "Head bob", "check"], ["toggle_crouch", "Toggle crouch", "check"],

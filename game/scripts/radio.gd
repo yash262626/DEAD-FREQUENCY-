@@ -27,11 +27,19 @@ func band() -> float:
 		if abs(f - b) < TOL: return b
 	return 0.0
 
+var _pre = null     # the player's own radio state before a scripted transmission took the set over
 func force(state: bool, freq := -1.0):
-	on = state
-	if freq > 0: f = freq
+	if state:
+		if _pre == null: _pre = [on, f]
+		on = true
+		if freq > 0: f = freq
+		Snd.play("glitch", -6)
+	else:
+		if _pre != null:
+			on = _pre[0]; f = _pre[1]; _pre = null
+		else:
+			on = false
 	_forced = 1.0
-	if state: Snd.play("glitch", -6)
 
 func _tune(d: float):
 	f = clamp(stepify(f + d, 0.1), 87.5, 108.0)

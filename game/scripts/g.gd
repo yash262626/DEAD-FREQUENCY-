@@ -5,6 +5,7 @@ var SAVE := "user://save.json"
 var PROFILE := "user://profile.json"
 const SAVE_VERSION := 1
 const LAST_CHAPTER := 13
+const RESOLUTIONS = [Vector2(1280, 720), Vector2(1600, 900), Vector2(1920, 1080), Vector2(2560, 1440)]
 
 signal settings_changed
 signal toast(text)
@@ -32,7 +33,7 @@ var settings := {
 	"sens": 1.0, "invert_y": false, "fov": 75.0,
 	"quality": 2, "fullscreen": false, "vsync": true, "brightness": 1.0,
 	"subtitles": true, "sub_size": 1, "head_bob": true, "toggle_crouch": true,
-	"hold_skip": true, "reduce_flashes": false,
+	"hold_skip": true, "reduce_flashes": false, "resolution": 0,
 }
 
 var skip := false          # cinematic fast-forward
@@ -42,10 +43,11 @@ var test_god := false
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	if OS.has_environment("DF_TEST"):
-		# automated tests never touch the player's real save or profile
+		# automated tests never touch the player's real save, profile or window
+		test_mode = true
 		SAVE = "user://test_save.json"; PROFILE = "user://test_profile.json"
 		var d = Directory.new()
-		for f in [SAVE, PROFILE]:
+		for f in [SAVE, SAVE + ".bak", SAVE + ".tmp", PROFILE]:
 			if d.file_exists(f): d.remove(f)
 	_setup_input()
 	_setup_buses()
@@ -109,6 +111,12 @@ func apply_settings():
 	if not test_mode:
 		OS.window_fullscreen = settings.fullscreen
 		OS.vsync_enabled = settings.vsync
+		if not settings.fullscreen:
+			var sz = RESOLUTIONS[clamp(int(settings.resolution), 0, RESOLUTIONS.size() - 1)]
+			var scr = OS.get_screen_size()
+			if sz.x <= scr.x and sz.y <= scr.y:
+				OS.window_size = sz
+				OS.window_position = (scr - sz) / 2
 	emit_signal("settings_changed")
 
 func save_profile():
@@ -127,7 +135,7 @@ func load_profile():
 	if d.has("settings"):
 		for k in d.settings:
 			if settings.has(k): settings[k] = d.settings[k]
-	settings.quality = int(settings.quality); settings.sub_size = int(settings.sub_size)
+	settings.quality = int(settings.quality); settings.sub_size = int(settings.sub_size); settings.resolution = int(settings.resolution)
 	unlocked = int(d.get("unlocked", 1)); endings = d.get("endings", [])
 	achievements = d.get("achievements", []); intro_seen = d.get("intro_seen", false)
 	ng_unlocked = d.get("ng_unlocked", false)
@@ -189,24 +197,48 @@ func add_journal(title, text, kind := "note"):
 	journal.append({"t": title, "x": text, "k": kind})
 
 func has_save() -> bool:
-	return File.new().file_exists(SAVE)
+	return File.new().file_exists(SAVE) or File.new().file_exists(SAVE + ".bak")
+
+var load_error := ""
 
 func save_game():
+	# Atomic: write a temp file, verify it parses, keep the previous save as .bak, then swap.
 	var d = {"v": SAVE_VERSION, "flags": flags, "inv": inv, "journal": journal, "chapter": chapter,
 		"checkpoint": checkpoint, "health": health, "battery": battery, "radio_batt": radio_batt,
 		"has_radio": has_radio, "has_light": has_light}
+	var tmp = SAVE + ".tmp"
 	var f = File.new()
-	if f.open(SAVE, File.WRITE) != OK: return false
+	if f.open(tmp, File.WRITE) != OK: return false
 	f.store_string(to_json(d)); f.close()
-	return true
+	if _read_save(tmp).empty(): return false
+	var dir = Directory.new()
+	if dir.file_exists(SAVE):
+		if dir.file_exists(SAVE + ".bak"): dir.remove(SAVE + ".bak")
+		dir.rename(SAVE, SAVE + ".bak")
+	return dir.rename(tmp, SAVE) == OK
+
+func _read_save(path: String) -> Dictionary:
+	var f = File.new()
+	if not f.file_exists(path) or f.open(path, File.READ) != OK: return {}
+	var txt = f.get_as_text(); f.close()
+	if validate_json(txt) != "": return {}      # damaged file: reject quietly, the caller reports it
+	var r = JSON.parse(txt)
+	if r.error != OK or typeof(r.result) != TYPE_DICTIONARY: return {}
+	var d = r.result
+	if int(d.get("v", 0)) > SAVE_VERSION or int(d.get("v", 0)) < 1: return {}
+	if typeof(d.get("flags", {})) != TYPE_DICTIONARY or typeof(d.get("inv", {})) != TYPE_DICTIONARY or typeof(d.get("journal", [])) != TYPE_ARRAY: return {}
+	if int(d.get("chapter", 1)) < 0 or int(d.get("chapter", 1)) > LAST_CHAPTER: return {}
+	return d
 
 func load_game() -> bool:
-	var f = File.new()
-	if not f.file_exists(SAVE) or f.open(SAVE, File.READ) != OK: return false
-	var r = JSON.parse(f.get_as_text()); f.close()
-	if r.error != OK or typeof(r.result) != TYPE_DICTIONARY: return false
-	var d = r.result
-	if int(d.get("v", 0)) > SAVE_VERSION: return false
+	load_error = ""
+	var d = _read_save(SAVE)
+	if d.empty():
+		d = _read_save(SAVE + ".bak")
+		if d.empty():
+			if File.new().file_exists(SAVE): load_error = "The save file is damaged and could not be loaded."
+			return false
+		load_error = "The latest save was damaged. Loaded the previous checkpoint instead."
 	flags = d.get("flags", {}); inv = d.get("inv", {}); journal = d.get("journal", [])
 	for k in inv: inv[k] = int(inv[k])
 	chapter = int(d.get("chapter", 1)); checkpoint = str(d.get("checkpoint", ""))

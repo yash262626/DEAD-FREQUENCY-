@@ -85,6 +85,17 @@ func t_save():
 	ok(not G.flag("alpha"), "state cleared")
 	ok(G.load_game(), "load ok")
 	ok(G.flag("alpha") and G.inv.fuse == 2 and G.journal.size() == 1 and G.health == 61.0 and G.checkpoint == "o" and G.chapter == 3, "state restored")
+	# corrupted saves: fall back to the previous good save, never crash, never load garbage
+	G.new_run(4); G.set_flag("good_a"); G.chapter = 4; ok(G.save_game(), "first save")
+	G.set_flag("good_b"); G.chapter = 5; ok(G.save_game(), "second save (first becomes .bak)")
+	var sf = File.new(); sf.open(G.SAVE, File.WRITE); sf.store_string("{\"v\": 1, \"flags\": [garbage"); sf.close()
+	G.new_run(1)
+	ok(G.load_game() and G.chapter == 4 and G.flag("good_a") and not G.flag("good_b") and G.load_error != "", "damaged save falls back to the previous checkpoint")
+	sf.open(G.SAVE + ".bak", File.WRITE); sf.store_string("not json at all"); sf.close()
+	sf.open(G.SAVE, File.WRITE); sf.store_string("{\"v\": 1, \"chapter\": 99, \"flags\": {}}"); sf.close()
+	G.new_run(1)
+	ok(not G.load_game() and G.load_error != "", "two damaged saves: refuses to load and reports it")
+	ok(G.save_game() and G.load_game() and G.load_error == "", "a fresh save after damage loads cleanly")
 	# ending logic
 	G.new_run(13); ok(G.ending_id() == "C", "default ending C")
 	G.set_flag("final_open"); ok(G.ending_id() == "B", "open → B")
@@ -147,6 +158,8 @@ func t_systems():
 	ok(abs(lv.radio.f - 94.1) < 0.01, "dial tunes in 0.1 MHz steps")
 	var rb = G.radio_batt; yield(frames(30), "completed"); ok(G.radio_batt < rb, "radio drains its cell")
 	lv.radio.f = 107.9; yield(frames(5), "completed"); ok(lv.reveal_on, "107.9 enables reveal")
+	lv.radio.f = 92.5; lv.radio.force(true, 96.1); yield(frames(2), "completed"); lv.radio.force(false)
+	ok(lv.radio.on and abs(lv.radio.f - 92.5) < 0.01, "a scripted transmission hands the receiver back as the player left it")
 	lv.radio.f = 94.6; yield(frames(5), "completed"); ok(not lv.reveal_on and lv.radio.band() == 94.6, "94.6 band recognised")
 	# transmission lock: stand by the source, face it, tune 89.1
 	var src = lv.ent_at("x")
