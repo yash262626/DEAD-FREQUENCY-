@@ -1,0 +1,34 @@
+; DEAD FREQUENCY - Godot 3.5 project
+config_version=4
+
+[application]
+
+config/name="DEAD FREQUENCY"
+run/main_scene="res://scenes/Main.tscn"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+boot_splash/show_image=false
+
+[autoload]
+
+G="*res://scripts/g.gd"
+Snd="*res://scripts/snd.gd"
+Story="*res://data/story.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[physics]
+
+common/physics_fps=60
+
+[rendering]
+
+quality/filters/msaa=2
+quality/shadows/filter_mode=2
+quality/shadow_atlas/size=4096
+environment/default_clear_color=Color( 0, 0, 0, 1 )
+quality/directional_shadow/size=2048

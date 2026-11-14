@@ -1,0 +1,6 @@
+.import/
+*.import
+export/
+build/
+*.tmp
+.mono/
