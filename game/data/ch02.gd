@@ -43,6 +43,8 @@ const DATA = {
 		"k": {"t": "item", "id": "med_key", "ev": [
 			["DANIEL", "Medical wing keycard. Okafor's. There's still a coffee ring on it."],
 			["checkpoint", "V"], ["obj", "The medical gate is at the east end of the lower hall."],
+			["wait", 1.0], ["sfx", "clicks", 0, 0.7, "M"], ["listener", "seek", "F"],
+			["toast", "It's between you and the gate. Wait it out, or give it something else to listen to."],
 		]},
 		"1": {"t": "trig", "r": 2.6, "ev": [
 			["cine", true], ["music", ""], ["listener", "spawn", "z", "watch"], ["sfx", "voice", -14, 0.9, "z"],

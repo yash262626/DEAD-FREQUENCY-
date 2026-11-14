@@ -94,7 +94,12 @@ const DATA = {
 			["MARCUS (TAPE)", "Last night it asked the night shift for somebody. By name. A name that isn't on my roster."],
 			["MARCUS (TAPE)", "'Arlen.' Nobody here called Arlen."],
 		]},
-		"h": {"t": "item", "id": "comms_key", "ev": [["obj", "Enter the communications annex at the end of the corridor."]]},
+		"h": {"t": "item", "id": "comms_key", "ev": [
+			["pulse"], ["wait", 1.2], ["sfx", "step", 4, 0.65, "K"], ["wait", 0.8], ["sfx", "step", 4, 0.65, "K"], ["wait", 0.8], ["sfx", "step", 2, 0.6, "K"],
+			["wait", 2.5], ["lights", true],
+			["DANIEL", "Something just walked past that door. Slowly. Like it was listening for me."],
+			["obj", "Enter the communications annex at the end of the corridor."],
+		]},
 		"C": {"t": "door", "lock": "comms_key", "msg": "Card reader. 'COMMS ANNEX — SECURITY ISSUE ONLY.' The security office should have a card."},
 		"m": {"t": "prop", "p": "monitor"},
 		"r": {"t": "use", "p": "recorder", "prompt": "Press PLAY", "ev": [

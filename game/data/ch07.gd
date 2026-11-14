@@ -61,6 +61,7 @@ const DATA = {
 			["DANIEL", "No way back up. And she's down there. So: down."],
 			["flag", "c7_uplink"], ["checkpoint", "V"],
 			["obj", "The research labs are through the door at the east end of the corridor."],
+			["listener", "ambush"],
 			["cine", false],
 		]},
 		"T": {"t": "tape", "title": "Dr. Voss — Run 18", "flag": "tape_ev4", "lines": [

@@ -43,7 +43,7 @@ const DATA = {
 			["sfx", "clicks", -6],
 			["HALE (TAPE)", "...It's here. It's using my voice in the corridor. Sounds just like me. Funny. I never liked my voice."],
 		], "ev": [
-			["ach", "hale"],
+			["ach", "hale"], ["listener", "seek", "h"],
 			["radio_on", true, 103.7], ["sfx", "glitch", -4],
 			["HALE? (103.7 MHz)", "Arlen. Don't waste time down there. The chamber. Get to the chamber."],
 			["DANIEL", "Hale's dead. He died at two fifty-one, in nineteen ninety-eight. I just heard him say so."],

@@ -86,6 +86,8 @@ const DATA = {
 		"valves": [
 			["sfx", "power_up", 0], ["loop3d", "pumps", "tram", "u", -6],
 			["DANIEL", "Pumps are taking it. Listen to that — the whole section's draining."],
+			["listener", "seek", "v"],
+			["DANIEL", "And everything down here just heard the pumps start."],
 			["checkpoint", "V"],
 			["obj", "The floodgate in the pool room should give now."],
 		],

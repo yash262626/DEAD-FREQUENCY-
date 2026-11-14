@@ -93,7 +93,7 @@ const DATA = {
 			["obj", "Caretaker's office — code 0309. Take the master key to the maintenance shaft at the east end."],
 		]},
 		"O": {"t": "door", "code": "0309", "label": "CARETAKER — CODE"},
-		"k": {"t": "item", "id": "res_key", "ev": [["DANIEL", "Master key. 'B.O.' scratched in the fob."], ["checkpoint", "V"], ["obj", "Open the maintenance shaft at the east end of the corridor."]]},
+		"k": {"t": "item", "id": "res_key", "ev": [["DANIEL", "Master key. 'B.O.' scratched in the fob."], ["checkpoint", "V"], ["obj", "Open the maintenance shaft at the east end of the corridor."], ["listener", "ambush"], ["sfx", "clicks", -8, 0.5, "M"]]},
 		"e": {"t": "item", "id": "battery"}, "q": {"t": "item", "id": "bottle", "n": 2},
 		"p": {"t": "note", "title": "Photo on the canteen wall", "text": "A polaroid pinned above the coffee urn. A lopsided cake with one candle. Twelve people in hairnets and lab coats crowded round a high chair, all of them pulling faces at a baby who is pulling one back.\n\nMarker on the white strip:\nHAPPY 1st BIRTHDAY DANNY!!  14.08.98\nlove from the canteen crew"},
 		"B": {"t": "door", "code": "0814", "label": "QUARTERS 2 — VOSS — CODE", "ev": [["DANIEL", "Zero-eight-one-four. Fourteenth of August."]]},

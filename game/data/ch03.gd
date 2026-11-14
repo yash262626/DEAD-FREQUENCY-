@@ -95,7 +95,7 @@ const DATA = {
 			["wait", 25.0],
 			["if", "u:c3_z1", [["obj", "Fit the fuse in the service lift panel at the east end of the corridor."]], [["obj", "Find a way down. The service lift is at the east end of the corridor."]]],
 		]},
-		"p": {"t": "plate", "flag": "c3_plate", "ev": [["toast", "The treadle plate is down. The morgue door will hold."], ["DANIEL", "That'll hold it."]]},
+		"p": {"t": "plate", "flag": "c3_plate", "ev": [["toast", "The treadle plate is down. The morgue door will hold."], ["DANIEL", "That'll hold it. And that was loud."], ["listener", "seek", "p"]]},
 		"Q": {"t": "door", "needflag": "c3_plate", "msg": "Pneumatics are dead. It won't hold open. Lind's memo — weight on the treadle plate."},
 		"z": {"t": "item", "id": "fuse", "ev": [["DANIEL", "Lift fuse. Top shelf, like she said."], ["checkpoint", "V"], ["obj", "Fit the fuse in the service lift panel at the east end of the corridor."]]},
 		"n": {"t": "note", "title": "Morgue register", "text": "MORGUE — REGISTER\n\nDrawer 1 — empty\nDrawer 2 — empty\nDrawer 3 — empty\nDrawer 4 — OCCUPIED (17 Oct, 02:47)\n             Name: ________\n             Nobody can remember who.\n             Nobody can remember bringing him down.\n             Drawer will not open.\nDrawer 5 — empty"},
