@@ -598,3 +598,26 @@ func t_gallery():
 		yield(frames(10), "completed"); _save(out + "/99_credits.png")
 		main.credits.scroll.rect_position.y = 520 - main.credits.scroll.rect_size.y + 40
 		yield(frames(10), "completed"); _save(out + "/99_credits_end.png")
+
+# ------------------------------------------------------------ export all story data as JSON (docs are generated from it)
+func t_export():
+	var all = {"chapters": [], "titles": Story.TITLES, "credits": Story.CREDITS, "items": Story.ITEMS, "ach": Story.ACH}
+	for n in chapters():
+		var d = Story.chapter(n); d.erase("map_cells")
+		all.chapters.append(d)
+	for id in ["A", "B", "C", "D"]:
+		var d = Story.ending(id); d["ending"] = id
+		all.chapters.append(d)
+	var f = File.new(); f.open(OS.get_environment("DF_OUT"), File.WRITE); f.store_string(to_json(all)); f.close()
+	print("  exported ", all.chapters.size(), " scripts")
+
+# ------------------------------------------------------------ real-time length of the opening cinematic (no skipping)
+func t_introtime():
+	var t0 = OS.get_ticks_msec()
+	main.play_intro()
+	for i in 20000:
+		yield(get_tree(), "idle_frame")
+		if main.menu != null and is_instance_valid(main.menu): break
+	var secs = (OS.get_ticks_msec() - t0) / 1000.0
+	print("  opening cinematic + title reveal: %.1f s" % secs)
+	ok(secs > 100 and secs < 200, "opening sequence runs 2–3 minutes (%.0f s)" % secs)

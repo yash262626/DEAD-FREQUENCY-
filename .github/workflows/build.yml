@@ -1,0 +1,51 @@
+# DEAD FREQUENCY — automated tests and PC builds.
+# Runs only when started by hand (Actions tab → "build" → Run workflow) or when a version tag (v*) is pushed,
+# so ordinary pushes do not spend Actions minutes.
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot 3.5 (Ubuntu package), virtual display and Mesa
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y godot3 xvfb libgl1-mesa-dri
+      - name: Run the test suite
+        run: |
+          for t in validate flags layout save systems ai flow endings play; do
+            DF_TIMEOUT=900 tools/test.sh "$t" > "log_$t.txt" 2>&1; rc=$?
+            grep -E "FAIL|RESULT|ENGINE ERRORS" "log_$t.txt"
+            [ $rc -eq 0 ] || { echo "test suite '$t' failed"; exit 1; }
+          done
+
+  export:
+    needs: test
+    runs-on: ubuntu-24.04
+    container: barichello/godot-ci:3.5.2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Place export templates
+        run: |
+          mkdir -p ~/.local/share/godot/templates
+          cp -r /root/.local/share/godot/templates/3.5.2.stable ~/.local/share/godot/templates/ 2>/dev/null || true
+      - name: Export Windows and Linux builds
+        run: |
+          mkdir -p build/windows build/linux
+          cd game
+          godot --no-window --export "Windows Desktop" ../build/windows/DeadFrequency.exe
+          godot --no-window --export "Linux/X11" ../build/linux/DeadFrequency.x86_64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DeadFrequency-windows
+          path: build/windows
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DeadFrequency-linux
+          path: build/linux

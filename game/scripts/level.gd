@@ -21,7 +21,7 @@ const PALETTES = {
 }
 const CMDS = ["wait", "obj", "flag", "sfx", "music", "lights", "card", "title", "fade", "cine", "cam", "camoff", "give", "take",
 	"checkpoint", "next", "ending", "choice", "if", "ifnot", "unlock", "listener", "hurt", "shake", "toast", "journal", "look",
-	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d", "group"]
+	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d", "group", "move"]
 const BUILTIN = {
 	"S": {"t": "start"}, "L": {"t": "light"}, "F": {"t": "light", "flicker": true}, "R": {"t": "light", "red": true},
 	"P": {"t": "patrol"}, "H": {"t": "hide"}, "V": {"t": "save"}, "D": {"t": "door"},
@@ -54,6 +54,7 @@ var _cam_tw: Tween
 var running := 0
 var dead := false
 var noise_mult := 1.0
+var _walkers := []
 var _loops3d := {}
 var _outside := false
 
@@ -461,6 +462,16 @@ func _door_close(e):
 # ---------------------------------------------------------------- per-frame
 func _physics_process(dt):
 	if player == null or dead: return
+	for w in _walkers:
+		w.t = min(w.dur, w.t + dt)
+		var k = w.t / w.dur
+		w.n.translation = w.a.linear_interpolate(w.b, k)
+		var sw = sin(w.t * 11.0) * 0.6 * (1.0 - k * k)
+		for part in [["leg_l", sw], ["leg_r", -sw], ["arm_l", -sw * 0.8], ["arm_r", sw * 0.8]]:
+			var nd = w.n.get_node_or_null(part[0])
+			if nd: nd.rotation.x = part[1]
+	for i in range(_walkers.size() - 1, -1, -1):
+		if _walkers[i].t >= _walkers[i].dur: _walkers.remove(i)
 	var pp = player.global_transform.origin
 	for l in lights:
 		l.t += dt
@@ -648,6 +659,13 @@ func checkpoint(marker: String):
 	G.checkpoint = marker
 	G.health = player.health; G.save_game()
 
+func ent_key(key: String):
+	var ch = key; var i = 0
+	if "#" in key:
+		ch = key.split("#")[0]; i = int(key.split("#")[1]) - 1
+	var l = by_char.get(ch, [])
+	return l[i] if i < l.size() else null
+
 func ent_at(ch: String):
 	return by_char[ch][0] if by_char.has(ch) and by_char[ch].size() else null
 
@@ -757,6 +775,14 @@ func _exec(e: Array):
 			if ext: ext.set_mode(e[1])
 		"noise_mult": noise_mult = float(e[1])
 		"group": return run(data.groups[e[1]])
+		"move":
+			# ["move", "k#2", marker, seconds]: an NPC walks/runs to a marker (legs and arms swing)
+			var x = ent_key(e[1])
+			if x and x.node:
+				var to = pos_of(e[2]); var fr = x.node.translation
+				var d = to - fr; d.y = 0
+				if d.length() > 0.01: x.node.rotation.y = atan2(-d.x, -d.z) + PI
+				_walkers.append({"n": x.node, "a": fr, "b": to, "t": 0.0, "dur": float(e[3])})
 		"loop3d":
 			if _loops3d.has(e[1]) and is_instance_valid(_loops3d[e[1]]): _loops3d[e[1]].queue_free()
 			_loops3d[e[1]] = Snd.play3d(e[2], self, pos_of(e[3]) + Vector3(0, 1.4, 0), e[4] if e.size() > 4 else 0.0, 1.0, 26.0)
@@ -860,6 +886,8 @@ static func _val_ev(evs: Array, chars: Dictionary, errs: Array, where: String, d
 					if e.size() > i and e[i] != "" and not str(e[i]).begins_with("@") and not chars.has(e[i]): errs.append("%s: cam marker '%s' missing" % [where, e[i]])
 			"tp", "look", "checkpoint", "unlock", "lock", "hide_ent", "show_ent", "close":
 				if not chars.has(e[1]): errs.append("%s: %s marker '%s' missing" % [where, c, e[1]])
+			"move":
+				if not chars.has(str(e[1]).split("#")[0]) or not chars.has(e[2]): errs.append("%s: move refs '%s' -> '%s'" % [where, e[1], e[2]])
 			"loop3d":
 				if not chars.has(e[3]): errs.append("%s: loop3d marker '%s' missing" % [where, e[3]])
 				if not e[2] in Snd.NAMES: errs.append("%s: unknown sound '%s'" % [where, e[2]])
