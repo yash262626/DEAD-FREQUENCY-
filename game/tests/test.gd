@@ -131,7 +131,7 @@ func t_systems():
 	yield(frames(10), "completed")
 	var lv = main.level; var p = lv.player
 	for e in lv.ents:
-		if e.kind == "trig": e.done = true
+		if e.kind in ["trig", "radio"]: e.done = true
 	p.global_transform.origin = lv.pos_of("1") + Vector3(0, 0.1, 0); p.rotation_degrees.y = -90
 	yield(frames(20), "completed")
 	var x0 = p.global_transform.origin.x
@@ -738,6 +738,9 @@ func t_sliceshots():
 	var lv = main.level
 	G.has_radio = true
 	main.ui.objective_text = ""; main.ui.obj_lbl.modulate.a = 0
+	G.set_flag("sl_fore"); G.set_flag("sl_echo")          # no transmissions or triggers firing into the shots
+	for e in lv.ents:
+		if e.kind in ["trig", "radio"]: e.done = true
 	for s in SLICE_SHOTS:
 		if only != "" and not s[0].begins_with(only): continue
 		lv.player.global_transform.origin = s[1] + Vector3(0, 0.05, 0)

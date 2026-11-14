@@ -2,7 +2,14 @@
 
 Status key: **Tested** = implemented and covered by a passing automated test · **Implemented** = in the game and exercised by playthrough/visual checks, no dedicated assertion · **Partial** · **Planned** · **Blocked** (cannot be done in this environment) · **Awaiting external** (needs people, money or hardware outside this project).
 
-Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 — 780 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
+Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 · slice 13/0 — 793 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
+
+## Visual quality rebuild (current brief)
+| Item | Status |
+|---|---|
+| Technical visual audit + engine decision | **Done** — docs/21; recommendation Godot 4 (UE5 alternative); migration **awaiting owner approval** |
+| Vertical slice: corridor, communications room, receiver, torch, Listener encounter, lighting, materials, atmosphere | **Implemented and tested** (`slice` suite 13/0); screenshots in docs/screenshots/slice; **not AAA photoreal**; GPU performance unmeasured |
+| Upgrade of the remaining chapters, main menu, UI | **Awaiting approval** of the slice's standard (per brief) |
 
 ## Final deliverables (as requested)
 | # | Deliverable | Status |

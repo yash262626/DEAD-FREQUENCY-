@@ -1,6 +1,8 @@
 # DEAD FREQUENCY — Engine Migration Assessment (Godot 4 / Unreal Engine 5)
 
-**Recommendation: do not migrate now. Finish content, art, audio and Windows QA on Godot 3.5; reassess a Godot 4 port after the first Windows playtest.** No migration has been started. Any migration needs the project owner's explicit approval.
+> **Superseded (2026-11-14) by [21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md](21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md).** The owner has since set a modern, near-photorealistic visual target. The vertical slice built for it shows that, once authored assets exist, Godot 3.5's renderer becomes the limit (no shadowed volumetric fog, no real-time GI for the torch, no TAA, no decals, no LOD). **New recommendation: migrate to Godot 4.x (Forward+)**, or UE5 if the owner can fund GPU hardware, artists and a full rebuild. Still no migration has been started; it needs the owner's explicit approval. The analysis below is kept for the record.
+
+*Original recommendation:* do not migrate now. Finish content, art, audio and Windows QA on Godot 3.5; reassess a Godot 4 port after the first Windows playtest.
 
 ## Where we are
 - Engine: Godot 3.5.2 (GLES3), GDScript. ~4,500 lines of engine code (`game/scripts`), ~3,000 lines of data-driven chapter content (`game/data`), 11 automated test suites.

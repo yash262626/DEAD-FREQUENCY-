@@ -29,6 +29,12 @@ Every defect found during development, with severity, how it showed up, the fix,
 | B-023 | S2 | Alt-tabbing during play left the game running — the Listener could catch an absent player | Alt-tab near the Listener | Focus loss opens the pause menu (not during cinematics) | `flow` (2 checks) |
 | B-024 | S2 | Release builds did not carry the licence texts of Godot's bundled third-party libraries (FreeType, etc.) | Inspect the build folder | `licenses/` generated from the engine's copyright data and shipped by `package_release.sh`; FreeType credit line in notices and README | `licenses` utility |
 | B-025 | S3 | The smoke test would have written its run into the player's play-time log | Run `--smoketest` | Smoke test uses its own log file | smoke test |
+| B-026 | S2 | Godot's shader translator turned `a - (-b)` into `a--b` (decrement) and the light-shaft shader failed to compile | Build the slice | Rewritten without a double minus | `slice` (no engine errors) |
+| B-027 | S2 | Blender's Cycles bakes came out black: this Blender build has no OpenImageDenoise and the bake silently failed while denoising was on | Bake the creature maps | Denoising disabled for bakes | creature maps checked |
+| B-028 | S3 | `import_assets.sh` compared counts, so new or changed files could stay un-imported (stale models) | Add a model, re-run | Checks each source's cache entry and content hash | manual |
+| B-029 | S2 | Hiding under a desk showed the locker-slat overlay | Hide in the slice | Low hiding places have no slats | `sliceshots` s08 |
+| B-030 | S3 | Preview cameras inside the art scene could take over the player's view | Load the slice | Preview cameras are stripped when a level loads its art | `slice` |
+| B-031 | S3 | GDScript 3 one-line `if x: a; continue` in new dev scripts skipped every iteration | Dev tools | Rewritten on separate lines | dev tools |
 
 ## Open issues (not defects in code, but release blockers)
 | ID | Sev | Issue | Status |

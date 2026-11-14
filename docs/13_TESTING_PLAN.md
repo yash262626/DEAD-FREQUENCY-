@@ -17,6 +17,7 @@ Run with `tools/test.sh <suite>`. A suite fails if any check fails **or** the en
 | `endings` | Each flag combination produces the right ending (A, B, C×2, D), reaches the credits, credits contain every contributor and the final card, return to menu, completion saved | 26 / 0 |
 | `ngplus` | New Game+ unlocks after an ending and appears in the menu; habits carried at half strength; NG+-only content (dispatch slip, 88.0 transmissions) exists only in NG+ and 88.0 makes no radio noise; Listener adaptations (faster but still slower than a sprint, chase cap, lure-wise, learning cap, remembered lockers checked more but never certainly); NG+ reaches an ending and awards Second Signal | 15 / 0 |
 | `play` | **Full campaign**: chapters 1→13 on the critical path (teleporting between steps but verifying A* reachability of every step), every required transmission, every puzzle, the choices, all optional wings and Pell's calls, ending D and the credits | 225 / 0 (all 7 tapes, ending D) |
+| `slice` | Vertical slice: data valid, authored art scene and its environment loaded, baked lightmap present, modelled hands/torch/receiver with live display, no campaign save written, 101.3 forecast received and shown on the receiver, main receiver starts the encounter, the new Listener arrives, beacon on, hiding under the desk lowers the view, creature animation playing, hidden player not found, slice ends and returns to the menu | 13 / 0 |
 | `vo` | A recording named by `vo_id` is played instead of the placeholder voice and holds the subtitle for its length; unrecorded lines fall back | 4 / 0 with a fixture recording (fixture not committed) |
 
 ## 2. Utilities
@@ -27,6 +28,8 @@ Run with `tools/test.sh <suite>`. A suite fails if any check fails **or** the en
 | `perf` | Level build time and fps per quality preset (12_TECHNICAL_DOCUMENTATION.md, Performance) |
 | `export` | Story data as JSON for `tools/gen_docs.py` and `tools/time_budget.py` |
 | `licenses` | `licenses/GODOT_ENGINE_LICENSE.txt` from the engine's own copyright data |
+| `sliceshots` | In-game evidence images of the vertical slice (`docs/screenshots/slice/`) |
+| `sliceperf` | Frame cost of the slice per graphics preset (fps, vertices, draw calls, video memory) |
 
 ## 3. Built-in smoke test (`--smoketest`)
 Shipped inside every build. `DeadFrequency.exe --smoketest` checks: audio bank built (39 sounds) · main menu shown · new game loads chapter 1 · flashlight on · radio on and draining · rendering fps measured · save/load round-trip · chapters 5 and 12 load and run · ending A plays through to the credits · five screenshots written. It writes `smoketest.log` and `smoke_*.png` to the user data folder and exits with code 0 only if all 15 checks pass. Testers attach the log to bug reports.

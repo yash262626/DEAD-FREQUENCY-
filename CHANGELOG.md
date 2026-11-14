@@ -1,6 +1,15 @@
 # Changelog
 
-## 0.9.x — production upgrade (in progress)
+## 0.10 — vertical slice (visual target, awaiting approval)
+- Sublevel 3 service corridor and communications room rebuilt as an authored scene: bevelled architecture, pipes, trays, doors, raised floor, suspended ceiling, equipment racks, operator console with CRTs, main receiver, signage, chart, clock (02:43), papers, cables.
+- 27 CC0 Poly Haven models and 14 2K Poly Haven surfaces (fetched by `tools/fetch_polyhaven.py`, listed in THIRD_PARTY_NOTICES).
+- Baked global illumination (Godot CPU lightmapper via `addons/df_tools`), reflection probes, flickering and rotating lights, light shafts with depth fade, puddles, steam, drips, colour grade.
+- New first-person models: gloved hands, knurled torch (hot spot + spill + beam), HX-7 receiver with a live frequency/band/signal display (the HUD receiver panel is hidden in the slice).
+- New Listener: original sculpted creature with a membrane "ear", baked skin maps, 42-bone rig, idle/walk/run/listen/attack animations driven by the existing AI.
+- Playable: menu entry and `--slice`; scripted encounter (hide under the desk); new `slice` test suite (13 checks) and `sliceshots` / `sliceperf` utilities.
+- Docs: 21 (visual audit, engine decision, migration plan, evidence).
+
+## 0.9.x — production upgrade
 
 ### Windows release work
 - Built-in self-check: `DeadFrequency.exe --smoketest` (15 checks, log + screenshots, exit code).

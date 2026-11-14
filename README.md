@@ -8,6 +8,11 @@ First-person psychological horror for Windows PC. October 17, 1998, 02:43: the H
 
 ![Title](docs/screenshots/00_title.png)
 
+## Vertical slice — the new visual target
+![Vertical slice: the communications room](docs/screenshots/slice/s06_room.jpg)
+
+One area — the Sublevel 3 service corridor and communications room — has been rebuilt to a new standard as a playable vertical slice: authored geometry, CC0 photoscanned props and 2K PBR surfaces, baked global illumination, reflection probes, light shafts, wet floors, a colour grade, modelled hands, torch and HX-7 receiver, and a new rigged, animated Listener. Play it from the main menu (*VERTICAL SLICE — VISUAL TARGET*) or with `--slice`. It is a big step up from the campaign but **not AAA photorealism**; the audit, the engine decision (Godot 4 recommended) and the evidence are in [21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md](docs/21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md). The other chapters are unchanged until the owner approves the standard and the engine path.
+
 ## What's in this repository
 - A complete, playable campaign in **Godot 3.5**: 2-minute opening cinematic, 13 chapters with optional wings, 4 endings, New Game+ ("Second Signal"), end credits.
 - The radio system (four bands plus hidden carriers, directional antenna, battery, exposure), a sound-hunting enemy that learns (and remembers between runs), stealth, puzzles, saves, menus, settings, subtitles, controller support.
@@ -51,6 +56,7 @@ tools/test.sh flow       # intro → menu → new game → focus-loss pause → 
 tools/test.sh endings    # all four endings + credits
 tools/test.sh ngplus     # New Game+ memory, 88.0 content, Listener adaptations
 tools/test.sh play       # the full campaign, chapter 1 → ending D
+tools/test.sh slice      # the vertical slice: art scene, baked light, HQ models, forecast, encounter, hiding, return to menu
 ```
 Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`). Latest results: [13_TESTING_PLAN.md](docs/13_TESTING_PLAN.md).
 
@@ -77,6 +83,7 @@ Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`). Latest result
 | 18 | [Audio Production Plan & VO](docs/18_AUDIO_PRODUCTION_PLAN.md) — recording script in [`docs/vo/`](docs/vo/) |
 | 19 | [Engine Migration Assessment](docs/19_ENGINE_MIGRATION_ASSESSMENT.md) |
 | 20 | [Steam Release Package](docs/20_STEAM_RELEASE_PACKAGE.md) |
+| 21 | [Visual Audit, Engine Decision & Vertical Slice](docs/21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md) |
 |  | [Third-Party Notices](docs/THIRD_PARTY_NOTICES.md) · [Privacy](docs/PRIVACY.md) |
 |  | [Changelog](CHANGELOG.md) |
 
