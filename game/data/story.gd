@@ -9,7 +9,7 @@ const ITEMS = {
 	"fuse": "Ceramic fuse", "comms_key": "Comms annex keycard", "med_key": "Medical wing keycard", "res_key": "Quarters master key",
 	"valve": "Valve wheel", "crank": "Hand crank", "lab_key": "Research keycard", "tram_fuse": "Traction fuse",
 	"hale_badge": "Hale's security badge", "shutdown_key": "Dr. Voss's shutdown key", "archive_key": "Archive keycard",
-	"crystal": "Tuning crystal", "tape_reel": "Unlabelled tape reel", "fluid": "Hydraulic fluid",
+	"crystal": "Tuning crystal", "tape_reel": "Voiceprint reel — E. Voss", "fluid": "Hydraulic fluid",
 }
 
 const ACH = {

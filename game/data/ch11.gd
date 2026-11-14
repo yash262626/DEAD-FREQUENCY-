@@ -12,9 +12,9 @@ const DATA = {
 		"######D###########Y#######Q#####",
 		"#................g.............#",
 		"#.zzzz.zzzz.zzzz.zzzz.zzzz..H..#",
-		"#....P....j....Z........P......#",
+		"#....P....j....Z........P.....U#",
 		"#.zzzz.zzzz.zzzz.zzzz.zzzz..L..M",
-		"#............................J.#",
+		"#.....r......................J.#",
 		"#.zzzz.zzzz.zzzz.zzzz.zBzz.k...#",
 		"#H.......L..........L..........#",
 		"################################",
@@ -22,6 +22,15 @@ const DATA = {
 	"leg": {
 		"z": {"t": "prop", "p": "shelf", "block": true}, "Z": {"t": "mark"},
 		"G": {"t": "ghost", "text": "BOX 19\nSTACK E — ROW 3", "r": 8.0},
+		"r": {"t": "item", "id": "tape_reel", "ev": [["DANIEL", "A reel. 'VOSS, E. — VOICEPRINT — DO NOT LOAN.' Her voice, on a spool, in a box."]]},
+		"U": {"t": "use", "p": "terminal", "prompt": "Deep lift control — play the voiceprint", "if": "u:c11_k1", "need": "tape_reel", "consume": false, "fail": "Deep lift control. 'DIRECTOR'S KEYCARD AND VOICEPRINT REQUIRED.' I need her card — and her voice.", "ev": [
+			["sfx", "click", 0], ["wait", 0.6],
+			["EVELYN (REEL)", "Voss, Evelyn. Director. Authorise deep-lift descent."],
+			["PA", "Voiceprint accepted. Good evening, Doctor Voss."],
+			["DANIEL", "Her voice off a reel, opening a door for a stranger. That's exactly what it does."],
+			["flag", "c11_lift"], ["listener", "seek", "U"],
+			["obj", "The deep lift is open. East end of the stacks."],
+		]},
 		"j": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (4 of 4)", "flag": "pell4", "lines": [
 			["PELL (1998)", "I followed him down to the Archive. He's in the stacks, looking for Box nineteen."],
 			["OKAFOR (1998)", "Jonah. Come back up. Please."],
@@ -45,7 +54,7 @@ const DATA = {
 			["give", "battery"], ["give", "medkit"], ["sfx", "pickup", -6], ["toast", "Taken: Power cell, Medkit"],
 			["DANIEL", "'Run it without him.' Hale tried. Hale was the only one who tried."],
 		]},
-		"n": {"t": "note", "title": "Archive index card", "text": "HELIX-9 ARCHIVE — INDEX\n\nStacks A–E ........ project records 1991–1998\nBox 19 ............ RUN 19 (empty — removed by order)\nVault S ........... security. Hale only.\nVault D ........... Director. Voss only.\n\nThe deep lift to the Aperture level runs from the east end of the stacks.\nArchive keycard required. The duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere."},
+		"n": {"t": "note", "title": "Archive index card", "text": "HELIX-9 ARCHIVE — INDEX\n\nStacks A–E ........ project records 1991–1998\nStack A, row 3 .... voiceprint reels (staff copies)\nBox 19 ............ RUN 19 (empty — removed by order)\nVault S ........... security. Hale only.\nVault D ........... Director. Voss only.\n\nThe deep lift to the Aperture level runs from the east end of the stacks. It answers to the Director's keycard AND the Director's voice. Copies of her voiceprint are filed with the reels in Stack A for exactly this reason.\n(Hale objected. Hale was overruled.)\n\nThe archive keycard: the duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere."},
 		"d": {"t": "note", "title": "Sealed statement — Cpl. I. Duarte", "flag": "c11_duarte", "text": "STATEMENT OF CPL. INES DUARTE, POST ONE\nSEALED BY ORDER OF THE DIRECTORATE — 18 OCT 1998\n\nAt approximately 02:46 Technician M. Solace came up in the service lift carrying the Director's son. She was crying. She put him in my arms and pinned a card to his blanket. The card said: HIS NAME IS DANIEL. DON'T LET THEM BRING HIM BACK HERE.\n\nShe said: 'Drive. Don't stop. Don't turn the radio on.'\n\nShe went back down. I watched the lights in the shaft go out floor by floor, like something was eating them.\n\nI drove. I did not turn the radio on. At the bottom of the mountain it turned itself on, and it was her voice, saying thank you.\n\nI did not stop.\n\nThe boy was placed with the county. I asked that his name be changed. I asked that nobody ever tell him where he came from.\n\nI am told the family is called Arlen."},
 		"e": {"t": "note", "title": "Taped to the Director's vault", "text": "VAULT D — DIRECTOR\n\nCombination per Dr. Voss: 'It opens at the moment it all ends.'\n\n(Below, in Hale's hand:)\nThat's not a combination, Evelyn. That's a threat.\n\n(Below that, in hers:)\nIt's both, Marcus. Most things are."},
 		"g": {"t": "ghost", "text": "VAULT S\nHALE, M.  —  5 1 1 9", "r": 9.0},
@@ -89,8 +98,9 @@ const DATA = {
 			["journal", "The shutdown key", "Evelyn's key. It collapses the Aperture: everything in the line goes silent for ever. It — and everything that's left of them. Mira too.\n\nOr: the third way. Don't open it. Don't just close it. Answer it — with their real voices, all together, and not alone."],
 			["DANIEL", "A key. Brass, warm, like somebody's been holding it for twenty-eight years."],
 		]},
-		"k": {"t": "item", "id": "archive_key", "ev": [["DANIEL", "Archive keycard. 'Somewhere sensible.' Under a box of 1994 payroll."], ["checkpoint", "V"], ["obj", "Take the deep lift at the east end of the stacks."]]},
-		"M": {"t": "door", "lock": "archive_key", "msg": "Deep lift. 'APERTURE LEVEL — AUTHORISED STAFF.' Archive keycard.", "ev": [
+		"k": {"t": "item", "id": "archive_key", "ev": [["DANIEL", "Archive keycard. 'Somewhere sensible.' Under a box of 1994 payroll."], ["checkpoint", "V"],
+			["if", "u:c11_r1", [["obj", "Keycard and voiceprint. The deep-lift control is at the east end of the stacks."]], [["obj", "The deep lift also wants the Director's voice. The index card says Stack A."]]]]},
+		"M": {"t": "door", "needflag": "c11_lift", "msg": "Deep lift. 'APERTURE LEVEL — KEYCARD AND VOICEPRINT.' The control panel is beside the doors.", "ev": [
 			["cine", true], ["PA", "Current time: zero two — forty-three."],
 			["DANIEL", "Last stop. Whatever's at the bottom, it's been waiting since before I was born."],
 			["ifnot", "shutdown_key", [["DANIEL", "Her vault. I never opened her vault. Too late now."]]],
@@ -103,7 +113,7 @@ const DATA = {
 		["DANIEL", "The Archive. Every page this place ever printed, every tape it ever cut."],
 		["DANIEL", "Hale kept a vault down here. So did she. If there's a truth in this mountain, it's on a shelf."],
 		["toast", "It has learned how you hide and where you go. Now it waits for you."],
-		["obj", "Find the archive keycard for the deep lift. Look for the vaults."],
+		["obj", "The deep lift needs the archive keycard and the Director's voiceprint. Read the index card. Look for the vaults."],
 	],
-	"walk": ["n", ["radio", "j"], ["radio", "J"], "d", "e", "Y", "h", "Q", "T", "s", "B", "k", "M"],
+	"walk": ["n", ["radio", "j"], ["radio", "J"], "d", "e", "Y", "h", "Q", "T", "s", "B", "k", "r", "U", "M"],
 }
