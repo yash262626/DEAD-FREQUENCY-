@@ -187,7 +187,7 @@ static func make(type: String, tint := Color(1, 1, 1)) -> Spatial:
 		"shade":
 			figure(n, Color(0.5, 0.8, 0.9, 0.35), 1.0, 0.8)
 		"glass":
-			box(n, Vector3(1.9, 2.4, 0.06), Vector3(0, 1.2, 0), Color(0.6, 0.75, 0.8, 0.45), 0, true)
+			box(n, Vector3(1.9, 2.4, 0.06), Vector3(0, 1.2, 0), Color(0.3, 0.38, 0.42, 0.2), 0, true)
 			box(n, Vector3(2.0, 0.08, 0.12), Vector3(0, 2.44, 0), STEEL); box(n, Vector3(2.0, 0.08, 0.12), Vector3(0, 0.04, 0), STEEL)
 		"debris":
 			var rng2 = RandomNumberGenerator.new(); rng2.randomize()

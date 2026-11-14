@@ -7,7 +7,7 @@ const DATA = {
 		"#......................#",
 		"#..........A...........#",
 		"#..o..............o....#",
-		"#.....x................#",
+		"#.....x....B...........#",
 		"#..R................R..#",
 		"#..o.......L.......o...#",
 		"#........m...e.........#",
@@ -23,6 +23,7 @@ const DATA = {
 		"o": {"t": "ghost", "p": "shade", "r": 14.0},
 		"m": {"t": "ghost", "p": "shade", "r": 14.0}, "e": {"t": "ghost", "p": "shade", "r": 14.0},
 		"R": {"t": "light", "red": true, "e": 1.6, "r": 12.0},
+		"B": {"t": "light", "always": true, "e": 2.4, "r": 16.0, "c": Color(0.6, 0.75, 1.0)},
 		"U": {"t": "use", "p": "console", "prompt": "The Aperture console", "ev": [
 			["cine", true], ["look", "A", 2.8],
 			["LISTENER (EVELYN'S VOICE)", "Open it, Danny. Open it, and we all come home. Me. Mira. Forty-one people. Open the door."],

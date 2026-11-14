@@ -25,7 +25,7 @@ func setup(m, u):
 	var t = ui.title_node(520, 90, 54); t.rect_position = Vector2(50, 90); t.rect_size = Vector2(520, 90); root.add_child(t)
 	var tag = ui._lbl("HELIX-9 has been silent for twenty-eight years.", 15, "m", Color(0.6, 0.62, 0.63)); tag.rect_position = Vector2(64, 184); root.add_child(tag)
 	list = VBoxContainer.new(); list.rect_position = Vector2(56, 250); list.rect_size = Vector2(420, 400); root.add_child(list)
-	var ver = ui._lbl("v0.1 vertical-slice build  ·  Godot 3.5", 12, "m", Color(1, 1, 1, 0.3))
+	var ver = ui._lbl("Build 0.9.0 — pre-release  ·  Godot 3.5", 12, "m", Color(1, 1, 1, 0.3))
 	ver.anchor_top = 1; ver.anchor_bottom = 1; ver.margin_top = -30; ver.margin_left = 20; root.add_child(ver)
 	_main_list()
 

@@ -17,7 +17,7 @@ const PALETTES = {
 	"transport": {"floor": Color(0.15, 0.15, 0.15), "wall": Color(0.24, 0.23, 0.22), "trim": Color(0.6, 0.5, 0.1), "ceil": Color(0.08, 0.08, 0.08), "fog": Color(0.04, 0.04, 0.04), "fog_end": 44, "amb": Color(0.45, 0.42, 0.35), "amb_e": 0.22, "light": Color(1.0, 0.85, 0.5), "h": 4.0},
 	"containment": {"floor": Color(0.12, 0.12, 0.13), "wall": Color(0.18, 0.18, 0.2), "trim": Color(0.5, 0.08, 0.06), "ceil": Color(0.07, 0.07, 0.08), "fog": Color(0.06, 0.02, 0.02), "fog_end": 26, "amb": Color(0.6, 0.25, 0.2), "amb_e": 0.24, "light": Color(1.0, 0.45, 0.35), "h": 3.4},
 	"archive": {"floor": Color(0.22, 0.2, 0.17), "wall": Color(0.33, 0.3, 0.25), "trim": Color(0.2, 0.16, 0.1), "ceil": Color(0.14, 0.13, 0.11), "fog": Color(0.06, 0.055, 0.04), "fog_end": 30, "amb": Color(0.55, 0.5, 0.35), "amb_e": 0.26, "light": Color(1.0, 0.88, 0.6), "h": 4.2},
-	"chamber": {"floor": Color(0.1, 0.11, 0.13), "wall": Color(0.16, 0.18, 0.22), "trim": Color(0.5, 0.15, 0.1), "ceil": Color(0.05, 0.05, 0.06), "fog": Color(0.03, 0.04, 0.07), "fog_end": 46, "amb": Color(0.3, 0.4, 0.7), "amb_e": 0.28, "light": Color(0.7, 0.8, 1.0), "h": 7.0},
+	"chamber": {"floor": Color(0.1, 0.11, 0.13), "wall": Color(0.16, 0.18, 0.22), "trim": Color(0.5, 0.15, 0.1), "ceil": Color(0.05, 0.05, 0.06), "fog": Color(0.03, 0.04, 0.07), "fog_end": 60, "amb": Color(0.3, 0.4, 0.7), "amb_e": 0.38, "light": Color(0.7, 0.8, 1.0), "h": 7.0},
 }
 const CMDS = ["wait", "obj", "flag", "sfx", "music", "lights", "card", "title", "fade", "cine", "cam", "camoff", "give", "take",
 	"checkpoint", "next", "ending", "choice", "if", "ifnot", "unlock", "listener", "hurt", "shake", "toast", "journal", "look",

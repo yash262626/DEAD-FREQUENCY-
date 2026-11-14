@@ -143,6 +143,10 @@ func _process(dt):
 	else:
 		skip_lbl.text = ""; _skip_hold = 0.0
 	bars.update()
+	# keep subtitles clear of the handheld receiver face
+	var narrow = hud_on and radio_state.on and not in_cine
+	sub.anchor_left = 0.06 if narrow else 0.14
+	sub.anchor_right = 0.68 if narrow else 0.86
 
 func set_hud(on: bool):
 	hud_on = on
@@ -235,24 +239,29 @@ func chapter_card(num: int, title: String, subt := "", tint := Color(0.75, 0.2, 
 	var c = Control.new(); c.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.modulate.a = 0
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var bg = ColorRect.new(); bg.color = Color(0, 0, 0, 1); bg.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.add_child(bg)
-	var line = ColorRect.new(); line.color = tint; line.rect_position = Vector2(W / 2 - 1, 268); line.rect_size = Vector2(2, 2); c.add_child(line)
-	var a = _lbl("CHAPTER %02d" % num, 20, "m", Color(0.6, 0.62, 0.63)); a.align = Label.ALIGN_CENTER
-	a.rect_position = Vector2(0, 230); a.rect_size = Vector2(W, 30); c.add_child(a)
-	var b = _lbl(_spaced(title), 54, "b", Color(0.92, 0.93, 0.94)); b.align = Label.ALIGN_CENTER
-	b.rect_position = Vector2(0, 290); b.rect_size = Vector2(W, 70); c.add_child(b)
-	var s = _lbl(subt, 18, "m", Color(0.55, 0.57, 0.58)); s.align = Label.ALIGN_CENTER
-	s.rect_position = Vector2(0, 378); s.rect_size = Vector2(W, 30); c.add_child(s)
-	for n in [a, b, s, line]:
-		n.anchor_left = 0.5; n.anchor_right = 0.5; n.anchor_top = 0.5; n.anchor_bottom = 0.5
-		n.margin_left = n.rect_position.x - W / 2; n.margin_right = n.margin_left + n.rect_size.x
-		n.margin_top = n.rect_position.y - H / 2; n.margin_bottom = n.margin_top + n.rect_size.y
+	var fog = ColorRect.new(); fog.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	var fm = ShaderMaterial.new(); fm.shader = Shader.new(); fm.shader.code = FOG_SHADER; fog.material = fm; c.add_child(fog)
+	var v = VBoxContainer.new(); v.anchor_right = 1; v.anchor_top = 0.5; v.anchor_bottom = 0.5
+	v.margin_top = -100; v.margin_bottom = 100; v.alignment = BoxContainer.ALIGN_CENTER
+	v.add_constant_override("separation", 16); v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	c.add_child(v)
+	var a = _lbl("CHAPTER %02d" % num, 20, "m", Color(0.6, 0.62, 0.63)); a.align = Label.ALIGN_CENTER; v.add_child(a)
+	var lc = CenterContainer.new(); lc.mouse_filter = Control.MOUSE_FILTER_IGNORE; v.add_child(lc)
+	var line = ColorRect.new(); line.color = tint; line.rect_min_size = Vector2(2, 2); lc.add_child(line)
+	var t = _spaced(title); var sz = 54
+	for z in [54, 48, 42, 38, 34, 30]:
+		sz = z
+		if font(z, "b").get_string_size(t).x < W - 120: break
+	var b = _lbl(t, sz, "b", Color(0.92, 0.93, 0.94)); b.align = Label.ALIGN_CENTER; v.add_child(b)
+	var s2 = _lbl(subt, 18, "m", Color(0.55, 0.57, 0.58)); s2.align = Label.ALIGN_CENTER; v.add_child(s2)
 	root.add_child(c)
 	Snd.play("impact", -6, 0.8 + 0.03 * (num % 5)); Snd.play("static", -18, 0.6 + 0.05 * (num % 4))
 	var tw = Tween.new(); c.add_child(tw)
 	if not G.skip:
-		tw.interpolate_property(line, "margin_left", -1, -220, 1.6, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-		tw.interpolate_property(line, "margin_right", 1, 220, 1.6, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+		tw.interpolate_property(line, "rect_min_size", Vector2(2, 2), Vector2(440, 2), 1.6, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 		tw.start()
+	else:
+		line.rect_min_size = Vector2(440, 2)
 	yield(_fade_node(c, 1.0, 1.2), "completed")
 	yield(wait(3.2), "completed")
 	yield(_fade_node(c, 0.0, 1.4), "completed")

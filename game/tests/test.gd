@@ -110,7 +110,7 @@ func t_systems():
 	var lv = main.level; var p = lv.player
 	for e in lv.ents:
 		if e.kind == "trig": e.done = true
-	p.global_transform.origin = lv.pos_of("x") + Vector3(0, 0.1, 0); p.rotation_degrees.y = -90
+	p.global_transform.origin = lv.pos_of("1") + Vector3(0, 0.1, 0); p.rotation_degrees.y = -90
 	yield(frames(20), "completed")
 	var x0 = p.global_transform.origin.x
 	Input.action_press("fwd")
@@ -150,7 +150,7 @@ func t_systems():
 	lv.radio.f = 94.6; yield(frames(5), "completed"); ok(not lv.reveal_on and lv.radio.band() == 94.6, "94.6 band recognised")
 	# transmission lock: stand by the source, face it, tune 89.1
 	var src = lv.ent_at("x")
-	p.global_transform.origin = src.pos + Vector3(3, 0.1, 0); p.rotation_degrees.y = 90; lv.radio.f = 89.1; G.skip = true
+	p.global_transform.origin = src.pos + Vector3(-2, 0.1, 0); p.rotation_degrees.y = -90; lv.radio.f = 89.1; G.skip = true
 	for i in 200:
 		yield(get_tree(), "physics_frame"); G.skip = true
 		if src.done: break
@@ -537,3 +537,64 @@ func t_flow():
 	ok(main.ui.modal != null and main.level.dead, "death shows the game-over screen")
 	main.ui._menu("reload"); yield(frames(5), "completed")
 	ok(main.level != null and not main.level.dead and main.level.data.n == 5, "reload checkpoint restores the chapter")
+
+# ------------------------------------------------------------ gallery: renders key shots for visual QA / store screenshots
+const SHOTS = [
+	# [file, chapter, marker, yaw, pitch, power, light, listener_marker, radio_freq]
+	["01_entrance", 1, "1", -90, 0, true, true, "2", 0.0],
+	["02_silent_wing", 2, "1", 90, 5, true, false, "z", 0.0],
+	["03_medical", 3, "w", -90, 0, true, false, "", 0.0],
+	["04_quarters", 4, "f", 0, -5, true, false, "", 0.0],
+	["05_power", 5, "w", 90, 12, true, false, "g", 0.0],
+	["06_flood", 6, "m", 180, 0, true, true, "P", 94.6],
+	["07_signal_room", 7, "x", 0, -8, true, false, "", 0.0],
+	["08_labs", 8, "1", 90, 0, true, false, "", 101.3],
+	["09_transport", 9, "R", -90, 0, true, false, "", 0.0],
+	["10_containment", 10, "U", -90, 3, true, true, "x", 107.9],
+	["11_archive", 11, "Z", -90, 0, true, true, "P", 0.0],
+	["12_ring", 12, "f", 0, 8, true, false, "x", 0.0],
+	["13_the_door", 13, "U", 0, 14, true, false, "x", 0.0],
+]
+
+func t_gallery():
+	G.test_god = true
+	var out = OS.get_environment("DF_OUT")
+	var only = OS.get_environment("DF_ONLY")
+	for s in SHOTS:
+		if only != "" and not s[0].begins_with(only): continue
+		G.new_run(s[1]); G.set_flag("started%d" % s[1]); G.has_radio = true
+		if s[5]: G.set_flag("power%d" % s[1])
+		main.start_chapter(s[1])
+		yield(frames(4), "completed")
+		var lv = main.level
+		main.ui.objective_text = ""; main.ui.obj_lbl.modulate.a = 0
+		lv.player.global_transform.origin = lv.pos_of(s[2]) + Vector3(0, 0.1, 0)
+		lv.player.rotation_degrees.y = s[3]; lv.player.pitch = deg2rad(s[4])
+		lv.player.light_on = s[6]
+		if s[7] != "":
+			lv.spawn_listener(s[7], "watch"); lv.listener.command("face")
+		if s[8] > 0:
+			lv.radio.on = true; lv.radio.f = s[8]
+		main.ui.fade_rect.color.a = 0
+		yield(frames(45), "completed")
+		_save("%s/%s.png" % [out, s[0]])
+	if only == "" or only == "menu":
+		main.show_menu(); yield(frames(5), "completed"); main.ui.fade_rect.color.a = 0
+		yield(frames(60), "completed"); _save(out + "/00_menu.png")
+	if only == "" or only == "title":
+		main._clear(); main.ui.fade_rect.color.a = 0
+		main.ui.title_reveal("HELIX-9 HAS BEEN SILENT FOR TWENTY-EIGHT YEARS")
+		yield(frames(150), "completed"); _save(out + "/00_title.png")
+		yield(frames(400), "completed")
+	if only == "" or only == "card":
+		main._clear(); main.ui.fade_rect.color.a = 0
+		main.ui.chapter_card(2, "THE SILENT WING", "SUBLEVEL 1 — ADMINISTRATION")
+		yield(frames(120), "completed"); _save(out + "/00_card.png")
+		yield(frames(400), "completed")
+	if only == "" or only == "credits":
+		G.test_mode = false
+		main.play_credits(); yield(frames(5), "completed")
+		main.credits.scroll.rect_position.y = 150
+		yield(frames(10), "completed"); _save(out + "/99_credits.png")
+		main.credits.scroll.rect_position.y = 520 - main.credits.scroll.rect_size.y + 40
+		yield(frames(10), "completed"); _save(out + "/99_credits_end.png")
