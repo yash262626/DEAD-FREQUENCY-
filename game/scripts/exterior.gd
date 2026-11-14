@@ -17,8 +17,13 @@ func build(m: String):
 	var rng = RandomNumberGenerator.new(); rng.seed = 1998
 	var rock = Props.mat(Color(0.09, 0.1, 0.11), 0, 0.95)
 	var snow = Props.mat(Color(0.55, 0.57, 0.6), 0, 0.9)
+	var groundm = Props.mat(Color(0.07, 0.08, 0.08), 0, 1.0)
+	if Mats.enabled():
+		rock = Mats.surface("Rock064", Color(0.55, 0.56, 0.6), 0.06)
+		snow = Mats.surface("Snow015", Color(0.85, 0.88, 0.95), 0.1)
+		groundm = Mats.surface("Gravel043", Color(0.5, 0.52, 0.55), 0.25)
 	var ground = MeshInstance.new(); var pm = PlaneMesh.new(); pm.size = Vector2(600, 600)
-	ground.mesh = pm; ground.material_override = Props.mat(Color(0.07, 0.08, 0.08), 0, 1.0); add_child(ground)
+	ground.mesh = pm; ground.material_override = groundm; add_child(ground)
 	for i in 26:
 		var mi = MeshInstance.new(); var cm = CylinderMesh.new()
 		var r = rng.randf_range(30, 80); var h = rng.randf_range(50, 150)
@@ -35,14 +40,16 @@ func build(m: String):
 	var big = MeshInstance.new(); var bm = CylinderMesh.new(); bm.top_radius = 6; bm.bottom_radius = 110; bm.height = 190; bm.radial_segments = 9
 	big.mesh = bm; big.material_override = rock; big.translation = Vector3(0, 93, -118); add_child(big)
 	var conc = Color(0.3, 0.31, 0.3)
-	Props.box(self, Vector3(22, 9, 6), Vector3(0, 4.5, -10), conc)
+	var portal = Props.box(self, Vector3(22, 9, 6), Vector3(0, 4.5, -10), conc)
+	if Mats.enabled(): portal.material_override = Mats.surface("Concrete046", Color(0.75, 0.76, 0.74), 0.25)
 	Props.box(self, Vector3(26, 1.2, 8), Vector3(0, 9.4, -10), conc * 0.8)
 	Props.box(self, Vector3(6, 5, 0.4), Vector3(0, 2.5, -6.9), Color(0.16, 0.17, 0.18), 0, false, 0.6)
 	Props.box(self, Vector3(6.4, 0.5, 0.5), Vector3(0, 5.3, -6.9), Color(0.6, 0.5, 0.1))
 	for sx in [-8, 8]: Props.box(self, Vector3(1.2, 9, 1.2), Vector3(sx, 4.5, -6.6), conc * 0.7)
 	var sign_ = Label3D.new(); sign_.text = "HELIX-9"; sign_.pixel_size = 0.03; sign_.modulate = Color(0.75, 0.75, 0.7)
 	sign_.translation = Vector3(0, 7.2, -6.9); add_child(sign_)
-	Props.box(self, Vector3(8, 0.1, 70), Vector3(0, 0.05, 28), Color(0.12, 0.12, 0.12))
+	var road = Props.box(self, Vector3(8, 0.1, 70), Vector3(0, 0.05, 28), Color(0.12, 0.12, 0.12))
+	if Mats.enabled(): road.material_override = Mats.surface("Concrete049", Color(0.45, 0.45, 0.45), 0.25)
 	for i in 9: Props.box(self, Vector3(0.15, 2.2, 0.15), Vector3(-5 + (i % 2) * 10, 1.1, 2 + i * 7), Color(0.2, 0.2, 0.2))
 	# Daniel's truck
 	var truck = Spatial.new(); truck.translation = Vector3(2.5, 0, 16); add_child(truck)

@@ -29,3 +29,6 @@ Source: https://ambientcg.com — released under CC0 1.0 (public domain dedicati
 - Concrete047A — https://ambientcg.com/view?id=Concrete047A
 - Tiles043 — https://ambientcg.com/view?id=Tiles043
 - Tiles084 — https://ambientcg.com/view?id=Tiles084
+- Gravel043 — https://ambientcg.com/view?id=Gravel043
+- Rock064 — https://ambientcg.com/view?id=Rock064
+- Snow015 — https://ambientcg.com/view?id=Snow015

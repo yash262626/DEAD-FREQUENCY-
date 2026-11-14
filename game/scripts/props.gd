@@ -218,18 +218,34 @@ static func make(type: String, tint := Color(1, 1, 1)) -> Spatial:
 	return n
 
 static func figure(n: Spatial, col: Color, s := 1.0, emis := 0.0):
-	# simple articulated humanoid; limbs are named so scripts can animate them
-	var legc = Color(0.15, 0.16, 0.2, col.a)
-	for sx in [-0.11, 0.11]:
-		var leg = Spatial.new(); leg.name = "leg_l" if sx < 0 else "leg_r"; leg.translation = Vector3(sx, 0.9 * s, 0); n.add_child(leg)
-		box(leg, Vector3(0.15, 0.9 * s, 0.16), Vector3(0, -0.45 * s, 0), legc, emis)
-		var arm = Spatial.new(); arm.name = "arm_l" if sx < 0 else "arm_r"; arm.translation = Vector3(sx * 2.4, 1.45 * s, 0); n.add_child(arm)
-		box(arm, Vector3(0.1, 0.68 * s, 0.11), Vector3(0, -0.32 * s, 0), col, emis)
-	box(n, Vector3(0.42, 0.62 * s, 0.24), Vector3(0, 1.2 * s, 0), col, emis)
-	box(n, Vector3(0.46, 0.5 * s, 0.26), Vector3(0, 0.82 * s, 0), col, emis)   # coat skirt
-	var head = MeshInstance.new(); var sm = SphereMesh.new(); sm.radius = 0.12; sm.height = 0.27
-	head.mesh = sm; head.material_override = mat(Color(0.72, 0.6, 0.52, col.a), emis); head.translation = Vector3(0, 1.67 * s, 0); head.name = "head"
+	# 1998 staff (and their translucent echoes): tapered limbs, lab coat or uniform, a head with hair.
+	# Limb joints are named so scripts can animate them (walkers in level.gd).
+	var a = col.a
+	var coat = mat(col, emis)
+	var trousers = mat(Color(0.14, 0.15, 0.19, a), emis)
+	var skin = mat(Color(0.74, 0.6, 0.5, a), emis)
+	var hair = mat(Color(0.12, 0.09, 0.07, a), emis)
+	for sx in [-1, 1]:
+		var leg = Spatial.new(); leg.name = "leg_l" if sx < 0 else "leg_r"; leg.translation = Vector3(sx * 0.1, 0.92 * s, 0); n.add_child(leg)
+		var lm = MeshInstance.new(); var lc = CylinderMesh.new(); lc.top_radius = 0.075; lc.bottom_radius = 0.05; lc.height = 0.88 * s; lc.radial_segments = 8
+		lm.mesh = lc; lm.material_override = trousers; lm.translation = Vector3(0, -0.44 * s, 0); leg.add_child(lm)
+		box(leg, Vector3(0.1, 0.06, 0.24), Vector3(0, -0.89 * s, 0.05), Color(0.06, 0.06, 0.06, a)).material_override = mat(Color(0.06, 0.06, 0.06, a), emis)
+		var arm = Spatial.new(); arm.name = "arm_l" if sx < 0 else "arm_r"; arm.translation = Vector3(sx * 0.24, 1.42 * s, 0); n.add_child(arm)
+		var am = MeshInstance.new(); var ac = CylinderMesh.new(); ac.top_radius = 0.055; ac.bottom_radius = 0.045; ac.height = 0.62 * s; ac.radial_segments = 8
+		am.mesh = ac; am.material_override = coat; am.translation = Vector3(0, -0.31 * s, 0); arm.add_child(am)
+		var hm = MeshInstance.new(); var hs = SphereMesh.new(); hs.radius = 0.045; hs.height = 0.09
+		hm.mesh = hs; hm.material_override = skin; hm.translation = Vector3(0, -0.66 * s, 0); arm.add_child(hm)
+	var torso = MeshInstance.new(); var tc = CylinderMesh.new(); tc.top_radius = 0.2; tc.bottom_radius = 0.17; tc.height = 0.58 * s; tc.radial_segments = 12
+	torso.mesh = tc; torso.material_override = coat; torso.translation = Vector3(0, 1.17 * s, 0); n.add_child(torso)
+	var skirt = MeshInstance.new(); var kc = CylinderMesh.new(); kc.top_radius = 0.18; kc.bottom_radius = 0.24; kc.height = 0.5 * s; kc.radial_segments = 12
+	skirt.mesh = kc; skirt.material_override = coat; skirt.translation = Vector3(0, 0.66 * s, 0); n.add_child(skirt)       # coat skirt
+	var neck = MeshInstance.new(); var nc = CylinderMesh.new(); nc.top_radius = 0.045; nc.bottom_radius = 0.05; nc.height = 0.1; nc.radial_segments = 8
+	neck.mesh = nc; neck.material_override = skin; neck.translation = Vector3(0, 1.5 * s, 0); n.add_child(neck)
+	var head = MeshInstance.new(); var sm = SphereMesh.new(); sm.radius = 0.105; sm.height = 0.25
+	head.mesh = sm; head.material_override = skin; head.translation = Vector3(0, 1.66 * s, 0); head.name = "head"
 	n.add_child(head)
+	var cap = MeshInstance.new(); var cm = SphereMesh.new(); cm.radius = 0.11; cm.height = 0.16; cm.is_hemisphere = true
+	cap.mesh = cm; cap.material_override = hair; cap.translation = Vector3(0, 1.69 * s, -0.01); n.add_child(cap)
 
 const SKIN_SHADER = """
 shader_type spatial;
