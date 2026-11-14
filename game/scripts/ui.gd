@@ -24,6 +24,7 @@ var cross: ColorRect
 var toast_lbl: Label
 var bars: Control
 var radio_panel: Control
+var compact_radio := false      # high-quality levels: the modelled receiver shows the frequency instead of the HUD panel
 var big_lbl: Label
 var modal: Control = null
 var modals := 0
@@ -130,7 +131,7 @@ func _process(dt):
 	var m = post.material
 	m.set_shader_param("dmg", clamp((60.0 - stat.hp) / 60.0, 0, 1) if hud_on else 0.0)
 	m.set_shader_param("stat", radio_state.danger if hud_on else 0.0)
-	m.set_shader_param("hide", 1.0 if (hud_on and stat.hidden) else 0.0)
+	m.set_shader_param("hide", 1.0 if (hud_on and stat.hidden and not stat.get("hide_open", false)) else 0.0)
 	# hold-to-skip for cinematics
 	if in_cine and not G.skip:
 		if Input.is_action_pressed("skip"):
@@ -144,7 +145,7 @@ func _process(dt):
 		skip_lbl.text = ""; _skip_hold = 0.0
 	bars.update()
 	# keep subtitles clear of the handheld receiver face
-	var narrow = hud_on and radio_state.on and not in_cine
+	var narrow = hud_on and radio_state.on and not in_cine and not compact_radio
 	sub.anchor_left = 0.06 if narrow else 0.14
 	sub.anchor_right = 0.68 if narrow else 0.86
 
@@ -246,7 +247,7 @@ func big_text(text: String, dur := 3.0, size := 30):
 	big_lbl.text = ""
 
 # ------------------------------------------------------------ chapter card
-func chapter_card(num: int, title: String, subt := "", tint := Color(0.75, 0.2, 0.15)):
+func chapter_card(num: int, title: String, subt := "", tint := Color(0.75, 0.2, 0.15), top := ""):
 	var c = Control.new(); c.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.modulate.a = 0
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var bg = ColorRect.new(); bg.color = Color(0, 0, 0, 1); bg.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.add_child(bg)
@@ -256,7 +257,7 @@ func chapter_card(num: int, title: String, subt := "", tint := Color(0.75, 0.2, 
 	v.margin_top = -100; v.margin_bottom = 100; v.alignment = BoxContainer.ALIGN_CENTER
 	v.add_constant_override("separation", 16); v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	c.add_child(v)
-	var a = _lbl("CHAPTER %02d" % num, 20, "m", Color(0.6, 0.62, 0.63)); a.align = Label.ALIGN_CENTER; v.add_child(a)
+	var a = _lbl(top if top != "" else "CHAPTER %02d" % num, 20, "m", Color(0.6, 0.62, 0.63)); a.align = Label.ALIGN_CENTER; v.add_child(a)
 	var lc = CenterContainer.new(); lc.mouse_filter = Control.MOUSE_FILTER_IGNORE; v.add_child(lc)
 	var line = ColorRect.new(); line.color = tint; line.rect_min_size = Vector2(2, 2); lc.add_child(line)
 	var t = _spaced(title); var sz = 54

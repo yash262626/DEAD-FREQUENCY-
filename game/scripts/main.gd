@@ -16,6 +16,8 @@ func _ready():
 	if "--smoketest" in OS.get_cmdline_args():
 		_smoketest()
 		return
+	if "--slice" in OS.get_cmdline_args():
+		start_slice(); return
 	if "--menu" in OS.get_cmdline_args(): show_menu()
 	else: play_intro()
 
@@ -183,16 +185,21 @@ func select_chapter(n: int):
 	G.stats_begin("chapter_%02d" % n)
 	start_chapter(n)
 
+func start_slice():
+	G.new_run(1); G.has_radio = true; G.has_light = true
+	G.stats_begin("slice")
+	start_chapter(Story.SLICE_N)
+
 func start_chapter(n: int):
 	G.chapter = n
-	var d = Story.chapter(n)
+	var d = Story.slice() if n == Story.SLICE_N else Story.chapter(n)
 	_load(d)
 	ui.set_hud(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var key = "started%d" % n
 	if not G.flag(key):
 		G.set_flag(key); G.checkpoint = ""; G.health = level.player.health
-		G.save_game()
+		if n != Story.SLICE_N: G.save_game()      # the slice is a standalone demo: it never touches the campaign save
 		G.flags["hunts_start"] = int(G.flags.get("m_hunts", 0))
 		yield(level.run([["cine", true]] + d.get("pre_ev", []) + [["card"], ["fade", false, 2.0]] + d.get("start_ev", []) + [["cine", false]]), "completed")
 	else:
@@ -221,6 +228,8 @@ func on_death():
 func _on_menu_action(id):
 	match id:
 		"reload":
+			if level and is_instance_valid(level) and level.data.n == Story.SLICE_N:
+				start_slice(); return
 			if G.load_game():
 				start_chapter(G.chapter)
 				if G.load_error != "": ui.toast(G.load_error)

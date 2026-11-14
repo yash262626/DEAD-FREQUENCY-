@@ -54,6 +54,12 @@ func chapter(n: int) -> Dictionary:
 	d["n"] = n; d["title"] = TITLES[n]
 	return d
 
+const SLICE_N := 99
+func slice() -> Dictionary:
+	var d = load("res://data/slice.gd").DATA.duplicate(true)
+	d["n"] = SLICE_N; d["title"] = "THE SIGNAL ROOM"
+	return d
+
 func ending(id: String) -> Dictionary:
 	var d = load("res://data/endings.gd").DATA[id].duplicate(true)
 	d["n"] = 14; d["title"] = "ENDING " + id

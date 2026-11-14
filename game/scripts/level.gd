@@ -22,7 +22,7 @@ const PALETTES = {
 }
 const CMDS = ["wait", "obj", "flag", "sfx", "music", "lights", "card", "title", "fade", "cine", "cam", "camoff", "give", "take",
 	"checkpoint", "next", "ending", "choice", "if", "ifnot", "unlock", "listener", "hurt", "shake", "toast", "journal", "look",
-	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d", "group", "move"]
+	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d", "group", "move", "art"]
 const BUILTIN = {
 	"S": {"t": "start"}, "L": {"t": "light"}, "F": {"t": "light", "flicker": true}, "R": {"t": "light", "red": true},
 	"P": {"t": "patrol"}, "H": {"t": "hide"}, "V": {"t": "save"}, "D": {"t": "door"},
@@ -208,7 +208,9 @@ func _apply_ai():
 
 func _apply_quality():
 	var q = int(G.settings.quality)
-	env.ssao_enabled = q >= 2; env.ssao_intensity = 1.5; env.ssao_radius = 1.2
+	env.ssao_enabled = q >= 2
+	if art == null:
+		env.ssao_intensity = 1.5; env.ssao_radius = 1.2
 	env.glow_enabled = q >= 1
 	env.adjustment_brightness = G.settings.brightness
 	env.ss_reflections_enabled = q >= 3
@@ -267,11 +269,17 @@ func _build_geometry():
 			"ceil": Mats.surface(tx[2], Mats.hue_tint(pal.ceil, 0.7), 0.5), "trim": Mats.surface(tx[3], Mats.hue_tint(pal.trim, 0.95), 0.5)}
 		for k in mats: mats[k].params_cull_mode = SpatialMaterial.CULL_DISABLED
 	var body = StaticBody.new(); body.name = "World"; add_child(body)
+	var art_mode = data.has("art")
 	for k in st:
 		var mesh = st[k].commit()
 		if mesh == null or mesh.get_surface_count() == 0: continue
-		var mi = MeshInstance.new(); mi.mesh = mesh; mi.material_override = mats[k]; add_child(mi)
+		if not art_mode:
+			var mi = MeshInstance.new(); mi.mesh = mesh; mi.material_override = mats[k]; add_child(mi)
 		var cs = CollisionShape.new(); cs.shape = mesh.create_trimesh_shape(); body.add_child(cs)
+	if art_mode:
+		# authored scene (meshes, baked lighting, probes, environment); the grid above stays as invisible collision
+		_load_art()
+		return
 	# water
 	if pal.has("water"):
 		var wm = MeshInstance.new(); var pm = PlaneMesh.new(); pm.size = Vector2(gw * C, gh * C)
@@ -314,6 +322,44 @@ func _build_geometry():
 					add_child(mi)
 			elif grid[cz][cx] == "." and _rng.randf() < 0.035:
 				var db = Props.make("debris"); db.translation = c; add_child(db)
+
+var art: Spatial = null
+var _flick := []
+func _load_art():
+	art = load(data.art).instance(); art.name = "Art"
+	var cams = art.get_node_or_null("Cams")
+	if cams: art.remove_child(cams); cams.free()          # preview cameras must never take the view
+	add_child(art)
+	var we = art.get_node_or_null("Env")
+	if we:
+		for c in get_children():
+			if c is WorldEnvironment and c != we: c.queue_free()
+		env = we.environment
+		pal.amb_e = env.ambient_light_energy; pal.amb = env.ambient_light_color; pal.fog = env.fog_color
+	# authored effect markers: steam, drips; and the colour grade
+	var fxn = art.get_node_or_null("FX")
+	if fxn and Mats.enabled():
+		for m in fxn.get_children():
+			if m.name.begins_with("steam"): Fx.steam(self, m.global_transform.origin)
+			elif m.name.begins_with("drip"): Fx.drips(self, m.global_transform.origin, m.global_transform.origin.y)
+	if data.get("grade", true): Fx.grade(self)
+	for nm in ["TrofferFlicker", "HangLamp"]:
+		var l = art.find_node(nm, true, false)
+		if l: _flick.append({"node": l, "base": l.light_energy, "t": _rng.randf() * 5.0})
+
+func _art_process(dt: float):
+	for f in _flick:
+		f.t -= dt
+		if f.t <= 0.0:
+			f.t = _rng.randf_range(0.04, 0.5) if _rng.randf() < 0.35 else _rng.randf_range(0.8, 3.5)
+			f.node.light_energy = f.base * (_rng.randf_range(0.0, 0.4) if _rng.randf() < 0.5 else 1.0)
+	var b = art.find_node("Beacon", true, false)
+	if b and b.visible: b.rotation.y += dt * 3.6
+
+func _hide_visuals(n: Node):
+	for c in n.get_children():
+		if c is VisualInstance: c.visible = false
+		_hide_visuals(c)
 
 func _build_nav():
 	for cz in gh:
@@ -372,6 +418,9 @@ func _build_entities():
 			by_char[ch].append(e)
 			ents.append(e)
 			call("_mk_" + d.t, e, cx, cz)
+			if d.get("noviz", false) and e.node:
+				if e.node is VisualInstance: e.node.visible = false
+				_hide_visuals(e.node)
 			if d.get("block", false): astar.set_point_disabled(pid(cx, cz), true)
 
 func _mk_start(_e, _x, _z): pass
@@ -517,6 +566,7 @@ func _door_close(e):
 
 # ---------------------------------------------------------------- per-frame
 func _physics_process(dt):
+	if art: _art_process(dt)
 	if player == null or dead: return
 	_music_director(dt)
 	for w in _walkers:
@@ -598,7 +648,7 @@ func prompt_for(e) -> String:
 			if d.has("cycle"): return "" if G.flag("solved_" + d.group) else d.get("prompt", "Turn")
 			return "" if (e.done and d.get("once", true)) else d.get("prompt", "Use")
 		"save": return "Emergency log terminal — save"
-		"hide": return "Leave locker" if player.hidden else "Hide"
+		"hide": return d.get("out", "Leave locker") if player.hidden else d.get("prompt", "Hide")
 	return ""
 
 func interact(e):
@@ -787,7 +837,17 @@ func _exec(e: Array):
 		"loop": Snd.loop(e[1], e[2], e[3] if e.size() > 3 else -10.0, e[4] if e.size() > 4 else 1.0)
 		"unloop": Snd.unloop(e[1])
 		"lights": set_power(e[1])
-		"card": return ui.chapter_card(data.n, data.title, data.get("sub", ""))
+		"card": return ui.chapter_card(-1 if data.has("card_top") else data.n, data.title, data.get("sub", ""), Color(0.75, 0.2, 0.15), data.get("card_top", ""))
+		"art":
+			var an = art.find_node(e[2], true, false) if art else null
+			if an:
+				match e[1]:
+					"energy":
+						an.light_energy = e[3]
+						for f in _flick:
+							if f.node == an: f.base = e[3]
+					"on": an.visible = true
+					"off": an.visible = false
 		"title": return ui.title_reveal(e[1] if e.size() > 1 else "")
 		"fade": return ui.fade(e[1], e[2] if e.size() > 2 else 1.0)
 		"cine":

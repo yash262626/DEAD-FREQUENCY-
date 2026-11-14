@@ -21,6 +21,91 @@ void fragment() {
 }
 """
 
+# A shaft of light in dusty air: additive, faded where it meets geometry (scene depth), near the camera and
+# along its length, with slowly drifting density so it never looks like a solid cone.
+const BEAM_SHADER = """
+shader_type spatial;
+render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled;
+uniform vec4 col : hint_color = vec4(1.0);
+uniform float energy = 0.05;
+uniform float length = 3.0;
+uniform float soft = 0.45;
+varying float t;
+varying vec3 wpos;
+float h(vec3 p){ return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
+float vnoise(vec3 p){
+	vec3 i = floor(p); vec3 f = fract(p); f = f * f * (3.0 - 2.0 * f);
+	return mix(mix(mix(h(i), h(i + vec3(1,0,0)), f.x), mix(h(i + vec3(0,1,0)), h(i + vec3(1,1,0)), f.x), f.y),
+	           mix(mix(h(i + vec3(0,0,1)), h(i + vec3(1,0,1)), f.x), mix(h(i + vec3(0,1,1)), h(i + vec3(1,1,1)), f.x), f.y), f.z);
+}
+void vertex() {
+	t = clamp(-VERTEX.y / length, 0.0, 1.0);
+	wpos = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
+}
+void fragment() {
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
+	vec4 ndc = vec4(SCREEN_UV * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);
+	vec4 vp = INV_PROJECTION_MATRIX * ndc; vp.xyz /= vp.w;
+	float fade = clamp((VERTEX.z - vp.z) / soft, 0.0, 1.0);    // distance in front of the scene surface
+	float facing = pow(clamp(abs(dot(NORMAL, VIEW)), 0.0, 1.0), 1.4);
+	float along = pow(clamp(1.0 - t, 0.0, 1.0), 1.5);
+	float near = smoothstep(0.25, 1.6, -VERTEX.z);
+	float dust = 0.65 + 0.35 * vnoise(wpos * 1.7 + vec3(0.0, TIME * 0.08, TIME * 0.05));
+	ALBEDO = col.rgb * energy * facing * along * fade * near * dust;
+}
+"""
+
+static func beam(parent: Node, r0: float, r1: float, length: float, col: Color, energy: float) -> MeshInstance:
+	# apex ring at the origin, opening along -Y
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var seg = 24
+	for i in seg:
+		var a0 = TAU * i / seg; var a1 = TAU * (i + 1) / seg
+		var t0 = Vector3(cos(a0) * r0, 0, sin(a0) * r0); var t1 = Vector3(cos(a1) * r0, 0, sin(a1) * r0)
+		var b0 = Vector3(cos(a0) * r1, -length, sin(a0) * r1); var b1 = Vector3(cos(a1) * r1, -length, sin(a1) * r1)
+		for v in [t0, b1, b0, t0, t1, b1]:
+			st.add_normal(Vector3(v.x, 0, v.z).normalized()); st.add_vertex(v)
+	var mi = MeshInstance.new(); mi.mesh = st.commit()
+	var sm = ShaderMaterial.new(); sm.shader = Shader.new(); sm.shader.code = BEAM_SHADER
+	sm.set_shader_param("col", col); sm.set_shader_param("energy", energy); sm.set_shader_param("length", length)
+	mi.material_override = sm; mi.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
+	mi.use_in_baked_light = false
+	parent.add_child(mi)
+	return mi
+
+const GRADE_SHADER = """
+shader_type canvas_item;
+uniform float grain = 0.022;
+uniform float vignette = 0.22;
+uniform float ca = 0.0014;
+uniform vec3 lift = vec3(0.006, 0.010, 0.014);
+uniform vec3 gain = vec3(1.05, 1.0, 0.94);
+uniform float contrast = 1.07;
+uniform float sat = 0.86;
+float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+void fragment() {
+	vec2 uv = SCREEN_UV; vec2 d = uv - 0.5; float r = dot(d, d);
+	vec3 c;
+	c.r = texture(SCREEN_TEXTURE, uv + d * ca * 2.0).r;
+	c.g = texture(SCREEN_TEXTURE, uv).g;
+	c.b = texture(SCREEN_TEXTURE, uv - d * ca * 2.0).b;
+	float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+	c = mix(vec3(l), c, sat);
+	c = (c - 0.5) * contrast + 0.5;
+	c = c * mix(vec3(1.0), gain, smoothstep(0.1, 0.8, l)) + lift * (1.0 - smoothstep(0.0, 0.35, l));
+	c *= 1.0 - vignette * smoothstep(0.06, 0.55, r);
+	c += (h(uv * vec2(1931.0, 1087.0) + fract(TIME * 7.0)) - 0.5) * grain;
+	COLOR = vec4(max(c, vec3(0.0)), 1.0);
+}
+"""
+
+static func grade(parent: Node) -> CanvasLayer:
+	var cl = CanvasLayer.new(); cl.layer = 1; parent.add_child(cl)
+	var cr = ColorRect.new(); cr.anchor_right = 1.0; cr.anchor_bottom = 1.0; cr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var sm = ShaderMaterial.new(); sm.shader = Shader.new(); sm.shader.code = GRADE_SHADER; cr.material = sm
+	cl.add_child(cr)
+	return cl
+
 const WATER_SHADER = """
 shader_type spatial;
 render_mode cull_disabled, specular_schlick_ggx;

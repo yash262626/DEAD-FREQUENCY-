@@ -25,7 +25,7 @@ func _draw():
 		draw_rect(Rect2(s.x / 2 - 60, s.y - 22, 120, 3), Color(1, 1, 1, 0.1))
 		draw_rect(Rect2(s.x / 2 - 60, s.y - 22, 1.2 * st.stam, 3), Color(1, 1, 1, 0.5))
 	var r = ui.radio_state
-	if not r.on: return
+	if not r.on or ui.compact_radio: return
 	# radio receiver face
 	var w = 330.0; var h = 150.0
 	var o = Vector2(s.x - w - 26, s.y - h - 26)

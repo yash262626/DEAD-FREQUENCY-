@@ -82,8 +82,20 @@ func _cube(s: Vector3) -> CubeMesh:
 	var c = CubeMesh.new(); c.size = s
 	return c
 
+var hq := false
+var spill: SpotLight
+var _beam: MeshInstance
+var _radio_on_y := -0.24
+var _radio_off_y := -0.62
+var _lcd_label: Label
+var _lcd_band: Label
+var _lcd_bars: ColorRect
+
 func _build_hands():
 	hands = Spatial.new(); hands.name = "hands"; cam.add_child(hands)
+	ui.compact_radio = false
+	if level.data.get("hq", false):
+		_build_hands_hq(); return
 	hands.scale = Vector3(0.6, 0.6, 0.6)
 	var sleeve = _hm(Color(0.62, 0.24, 0.06), 0, 0.9)          # Northline orange
 	var cuff = _hm(Color(0.2, 0.2, 0.22), 0, 0.9)
@@ -107,13 +119,52 @@ func _build_hands():
 	_part(radio_model, _cyl(0.004, 0.004, 0.24), metal, Vector3(0.05, 0.2, 0.0))
 	_part(radio_model, _cube(Vector3(0.08, 0.1, 0.07)), glove, Vector3(-0.02, -0.08, 0.02))
 
+func _build_hands_hq():
+	# modelled gloves, torch and HX-7 (tools/blender/fp_items.py) at real scale
+	hq = true
+	var fp = load("res://scripts/fp_models.gd").build()
+	light_model = Spatial.new(); light_model.translation = Vector3(0.125, -0.125, -0.25); light_model.rotation_degrees = Vector3(5, 4, 0)
+	hands.add_child(light_model); light_model.add_child(fp.torch)
+	_radio_on_y = -0.13; _radio_off_y = -0.42
+	radio_model = Spatial.new(); radio_model.translation = Vector3(-0.125, _radio_off_y, -0.25); radio_model.rotation_degrees = Vector3(12, 18, 4)
+	hands.add_child(radio_model); radio_model.add_child(fp.radio)
+	_lens = fp.lens; _screen = fp.screen
+	# the receiver's display shows the live frequency
+	var vp = Viewport.new(); vp.size = Vector2(512, 224); vp.transparent_bg = false; vp.render_target_v_flip = true
+	vp.usage = Viewport.USAGE_2D; vp.render_target_update_mode = Viewport.UPDATE_ALWAYS; add_child(vp)
+	var bg = ColorRect.new(); bg.color = Color(0.045, 0.085, 0.04); bg.rect_size = vp.size; vp.add_child(bg)
+	_lcd_label = Label.new(); _lcd_label.add_font_override("font", ui.font(132, "m")); _lcd_label.add_color_override("font_color", Color(0.47, 1.0, 0.55))
+	_lcd_label.rect_position = Vector2(18, 4); vp.add_child(_lcd_label)
+	var mhz = Label.new(); mhz.text = "MHz"; mhz.add_font_override("font", ui.font(40, "m")); mhz.add_color_override("font_color", Color(0.35, 0.8, 0.42))
+	mhz.rect_position = Vector2(400, 112); vp.add_child(mhz)
+	_lcd_band = Label.new(); _lcd_band.add_font_override("font", ui.font(34, "m")); _lcd_band.add_color_override("font_color", Color(0.4, 0.9, 0.48))
+	_lcd_band.rect_position = Vector2(26, 142); vp.add_child(_lcd_band)
+	ui.compact_radio = true          # the receiver in his hand is the radio UI
+	_lcd_bars = ColorRect.new(); _lcd_bars.color = Color(0.43, 0.95, 0.5); _lcd_bars.rect_position = Vector2(26, 186); _lcd_bars.rect_size = Vector2(10, 18); vp.add_child(_lcd_bars)
+	_screen.albedo_texture = vp.get_texture(); _screen.emission_texture = vp.get_texture()
+	# torch beam: a tight hot spot plus a wide, dim spill, from the lens
+	lamp.translation = Vector3(0.125, -0.108, -0.33); lamp.spot_angle = 28; lamp.spot_angle_attenuation = 0.75; lamp.spot_attenuation = 1.1
+	# a faint shaft of light in the dusty air, fading where it meets geometry
+	_beam = load("res://scripts/fx.gd").beam(cam, 0.05, 2.1, 9.0, Color(1.0, 0.95, 0.85), 0.0)
+	_beam.translation = lamp.translation; _beam.rotation_degrees = Vector3(-90, 0, 0)
+	spill = SpotLight.new(); spill.translation = lamp.translation; spill.spot_range = 16; spill.spot_angle = 52
+	spill.spot_angle_attenuation = 0.9; spill.light_color = lamp.light_color; spill.light_energy = 0.0; cam.add_child(spill)
+
 func _animate_hands(dt: float):
 	if hands == null: return
 	hands.visible = not ui.in_cine and not hidden
 	var radio_on = level.radio != null and level.radio.on and G.has_radio
-	var ry = -0.24 if radio_on else -0.62
+	var ry = _radio_on_y if radio_on else _radio_off_y
 	radio_model.translation.y = lerp(radio_model.translation.y, ry, min(1.0, 9 * dt))
-	radio_model.visible = radio_model.translation.y > -0.58
+	radio_model.visible = radio_model.translation.y > _radio_off_y + 0.04
+	if hq:
+		spill.light_energy = lamp.light_energy * 0.25
+		_beam.material_override.set_shader_param("energy", lamp.light_energy * 0.045)
+		if radio_on and _lcd_label:
+			_lcd_label.text = "%05.1f" % level.radio.f
+			var bd = level.radio.band()
+			_lcd_band.text = {89.1: "ECHO", 94.6: "PROXIMITY", 101.3: "FORECAST", 107.9: "UNSEEN"}.get(bd, "")
+			_lcd_bars.rect_size.x = 20 + 300 * clamp(level.radio.sig, 0.0, 1.0)
 	_lens.emission_enabled = light_on
 	_lens.emission = Color(1.0, 0.95, 0.8); _lens.emission_energy = 3.0
 	_screen.emission_energy = 1.0 + (level.radio.sig * 1.5 if radio_on else 0.0)
@@ -172,10 +223,11 @@ func _process(dt):
 			else:
 				light_on = false; G.battery = 0; Snd.play("click", 0, 0.7)
 	var target_e = 0.0
-	if light_on: target_e = 2.6 * (1.0 if G.battery > 12 else (0.5 + 0.5 * randf()))
+	if light_on: target_e = (1.7 if hq else 2.6) * (1.0 if G.battery > 12 else (0.5 + 0.5 * randf()))
 	lamp.light_energy = lerp(lamp.light_energy, target_e, 0.4)
 	ui.stat.hp = health; ui.stat.batt = G.battery; ui.stat.stam = stamina; ui.stat.light = light_on
 	ui.stat.cells = int(G.inv.get("battery", 0)); ui.stat.hidden = hidden
+	ui.stat.hide_open = hidden and hide_ent != null and hide_ent.d.get("low", false)   # under a desk: no locker slats
 	if health < 40: Snd.loop("heart", "heart", -6.0 - health * 0.2, 1.0 + (40 - health) * 0.01)
 	else: Snd.unloop("heart")
 	if _busy() or ui.closed_this_frame():
@@ -220,6 +272,7 @@ func _physics_process(dt):
 		else: crouching = Input.is_action_pressed("crouch")
 	# crouch / stand
 	var th = 0.95 if crouching else 1.62
+	if hidden and hide_ent and hide_ent.d.get("low", false): th = hide_ent.d.get("eye", 0.95)
 	head.translation.y = lerp(head.translation.y, th, 10 * dt)
 	shape.height = 0.4 if crouching else 1.05
 	$Col.translation.y = 0.54 if crouching else 0.87

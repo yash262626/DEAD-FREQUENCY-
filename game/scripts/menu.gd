@@ -50,7 +50,7 @@ func _fill(items: Array):
 func _main_list():
 	var items = [["NEW GAME", "new"], ["CONTINUE", "continue", not G.has_save()]]
 	if G.ng_unlocked: items.append(["NEW GAME+  —  SECOND SIGNAL", "ngplus"])
-	items += [["CHAPTER SELECTION", "chapters", G.unlocked < 2], ["SETTINGS", "settings"], ["CREDITS", "credits"], ["EXIT GAME", "exit"]]
+	items += [["CHAPTER SELECTION", "chapters", G.unlocked < 2], ["VERTICAL SLICE  —  VISUAL TARGET", "slice"], ["SETTINGS", "settings"], ["CREDITS", "credits"], ["EXIT GAME", "exit"]]
 	_fill(items)
 
 func _act(id):
@@ -58,6 +58,7 @@ func _act(id):
 	match id:
 		"new": _go("new_game")
 		"ngplus": _go("new_game_plus")
+		"slice": _go("start_slice")
 		"continue": _go("continue_game")
 		"chapters":
 			var items = []

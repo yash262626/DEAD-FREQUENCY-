@@ -61,7 +61,11 @@ func setup(lv, p, u, pos: Vector3, mode: String):
 	level = lv; player = p; ui = u
 	_rng.randomize()
 	translation = pos
-	body = level.Props.listener_body(); add_child(body)
+	hq = level.data.get("hq", false)
+	if hq:
+		body = load("res://scripts/listener_model.gd").new(); add_child(body)
+	else:
+		body = level.Props.listener_body(); add_child(body)
 	snd = AudioStreamPlayer3D.new(); snd.stream = Snd.bank["clicks"]; snd.unit_db = 2; snd.unit_size = 4.0; snd.max_distance = 26
 	snd.bus = "SFX"; snd.translation.y = 2.4; add_child(snd); snd.play()
 	rasp = AudioStreamPlayer3D.new(); rasp.stream = Snd.bank["rasp"]; rasp.unit_db = -8; rasp.unit_size = 1.2; rasp.max_distance = 7
@@ -340,7 +344,34 @@ var _snap_t := 0.0
 var _dish_target := 0.0
 var _glitch_t := 0.0
 var rasp: AudioStreamPlayer3D
+var hq := false
+var force_anim := ""          # screenshots / cinematics
+func _animate_hq(dt: float, speed: float):
+	if force_anim != "":
+		body.play(force_anim); return
+	if speed > 3.3:
+		body.play("run", speed / 4.4)
+	elif speed > 0.25:
+		body.play("walk", speed / 1.9)
+	elif st in [S.INVESTIGATE, S.SEARCH, S.AMBUSH]:
+		body.play("listen")
+	else:
+		body.play("idle")
+	_snap_t -= dt
+	if _snap_t <= 0.0:
+		_snap_t = _rng.randf_range(0.8, 2.6)
+		if body.visible and st != S.DORMANT:
+			Snd.play3d("snap", level, global_transform.origin + Vector3(0, 2.4, 0), -10, _rng.randf_range(0.9, 1.15), 12)
+	_glitch_t -= dt
+	if (st == S.STALK or st == S.INVESTIGATE) and _glitch_t <= 0.0:
+		_glitch_t = _rng.randf_range(1.5, 4.0)
+		body.translation.x = _rng.randf_range(-0.06, 0.06)
+	elif _glitch_t < 1.35:
+		body.translation.x = lerp(body.translation.x, 0.0, 20 * dt)
+
 func _animate(dt: float, speed: float):
+	if hq:
+		_animate_hq(dt, speed); return
 	# long, unhurried strides; knees fold on the back-swing; arms hang and lag. In a hunt it pitches forward.
 	_anim += dt * (1.6 + speed * 1.9)
 	var stride = 0.18 + speed * 0.11
@@ -385,6 +416,7 @@ func _animate(dt: float, speed: float):
 	pit.emission = Color(0.9, 0.08, 0.04); pit.emission_energy = 1.4 if st == S.HUNT else 0.3
 
 func _attack():
+	if hq: body.play("attack", 1.0, 0.1)
 	player.hurt(55.0)
 	Snd.play("glitch", 2)
 	if not level.dead:

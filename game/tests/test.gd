@@ -534,7 +534,7 @@ func t_flow():
 	G.skip = false
 	var labels = []
 	for b in main.menu.list.get_children(): labels.append(b.text)
-	ok(labels == ["NEW GAME", "CONTINUE", "CHAPTER SELECTION", "SETTINGS", "CREDITS", "EXIT GAME"], "menu items %s" % str(labels))
+	ok(labels == ["NEW GAME", "CONTINUE", "CHAPTER SELECTION", "VERTICAL SLICE  —  VISUAL TARGET", "SETTINGS", "CREDITS", "EXIT GAME"], "menu items %s" % str(labels))
 	ok(main.menu.list.get_child(1).disabled, "CONTINUE disabled without a save")
 	ok(main.menu.list.get_child(2).disabled, "CHAPTER SELECTION locked at first launch")
 	main.new_game()
@@ -648,6 +648,117 @@ func t_gallery():
 		yield(frames(10), "completed"); _save(out + "/99_credits.png")
 		main.credits.scroll.rect_position.y = 520 - main.credits.scroll.rect_size.y + 40
 		yield(frames(10), "completed"); _save(out + "/99_credits_end.png")
+
+# ------------------------------------------------------------ the vertical slice: data, art, gameplay loop
+func _slice_ready():
+	main.start_slice()
+	for i in 3000:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if main.level and main.level.running == 0: break
+	G.skip = false
+	main.ui.fade_rect.color.a = 0
+
+func t_slice():
+	var d = Story.slice()
+	var errs = LevelScript.validate(d)
+	ok(errs.empty(), "slice data valid %s" % str(errs))
+	yield(_slice_ready(), "completed")
+	var lv = main.level
+	ok(lv.art != null and lv.env == lv.art.get_node("Env").environment, "authored art scene and its environment loaded")
+	ok(lv.art.get_node("Lightmap").light_data != null, "baked lightmap present")
+	ok(lv.player.hq and lv.player.light_model.get_child_count() == 1 and lv.player._lcd_label != null, "modelled hands, torch and live receiver display")
+	ok(not G.has_save(), "the slice never writes the campaign save")
+	# the forecast in the corridor
+	var f = lv.ent_at("f")
+	lv.player.global_transform.origin = f.pos + Vector3(0, 0.05, 2.0); lv.player.rotation_degrees.y = 0
+	G.has_radio = true; lv.radio.on = true; lv.radio.f = 101.3
+	for i in 900:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if G.flag("sl_fore"): break
+	ok(G.flag("sl_fore"), "101.3 forecast received in the corridor")
+	ok(lv.player._lcd_label.text == "101.3", "receiver display shows the tuned frequency (%s)" % lv.player._lcd_label.text)
+	lv.radio.on = false
+	# the main receiver starts the encounter
+	var u = lv.ent_at("U")
+	lv.player.global_transform.origin = lv.pos_of("u") + Vector3(0, 0.05, 0)
+	G.skip = true
+	lv.interact(u)
+	for i in 600:
+		yield(get_tree(), "physics_frame")
+		if lv.listener and is_instance_valid(lv.listener): break
+	ok(lv.listener and is_instance_valid(lv.listener) and lv.listener.hq, "the new Listener arrives through the vent")
+	ok(lv.art.find_node("Beacon", true, false).visible, "red beacon switched on")
+	var h = lv.ent_at("H")
+	lv.player.toggle_hide(h)
+	yield(frames(10), "completed")
+	ok(lv.player.hidden and lv.player.head.translation.y < 1.2, "hiding under the desk lowers the view")
+	ok(lv.listener.body.anim.current_animation != "", "creature animation playing (%s)" % lv.listener.body.anim.current_animation)
+	var hurt = false
+	for i in 4000:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if lv and is_instance_valid(lv) and lv.player.health < 100: hurt = true
+		if main.menu != null and is_instance_valid(main.menu): break
+	G.skip = false
+	ok(not hurt, "staying hidden and silent, the player is not found")
+	ok(main.menu != null and is_instance_valid(main.menu), "the slice ends and returns to the menu")
+
+func t_sliceperf():
+	# frame cost of the slice at the corridor start and inside the comms room, per graphics preset
+	yield(_slice_ready(), "completed")
+	var lv = main.level
+	for q in [0, 2, 3]:
+		G.settings.quality = q; G.apply_settings(); G.emit_signal("settings_changed")
+		for pose in [["corridor", Vector3(5.0, 0.05, 20.6), 0.0], ["room", Vector3(21.0, 0.05, 7.2), -96.0]]:
+			lv.player.global_transform.origin = pose[1]; lv.player.rotation_degrees.y = pose[2]; lv.player.light_on = true
+			yield(frames(30), "completed")
+			var f0 = Engine.get_frames_drawn(); var t0 = OS.get_ticks_msec()
+			yield(get_tree().create_timer(4.0), "timeout")
+			var fps = (Engine.get_frames_drawn() - f0) * 1000.0 / max(1, OS.get_ticks_msec() - t0)
+			print("PERF q%d %s: %.1f fps  vertices %d  draw calls %d  objects %d  video mem %.0f MB" % [q, pose[0], fps,
+				Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME), Performance.get_monitor(Performance.RENDER_DRAW_CALLS_IN_FRAME),
+				Performance.get_monitor(Performance.RENDER_OBJECTS_IN_FRAME), Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 1048576.0])
+
+const SLICE_SHOTS = [
+	# name, position, yaw, pitch, torch, radio MHz, listener [x, z, yaw, anim] or null, extra
+	["s01_corridor", Vector3(5.0, 0, 20.6), 0.0, -2.0, true, 0.0, null, ""],
+	["s02_receiver", Vector3(5.25, 0, 15.6), 4.0, -4.0, true, 101.3, null, ""],
+	["s03_corner", Vector3(4.8, 0, 8.6), -62.0, -3.0, true, 0.0, null, ""],
+	["s04_listener_corridor", Vector3(6.6, 0, 7.05), -90.0, 6.0, true, 0.0, [10.6, 7.0, 90.0, "listen"], ""],
+	["s05_vestibule", Vector3(16.6, 0, 7.0), -90.0, -2.0, false, 0.0, null, ""],
+	["s06_room", Vector3(20.9, 0, 7.2), -96.0, -6.0, false, 0.0, null, ""],
+	["s07_console", Vector3(25.85, 0, 7.05), -90.0, -24.0, true, 89.1, null, ""],
+	["s08_encounter", Vector3(27.5, 0, 11.3), 10.0, 4.0, false, 0.0, [25.6, 7.4, 160.0, "listen"], "hide"],
+	["s09_hunt", Vector3(5.1, 0, 12.4), 0.0, 6.0, true, 0.0, [5.0, 9.6, 0.0, "run"], ""],
+]
+
+func t_sliceshots():
+	G.test_god = true
+	var out = OS.get_environment("DF_OUT"); var only = OS.get_environment("DF_ONLY")
+	yield(_slice_ready(), "completed")
+	var lv = main.level
+	G.has_radio = true
+	main.ui.objective_text = ""; main.ui.obj_lbl.modulate.a = 0
+	for s in SLICE_SHOTS:
+		if only != "" and not s[0].begins_with(only): continue
+		lv.player.global_transform.origin = s[1] + Vector3(0, 0.05, 0)
+		lv.player.rotation_degrees.y = s[2]; lv.player.pitch = deg2rad(s[3]); lv.player.head.rotation.x = lv.player.pitch
+		lv.player.light_on = s[4]
+		lv.radio.on = s[5] > 0.0
+		if s[5] > 0.0: lv.radio.f = s[5]
+		if lv.listener and is_instance_valid(lv.listener): lv.despawn_listener()
+		if s[6] != null:
+			lv.spawn_listener("v", "watch")
+			lv.listener.translation = Vector3(s[6][0], 0, s[6][1]); lv.listener.rotation_degrees.y = s[6][2]
+			lv.listener.force_anim = s[6][3]
+		var beacon = lv.art.find_node("Beacon", true, false)
+		beacon.visible = s[7] == "hide"
+		if s[7] == "hide":
+			lv.art.find_node("TrofferFlicker", true, false).light_energy = 0.0
+			lv.player.hidden = true; lv.player.hide_ent = lv.ent_at("H")
+		else:
+			lv.player.hidden = false; lv.player.hide_ent = null
+		yield(frames(70), "completed")
+		_save("%s/%s.png" % [out, s[0]])
 
 # ------------------------------------------------------------ export all story data as JSON (docs are generated from it)
 func t_export():
