@@ -140,6 +140,7 @@ const DATA = {
 			["EVELYN (02:51, 1998)", "Danny? Oh — oh, look at you. Little light. You got so tall."],
 			["DANIEL", "You can close it now. From your side. I'll close it from mine. Together. Not alone."],
 			["EVELYN (02:51, 1998)", "Together. Yes. Yes, my love."],
+			["if", "mira_pages", [["MIRA (96.1 MHz)", "You read my notebook. Didn't you. All of it."], ["DANIEL", "Every page."]]],
 			["MIRA (96.1 MHz)", "I'm staying with her, Danny. I carried you once. Let me carry her now."],
 			["DANIEL", "Mira—"],
 			["MIRA (96.1 MHz)", "Signal and answer. Go home."],

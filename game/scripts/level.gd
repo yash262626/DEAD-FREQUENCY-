@@ -3,21 +3,22 @@ extends Spatial
 # interaction, checkpoints, noise propagation and the cinematic camera.
 
 const Props = preload("res://scripts/props.gd")
+const Fx = preload("res://scripts/fx.gd")
 const C := 2.0   # cell size in metres
 
 const PALETTES = {
-	"entrance": {"floor": Color(0.23, 0.24, 0.24), "wall": Color(0.36, 0.37, 0.36), "trim": Color(0.5, 0.42, 0.12), "ceil": Color(0.18, 0.18, 0.18), "fog": Color(0.05, 0.06, 0.07), "fog_end": 38, "amb": Color(0.35, 0.4, 0.5), "amb_e": 0.32, "light": Color(1.0, 0.9, 0.75), "h": 3.2},
-	"security": {"floor": Color(0.2, 0.21, 0.22), "wall": Color(0.33, 0.35, 0.37), "trim": Color(0.16, 0.24, 0.34), "ceil": Color(0.16, 0.16, 0.17), "fog": Color(0.04, 0.05, 0.06), "fog_end": 34, "amb": Color(0.35, 0.42, 0.55), "amb_e": 0.28, "light": Color(0.85, 0.92, 1.0), "h": 3.0},
-	"medical": {"floor": Color(0.42, 0.45, 0.43), "wall": Color(0.6, 0.63, 0.6), "trim": Color(0.3, 0.5, 0.45), "ceil": Color(0.5, 0.5, 0.48), "fog": Color(0.07, 0.09, 0.08), "fog_end": 36, "amb": Color(0.45, 0.6, 0.55), "amb_e": 0.3, "light": Color(0.85, 1.0, 0.92), "h": 3.0},
-	"residential": {"floor": Color(0.3, 0.24, 0.2), "wall": Color(0.5, 0.45, 0.36), "trim": Color(0.36, 0.2, 0.15), "ceil": Color(0.3, 0.28, 0.25), "fog": Color(0.07, 0.05, 0.04), "fog_end": 32, "amb": Color(0.6, 0.45, 0.3), "amb_e": 0.26, "light": Color(1.0, 0.8, 0.55), "h": 2.8},
-	"power": {"floor": Color(0.2, 0.19, 0.17), "wall": Color(0.3, 0.27, 0.22), "trim": Color(0.6, 0.45, 0.08), "ceil": Color(0.12, 0.12, 0.12), "fog": Color(0.07, 0.05, 0.03), "fog_end": 40, "amb": Color(0.6, 0.4, 0.2), "amb_e": 0.25, "light": Color(1.0, 0.72, 0.4), "h": 5.0},
-	"flooded": {"floor": Color(0.14, 0.17, 0.16), "wall": Color(0.2, 0.26, 0.25), "trim": Color(0.12, 0.2, 0.18), "ceil": Color(0.1, 0.12, 0.12), "fog": Color(0.03, 0.07, 0.07), "fog_end": 24, "amb": Color(0.2, 0.5, 0.5), "amb_e": 0.24, "light": Color(0.6, 1.0, 0.9), "h": 2.8, "water": 0.45},
-	"comms": {"floor": Color(0.16, 0.17, 0.2), "wall": Color(0.25, 0.27, 0.32), "trim": Color(0.1, 0.3, 0.2), "ceil": Color(0.1, 0.1, 0.12), "fog": Color(0.03, 0.05, 0.05), "fog_end": 34, "amb": Color(0.3, 0.55, 0.45), "amb_e": 0.26, "light": Color(0.7, 1.0, 0.85), "h": 3.6},
-	"lab": {"floor": Color(0.5, 0.52, 0.54), "wall": Color(0.7, 0.72, 0.74), "trim": Color(0.2, 0.4, 0.6), "ceil": Color(0.6, 0.6, 0.6), "fog": Color(0.08, 0.1, 0.12), "fog_end": 40, "amb": Color(0.55, 0.65, 0.8), "amb_e": 0.3, "light": Color(0.9, 0.96, 1.0), "h": 3.4},
-	"transport": {"floor": Color(0.15, 0.15, 0.15), "wall": Color(0.24, 0.23, 0.22), "trim": Color(0.6, 0.5, 0.1), "ceil": Color(0.08, 0.08, 0.08), "fog": Color(0.04, 0.04, 0.04), "fog_end": 44, "amb": Color(0.45, 0.42, 0.35), "amb_e": 0.22, "light": Color(1.0, 0.85, 0.5), "h": 4.0},
-	"containment": {"floor": Color(0.12, 0.12, 0.13), "wall": Color(0.18, 0.18, 0.2), "trim": Color(0.5, 0.08, 0.06), "ceil": Color(0.07, 0.07, 0.08), "fog": Color(0.06, 0.02, 0.02), "fog_end": 26, "amb": Color(0.6, 0.25, 0.2), "amb_e": 0.24, "light": Color(1.0, 0.45, 0.35), "h": 3.4},
-	"archive": {"floor": Color(0.22, 0.2, 0.17), "wall": Color(0.33, 0.3, 0.25), "trim": Color(0.2, 0.16, 0.1), "ceil": Color(0.14, 0.13, 0.11), "fog": Color(0.06, 0.055, 0.04), "fog_end": 30, "amb": Color(0.55, 0.5, 0.35), "amb_e": 0.26, "light": Color(1.0, 0.88, 0.6), "h": 4.2},
-	"chamber": {"floor": Color(0.1, 0.11, 0.13), "wall": Color(0.16, 0.18, 0.22), "trim": Color(0.5, 0.15, 0.1), "ceil": Color(0.05, 0.05, 0.06), "fog": Color(0.03, 0.04, 0.07), "fog_end": 60, "amb": Color(0.3, 0.4, 0.7), "amb_e": 0.38, "light": Color(0.7, 0.8, 1.0), "h": 7.0},
+	"entrance": {"floor": Color(0.23, 0.24, 0.24), "wall": Color(0.36, 0.37, 0.36), "trim": Color(0.5, 0.42, 0.12), "ceil": Color(0.18, 0.18, 0.18), "fog": Color(0.05, 0.06, 0.07), "fog_end": 38, "amb": Color(0.35, 0.4, 0.5), "amb_e": 0.32, "light": Color(1.0, 0.9, 0.75), "h": 3.2, "tex": ["Concrete046", "Concrete047A", "Concrete034", "PaintedPlaster017"]},
+	"security": {"floor": Color(0.2, 0.21, 0.22), "wall": Color(0.33, 0.35, 0.37), "trim": Color(0.16, 0.24, 0.34), "ceil": Color(0.16, 0.16, 0.17), "fog": Color(0.04, 0.05, 0.06), "fog_end": 34, "amb": Color(0.35, 0.42, 0.55), "amb_e": 0.28, "light": Color(0.85, 0.92, 1.0), "h": 3.0, "tex": ["PaintedPlaster017", "Tiles043", "PaintedPlaster006", "MetalPlates006"]},
+	"medical": {"floor": Color(0.42, 0.45, 0.43), "wall": Color(0.6, 0.63, 0.6), "trim": Color(0.3, 0.5, 0.45), "ceil": Color(0.5, 0.5, 0.48), "fog": Color(0.07, 0.09, 0.08), "fog_end": 36, "amb": Color(0.45, 0.6, 0.55), "amb_e": 0.3, "light": Color(0.85, 1.0, 0.92), "h": 3.0, "tex": ["Tiles141", "Tiles043", "PaintedPlaster006", "PaintedPlaster017"]},
+	"residential": {"floor": Color(0.3, 0.24, 0.2), "wall": Color(0.5, 0.45, 0.36), "trim": Color(0.36, 0.2, 0.15), "ceil": Color(0.3, 0.28, 0.25), "fog": Color(0.07, 0.05, 0.04), "fog_end": 32, "amb": Color(0.6, 0.45, 0.3), "amb_e": 0.26, "light": Color(1.0, 0.8, 0.55), "h": 2.8, "tex": ["PaintedPlaster006", "Wood096", "PaintedPlaster006", "Wood096"]},
+	"power": {"floor": Color(0.2, 0.19, 0.17), "wall": Color(0.3, 0.27, 0.22), "trim": Color(0.6, 0.45, 0.08), "ceil": Color(0.12, 0.12, 0.12), "fog": Color(0.07, 0.05, 0.03), "fog_end": 40, "amb": Color(0.6, 0.4, 0.2), "amb_e": 0.25, "light": Color(1.0, 0.72, 0.4), "h": 5.0, "tex": ["Concrete046", "MetalWalkway014", "Concrete034", "Metal063"]},
+	"flooded": {"floor": Color(0.14, 0.17, 0.16), "wall": Color(0.2, 0.26, 0.25), "trim": Color(0.12, 0.2, 0.18), "ceil": Color(0.1, 0.12, 0.12), "fog": Color(0.03, 0.07, 0.07), "fog_end": 24, "amb": Color(0.2, 0.5, 0.5), "amb_e": 0.24, "light": Color(0.6, 1.0, 0.9), "h": 2.8, "water": 0.45, "tex": ["Concrete049", "Tiles084", "Concrete046", "Metal063"]},
+	"comms": {"floor": Color(0.16, 0.17, 0.2), "wall": Color(0.25, 0.27, 0.32), "trim": Color(0.1, 0.3, 0.2), "ceil": Color(0.1, 0.1, 0.12), "fog": Color(0.03, 0.05, 0.05), "fog_end": 34, "amb": Color(0.3, 0.55, 0.45), "amb_e": 0.26, "light": Color(0.7, 1.0, 0.85), "h": 3.6, "tex": ["PaintedPlaster017", "Rubber004", "PaintedPlaster006", "MetalPlates006"]},
+	"lab": {"floor": Color(0.5, 0.52, 0.54), "wall": Color(0.7, 0.72, 0.74), "trim": Color(0.2, 0.4, 0.6), "ceil": Color(0.6, 0.6, 0.6), "fog": Color(0.08, 0.1, 0.12), "fog_end": 40, "amb": Color(0.55, 0.65, 0.8), "amb_e": 0.3, "light": Color(0.9, 0.96, 1.0), "h": 3.4, "tex": ["Tiles141", "Tiles043", "PaintedPlaster006", "PaintedPlaster017"]},
+	"transport": {"floor": Color(0.15, 0.15, 0.15), "wall": Color(0.24, 0.23, 0.22), "trim": Color(0.6, 0.5, 0.1), "ceil": Color(0.08, 0.08, 0.08), "fog": Color(0.04, 0.04, 0.04), "fog_end": 44, "amb": Color(0.45, 0.42, 0.35), "amb_e": 0.22, "light": Color(1.0, 0.85, 0.5), "h": 4.0, "tex": ["Concrete046", "Concrete049", "Concrete034", "Metal063"]},
+	"containment": {"floor": Color(0.12, 0.12, 0.13), "wall": Color(0.18, 0.18, 0.2), "trim": Color(0.5, 0.08, 0.06), "ceil": Color(0.07, 0.07, 0.08), "fog": Color(0.06, 0.02, 0.02), "fog_end": 26, "amb": Color(0.6, 0.25, 0.2), "amb_e": 0.24, "light": Color(1.0, 0.45, 0.35), "h": 3.4, "tex": ["MetalPlates006", "MetalWalkway014", "MetalPlates006", "Metal063"]},
+	"archive": {"floor": Color(0.22, 0.2, 0.17), "wall": Color(0.33, 0.3, 0.25), "trim": Color(0.2, 0.16, 0.1), "ceil": Color(0.14, 0.13, 0.11), "fog": Color(0.06, 0.055, 0.04), "fog_end": 30, "amb": Color(0.55, 0.5, 0.35), "amb_e": 0.26, "light": Color(1.0, 0.88, 0.6), "h": 4.2, "tex": ["PaintedPlaster017", "Concrete047A", "PaintedPlaster006", "Wood096"]},
+	"chamber": {"floor": Color(0.1, 0.11, 0.13), "wall": Color(0.16, 0.18, 0.22), "trim": Color(0.5, 0.15, 0.1), "ceil": Color(0.05, 0.05, 0.06), "fog": Color(0.03, 0.04, 0.07), "fog_end": 60, "amb": Color(0.3, 0.4, 0.7), "amb_e": 0.38, "light": Color(0.7, 0.8, 1.0), "h": 7.0, "tex": ["MetalPlates006", "MetalWalkway014", "Concrete046", "Metal063"]},
 }
 const CMDS = ["wait", "obj", "flag", "sfx", "music", "lights", "card", "title", "fade", "cine", "cam", "camoff", "give", "take",
 	"checkpoint", "next", "ending", "choice", "if", "ifnot", "unlock", "listener", "hurt", "shake", "toast", "journal", "look",
@@ -233,6 +234,11 @@ func _build_geometry():
 				_quad(st.trim, a, b, b + up * th, a + up * th, s[4])
 				_quad(st.wall, a + up * th, b + up * th, b + up * h, a + up * h, s[4])
 	var mats = {"floor": _surf_mat(pal.floor, 11, 0.55, 0.1), "wall": _surf_mat(pal.wall, 23, 0.85), "trim": _surf_mat(pal.trim, 37, 0.6, 0.3), "ceil": _surf_mat(pal.ceil, 41, 0.9)}
+	if Mats.enabled() and pal.has("tex"):
+		var tx = pal.tex
+		mats = {"wall": Mats.surface(tx[0], Mats.hue_tint(pal.wall, 0.9), 0.5), "floor": Mats.surface(tx[1], Mats.hue_tint(pal.floor, 0.8), 0.5),
+			"ceil": Mats.surface(tx[2], Mats.hue_tint(pal.ceil, 0.7), 0.5), "trim": Mats.surface(tx[3], Mats.hue_tint(pal.trim, 0.95), 0.5)}
+		for k in mats: mats[k].params_cull_mode = SpatialMaterial.CULL_DISABLED
 	var body = StaticBody.new(); body.name = "World"; add_child(body)
 	for k in st:
 		var mesh = st[k].commit()
@@ -246,7 +252,21 @@ func _build_geometry():
 		var m = SpatialMaterial.new(); m.albedo_color = Color(0.05, 0.14, 0.13, 0.82); m.flags_transparent = true
 		m.roughness = 0.08; m.metallic = 0.6; m.normal_enabled = true; m.normal_texture = _noise_tex(77, 30.0, true)
 		m.uv1_scale = Vector3(gw / 3.0, gh / 3.0, 1)
-		wm.material_override = m; add_child(wm); wm.name = "Water"
+		wm.material_override = m
+		if Mats.enabled(): wm.material_override = Fx.water_material(_noise_tex(77, 24.0, true), _noise_tex(91, 13.0, true))
+		add_child(wm); wm.name = "Water"
+	# atmosphere: steam in the industrial levels, drips where there is water
+	if Mats.enabled():
+		var spots = 0
+		for cz in gh:
+			for cx in gw:
+				if not is_floor(cx, cz) or grid[cz][cx] != "." or _wall_dir(cx, cz) == Vector3(): continue
+				var roll = _rng.randf()
+				var c0 = center(cx, cz)
+				if data.get("pal", "") in ["power", "transport"] and roll < 0.025 and spots < 6:
+					Fx.steam(self, c0 + _wall_dir(cx, cz) * 0.85 + Vector3(0, 0.3, 0)); spots += 1
+				elif pal.has("water") and roll < 0.05 and spots < 10:
+					Fx.drips(self, c0 + Vector3(0, pal.h - 0.05, 0), pal.h); spots += 1
 	# automatic dressing: corridor pipes, conduits, debris
 	var pipe = CylinderMesh.new(); pipe.top_radius = 0.07; pipe.bottom_radius = 0.07; pipe.height = C; pipe.radial_segments = 8
 	var pm1 = Props.mat(Color(0.3, 0.2, 0.14), 0, 0.5, 0.6); var pm2 = Props.mat(Color(0.25, 0.27, 0.28), 0, 0.4, 0.7)
@@ -317,6 +337,7 @@ func _build_entities():
 			if d == null: continue
 			counts[ch] = counts.get(ch, 0) + 1
 			if d.get("ngp", false) and not G.flag("ngp"): continue   # New Game+ only content
+			if d.has("only_if") and not G.flag(d.only_if): continue   # earned content (e.g. all notebook pages found)
 			var e = {"d": d, "ch": ch, "kind": d.t, "pos": c, "cell": Vector2(cx, cz), "uid": "c%d_%s%d" % [data.n, ch, counts[ch]],
 				"node": null, "body": null, "done": false, "open": false}
 			e.done = G.flag("u:" + e.uid)
@@ -339,9 +360,16 @@ func _mk_light(e, cx, cz):
 	l.light_color = col; l.omni_range = d.get("r", 9.0); l.omni_attenuation = 1.4
 	l.light_energy = d.get("e", 1.3); l.shadow_bias = 0.25
 	l.translation = e.pos + Vector3(0, min(pal.h - 0.45, 3.4), 0); add_child(l)
-	var fx = Props.box(self, Vector3(0.9, 0.08, 0.25), e.pos + Vector3(0, pal.h - 0.05, 0), col, 2.5)
+	var rec = {"node": l, "d": d, "base": l.light_energy, "t": _rng.randf() * 10.0, "cone": null, "sparks": null, "was_on": true}
+	if Mats.enabled():
+		# fluorescent fitting + a soft light shaft through the fog
+		rec.fx = Fx.fixture(self, e.pos + Vector3(0, pal.h - 0.06, 0), col, Props.mat(Color(0.3, 0.31, 0.3), 0, 0.5, 0.6)).get_node("diffuser")
+		rec.cone = Fx.cone(self, e.pos + Vector3(0, pal.h - 0.12, 0), pal.h - 0.15, col)
+		if d.get("flicker", false): rec.sparks = Fx.sparks(self, e.pos + Vector3(0, pal.h - 0.15, 0))
+	else:
+		rec.fx = Props.box(self, Vector3(0.9, 0.08, 0.25), e.pos + Vector3(0, pal.h - 0.05, 0), col, 2.5)
 	e.node = l
-	lights.append({"node": l, "d": d, "base": l.light_energy, "fx": fx, "t": _rng.randf() * 10.0})
+	lights.append(rec)
 
 func _mk_prop(e, cx, cz):
 	var n = Props.make(e.d.p, e.d.get("tint", Color(1, 1, 1)))
@@ -483,6 +511,15 @@ func _physics_process(dt):
 		if l.d.get("red", false): e *= 0.55 + 0.45 * sin(l.t * 4.0)
 		l.node.light_energy = e
 		l.fx.visible = e > 0.1
+		if l.cone:
+			l.cone.visible = e > 0.05
+			if l.cone.visible: l.cone.material_override.set_shader_param("energy", e)
+		if l.sparks:
+			var on_now = e > l.base * 0.5
+			if on_now and not l.was_on and _rng.randf() < 0.35:
+				l.sparks.restart(); l.sparks.emitting = true
+				Snd.play3d("glitch", self, l.node.global_transform.origin, -16, 2.2, 14)
+			l.was_on = on_now
 	for e in ents:
 		if e.kind == "trig" and not e.done:
 			if _cond(e.d) and Vector2(pp.x - e.pos.x, pp.z - e.pos.z).length() < e.d.get("r", 1.6) and not ui.in_cine:

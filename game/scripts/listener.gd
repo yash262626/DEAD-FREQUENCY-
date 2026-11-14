@@ -307,7 +307,7 @@ func _physics_process(dt):
 	snd.pitch_scale = [0.5, 0.8, 1.0, 1.0, 0.6, 1.6, 0.4, 0.8][st]
 	snd.unit_db = [-12, 0, 2, 2, -6, 6, -30, 0][st]
 	# visibility (cloaked variants can only be seen on 107.9 or at arm's length)
-	body.visible = not cloaked or level.reveal_on or dist < 2.2
+	body.visible = not cloaked or level.reveal_on or level.force_reveal or dist < 2.2
 
 func _move(dt: float, speed: float):
 	if route.size() == 0 or speed <= 0.0: return
@@ -334,20 +334,48 @@ func _move(dt: float, speed: float):
 		_step = 0.0
 		Snd.play3d("step", level, me, 4 if st == S.HUNT else -2, 0.55, 22)
 
+var _snap_t := 0.0
+var _dish_target := 0.0
+var _glitch_t := 0.0
 func _animate(dt: float, speed: float):
-	_anim += dt * (2.0 + speed * 2.2)
-	var sw = sin(_anim) * (0.12 + speed * 0.12)
-	body.get_node("leg_l").rotation.x = sw; body.get_node("leg_r").rotation.x = -sw
-	body.get_node("arm_l").rotation.x = -sw * 0.7 - (0.9 if st == S.HUNT else 0.0)
-	body.get_node("arm_r").rotation.x = sw * 0.7 - (0.9 if st == S.HUNT else 0.0)
-	body.translation.y = abs(sin(_anim)) * 0.03
-	# the dish tilts toward whatever it is listening to
-	var neck = body.get_node("neck")
-	var want = 0.0
-	if st in [S.INVESTIGATE, S.SEARCH, S.DORMANT, S.AMBUSH]: want = sin(_anim * 0.35) * 0.9
-	neck.rotation.y = lerp(neck.rotation.y, want, 3 * dt)
-	neck.rotation.z = lerp(neck.rotation.z, 0.5 if st == S.STALK else 0.0, 2 * dt)
-	var pit = neck.get_node("pit").material_override
+	# long, unhurried strides; knees fold on the back-swing; arms hang and lag. In a hunt it pitches forward.
+	_anim += dt * (1.6 + speed * 1.9)
+	var stride = 0.18 + speed * 0.11
+	var sw = sin(_anim) * stride
+	var hunting = st == S.HUNT
+	for side in [["l", 1.0], ["r", -1.0]]:
+		var ph = sw * side[1]
+		var leg = body.get_node("leg_" + side[0]); var knee = leg.get_node("knee_" + side[0])
+		leg.rotation.x = ph
+		knee.rotation.x = max(0.0, -ph) * 1.6 + (0.25 if hunting else 0.08)     # bend on the back-swing
+		var chest = body.get_node("torso/chest")
+		var arm = chest.get_node("arm_" + side[0]); var elbow = arm.get_node("elbow_" + side[0])
+		arm.rotation.x = -ph * 0.6 - (1.0 if hunting else 0.0)
+		elbow.rotation.x = -(0.25 + max(0.0, ph) * 0.6) - (0.5 if hunting else 0.0)
+	var torso = body.get_node("torso")
+	torso.rotation.x = lerp(torso.rotation.x, 0.45 if hunting else (0.2 if st == S.STALK else 0.06), 3 * dt)
+	body.translation.y = abs(sin(_anim)) * 0.035 * min(1.0, speed)
+	# the dish snaps toward sound, then drifts — like an ear, not an eye
+	var neck = body.get_node("torso/chest/neck")
+	_snap_t -= dt
+	if _snap_t <= 0.0:
+		_snap_t = _rng.randf_range(0.6, 2.4)
+		if st in [S.INVESTIGATE, S.SEARCH, S.DORMANT, S.AMBUSH, S.PATROL]:
+			_dish_target = _rng.randf_range(-1.0, 1.0)
+		elif st == S.HUNT or st == S.STALK:
+			var to = player.global_transform.origin - global_transform.origin
+			_dish_target = clamp(wrapf(atan2(-to.x, -to.z) - rotation.y, -PI, PI), -1.0, 1.0)
+	var k = 14.0 if abs(neck.rotation.y - _dish_target) > 0.3 else 2.0
+	neck.rotation.y = lerp(neck.rotation.y, _dish_target, min(1.0, k * dt))
+	neck.rotation.z = lerp(neck.rotation.z, 0.45 if st == S.STALK else 0.0, 2 * dt)
+	# signal stutter: while stalking or investigating it sometimes skips a frame, like a bad picture
+	_glitch_t -= dt
+	if (st == S.STALK or st == S.INVESTIGATE) and _glitch_t <= 0.0:
+		_glitch_t = _rng.randf_range(1.5, 4.0)
+		body.translation.x = _rng.randf_range(-0.06, 0.06)
+	elif _glitch_t < 1.35:
+		body.translation.x = lerp(body.translation.x, 0.0, 20 * dt)
+	var pit = neck.get_node("head/pit").material_override
 	pit.emission_enabled = st == S.HUNT or st == S.STALK
 	pit.emission = Color(0.9, 0.08, 0.04); pit.emission_energy = 1.4 if st == S.HUNT else 0.3
 

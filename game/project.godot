@@ -16,6 +16,7 @@ boot_splash/show_image=false
 G="*res://scripts/g.gd"
 Snd="*res://scripts/snd.gd"
 Story="*res://data/story.gd"
+Mats="*res://scripts/mats.gd"
 
 [display]
 

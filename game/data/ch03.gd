@@ -8,7 +8,7 @@ const DATA = {
 		"#..S...#.b..b..b.#..f....#..T....#",
 		"#......#.........#.......#......j#",
 		"#..a...#.b..b..b.#..L..H.#....L..#",
-		"#...L..#.....L...#.......#..t....#",
+		"#...L..#.....L...#......U#..t....#",
 		"#......#.........#....q..#.......#",
 		"###D#######D#########D#######D####",
 		"#....L......P.....1......L.....PY#",
@@ -79,6 +79,7 @@ const DATA = {
 			["DANIEL", "Paging a doctor who's been gone twenty-eight years."],
 		]},
 		"x": {"t": "pcrate"},
+		"U": {"t": "note", "title": "Mira's notebook — page 1 of 5", "flag": "mira_p1", "text": "17 October. 02:43. Loop one? I don't know what to call it.\n\nThe lights went, and then it was 02:43 again, and Evelyn was saying 'Take him, Mira' again — except I had already taken him. My arms still feel the weight of him.\n\nI'm writing this down because the notebook is the only thing that stays where I leave it.", "ev": [["DANIEL", "Mira's handwriting. 'The notebook is the only thing that stays.'"], ["if", "mira_p1", [["if", "mira_p2", [["if", "mira_p3", [["if", "mira_p4", [["if", "mira_p5", [["flag", "mira_all"], ["ach", "notebook"], ["toast", "That's every page. If she left one more, it's where she is."]]]]]]]]]]]]},
 		"k": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (2 of 4)", "flag": "pell2", "lines": [
 			["PELL (1998)", "Records to medical. Doctor Lind? The man in the orange jacket — he's in your records office. He's reading the files."],
 			["LIND (1998)", "Jonah, there's nobody in my office. I'm standing in it."],
@@ -125,5 +126,5 @@ const DATA = {
 		["DANIEL", "Lift down is on this level. Find it, find power, find a phone."],
 		["obj", "Search the medical wing. The service lift is somewhere along the main corridor."],
 	],
-	"walk": ["w", "f", ["radio", "k"], "t", "T", "1", ["crate", "x", "p"], "Q", "z", "X", "N", "Y"],
+	"walk": ["w", "f", "U", ["radio", "k"], "t", "T", "1", ["crate", "x", "p"], "Q", "z", "X", "N", "Y"],
 }

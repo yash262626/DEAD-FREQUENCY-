@@ -12,7 +12,7 @@ const DATA = {
 		"#...a#...u.....u..y..u.......#",
 		"##.###.......w...............#",
 		"#....########D################",
-		"#.e..#.........#.H...........#",
+		"#.e..#........Q#.H...........#",
 		"#....#..1..A...#..q..A...r...#",
 		"#..H.#.........D.............#",
 		"#c...#..T..V...#.............#",
@@ -28,6 +28,7 @@ const DATA = {
 		"u": {"t": "prop", "p": "turbine"}, "g": {"t": "mark"},
 		"a": {"t": "note", "title": "Shaft maintenance log", "text": "MAINTENANCE SHAFT — LOG\n\n17/10  01:55  Ladder inspection. Rungs 40–44 loose. Tagged.\n17/10  02:20  Heard someone climbing below me. Called down. Nobody below me. Called down again. Heard my own voice call back up.\n17/10  02:44  Power station dark. Turbines spun down in under a minute. That is not possible. They take twenty.\n\nNot going back down. Not tonight. — A. Ruiz"},
 		"e": {"t": "item", "id": "battery"},
+		"Q": {"t": "note", "title": "Mira's notebook — page 2 of 5", "flag": "mira_p2", "text": "Loop 214.\n\nThe notebook stays. Nothing else does. The coats go back on their hooks. The coffee in Evelyn's mug is warm again every time.\n\nI've stopped drinking it. It tastes like the first time.", "ev": [["if", "mira_p1", [["if", "mira_p2", [["if", "mira_p3", [["if", "mira_p4", [["if", "mira_p5", [["flag", "mira_all"], ["ach", "notebook"], ["toast", "That's every page. If she left one more, it's where she is."]]]]]]]]]]]]},
 		"y": {"t": "item", "id": "fluid", "ev": [["DANIEL", "Hydraulic fluid. Five litres, sealed. Heavier than it looks."]]},
 		"U": {"t": "use", "p": "generator", "prompt": "Refill and prime the accumulator", "need": "fluid", "fail": "The tunnel door's hydraulic accumulator. Bone dry — it needs a can of fluid.", "ev": [
 			["sfx", "power_up", -4, 0.6], ["flag", "c5_hyd"],
@@ -133,5 +134,5 @@ const DATA = {
 		["toast", "Crouch to move quietly. Throw a bottle (G) to pull its attention somewhere else."],
 		["obj", "Cross the turbine hall to the power station control room. Stay away from the clicking."],
 	],
-	"walk": ["1", "T", ["radio", "r"], "k", "i", "l", "j", "y", "c", "O", "x", "U", "w", "M"],
+	"walk": ["1", "Q", "T", ["radio", "r"], "k", "i", "l", "j", "y", "c", "O", "x", "U", "w", "M"],
 }

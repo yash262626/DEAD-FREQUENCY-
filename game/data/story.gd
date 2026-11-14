@@ -25,11 +25,13 @@ const ACH = {
 	"end_A": "Ending — Silence", "end_B": "Ending — The Open Door", "end_C": "Ending — The Loop", "end_D": "Ending — The Last Transmission",
 	"all_endings": "The Signal Never Ends — see all four endings",
 	"second_signal": "Second Signal — finish New Game+",
+	"long_ear": "Long Ear — find the Directorate annex",
+	"notebook": "Eleven Thousand Nights — find every page of Mira's notebook",
 	"static_between": "Static Between — hear every transmission on 88.0",
 }
 
 # Achievements whose name and description stay hidden until earned (Steam "hidden" flag).
-const HIDDEN_ACH = ["pell", "second_signal", "static_between", "unseen"]
+const HIDDEN_ACH = ["pell", "second_signal", "static_between", "unseen", "long_ear", "notebook"]
 
 # Exact names and roles supplied by the project owner.
 const CREDITS = [

@@ -4,7 +4,7 @@ const DATA = {
 	"pal": "comms", "sub": "SUBLEVEL 4 — COMMUNICATIONS CENTRE", "music": "drone_c", "amb_loop": "hum", "amb_db": -22.0, "face": 180,
 	"map": [
 		"##############################",
-		"#....#.............#.........#",
+		"#....#.............#........Q#",
 		"#.S..#..c...c...c..#..T...L..#",
 		"#....#.....L...j...#.........#",
 		"#.L..#..x...U...c..#..n......#",
@@ -85,6 +85,7 @@ const DATA = {
 		"b": {"t": "use", "p": "dish", "cycle": 4, "target": 3, "group": "arr", "label": "Feed horns", "prompt": "Turn the east feed horn"},
 		"g": {"t": "use", "p": "dish", "cycle": 4, "target": 1, "group": "arr", "label": "Feed horns", "prompt": "Turn the south feed horn"},
 		"e": {"t": "item", "id": "battery"},
+		"Q": {"t": "note", "title": "Mira's notebook — page 3 of 5", "flag": "mira_p3", "text": "Loop 1,906.\n\nI've tried every frequency on the set. 96.1 is the only one that ever answers, and it is always someone who isn't there.\n\nTonight somebody answered and said his name was Arlen. Arlen. I've heard that name before — it asked Hale for an Arlen, weeks ago. Before all this.", "ev": [["DANIEL", "Somebody called Arlen answered her. Before me. Or — me, before."], ["if", "mira_p1", [["if", "mira_p2", [["if", "mira_p3", [["if", "mira_p4", [["if", "mira_p5", [["flag", "mira_all"], ["ach", "notebook"], ["toast", "That's every page. If she left one more, it's where she is."]]]]]]]]]]]]},
 		"j": {"t": "radio", "f": 89.1, "r": 12.0, "title": "Pell — the stranger (3 of 4)", "flag": "pell3", "lines": [
 			["PELL (1998)", "Okafor. He's in the Signal Room now. He's at the uplink console, talking to someone. He keeps saying 'Northline'."],
 			["OKAFOR (1998)", "There is no Northline, Jonah."],
@@ -114,5 +115,5 @@ const DATA = {
 		["DANIEL", "Uplink, then Northline. Then out. Whatever 'out' means now."],
 		["obj", "Bring the uplink online: align the feed horns and find a tuning crystal."],
 	],
-	"walk": [["radio", "x"], ["radio", "j"], ["radio", "r"], "K", "k", "N", ["radio", "w"], "a", "a", "b", "b", "b", "g", "T", "U", "M"],
+	"walk": [["radio", "x"], ["radio", "j"], ["radio", "r"], "K", "k", "Q", "N", ["radio", "w"], "a", "a", "b", "b", "b", "g", "T", "U", "M"],
 }

@@ -44,11 +44,85 @@ func setup(lv, u):
 	cam = Camera.new(); cam.near = 0.06; cam.far = 120; cam.current = true; head.add_child(cam)
 	lamp = SpotLight.new(); lamp.spot_range = 22; lamp.spot_angle = 26; lamp.spot_attenuation = 0.7; lamp.spot_angle_attenuation = 0.6
 	lamp.light_energy = 0.0; lamp.light_color = Color(1.0, 0.95, 0.85); lamp.shadow_enabled = true; lamp.shadow_bias = 0.9
-	lamp.translation = Vector3(0.22, -0.18, 0.0); cam.add_child(lamp)
+	lamp.translation = Vector3(0.21, -0.17, -0.2); cam.add_child(lamp)
 	ray = RayCast.new(); ray.cast_to = Vector3(0, 0, -2.7); ray.collision_mask = 3; ray.enabled = true; cam.add_child(ray)
 	var listener3d = Listener.new(); cam.add_child(listener3d); listener3d.make_current()
+	if Mats.enabled(): load("res://scripts/fx.gd").dust(cam)
+	_build_hands()
 	apply_quality()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+# ---------------------------------------------------------------- first-person hands
+var hands: Spatial
+var radio_model: Spatial
+var light_model: Spatial
+var _lens: SpatialMaterial
+var _screen: SpatialMaterial
+var _sway := Vector2()
+var _reach := 0.0
+
+func _hm(col: Color, emis := 0.0, rough := 0.8, metal := 0.0) -> SpatialMaterial:
+	# the rig is scaled to 60 % and kept within ~0.25 m of the camera, inside the 0.34 m body radius, so it never clips walls
+	var m = SpatialMaterial.new(); m.albedo_color = col; m.roughness = rough; m.metallic = metal
+	if emis > 0.0:
+		m.emission_enabled = true; m.emission = col; m.emission_energy = emis
+	return m
+
+func _part(parent: Node, mesh: Mesh, m: Material, pos: Vector3, rot := Vector3()) -> MeshInstance:
+	var mi = MeshInstance.new(); mi.mesh = mesh; mi.material_override = m; mi.translation = pos; mi.rotation_degrees = rot
+	mi.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(mi)
+	return mi
+
+func _cyl(r1: float, r2: float, h: float) -> CylinderMesh:
+	var c = CylinderMesh.new(); c.top_radius = r1; c.bottom_radius = r2; c.height = h; c.radial_segments = 12; c.rings = 1
+	return c
+
+func _cube(s: Vector3) -> CubeMesh:
+	var c = CubeMesh.new(); c.size = s
+	return c
+
+func _build_hands():
+	hands = Spatial.new(); hands.name = "hands"; cam.add_child(hands)
+	hands.scale = Vector3(0.6, 0.6, 0.6)
+	var sleeve = _hm(Color(0.62, 0.24, 0.06), 0, 0.9)          # Northline orange
+	var cuff = _hm(Color(0.2, 0.2, 0.22), 0, 0.9)
+	var glove = _hm(Color(0.09, 0.09, 0.1), 0, 0.85)
+	var metal = _hm(Color(0.16, 0.17, 0.18), 0, 0.35, 0.7)
+	# right hand: the torch
+	light_model = Spatial.new(); light_model.translation = Vector3(0.21, -0.2, -0.34); hands.add_child(light_model)
+	_part(light_model, _cyl(0.045, 0.05, 0.3), sleeve, Vector3(0.03, -0.05, 0.2), Vector3(70, 0, 0))
+	_part(light_model, _cyl(0.05, 0.05, 0.05), cuff, Vector3(0.025, -0.01, 0.07), Vector3(70, 0, 0))
+	_part(light_model, _cube(Vector3(0.075, 0.07, 0.09)), glove, Vector3(0.01, 0.0, 0.0))
+	_part(light_model, _cyl(0.022, 0.018, 0.2), metal, Vector3(0, 0.03, -0.06), Vector3(90, 0, 0))
+	_lens = _hm(Color(1.0, 0.95, 0.8), 0.0)
+	_part(light_model, _cyl(0.027, 0.027, 0.02), _lens, Vector3(0, 0.03, -0.165), Vector3(90, 0, 0))
+	# left hand: the HX-7 receiver
+	radio_model = Spatial.new(); radio_model.translation = Vector3(-0.2, -0.62, -0.36); hands.add_child(radio_model)
+	_part(radio_model, _cyl(0.045, 0.05, 0.3), sleeve, Vector3(-0.04, -0.12, 0.17), Vector3(55, 0, 10))
+	_part(radio_model, _cube(Vector3(0.13, 0.19, 0.05)), _hm(Color(0.2, 0.24, 0.2), 0, 0.6, 0.3), Vector3(0, 0, 0))
+	_screen = _hm(Color(0.35, 1.0, 0.5), 1.4)
+	_part(radio_model, _cube(Vector3(0.09, 0.035, 0.005)), _screen, Vector3(0, 0.055, -0.026))
+	_part(radio_model, _cyl(0.018, 0.018, 0.012), metal, Vector3(0.035, -0.02, -0.028), Vector3(90, 0, 0))
+	_part(radio_model, _cyl(0.004, 0.004, 0.24), metal, Vector3(0.05, 0.2, 0.0))
+	_part(radio_model, _cube(Vector3(0.08, 0.1, 0.07)), glove, Vector3(-0.02, -0.08, 0.02))
+
+func _animate_hands(dt: float):
+	if hands == null: return
+	hands.visible = not ui.in_cine and not hidden
+	var radio_on = level.radio != null and level.radio.on and G.has_radio
+	var ry = -0.24 if radio_on else -0.62
+	radio_model.translation.y = lerp(radio_model.translation.y, ry, min(1.0, 9 * dt))
+	radio_model.visible = radio_model.translation.y > -0.58
+	_lens.emission_enabled = light_on
+	_lens.emission = Color(1.0, 0.95, 0.8); _lens.emission_energy = 3.0
+	_screen.emission_energy = 1.0 + (level.radio.sig * 1.5 if radio_on else 0.0)
+	# sway: hands lag behind the view and bob with the stride
+	_sway = _sway.linear_interpolate(Vector2(), min(1.0, 6 * dt))
+	_reach = max(0.0, _reach - dt * 4.0)
+	var bob = Vector3(cos(_bob) * 0.008, sin(_bob * 2.0) * 0.01, 0) if moving_speed > 0.5 else Vector3()
+	hands.translation = hands.translation.linear_interpolate(Vector3(-_sway.x * 0.03, _sway.y * 0.03, -_reach * 0.06) + bob, min(1.0, 12 * dt))
+	hands.rotation.z = lerp(hands.rotation.z, -lean * 0.15 + (rand_range(-1, 1) * shake * 0.05), min(1.0, 10 * dt))
 
 func apply_quality():
 	cam.fov = G.settings.fov
@@ -63,6 +137,7 @@ func _input(ev):
 		_look(ev.relative * 0.0022 * G.settings.sens)
 
 func _look(d: Vector2):
+	_sway += d * 6.0
 	if hidden: d *= 0.4
 	rotation.y -= d.x
 	pitch = clamp(pitch - d.y * (-1.0 if G.settings.invert_y else 1.0), -1.45, 1.45)
@@ -86,6 +161,7 @@ func look_at_point(p: Vector3):
 
 func _process(dt):
 	head.rotation.x = pitch
+	_animate_hands(dt)
 	_hurt_cd = max(0.0, _hurt_cd - dt)
 	# flashlight
 	if light_on:
@@ -127,7 +203,9 @@ func _process(dt):
 		if c and c.has_meta("ent"): e = c.get_meta("ent")
 	var p = level.prompt_for(e)
 	ui.prompt(("[F]  " + p) if p != "" else "")
-	if p != "" and Input.is_action_just_pressed("interact"): level.interact(e)
+	if p != "" and Input.is_action_just_pressed("interact"):
+		_reach = 1.0
+		level.interact(e)
 
 func _physics_process(dt):
 	if level.dead: return

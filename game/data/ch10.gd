@@ -54,6 +54,8 @@ const DATA = {
 			["MIRA (96.1 MHz)", "Danny, that isn't me. I'm not at the bulkhead. I'm in the chamber, with your mother. Whatever is at that door — keep it shut."],
 			["radio_on", true, 103.7], ["sfx", "glitch", -8],
 			["HALE (103.7 MHz)", "Arlen, that's her at the door. That's Mira. The thing on the radio is wearing her. Open the bulkhead and get her out."],
+			["if", "c6_told", [["HALE (103.7 MHz)", "Twenty-three is a smaller number than forty-one. Isn't that what she told you, Arlen? You told me so yourself."],
+				["DANIEL", "I said that on the air. I handed it that."]]],
 			["radio_on", false],
 			["DANIEL", "Two Miras. Hale says open it. Mira says keep it shut."],
 			["DANIEL", "Mira. Sing it. Sing me the song."],

@@ -406,6 +406,8 @@ func _play_chapter(n: int):
 			ok(G.flag(pl.d.get("flag", "")) or pl.done, "ch%02d: plate %s pressed" % [n, s[2]])
 			continue
 		var e = _ent(lv, key)
+		if e == null and G.flag("cs_run"):
+			continue   # earned content (only_if) can't exist in a mid-campaign start
 		if e == null:
 			ok(false, "ch%02d: walkthrough step '%s' has no entity" % [n, key]); continue
 		var pp = lv.player.global_transform.origin

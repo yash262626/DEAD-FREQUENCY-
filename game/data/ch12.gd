@@ -56,6 +56,7 @@ const DATA = {
 			["HALE (02:47, 1998)", "All posts. Containment protocol. The bulkhead closes at two forty-nine. God help us."],
 			["radio_on", false], ["unloop", "static"],
 			["listener", "seek", "b"], ["group", "check"],
+			["if", "c12_a", [["listener", "ambush"]]],
 		]},
 		"c": {"t": "use", "p": "rack", "prompt": "Start the south emitter", "ev": [
 			["flag", "c12_c"], ["sfx", "power_up", 2, 1.1], ["shake", 0.3],

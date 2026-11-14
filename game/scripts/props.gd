@@ -3,6 +3,8 @@ extends Reference
 # ships with zero imported art; see docs/11_ASSET_LIST.md for the replacement plan.
 
 static func mat(col: Color, emis := 0.0, rough := 0.7, metal := 0.0) -> SpatialMaterial:
+	if emis <= 0.0 and col.a >= 1.0 and Mats.enabled():
+		return Mats.prop(col, rough, metal)
 	var m = SpatialMaterial.new()
 	m.albedo_color = col; m.roughness = rough; m.metallic = metal
 	if emis > 0.0:
@@ -229,27 +231,97 @@ static func figure(n: Spatial, col: Color, s := 1.0, emis := 0.0):
 	head.mesh = sm; head.material_override = mat(Color(0.72, 0.6, 0.52, col.a), emis); head.translation = Vector3(0, 1.67 * s, 0); head.name = "head"
 	n.add_child(head)
 
+const SKIN_SHADER = """
+shader_type spatial;
+render_mode specular_schlick_ggx;
+uniform vec4 base : hint_color = vec4(0.02, 0.02, 0.025, 1.0);
+uniform vec4 rim : hint_color = vec4(0.25, 0.32, 0.4, 1.0);
+uniform float rim_power = 3.0;
+void fragment() {
+	ALBEDO = base.rgb;
+	ROUGHNESS = 0.28;
+	SPECULAR = 0.6;
+	float f = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), rim_power);
+	EMISSION = rim.rgb * f * 0.35;   // a faint cold rim so its silhouette reads in the dark
+}
+"""
+
+static func _limb(parent: Node, r_top: float, r_bot: float, length: float, m: Material) -> MeshInstance:
+	# tapered segment hanging down from its parent joint
+	var mi = MeshInstance.new(); var cm = CylinderMesh.new()
+	cm.top_radius = r_top; cm.bottom_radius = r_bot; cm.height = length; cm.radial_segments = 10; cm.rings = 2
+	mi.mesh = cm; mi.material_override = m; mi.translation = Vector3(0, -length / 2.0, 0)
+	parent.add_child(mi)
+	return mi
+
+static func _joint(parent: Node, name: String, pos: Vector3) -> Spatial:
+	var j = Spatial.new(); j.name = name; j.translation = pos; parent.add_child(j)
+	return j
+
+static func _dish(parent: Node, radius: float, depth: float, m: Material) -> MeshInstance:
+	# shallow paraboloid, opening toward +z (its "face")
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var rings = 8; var seg = 24
+	for r in rings:
+		for s in seg:
+			var pts = []
+			for d in [[r, s], [r + 1, s], [r + 1, s + 1], [r, s + 1]]:
+				var rr = radius * d[0] / float(rings); var a = TAU * d[1] / float(seg)
+				pts.append(Vector3(cos(a) * rr, sin(a) * rr, depth * pow(rr / radius, 2.0)))
+			for v in [pts[0], pts[1], pts[2], pts[0], pts[2], pts[3]]:
+				st.add_normal(Vector3(-v.x, -v.y, radius).normalized()); st.add_vertex(v)
+	st.generate_normals()
+	var mi = MeshInstance.new(); mi.mesh = st.commit(); mi.material_override = m
+	parent.add_child(mi)
+	return mi
+
 static func listener_body() -> Spatial:
-	# The Listener: too tall, too thin, and where a face should be - a shallow black dish that turns toward sound.
+	# THE LISTENER. 2.6 m, starved-thin, ribs like a radiator grille, forearms longer than they should be.
+	# Where a face should be: a parabolic dish with a feed horn on three struts. It turns toward sound.
 	var n = Spatial.new()
-	var c = Color(0.015, 0.015, 0.02)
-	var m = mat(c, 0, 1.0, 0.0)
-	for sx in [-0.13, 0.13]:
-		var leg = Spatial.new(); leg.name = "leg_l" if sx < 0 else "leg_r"; leg.translation = Vector3(sx, 1.35, 0); n.add_child(leg)
-		box(leg, Vector3(0.1, 0.72, 0.1), Vector3(0, -0.36, 0.05), c).material_override = m
-		box(leg, Vector3(0.08, 0.7, 0.08), Vector3(0, -1.0, -0.02), c).material_override = m
-		var arm = Spatial.new(); arm.name = "arm_l" if sx < 0 else "arm_r"; arm.translation = Vector3(sx * 2.3, 2.2, 0); n.add_child(arm)
-		box(arm, Vector3(0.07, 0.85, 0.07), Vector3(0, -0.42, 0), c).material_override = m
-		box(arm, Vector3(0.055, 0.95, 0.055), Vector3(0, -1.3, 0.08), c).material_override = m
-		for f in 3: box(arm, Vector3(0.015, 0.3, 0.015), Vector3(-0.03 + f * 0.03, -1.9, 0.1), c).material_override = m
-	box(n, Vector3(0.38, 0.5, 0.2), Vector3(0, 2.05, 0), c).material_override = m
-	box(n, Vector3(0.26, 0.5, 0.16), Vector3(0, 1.6, 0.02), c).material_override = m
-	for i in 5: box(n, Vector3(0.34 - i * 0.02, 0.02, 0.22), Vector3(0, 1.85 + i * 0.09, 0), Color(0.05, 0.05, 0.06)).material_override = m
-	var neck = Spatial.new(); neck.name = "neck"; neck.translation = Vector3(0, 2.35, 0); n.add_child(neck)
-	box(neck, Vector3(0.07, 0.3, 0.07), Vector3(0, 0.12, 0), c).material_override = m
-	var dish = MeshInstance.new(); var dm = CylinderMesh.new(); dm.top_radius = 0.23; dm.bottom_radius = 0.1; dm.height = 0.12; dm.radial_segments = 20
-	dish.mesh = dm; dish.material_override = m; dish.rotation_degrees.x = 90; dish.translation = Vector3(0, 0.36, 0.05); neck.add_child(dish)
-	var pit = MeshInstance.new(); var pm = CylinderMesh.new(); pm.top_radius = 0.19; pm.bottom_radius = 0.19; pm.height = 0.01; pm.radial_segments = 20
-	pit.mesh = pm; pit.name = "pit"; pit.rotation_degrees.x = 90; pit.translation = Vector3(0, 0.36, 0.115)
-	pit.material_override = mat(Color(0.5, 0.05, 0.03), 0.0); neck.add_child(pit)
+	var skin = ShaderMaterial.new(); skin.shader = Shader.new(); skin.shader.code = SKIN_SHADER
+	var dark = mat(Color(0.01, 0.01, 0.012), 0, 0.2, 0.0)
+	var torso = _joint(n, "torso", Vector3(0, 1.42, 0))
+	_limb(torso, 0.09, 0.07, 0.42, skin).translation = Vector3(0, 0.21, 0)          # spine/pelvis core
+	var chest = _joint(torso, "chest", Vector3(0, 0.42, 0))
+	_limb(chest, 0.17, 0.11, 0.6, skin).translation = Vector3(0, 0.3, 0)            # narrow chest, wider at the top
+	for i in 7:                                                                      # rib slats
+		var y = 0.1 + i * 0.075; var w = 0.3 - abs(i - 4) * 0.025
+		var rib = box(chest, Vector3(w, 0.018, 0.2), Vector3(0, y, 0.02), Color(0.03, 0.03, 0.035)); rib.material_override = skin
+	for sx in [-1, 1]:
+		var side = "l" if sx < 0 else "r"
+		# legs: hip -> thigh -> knee -> shin -> long narrow foot
+		var hip = _joint(n, "leg_" + side, Vector3(sx * 0.11, 1.42, 0))
+		_limb(hip, 0.07, 0.045, 0.68, skin)
+		var knee = _joint(hip, "knee_" + side, Vector3(0, -0.68, 0))
+		_limb(knee, 0.045, 0.03, 0.66, skin)
+		box(knee, Vector3(0.07, 0.04, 0.32), Vector3(0, -0.68, 0.1), Color()).material_override = skin
+		# arms: shoulder -> upper arm -> elbow -> very long forearm -> three long fingers
+		var sh = _joint(chest, "arm_" + side, Vector3(sx * 0.21, 0.56, 0))
+		sh.rotation_degrees.z = sx * 6
+		_limb(sh, 0.045, 0.035, 0.62, skin)
+		var el = _joint(sh, "elbow_" + side, Vector3(0, -0.62, 0))
+		_limb(el, 0.035, 0.022, 0.92, skin)
+		for f in 3:
+			var fj = _joint(el, "finger_%s%d" % [side, f], Vector3((f - 1) * 0.025, -0.92, 0.01))
+			fj.rotation_degrees = Vector3(8 + f * 4, 0, (f - 1) * 7)
+			_limb(fj, 0.012, 0.005, 0.34, skin)
+	# neck: two segments, stretched forward, then the dish
+	var neck = _joint(chest, "neck", Vector3(0, 0.62, 0.02))
+	_limb(neck, 0.03, 0.04, 0.24, skin).translation = Vector3(0, 0.12, 0)
+	var head = _joint(neck, "head", Vector3(0, 0.3, 0.04))
+	var dish = _dish(head, 0.26, 0.11, skin); dish.translation = Vector3(0, 0, -0.06)
+	var inner = _dish(head, 0.24, 0.1, dark); inner.translation = Vector3(0, 0, -0.055)
+	for k in 3:                                                                      # feed-horn struts
+		var a = TAU * k / 3.0 + 0.5
+		var strut = MeshInstance.new(); var sm = CylinderMesh.new(); sm.top_radius = 0.006; sm.bottom_radius = 0.006; sm.height = 0.3
+		strut.mesh = sm; strut.material_override = skin; head.add_child(strut)
+		var p0 = Vector3(cos(a) * 0.24, sin(a) * 0.24, 0.05); var p1 = Vector3(0, 0, 0.26)
+		strut.translation = (p0 + p1) / 2.0
+		strut.look_at_from_position(strut.translation, p1, Vector3(0, 1, 0)); strut.rotate_object_local(Vector3(1, 0, 0), PI / 2)
+	var horn = MeshInstance.new(); var hm = CylinderMesh.new(); hm.top_radius = 0.035; hm.bottom_radius = 0.015; hm.height = 0.07
+	horn.mesh = hm; horn.rotation_degrees.x = 90; horn.translation = Vector3(0, 0, 0.27); horn.material_override = skin; head.add_child(horn)
+	var pit = MeshInstance.new(); var pm = SphereMesh.new(); pm.radius = 0.028; pm.height = 0.056
+	pit.mesh = pm; pit.name = "pit"; pit.translation = Vector3(0, 0, 0.31)
+	pit.material_override = mat(Color(0.5, 0.05, 0.03), 0.0); head.add_child(pit)
 	return n

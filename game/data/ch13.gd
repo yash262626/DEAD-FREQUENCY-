@@ -15,11 +15,12 @@ const DATA = {
 		"#......................#",
 		"#..o................o..#",
 		"#..........S...........#",
-		"#......................#",
+		"#.................P....#",
 		"########################",
 	],
 	"leg": {
 		"A": {"t": "prop", "p": "aperture", "rot": 0}, "x": {"t": "mark"},
+		"P": {"t": "note", "only_if": "mira_all", "title": "Mira's notebook — the last page", "flag": "mira_pages", "text": "If you're reading this, you found all of them.\n\nThen you're the one who answers.\n\nI kept the notebook so someone would know we tried. I didn't think it would be you. I hoped. Eleven thousand times, I hoped.\n\n— M.\n(Loop: the last one.)", "ev": [["DANIEL", "She left it where she'd be. Right here. At the Door."]]},
 		"o": {"t": "ghost", "p": "shade", "r": 14.0},
 		"m": {"t": "ghost", "p": "shade", "r": 14.0}, "e": {"t": "ghost", "p": "shade", "r": 14.0},
 		"R": {"t": "light", "red": true, "e": 1.6, "r": 12.0},
@@ -60,5 +61,5 @@ const DATA = {
 		["listener", "face"],
 		["obj", "The Aperture console."],
 	],
-	"walk": [["choice", 2], "U"],
+	"walk": [["choice", 2], "P", "U"],
 }

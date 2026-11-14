@@ -4,7 +4,7 @@ const DATA = {
 	"pal": "transport", "sub": "SUBLEVEL 5 — TRANSPORT LINE", "music": "drone_a", "amb_loop": "hum", "amb_db": -28.0, "face": -90,
 	"map": [
 		"################################",
-		"#n..V#.......L.......L..q...p..#",
+		"#nQ.V#.......L.......L..q...p..#",
 		"#.S..D...........R...m.........#",
 		"#b...#.........................#",
 		"#....#.........Y...............#",
@@ -23,6 +23,7 @@ const DATA = {
 	],
 	"leg": {
 		"x": {"t": "prop", "p": "crate"}, "Z": {"t": "mark"},
+		"Q": {"t": "note", "title": "Mira's notebook — page 4 of 5", "flag": "mira_p4", "text": "Loop 7,040.\n\nI ride the lift up every time. Every time it stops between floors. Every time I hear him laugh at the top, in Ines's arms, and every time the doors open on the bulkhead instead.\n\nI am not going to stop riding it.", "ev": [["if", "mira_p1", [["if", "mira_p2", [["if", "mira_p3", [["if", "mira_p4", [["if", "mira_p5", [["flag", "mira_all"], ["ach", "notebook"], ["toast", "That's every page. If she left one more, it's where she is."]]]]]]]]]]]]},
 		"m": {"t": "ghost", "p": "shade", "r": 6.0},
 		"n": {"t": "note", "title": "Transport booth — procedures", "text": "HELIX-9 TRANSPORT LINE\n\nLast service nightly: 02:30 — CONTAINMENT (staff only)\n\nTRACTION RESTORE: three switches, in the order on the operator's card.\n\n(The card is missing. Pencil on the wall where it used to be pinned:)\nCross took the card home AGAIN.\nJust ask him on the radio. He says it every night."},
 		"o": {"t": "radio", "f": 89.1, "r": 16.0, "title": "Transport, 1998", "flag": "c9_order", "lines": [
@@ -98,6 +99,9 @@ const DATA = {
 			["MIRA (96.1 MHz)", "Talk to me. Keep talking. It's harder for it when you're not alone."],
 			["DANIEL", "What do I talk about?"],
 			["MIRA (96.1 MHz)", "Anything. What you did. Who you turned into. I've wondered for eleven thousand nights."],
+			["sfx", "metal", 4, 0.5], ["shake", 0.5], ["wait", 1.0], ["sfx", "step", 2, 0.5], ["wait", 0.6], ["sfx", "step", 2, 0.5],
+			["DANIEL", "...There's something on the roof."],
+			["MIRA (96.1 MHz)", "Then keep talking. Don't stop. Don't let it have the quiet."],
 			["DANIEL", "I fix radios. I used to run rescue comms in the mountains. Then one night I listened to the wrong voice, and four people froze on Harrow Pass. So now I fix radios."],
 			["MIRA (96.1 MHz)", "Whose voice?"],
 			["DANIEL", "Mine."],
@@ -126,5 +130,5 @@ const DATA = {
 		["DANIEL", "Containment's at the end of the line. So is she."],
 		["obj", "Restore traction power: three switches in the right order, and a traction fuse on the platform."],
 	],
-	"walk": [["radio", "o"], "y", "b", "p", "O", "a", "T", "f", "q", "R", "Y"],
+	"walk": [["radio", "o"], "Q", "y", "b", "p", "O", "a", "T", "f", "q", "R", "Y"],
 }

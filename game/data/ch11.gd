@@ -8,7 +8,7 @@ const DATA = {
 		"#.S..D...n.....#..h...#..T..s..#",
 		"#....#....L....#..L...#...L....#",
 		"#.L..#.......V.#......#........#",
-		"#....#..d...e..#......#........#",
+		"#....#..d...e..#......#.......W#",
 		"######D###########Y#######Q#####",
 		"#................g.............#",
 		"#.zzzz.zzzz.zzzz.zzzz.zzzz..H..#",
@@ -21,6 +21,7 @@ const DATA = {
 	],
 	"leg": {
 		"z": {"t": "prop", "p": "shelf", "block": true}, "Z": {"t": "mark"},
+		"W": {"t": "note", "title": "Mira's notebook — page 5 of 5", "flag": "mira_p5", "text": "Loop eleven thousand and something. I've stopped counting.\n\nEvelyn asked me tonight why I keep writing in this. I told her: so that if anyone ever comes, they'll know we didn't just stand here.\n\nWe tried. We tried eleven thousand times.", "ev": [["if", "mira_p1", [["if", "mira_p2", [["if", "mira_p3", [["if", "mira_p4", [["if", "mira_p5", [["flag", "mira_all"], ["ach", "notebook"], ["toast", "That's every page. If she left one more, it's where she is."]]]]]]]]]]]]},
 		"G": {"t": "ghost", "text": "BOX 19\nSTACK E — ROW 3", "r": 8.0},
 		"r": {"t": "item", "id": "tape_reel", "ev": [["DANIEL", "A reel. 'VOSS, E. — VOICEPRINT — DO NOT LOAN.' Her voice, on a spool, in a box."]]},
 		"U": {"t": "use", "p": "terminal", "prompt": "Deep lift control — play the voiceprint", "if": "u:c11_k1", "need": "tape_reel", "consume": false, "fail": "Deep lift control. 'DIRECTOR'S KEYCARD AND VOICEPRINT REQUIRED.' I need her card — and her voice.", "ev": [
@@ -79,6 +80,7 @@ const DATA = {
 			["radio_on", false],
 			["DANIEL", "You. It was always you. The uplink. The chamber. Everything 'Hale' wanted, you wanted."],
 			["DANIEL", "Do the opposite. Whatever it tells me — do the opposite."],
+			["if", "c6_told", [["DANIEL", "And everything I told it, back in the tunnels — it kept every word."]]],
 			["journal", "Hale", "The Hale on 103.7 was never Hale. Marcus Hale died at 02:51 on 17 October 1998. His last order: if you hear me on the radio after tonight, it isn't me. Do the opposite.\n\nIt wanted the uplink fixed. It wants me at the chamber. It wants the Door open."],
 		]},
 		"Q": {"t": "door", "code": "0243", "label": "VAULT D — DIRECTOR — CODE"},
@@ -115,5 +117,5 @@ const DATA = {
 		["toast", "It has learned how you hide and where you go. Now it waits for you."],
 		["obj", "The deep lift needs the archive keycard and the Director's voiceprint. Read the index card. Look for the vaults."],
 	],
-	"walk": ["n", ["radio", "j"], ["radio", "J"], "d", "e", "Y", "h", "Q", "T", "s", "B", "k", "r", "U", "M"],
+	"walk": ["n", ["radio", "j"], ["radio", "J"], "d", "e", "Y", "h", "Q", "W", "T", "s", "B", "k", "r", "U", "M"],
 }
