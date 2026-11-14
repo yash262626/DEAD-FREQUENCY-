@@ -3,7 +3,7 @@ extends Node
 # first launch and cached in user://, so the project ships no audio assets.
 
 const RATE := 22050
-const CACHE_VER := 4
+const CACHE_VER := 5
 var bank := {}
 var _pool := []
 var _loops := {}
@@ -61,7 +61,40 @@ func unloop(id: String):
 func stop_all_loops():
 	for id in _loops.keys(): unloop(id)
 
+# ------------------------------------------------------------ adaptive music layers
+# Each layer is a looping stream on the Music bus whose volume eases toward a target (0..1).
+var _layers := {}
+var _layer_target := {}
+func layer(id: String, sound: String, target: float):
+	if not bank.has(sound): return
+	if not _layers.has(id):
+		var p = AudioStreamPlayer.new(); p.bus = "Music"; p.stream = bank[sound]; p.volume_db = -80; add_child(p); p.play()
+		_layers[id] = p
+	_layer_target[id] = clamp(target, 0.0, 1.0)
+
+func clear_layers():
+	for id in _layers.keys():
+		_layers[id].queue_free()
+	_layers.clear(); _layer_target.clear()
+
+func _process(dt):
+	for id in _layers:
+		var p = _layers[id]
+		var cur = db2linear(p.volume_db)
+		var tgt = _layer_target.get(id, 0.0)
+		var rate = 0.9 if tgt > cur else 0.35      # swell fast, release slowly
+		cur = move_toward(cur, tgt, rate * dt)
+		p.volume_db = linear2db(max(cur, 0.0001))
+	if _music_a and _music_a.playing:
+		_music_a.volume_db = lerp(_music_a.volume_db, _music_db_target + linear2db(max(_music_duck, 0.0001)), min(1.0, 2.0 * dt))
+
+var _music_db_target := -8.0
+var _music_duck := 1.0
+func duck_music(v: float):
+	_music_duck = clamp(v, 0.0, 1.0)
+
 func music(name: String, db := -8.0):
+	_music_db_target = db
 	if name == _music_name: return
 	_music_name = name
 	if name == "" or not bank.has(name):
@@ -261,11 +294,59 @@ func _gen(name: String):
 			n = RATE * 2; o = _noise(n, 0.06)
 			for i in n:
 				o[i] = o[i] * 3.0 * (0.7 + 0.3 * sin(TAU * 4 * float(i) / n)) + 0.15 * sin(70 * T * i)
-	return _mk(o, name in ["static", "hum", "drone_a", "drone_b", "drone_c", "drone_d", "rain", "heart", "clicks", "alarm", "breath", "tram", "knock"])
+		"step_metal":
+			# a grating underfoot: a dull thud plus a few ringing partials
+			n = int(RATE * 0.32); o = _noise(n, 0.3, 0.05)
+			for i in n:
+				var t = float(i) / RATE
+				o[i] = o[i] * 1.4 * exp(-t * 40) + (0.22 * sin(910 * T * i) + 0.16 * sin(1433 * T * i) + 0.1 * sin(2107 * T * i)) * exp(-t * 14) \
+					+ 0.5 * sin(70 * T * i) * exp(-t * 30)
+		"step_tile":
+			n = int(RATE * 0.14); o = _noise(n, 0.7, 0.25)
+			for i in n:
+				var t = float(i) / RATE
+				o[i] = o[i] * 1.6 * exp(-t * 70) + 0.35 * sin(120 * T * i) * exp(-t * 45)
+		"tension":
+			# 8 s loop: a sub pulse like a slow double heartbeat, a dissonant high cluster that trembles
+			n = RATE * 8; o.resize(n); var nzt = _noise(n, 0.01)
+			for i in n:
+				var t = float(i) / RATE
+				var beat = fmod(t, 2.0)
+				var pulse = exp(-beat * 9.0) + 0.6 * (exp(-(beat - 0.32) * 9.0) if beat > 0.32 else 0.0)
+				var trem = 0.5 + 0.5 * sin(TAU * 6.0 * t)
+				var swell = 0.5 - 0.5 * cos(TAU * t / 8.0)
+				o[i] = 0.55 * sin(41.2 * T * i) * pulse + (0.035 * sin(1760 * T * i) + 0.03 * sin(1864.66 * T * i) + 0.02 * sin(2349.3 * T * i)) * trem * swell \
+					+ nzt[i] * 2.0 * swell
+		"chase":
+			# 4 s loop at 120 bpm: thumping pulse, metal hits on the off-beat, a detuned saw underneath
+			n = RATE * 4; o.resize(n); var nzc = _noise(n, 0.5, 0.1); var p1 = 0.0; var p2 = 0.0
+			for i in n:
+				var t = float(i) / RATE
+				var b = fmod(t, 0.5); var off = fmod(t + 0.25, 0.5)
+				p1 += T * 55.0; p2 += T * 55.8
+				var saw = (fmod(p1 / TAU, 1.0) * 2.0 - 1.0) * 0.08 + (fmod(p2 / TAU, 1.0) * 2.0 - 1.0) * 0.08
+				var kick = sin(T * i * (45.0 + 90.0 * exp(-b * 30.0))) * exp(-b * 12.0) * 0.7
+				var hit = (nzc[i] * 0.8 + 0.15 * sin(1650 * T * i)) * exp(-off * 25.0) * (1.0 if int(t / 0.5) % 2 == 1 else 0.55)
+				o[i] = clamp(saw + kick + hit, -1.0, 1.0)
+		"rasp":
+			# wet, slow breathing through something that is not a mouth
+			n = RATE * 3; o = _noise(n, 0.12, 0.02)
+			for i in n:
+				var t = float(i) / RATE
+				var env = pow(abs(sin(PI * t / 1.5)), 3.0)
+				o[i] = o[i] * 3.0 * env * (0.7 + 0.3 * sin(TAU * 31.0 * t))
+		"snap":
+			n = int(RATE * 0.07); o.resize(n); var ph = 0.0
+			for i in n:
+				var t = float(i) / n
+				ph += T * (3200.0 - 2400.0 * t)
+				o[i] = 0.35 * sin(ph) * (1.0 - t)
+	return _mk(o, name in ["static", "hum", "drone_a", "drone_b", "drone_c", "drone_d", "rain", "heart", "clicks", "alarm", "breath", "tram", "knock", "tension", "chase", "rasp"])
 
 const NAMES = ["static", "hum", "drone_a", "drone_b", "drone_c", "drone_d", "rain", "thunder", "step", "step_wet",
 	"door", "locked", "click", "beep", "beep_hi", "pickup", "impact", "glitch", "voice", "whisper", "heart", "drip",
-	"clicks", "screech", "alarm", "breath", "tune", "power_down", "power_up", "metal", "splash", "tram", "knock"]
+	"clicks", "screech", "alarm", "breath", "tune", "power_down", "power_up", "metal", "splash", "tram", "knock",
+	"step_metal", "step_tile", "tension", "chase", "rasp", "snap"]
 
 func _build_bank():
 	var dir = Directory.new()

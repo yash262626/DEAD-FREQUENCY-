@@ -266,7 +266,7 @@ func _physics_process(dt):
 			_step_acc = 0.0
 			var loud = 12.5 if sprinting else (1.3 if crouching else 5.0)
 			if in_water: loud *= 1.5
-			Snd.play("step_wet" if in_water else "step", -14 if crouching else (-4 if sprinting else -9), rand_range(0.85, 1.15))
+			Snd.play(_step_sound(), -14 if crouching else (-4 if sprinting else -9), rand_range(0.85, 1.15))
 			level.noise(global_transform.origin, loud, "step")
 		if G.settings.head_bob:
 			_bob += moving_speed * dt * 3.2
@@ -297,6 +297,13 @@ func _bottle_hit(_b, rb):
 	level.noise(p, 16.0, "object")
 	yield(get_tree().create_timer(1.5, false), "timeout")
 	if is_instance_valid(rb): rb.queue_free()
+
+func _step_sound() -> String:
+	if in_water: return "step_wet"
+	var floor_tex = level.pal.get("tex", ["", "", "", ""])[1]
+	if floor_tex in ["MetalWalkway014", "MetalPlates006"]: return "step_metal"
+	if floor_tex in ["Tiles043", "Tiles141", "Tiles084"]: return "step_tile"
+	return "step"
 
 func toggle_hide(e):
 	if hidden:

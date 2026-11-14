@@ -64,6 +64,8 @@ func setup(lv, p, u, pos: Vector3, mode: String):
 	body = level.Props.listener_body(); add_child(body)
 	snd = AudioStreamPlayer3D.new(); snd.stream = Snd.bank["clicks"]; snd.unit_db = 2; snd.unit_size = 4.0; snd.max_distance = 26
 	snd.bus = "SFX"; snd.translation.y = 2.4; add_child(snd); snd.play()
+	rasp = AudioStreamPlayer3D.new(); rasp.stream = Snd.bank["rasp"]; rasp.unit_db = -8; rasp.unit_size = 1.2; rasp.max_distance = 7
+	rasp.bus = "SFX"; rasp.translation.y = 2.3; add_child(rasp); rasp.play()
 	cloaked = level.data.get("cloaked", false)
 	ngp = G.flag("ngp")
 	if ngp:
@@ -337,6 +339,7 @@ func _move(dt: float, speed: float):
 var _snap_t := 0.0
 var _dish_target := 0.0
 var _glitch_t := 0.0
+var rasp: AudioStreamPlayer3D
 func _animate(dt: float, speed: float):
 	# long, unhurried strides; knees fold on the back-swing; arms hang and lag. In a hunt it pitches forward.
 	_anim += dt * (1.6 + speed * 1.9)
@@ -366,6 +369,8 @@ func _animate(dt: float, speed: float):
 			var to = player.global_transform.origin - global_transform.origin
 			_dish_target = clamp(wrapf(atan2(-to.x, -to.z) - rotation.y, -PI, PI), -1.0, 1.0)
 	var k = 14.0 if abs(neck.rotation.y - _dish_target) > 0.3 else 2.0
+	if k > 10.0 and _snap_t > _rng.randf_range(0.5, 2.3) and body.visible:
+		Snd.play3d("snap", level, global_transform.origin + Vector3(0, 2.6, 0), -10, _rng.randf_range(0.9, 1.15), 12)
 	neck.rotation.y = lerp(neck.rotation.y, _dish_target, min(1.0, k * dt))
 	neck.rotation.z = lerp(neck.rotation.z, 0.45 if st == S.STALK else 0.0, 2 * dt)
 	# signal stutter: while stalking or investigating it sometimes skips a frame, like a bad picture

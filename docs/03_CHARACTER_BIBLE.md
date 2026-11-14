@@ -75,6 +75,8 @@ Each profile includes a production brief for the final 3D model, animation and v
 
 **Abilities (all implemented).** Imitates voices (repeats lines it has "heard": Daniel's own words in Ch 2, Kessler, Evelyn, Mira, Hale); hunts by sound; tracks radio transmissions; learns habits (hiding spots, radio overuse, where you go); manipulates the environment (power failures, doors, knocking, tapes left playing); psychological illusions (forecasts, the warning); cloaked in containment; blind but hyper-acute hearing at the end.
 
+**Current in-game model (procedural, implemented).** Jointed hips/knees/shoulders/elbows, a chest of horizontal rib slats like a radiator grille, forearms longer than the upper arms, three long fingers, a long neck and a **parabolic dish face with a feed horn held on three struts** — a satellite dish where the face should be. Rim-lit black skin shader so the silhouette reads in darkness; the feed horn glows red when it hunts. Movement: long unhurried strides with knee fold, forward pitch when hunting, a dish that snaps toward sound and then drifts, and "signal-stutter" micro-jumps while stalking or investigating.
+
 **Silhouette / model brief.** 2.6 m. Impossibly thin, long-limbed, slightly stooped. Matte, light-swallowing black with a faint wet sheen. Joints too many: forearms longer than upper arms, three long fingers. Ribbed torso like a radiator grille. No face — a shallow black **dish** where the face should be, which rotates toward sound and glows faintly red inside when it hunts. Moves in uneven bursts; freezes when looked at while stalking.
 
 **Animation set.** Idle "listening" (dish slow scan), patrol walk, investigate (head-tilt, crouch), search (sweeping), stalk (low, freeze-when-watched), hunt run (arms forward), ambush wait (perfectly still), grab/attack, retreat, locker drag-out, "face" turn.
@@ -86,7 +88,11 @@ Each profile includes a production brief for the final 3D model, animation and v
 ## Supporting cast
 | Character | Who | Where heard / seen |
 |---|---|---|
-| **Kessler** | Northline dispatcher, Daniel's friend; calls him "Danny" | Arrival (Ch 1), mimicked (Ch 2), real on the uplink (Ch 7), endings B/C |
+| **Peter Kessler** | Northline dispatcher, Daniel's friend; calls him "Danny". In 1998 (New Game+ reveal) the Directorate's 29-year-old liaison to HELIX-9, due to collect Subject D at 06:00 | Arrival (Ch 1), mimicked (Ch 2), real on the uplink (Ch 7), endings; dispatch slip and 88.0 thread in New Game+ |
+| **The Colonel** | Directorate officer behind Project Long Ear ("we'll never need a receiver again — we'll just need him") | Annex tape (Ch 8) |
+| **Paul Brandt** | Security sergeant, quarantined by Lind; his mother "called" him on the base radio for six years | Ch 3 quarantine tape |
+| **Ana Ruiz** | Power engineer; the turbines say her name in her father's voice | Ch 5 workshop tape |
+| **Lenny Cross** | Transport operator who counted "eleven and a half" on the last tram | Ch 9 manifest and tape |
 | **Tunde Okafor** | Signals supervisor, 44 | 89.1 echoes throughout; personal tape for his wife Adaeze (Ch 6) |
 | **Jonah Pell** | Records clerk | Ch 2 echo, medical log |
 | **Dr. Sara Lind** | Medical officer | Ch 3 (tape, memos, survey) |

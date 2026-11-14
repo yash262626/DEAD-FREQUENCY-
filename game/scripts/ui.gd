@@ -200,16 +200,27 @@ func say(who: String, text: String, dur := -1.0):
 	if G.settings.subtitles:
 		var name = ("[b][color=#%s]%s[/color][/b]   " % [info[0].to_html(false), who]) if who != "" else ""
 		sub.bbcode_text = "[center]" + name + text + "[/center]"
-	if who != "" and Snd.bank.has("voice"):
+	var vo_path = "res://vo/%s.ogg" % vo_id(who, text)
+	var recorded = who != "" and ResourceLoader.exists(vo_path)
+	if recorded:
+		_voice.stream = load(vo_path); _voice.pitch_scale = 1.0; _voice.volume_db = 0.0; _voice.play()
+		dur = max(dur, _voice.stream.get_length() + 0.3)
+	elif who != "" and Snd.bank.has("voice"):
 		_voice.stream = Snd.bank["voice"]; _voice.pitch_scale = info[1] * rand_range(0.96, 1.04)
 		_voice.volume_db = -13.0; _voice.play()
 	var t = 0.0
 	while t < dur and not G.skip:
 		yield(get_tree(), "idle_frame")
 		if not get_tree().paused: t += get_process_delta_time()
-		if who != "" and not _voice.playing and t < dur - 0.9 and not get_tree().paused: _voice.play()
+		if who != "" and not recorded and not _voice.playing and t < dur - 0.9 and not get_tree().paused: _voice.play()
 	_voice.stop(); sub.bbcode_text = ""
 	_saying = false
+
+static func vo_id(who: String, text: String) -> String:
+	# stable id shared with tools/vo_package.py: <speaker>_<first 10 hex of md5("WHO|text")>
+	var base = who.split(" ")[0].replace("?", "").to_lower()
+	if base == "": base = "system"
+	return "%s_%s" % [base, (who + "|" + text).md5_text().substr(0, 10)]
 
 func objective(text: String):
 	objective_text = text

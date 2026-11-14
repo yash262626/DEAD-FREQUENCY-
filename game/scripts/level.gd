@@ -149,7 +149,34 @@ func build(d: Dictionary, main_ref, ui_ref):
 	Snd.music(d.get("music", "drone_a"), -10)
 
 func _exit_tree():
-	Snd.unloop("amb"); Snd.unloop("static"); Snd.unloop("heart"); Snd.unloop("cine")
+	Snd.unloop("amb"); Snd.unloop("static"); Snd.unloop("heart"); Snd.unloop("cine"); Snd.unloop("fear")
+	Snd.clear_layers(); Snd.duck_music(1.0)
+
+var _md_t := 0.0
+func _music_director(dt: float):
+	# tension rises as the Listener gets close or starts searching; a hunt brings in the chase layer;
+	# when it is close but hasn't found you, everything drops to near-silence and you hear only the room.
+	_md_t -= dt
+	if _md_t > 0.0: return
+	_md_t = 0.2
+	var tension = 0.0; var chase = 0.0; var duck = 1.0; var fear = 0.0
+	if listener and is_instance_valid(listener) and not ui.in_cine:
+		var d = (listener.global_transform.origin - player.global_transform.origin).length()
+		var st = listener.st; var S = listener.S
+		if st == S.HUNT:
+			chase = 1.0; tension = 0.5; duck = 0.3
+		else:
+			var near = clamp(1.0 - d / 24.0, 0.0, 1.0)
+			var mult = 1.0 if st in [S.INVESTIGATE, S.SEARCH, S.STALK, S.AMBUSH] else 0.55
+			tension = near * mult
+			if d < 8.0 and st in [S.DORMANT, S.AMBUSH, S.STALK, S.SEARCH]:
+				tension *= 0.25; duck = 0.0          # the silence
+			fear = clamp(1.0 - d / 7.0, 0.0, 1.0)
+	Snd.layer("tension", "tension", tension * 0.9)
+	Snd.layer("chase", "chase", chase * 0.8)
+	Snd.duck_music(duck)
+	if fear > 0.05 and not player.hidden: Snd.loop("fear", "breath", -26.0 + fear * 12.0, 1.1 + fear * 0.25)
+	else: Snd.unloop("fear")
 
 func _build_env():
 	env = Environment.new()
@@ -491,6 +518,7 @@ func _door_close(e):
 # ---------------------------------------------------------------- per-frame
 func _physics_process(dt):
 	if player == null or dead: return
+	_music_director(dt)
 	for w in _walkers:
 		w.t = min(w.dur, w.t + dt)
 		var k = w.t / w.dur

@@ -1,83 +1,76 @@
 # DEAD FREQUENCY — Development Progress Tracker
 
-Status key: **Tested** = implemented and covered by an automated test that passes · **Implemented** = in the game, exercised by playthrough tests or manual checks but without a dedicated assertion · **Partial** = present in reduced form · **Planned** = designed, not built · **Blocked** = cannot be done in this environment.
+Status key: **Tested** = implemented and covered by a passing automated test · **Implemented** = in the game and exercised by playthrough/visual checks, no dedicated assertion · **Partial** · **Planned** · **Blocked** (cannot be done in this environment) · **Awaiting external** (needs people, money or hardware outside this project).
 
-Last full test run: validate 253/0 · flags 73/0 · layout 18/0 · save 12/0 · systems 28/0 · ai 12/0 · flow 13/0 · endings 26/0 · play 198/0 · introtime 135 s.
+Latest full regression: validate 257/0 · flags 161/0 · layout 18/0 · save 17/0 · systems 29/0 · ai 12/0 · flow 13/0 · endings 26/0 · play 225/0 · ngplus 15/0 · vo 4/0 (with a fixture recording) · introtime 135 s.
 
-## Milestones
-| Phase | Scope | Status |
+## Final deliverables (as requested)
+| # | Deliverable | Status |
 |---|---|---|
-| 1 Pre-production | GDD, story & character bibles, campaign, architecture, asset list, roadmap | **Done** (docs 01–15) |
-| 2 Core development | controller, interaction, flashlight, inventory, radio, UI, save | **Done — Tested** |
-| 3 Horror systems | Listener AI, sound detection, stalking, hiding, environmental horror | **Done — Tested** |
-| 4 World development | 13 chapters + prologue + ending sets, puzzles, exploration | **Done (procedural art)** — length below target |
-| 5 Story & cinematics | dialogue, tapes, cutscenes, title reveals, chapter cards, endings, credits | **Done — Tested** (no recorded VO) |
-| 6 Polish & testing | optimisation, bug fixing, balancing, release builds | **Partial** — automated QA done; human playtests, GPU profiling, Windows launch test outstanding |
+| 1 | Updated playable game | **Tested** — 13 chapters, prologue, 4 endings, credits; full campaign plays end-to-end in the automated test |
+| 2 | Expanded campaign | **Partial** — optional wings in every chapter, Directorate Annex, Mira's notebook, Pell's calls, two-part objectives (Ch 5, 8, 9, 11), Ch 6 narrative branch, more encounters. Modelled length 3.9–10.1 h main path, 5.4–14 h with all optional content (17_TIME_BUDGET.md) — **not measured with players; 10–15 h not claimed** |
+| 3 | New Game+ | **Tested** — cross-run memory, bounded adaptations, 88.0 thread, encounter variants, postscripts |
+| 4 | Improved graphics | **Partial** — CC0 PBR materials, fixtures and light shafts, particles, water, new creature, first-person hands, textured exterior, better human figures. Still procedural geometry; **not photoreal** |
+| 5 | Improved audio | **Partial** — adaptive music, silence logic, surface footsteps, creature sounds, fear breathing, VO hook; all sound still synthesised placeholders. No recorded audio |
+| 6 | Improved cinematics | **Partial** — new creature and figures appear in every cinematic; title reveal, second reveal, cards and endings unchanged in structure (see 07_CINEMATIC_SCRIPT.md) |
+| 7 | Updated Windows build | **Implemented** — exported from the final code; Wine smoke test (see 13_TESTING_PLAN.md); **not run on real Windows** |
+| 8 | Automated test reports | **Tested** — 13_TESTING_PLAN.md, 16_BUG_REPORTS.md |
+| 9 | Updated GDD | **Implemented** — 01 |
+| 10 | Updated Story Bible | **Implemented** — 02 (incl. New Game+ canon) |
+| 11 | Updated technical documentation | **Implemented** — 12, 19 (engine migration assessment) |
+| 12 | Updated progress tracker | this document |
+| 13 | Steam release package | **Implemented** — 20_STEAM_RELEASE_PACKAGE.md, PRIVACY.md, THIRD_PARTY_NOTICES.md; integration **awaiting App ID** |
+
+## Phase status
+| Phase | Status |
+|---|---|
+| 1 Finish incomplete gameplay | **Done** — two-part objectives Ch 8/11, save robustness, resolution setting, radio state, bug log |
+| 2 Expand toward 10–15 h | **Partial** — see deliverable 2; needs playtest data before more content is scoped |
+| 3 New Game+ | **Done — Tested** |
+| 4 Graphics and characters | **Partial** — everything achievable with code + CC0 libraries in this environment is in; authored characters/environments need artists (11_ASSET_PRODUCTION_LIST.md) |
+| 5 Sound and music | **Partial** — systems done; content needs a sound designer, composer and actors (18_AUDIO_PRODUCTION_PLAN.md, docs/vo/) |
+| 6 Cinematics and UI | **Partial** — functional and tested; a dedicated polish pass with real assets is pending |
+| 7 Performance and Windows | **Partial** — CPU-side measured; GPU and real-Windows testing awaiting hardware |
+| 8 Release preparation | **Done (docs)** — publishing, Steamworks and App ID **awaiting owner** |
 
 ## Feature status
-| Feature | Status | Notes |
-|---|---|---|
-| First-person walk / sprint / crouch / lean / stamina | Tested | `systems` |
-| Flashlight + battery + spare cells | Tested | |
-| Inventory, keys, items | Tested | `systems`, `play` |
-| Health, injuries (slow + heartbeat + vignette), medkits | Tested | |
-| Interaction, doors, keycards, code locks, power-gated doors | Tested | |
-| Physics puzzle (crate + plate) | Tested | Ch 3 |
-| Ordered-switch puzzles, rotation puzzles | Tested | Ch 5, 6, 7, 9 |
-| Hiding (lockers) with learned searching | Tested | `ai` |
-| Throwing distractions | Implemented | |
-| Radio: dial, bands, directional antenna, battery, static, signal bars, exposure | Tested | |
-| 89.1 / 94.6 / 101.3 / 107.9 + hidden carriers | Tested | every chapter |
-| Listener: 8 states, hearing, sight, learning, mimicry, cloaked, blind | Tested | `ai` + playthrough |
-| Objectives, journal, subtitles, prompts, HUD | Implemented | |
-| Save / load / checkpoints / emergency terminals / death & reload | Tested | `save`, `flow` |
-| Main menu (3D), Continue, Chapter Selection (unlocking), Settings, Credits, Exit | Tested | `flow` |
-| Pause menu, settings (audio, video, controls, accessibility) | Tested | `systems` |
-| Keyboard + mouse, gamepad | Implemented | gamepad not tested with hardware |
-| Opening cinematic (2:15) + first title reveal | Tested | `flow`, `introtime` |
-| Second title reveal (~25 min, "ALREADY INSIDE") | Tested | `play` |
-| Chapter cards (13) | Implemented | reviewed visually |
-| Cinematics (12 required beats) | Implemented | see 07_CINEMATIC_SCRIPT.md |
-| Four endings with distinct staging | Tested | `endings` |
-| End credits (exact names, skip, return to menu, completion saved) | Tested | `endings` |
-| Achievements (14) | Implemented | local; Steamworks planned |
-| Procedural audio (33 sounds), 3D positional audio, reverb | Implemented | |
-| Windows export | Implemented | 39.6 MB `.exe` exported; **not launched on Windows yet** |
-| Linux export | Implemented | booted headless OK |
-| CI (tests + exports) | Implemented | workflow written; not yet run on GitHub |
+| Feature | Status |
+|---|---|
+| Movement, sprint, crouch, lean, stamina | Tested |
+| Flashlight, battery, spare cells | Tested |
+| Radio: dial, 4 bands, hidden carriers (88.0, 92.3, 93.3, 96.1, 98.5, 99.7, 103.7, 104.4), antenna, battery, exposure | Tested |
+| Inventory, keys, items, medkits, bottles | Tested |
+| Health and injuries (slow, heartbeat, vignette) | Implemented |
+| Doors: plain, keycard, code, power-gated, sealed; hidden door | Tested |
+| Puzzles: codes, ordered switches, rotation, crate/plate, two-person release, voiceprint, multi-stage annex | Tested (every puzzle in the critical-path or optional walkthrough) |
+| Hiding with learned searching | Tested |
+| Listener AI: 8 states, hearing, sight, learning, mimicry, cloaked, blind, New Game+ adaptations | Tested |
+| Objectives, journal, subtitles, prompts, HUD | Implemented |
+| Save/load/checkpoints, atomic saves + backup fallback | Tested |
+| Menus, chapter select, settings (incl. resolution), pause | Tested |
+| Gamepad | Implemented (bindings); **not tested with hardware** |
+| Opening cinematic + first title reveal (2 min 15 s) | Tested |
+| Second title reveal "SIGNAL IDENTIFIED / SUBJECT: DANIEL ARLEN / STATUS: ALREADY INSIDE" | Tested |
+| Four endings + New Game+ postscripts | Tested |
+| Credits (exact names/roles, skip, return to menu, completion saved) | Tested |
+| Achievements (18, 6 hidden) | Implemented (local); Steamworks awaiting App ID |
+| PBR materials, light shafts, particles, water, creature model, hands | Implemented (visual QA via `gallery`) |
+| Adaptive music, silence, surface footsteps, creature sounds, VO hook | Implemented; VO hook Tested |
 
-## Against the original brief — gaps, stated plainly
-| Brief | Reality | Why / plan |
+## Honest gaps against the brief
+| Brief | Reality | Why / next step |
 |---|---|---|
-| Unreal Engine 5, C++, Lumen, Nanite | **Blocked here** → Godot 3.5, GDScript | No GPU, no UE5 available; Godot 4 binary blocked by environment policy. Data and design are portable. |
-| Highly realistic 3D, detailed characters | **Partial** — stylised procedural stand-ins | Needs the art pipeline in 11_ASSET_PRODUCTION_LIST.md (Blender/Substance not available here). |
-| 10–15 h main campaign | **Not met yet** — estimated **≈ 4.5–7 h** after expansion passes 1–3 (≈ 64 min of scripted dialogue/documents), unmeasured with players | Expansion in progress (below). Target unchanged. |
-| Voice-acted cinematic dialogue | **Partial** — all 538 lines written and subtitled; procedural voice texture only | Casting/recording needed. |
-| Original music score | **Partial** — procedural drones and stingers | Composer needed. |
-| Steam release | **Partial** — store copy, briefs, achievements, build pipeline ready | Steamworks integration, page assets, playtests outstanding. |
-
-## Expansion progress toward 10–15 hours (no padding)
-| Pass | Content | Status |
-|---|---|---|
-| 1 | Optional wing with its own puzzle and story payoff in chapters 1–12 (lost property, Okafor's office, Brandt's quarantine, the radio club, Ruiz's workshop, the Directorate memo, Rami's 104.4 broadcast, the Aperture prototype, the 02:30 manifest, the containment roll call, Box 19, the Run 19 operator log) | **Done — Tested** (`play` covers every wing) |
-| 2 | Authored Listener set-pieces on the critical path (Ch 1, 2, 3, 4, 6, 7, 11) | **Done — Tested** |
-| 3 | Second objective chains, solvable in either order (Ch 5 power + hydraulics; Ch 9 switch order + traction fuse) | **Partial** — Ch 5, 9 done; Ch 8 and 11 to do |
-| 4 | Cross-chapter 89.1 investigation: Jonah Pell's four calls about a stranger in an orange jacket (Ch 2, 3, 7, 11) unlock a fifth in the Archive + achievement | **Done — Tested** |
-| 5 | New Game+ "Second Signal" | Planned |
-
-Remaining plan, in priority order after the first playtests; each item adds real content, not corridors:
-1. **Optional wing per chapter** (13 × 10–15 min): side rooms with their own small puzzle and a story payoff — e.g. Okafor's office and family letters (Ch 2), Lind's quarantine ward (Ch 3), Haddad's numbers-station archive (Ch 7), the Directorate liaison's office (Ch 8).
-2. **Second objective chain in larger chapters** (Ch 5, 7, 8, 11): two independent power/route problems the player can do in either order while the Listener adapts.
-3. **Echo investigations**: multi-part 89.1 mysteries spanning chapters (find all of Pell's records-room calls to reconstruct what happened in the archive at 02:47).
-4. **Encounter design pass**: 2–3 authored Listener set-pieces per chapter using forecast, mimicry and ambush.
-5. **New Game+ "Second Signal"**: the Listener starts with the learned habits of the first run; new 101.3 forecasts reveal a few alternative scenes.
+| Unreal Engine 5 / realistic graphics | Godot 3.5; stylised procedural geometry with CC0 PBR textures | UE5 impossible here (no GPU); migration options assessed in 19 — awaiting decision |
+| Professional characters and animation | Procedural rigs with code animation | Needs a character artist/animator |
+| 10–15 h campaign | Modelled 5.4–14 h incl. optional content, unmeasured | Playtests first; then scope more content where players finish fastest |
+| Professional audio, soundtrack, VO | Systems ready; placeholders only | Sound designer (credited: Ajay Gohil), composer, voice cast |
+| Windows verification | Exported; Wine smoke test only | Run the build on Windows 10/11 (`--smoketest`, checklist in 13) |
+| Steam | Package prepared | Owner's Steamworks account and App ID |
 
 ## Roadmap
-| Next | Work |
-|---|---|
-| 1 | Windows launch test on real hardware; GPU profiling; fix anything found |
-| 2 | Human playtest round 1; tune AI hearing radii and puzzle signposting |
-| 3 | Content expansion items 1–2 |
-| 4 | Art pass (creature first, then kits), VO recording, score |
-| 5 | Steamworks, store page, trailer recapture, beta branch |
-| 6 | Playtest rounds 2–3, polish, release candidate |
+1. Owner runs `DeadFrequency.exe --smoketest` on Windows and plays chapters 1–3; fix anything found.
+2. Playtest round 1 (5 players): replace the time-budget model with measured data.
+3. Decide engine path (19): stay on 3.5 or port to Godot 4 for real-time GI.
+4. Commission creature + Daniel arms model, environment kit for 2 areas as a vertical slice of the final art style.
+5. Audio: sound designer pass on creature/radio/footsteps; record VO for chapters 1–3; composer stems for tension/chase.
+6. Steamworks: App ID, achievements, Auto-Cloud, Coming Soon page.

@@ -112,6 +112,25 @@ Every second the receiver is on, it transmits the player's position (noise radiu
 - **C — The Loop.** Without the key, or answering without the truth, the attempt fails. Daniel wakes in the annex at 02:43 and becomes the voice that warns himself: "Daniel… whatever happens, do not open the door." The game's first line closes into a circle.
 - **D — The Last Transmission.** Daniel doesn't open it or merely close it — he answers it, with the real voices he has gathered and with Mira on the line, not alone. Evelyn hears her son, and they close the Door from both sides. Mira stays with Evelyn. At dawn, on the truck radio, faint: "Signal, Danny." — "Answer."
 
+## Later additions to canon
+### The Directorate Annex (Ch 8, optional)
+A hidden wing under the research labs, run by the Directorate itself — **Project Long Ear**: "a listener who requires no equipment". It held a soundproofed cell prepared for Subject D (a cot, the carrier piped in 24 hours, "no toys — toys are noise"). Transfer was scheduled for **06:00 on 17 October 1998**. The liaison's name is cut off on the terminal: *P. K—*. The annex power protocol is initialled *P.K., liaison*. The Directorate's own numbers station broadcasts the access code on 93.3 ("Long Ear. Five. Two. Seven. Zero.").
+
+### Mira's notebook (Ch 3, 5, 7, 9, 11; final page at the Door)
+Mira writes in a notebook because it is the only object that stays where she leaves it between loops. Pages are dated by loop count (1, 214, 1,906, 7,040, ~11,000). Loop 1,906: "somebody answered and said his name was Arlen." Finding all five places the last page at the Door ("Then you're the one who answers") and adds an exchange to ending D.
+
+### Jonah Pell's calls — "The Forty-Second" (Ch 2, 3, 7, 11)
+On the night itself, records clerk Jonah Pell reported a stranger in an orange jacket walking through the facility — the open-plan office, Lind's records, the Signal Room, the Archive. The stranger said his name was Arlen and then "wasn't there, like a station going off the air". Okafor had counted forty-two people all night: the forty-second was Daniel, glimpsed across time.
+
+### What you say on the air, it keeps (Ch 6 → 10, 11)
+If Daniel repeats Mira's words to "Hale" on 103.7, the Listener quotes them back at the bulkhead and later thanks him for them. The rule is never broken: it can only use what it has heard over the air.
+
+### The Second Signal (New Game+ canon)
+- 88.0 MHz sits below the Listener's band — the one channel it cannot hear. A previous Daniel speaks there.
+- **Peter Kessler**, Northline's dispatcher, was 29 in 1998 and the Directorate's liaison to HELIX-9: the man due to collect Subject D at 06:00. He found the blast door rusted shut and a gate guard who would not say where the baby went. For twenty-eight years he looked for the boy, and when the beacon finally asked for "Arlen, Daniel" he sent him. A dispatch slip with his handwriting ("Twenty-eight years. It finally asked for him. God forgive me. — P.K.") exists only in New Game+.
+- The Listener remembers selected habits across runs (hiding spots, radio use, lures, sprint escapes) and the previous ending, and imitates what Daniel said at the Door.
+- Endings gain a Kessler postscript in New Game+. Whether Kessler wanted Daniel to save them or to bring the signal out to him is deliberately unresolved.
+
 ## Open threads (for expansion; not contradicted by the main game)
 - The Directorate: who sealed Duarte's statement, and what they wanted from "the future".
 - Other echo-shelf sites ("thinnest point *on this continent*").

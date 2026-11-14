@@ -724,3 +724,19 @@ func t_ngplus():
 		if main.credits != null and is_instance_valid(main.credits):
 			reached = true; break
 	ok(reached and "second_signal" in G.achievements, "New Game+ reaches an ending and awards Second Signal")
+
+# ------------------------------------------------------------ recorded voice-over is picked up automatically by filename
+func t_vo():
+	var line = "Twenty-eight years of dust, and the emergency lamps still think someone's coming home."
+	var id = main.ui.vo_id("DANIEL", line)
+	ok(ResourceLoader.exists("res://vo/%s.ogg" % id), "test recording present and imported (%s)" % id)
+	var t0 = OS.get_ticks_msec()
+	main.ui.say("DANIEL", line)
+	yield(frames(5), "completed")
+	var s = main.ui._voice.stream
+	ok(s is AudioStreamOGGVorbis and main.ui._voice.playing, "say() plays the recorded file instead of the placeholder voice")
+	while main.ui._saying: yield(get_tree(), "idle_frame")
+	ok((OS.get_ticks_msec() - t0) / 1000.0 >= 4.4, "subtitle stays up for the whole recording")
+	main.ui.say("DANIEL", "A line nobody has recorded yet.")
+	yield(frames(5), "completed")
+	ok(main.ui._voice.stream == Snd.bank["voice"], "unrecorded lines fall back to the radio-voice texture")
