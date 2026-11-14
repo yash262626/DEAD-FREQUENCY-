@@ -363,7 +363,11 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 *HINT — Running machinery masks your footsteps.*
 *CHECKPOINT — game saved*
 *— control returns to the player —*
-*OBJECTIVE — Main power is up. Get back through the control room — the tunnel door is at the east end of the turbine hall.*
+*[if `c5_hyd`:]*
+  *(story flag `c5_ready`)*
+  *OBJECTIVE — Main power is up and the door is primed. The tunnel door is at the east end of the turbine hall.*
+*[otherwise:]*
+  *OBJECTIVE — Main power is up. The tunnel door's hydraulics still need priming — Ruiz's workshop, under the control room.*
 
 
 ---
@@ -427,6 +431,7 @@ Shared presentation rules: 55° cinematic FOV; filmic tonemapping, glow, SSAO (H
 *(story flag `c7_uplink`)*
 *CHECKPOINT — game saved*
 *OBJECTIVE — The research labs are through the door at the east end of the corridor.*
+*THE LISTENER — ambush*
 *— control returns to the player —*
 
 ### Door

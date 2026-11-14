@@ -162,7 +162,7 @@ Palette: **power** · ceiling height palette default · grid 30×19 cells (60×3
 #....#.g....L...........L....#
 #.A..#..A....P....A....P..A..M
 #....#.......................#
-#...a#...u.....u.....u.......#
+#...a#...u.....u..y..u.......#
 ##.###.......w...............#
 #....########D################
 #.e..#.........#.H...........#
@@ -171,12 +171,12 @@ Palette: **power** · ceiling height palette default · grid 30×19 cells (60×3
 #c...#..T..V...#.............#
 #.F..#.........#..i..j..k..l.#
 ##########O###################
-######.........###############
+######...U.....###############
 ######.b...L.n.###############
 ######.x.....m.###############
 ##############################
 ```
-Legend: `1` Trigger `1` · `A` light (always on) · `M` Door · `O` Door · `T` Tape — “Dr. Voss — Run 7” · `a` Document — “Shaft maintenance log” · `b` prop: table · `c` Pickup — Hand crank · `e` Pickup — Power cell · `g` marker (camera / spawn point) · `i` Interaction — “Close breaker A” · `j` Interaction — “Close breaker B” · `k` Interaction — “Close breaker C” · `l` Interaction — “Close breaker D” · `m` Pickup — Medkit · `n` Document — “Turbine fault board” · `q` Document — “Main bus restart card” · `r` Radio 89.1 MHz — “Breaker gallery, 1998” · `u` prop: turbine · `w` Trigger `w` · `x` Tape — “Ruiz — workshop”
+Legend: `1` Trigger `1` · `A` light (always on) · `M` Door · `O` Door · `T` Tape — “Dr. Voss — Run 7” · `U` Interaction — “Refill and prime the accumulator” · `a` Document — “Shaft maintenance log” · `b` prop: table · `c` Pickup — Hand crank · `e` Pickup — Power cell · `g` marker (camera / spawn point) · `i` Interaction — “Close breaker A” · `j` Interaction — “Close breaker B” · `k` Interaction — “Close breaker C” · `l` Interaction — “Close breaker D” · `m` Pickup — Medkit · `n` Document — “Turbine fault board” · `q` Document — “Main bus restart card” · `r` Radio 89.1 MHz — “Breaker gallery, 1998” · `u` prop: turbine · `w` Trigger `w` · `x` Tape — “Ruiz — workshop” · `y` Pickup — Hydraulic fluid
 
 
 ---
@@ -269,7 +269,7 @@ Palette: **transport** · ceiling height palette default · grid 32×17 cells (6
 
 ```
 ################################
-#n..V#.......L.......L......p..#
+#n..V#.......L.......L..q...p..#
 #.S..D...........R...m.........#
 #b...#.........................#
 #....#.........Y...............#
@@ -283,10 +283,10 @@ Palette: **transport** · ceiling height palette default · grid 32×17 cells (6
 ################O###############
 ##############..L.....##########
 ##############.a...T..##########
-##############.....k..##########
+##############.f...k..##########
 ################################
 ```
-Legend: `O` Door · `R` Trigger `R` · `T` Tape — “Cross — transport” · `Y` Interaction — “Start the tram” · `Z` marker (camera / spawn point) · `a` Document — “Last service manifest” · `b` Interaction — “Throw the booth traction switch” · `e` Pickup — Power cell · `k` Pickup — Medkit · `m` 107.9 writing · `n` Document — “Transport booth — procedures” · `o` Radio 89.1 MHz — “Transport, 1998” · `p` Interaction — “Throw the platform traction switch” · `x` prop: crate · `y` Interaction — “Throw the yard traction switch”
+Legend: `O` Door · `R` Trigger `R` · `T` Tape — “Cross — transport” · `Y` Interaction — “Start the tram” · `Z` marker (camera / spawn point) · `a` Document — “Last service manifest” · `b` Interaction — “Throw the booth traction switch” · `e` Pickup — Power cell · `f` Pickup — Traction fuse · `k` Pickup — Medkit · `m` 107.9 writing · `n` Document — “Transport booth — procedures” · `o` Radio 89.1 MHz — “Transport, 1998” · `p` Interaction — “Throw the platform traction switch” · `q` Interaction — “Fit the traction fuse” · `x` prop: crate · `y` Interaction — “Throw the yard traction switch”
 
 
 ---

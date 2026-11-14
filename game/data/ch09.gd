@@ -4,7 +4,7 @@ const DATA = {
 	"pal": "transport", "sub": "SUBLEVEL 5 — TRANSPORT LINE", "music": "drone_a", "amb_loop": "hum", "amb_db": -28.0, "face": -90,
 	"map": [
 		"################################",
-		"#n..V#.......L.......L......p..#",
+		"#n..V#.......L.......L..q...p..#",
 		"#.S..D...........R...m.........#",
 		"#b...#.........................#",
 		"#....#.........Y...............#",
@@ -18,7 +18,7 @@ const DATA = {
 		"################O###############",
 		"##############..L.....##########",
 		"##############.a...T..##########",
-		"##############.....k..##########",
+		"##############.f...k..##########",
 		"################################",
 	],
 	"leg": {
@@ -36,6 +36,11 @@ const DATA = {
 		"b": {"t": "use", "p": "switch", "seq": "trac", "step": 2, "prompt": "Throw the booth traction switch"},
 		"p": {"t": "use", "p": "switch", "seq": "trac", "step": 3, "prompt": "Throw the platform traction switch"},
 		"e": {"t": "item", "id": "battery"}, "O": {"t": "door"}, "k": {"t": "item", "id": "medkit"},
+		"f": {"t": "item", "id": "tram_fuse", "ev": [["DANIEL", "Traction fuse. Big as a loaf of bread."]]},
+		"q": {"t": "use", "p": "switch", "prompt": "Fit the traction fuse", "need": "tram_fuse", "fail": "Traction fuse holder. Empty. The depot office off the yard should keep spares.", "ev": [
+			["flag", "c9_fuse"], ["sfx", "beep", -6], ["DANIEL", "Fuse is in."],
+			["if", "solved_trac", [["group", "power"]], [["obj", "Fuse is in. Now the traction switches: the order is on the operator's channel."]]],
+		]},
 		"a": {"t": "note", "title": "Last service manifest", "text": "HELIX-9 TRANSPORT — SERVICE 02:30 — CONTAINMENT (STAFF ONLY)\n\nVoss, E. (Director)\nOkafor, T.\nSolace, M.  + D. (infant — see below)\nKowalczyk, J.\nMensah, A.\nFerreira, L.\nVarga, P.\nIto, K.\nNyberg, H.\nAchterberg, R.\nFofanah, K.\n\n(Operator's note:) D. should NOT be on this tram. Told the Director. She said Mira's taking him up at 02:40.\nIt's 02:30. — L. Cross"},
 		"T": {"t": "tape", "title": "Cross — transport", "flag": "tape_cross", "lines": [
 			["CROSS (TAPE)", "Cross. Transport. I'm not supposed to keep a log, so this is a log."],
@@ -43,7 +48,7 @@ const DATA = {
 			["CROSS (TAPE)", "Mira had him in a sling, asleep. She saw me looking and said, 'Ten minutes, Lenny. I'm taking him up at two-forty. I promise.'"],
 			["CROSS (TAPE)", "It's two forty-one. Nobody's come back up the line."],
 		]},
-		"R": {"t": "trig", "r": 2.2, "if": "solved_trac", "ev": [
+		"R": {"t": "trig", "r": 2.2, "if": "c9_power", "ev": [
 			["cine", true], ["music", ""], ["radio_on", true, 96.1], ["sfx", "glitch", -10],
 			["MIRA (96.1 MHz)", "Daniel? You're on the platform. I can hear the rails singing."],
 			["DANIEL", "Tram's live. I'm coming down to you. Containment. Ten minutes."],
@@ -104,8 +109,12 @@ const DATA = {
 		]},
 	},
 	"groups": {
-		"trac": [
-			["sfx", "power_up", 2], ["lights", true], ["shake", 0.3],
+		"trac": [["if", "c9_fuse", [["group", "power"]], [
+			["DANIEL", "Switches are thrown, but the platform circuit's dead. The traction fuse holder's empty."],
+			["obj", "Find a traction fuse. The depot office is off the yard."],
+		]]],
+		"power": [
+			["flag", "c9_power"], ["sfx", "power_up", 2], ["lights", true], ["shake", 0.3],
 			["PA", "Traction restored. Next service: Containment. Staff only."],
 			["checkpoint", "V"], ["obj", "Board the tram on the platform."],
 		],
@@ -115,7 +124,7 @@ const DATA = {
 	"start_ev": [
 		["DANIEL", "The transport line. Rails into the dark, and a tram that hasn't moved since nineteen ninety-eight."],
 		["DANIEL", "Containment's at the end of the line. So is she."],
-		["obj", "Restore traction power and get the tram moving."],
+		["obj", "Restore traction power: three switches in the right order, and a traction fuse on the platform."],
 	],
-	"walk": [["radio", "o"], "y", "b", "p", "O", "a", "T", "R", "Y"],
+	"walk": [["radio", "o"], "y", "b", "p", "O", "a", "T", "f", "q", "R", "Y"],
 }

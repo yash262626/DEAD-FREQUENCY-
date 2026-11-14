@@ -213,14 +213,18 @@ The power station. A man who calls himself Marcus Hale answers on 103.7 and dire
 **Objectives (in order shown to the player)**
 
 1. Cross the turbine hall to the power station control room. Stay away from the clicking.
-1. Restart the main bus. The breaker gallery is through the east door.
+1. Restore main power (breaker gallery) and prime the tunnel door's hydraulics (Ruiz's workshop) — in either order.
+1. Power's up and the door is primed. The tunnel door is at the east end of the turbine hall.
+1. Door's primed. Now the main bus — the breaker gallery is east of the control room.
 1. RUN. The tunnel door — east end of the turbine hall.
-1. Main power is up. Get back through the control room — the tunnel door is at the east end of the turbine hall.
+1. Main power is up and the door is primed. The tunnel door is at the east end of the turbine hall.
+1. Main power is up. The tunnel door's hydraulics still need priming — Ruiz's workshop, under the control room.
 
 **Puzzles & gates**
 
-- Door gated by story state `power5` — “Tunnel door. No main power, no hydraulics. It won't budge.”
+- Door gated by story state `c5_ready` — “Tunnel door. It needs main power and primed hydraulics. It won't budge.”
 - Door locked by item — needs **Hand crank**
+- “Refill and prime the accumulator” — needs **Hydraulic fluid**
 - Ordered switches `brk` — correct order: Close breaker C → Close breaker A → Close breaker D → Close breaker B (a mistake resets the board and makes noise)
 
 **Discoveries**
@@ -234,6 +238,7 @@ The power station. A man who calls himself Marcus Hale answers on 103.7 and dire
 - Document — Main bus restart card
 - Transmission 89.1 MHz — Breaker gallery, 1998
 - Tape — Ruiz — workshop
+- Item — Hydraulic fluid
 
 **The Listener** — patrol from `P` until `solved_brk`; patrol from `g` once `solved_brk`
 
@@ -366,12 +371,15 @@ The transport line. Mira sings the first line of the lullaby; Daniel finishes it
 
 **Objectives (in order shown to the player)**
 
-1. Restore traction power and get the tram moving.
+1. Restore traction power: three switches in the right order, and a traction fuse on the platform.
+1. Fuse is in. Now the traction switches: the order is on the operator's channel.
 1. Get on the tram!
 1. Board the tram on the platform.
+1. Find a traction fuse. The depot office is off the yard.
 
 **Puzzles & gates**
 
+- “Fit the traction fuse” — needs **Traction fuse**
 - Ordered switches `trac` — correct order: Throw the yard traction switch → Throw the booth traction switch → Throw the platform traction switch (a mistake resets the board and makes noise)
 
 **Discoveries**
@@ -379,6 +387,7 @@ The transport line. Mira sings the first line of the lullaby; Daniel finishes it
 - Tape — Cross — transport
 - Document — Last service manifest
 - Item — Power cell
+- Item — Traction fuse
 - Item — Medkit
 - Document — Transport booth — procedures
 - Transmission 89.1 MHz — Transport, 1998

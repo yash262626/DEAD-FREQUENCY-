@@ -80,13 +80,15 @@
 5. Interaction — “Close breaker A”
 6. Interaction — “Close breaker D”
 7. Interaction — “Close breaker B”
-8. Pickup — Hand crank
-9. Door
-10. Tape — “Ruiz — workshop”
-11. Trigger `w`
-12. Door
+8. Pickup — Hydraulic fluid
+9. Pickup — Hand crank
+10. Door
+11. Tape — “Ruiz — workshop”
+12. Interaction — “Refill and prime the accumulator”
+13. Trigger `w`
+14. Door
 
-**Mission objectives**: Cross the turbine hall to the power station control room. Stay away from the clicking. → Restart the main bus. The breaker gallery is through the east door. → RUN. The tunnel door — east end of the turbine hall. → Main power is up. Get back through the control room — the tunnel door is at the east end of the turbine hall.
+**Mission objectives**: Cross the turbine hall to the power station control room. Stay away from the clicking. → Restore main power (breaker gallery) and prime the tunnel door's hydraulics (Ruiz's workshop) — in either order. → Power's up and the door is primed. The tunnel door is at the east end of the turbine hall. → Door's primed. Now the main bus — the breaker gallery is east of the control room. → RUN. The tunnel door — east end of the turbine hall. → Main power is up and the door is primed. The tunnel door is at the east end of the turbine hall. → Main power is up. The tunnel door's hydraulics still need priming — Ruiz's workshop, under the control room.
 
 ## CHAPTER 06 — NO WAY BACK
 
@@ -158,10 +160,12 @@
 5. Door
 6. Document — “Last service manifest”
 7. Tape — “Cross — transport”
-8. Trigger `R`
-9. Interaction — “Start the tram”
+8. Pickup — Traction fuse
+9. Interaction — “Fit the traction fuse”
+10. Trigger `R`
+11. Interaction — “Start the tram”
 
-**Mission objectives**: Restore traction power and get the tram moving. → Get on the tram! → Board the tram on the platform.
+**Mission objectives**: Restore traction power: three switches in the right order, and a traction fuse on the platform. → Fuse is in. Now the traction switches: the order is on the operator's channel. → Get on the tram! → Board the tram on the platform. → Find a traction fuse. The depot office is off the yard.
 
 ## CHAPTER 10 — WHAT LISTENS
 

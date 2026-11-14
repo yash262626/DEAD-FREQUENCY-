@@ -13,7 +13,7 @@ First-person psychological horror for Windows PC. October 17, 1998, 02:43: the H
 - The radio system (four bands plus hidden carriers, directional antenna, battery, exposure), a sound-hunting enemy that learns, stealth, puzzles, saves, menus, settings, subtitles, controller support.
 - 15 production documents in [`docs/`](docs/) and an automated test suite that plays the whole campaign.
 
-All art and audio are generated in code (original, licence-clean stand-ins). See the [progress tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md) for an honest list of what is done and what is not — notably the campaign is currently an estimated 3–5 hours against a 10–15 hour target, there is no recorded voice acting, and the Windows build has been exported but not yet launched on Windows hardware.
+All art and audio are generated in code (original, licence-clean stand-ins). See the [progress tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md) for an honest list of what is done and what is not — notably the campaign is currently an estimated 4.5–7 hours against a 10–15 hour target (expansion in progress), there is no recorded voice acting, and the Windows build has been exported but not yet launched on Windows hardware.
 
 ## Play from source
 1. Install **Godot 3.5.x** (standard build) from godotengine.org, or `sudo apt install godot3` on Ubuntu.
@@ -71,6 +71,7 @@ Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`).
 | 13 | [Testing Plan & Results](docs/13_TESTING_PLAN.md) |
 | 14 | [Release Plan (Steam)](docs/14_RELEASE_PLAN.md) |
 | 15 | [Development Progress Tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md) |
+|  | [Changelog](CHANGELOG.md) |
 
 Docs 04–08 are generated from the game data (`python3 tools/gen_docs.py <export.json> docs`), so they always match what ships.
 

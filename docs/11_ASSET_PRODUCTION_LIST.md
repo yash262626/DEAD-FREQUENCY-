@@ -35,7 +35,7 @@ Entrance & security · administration · medical · residential · power station
 PBR sets (albedo/normal/roughness/AO) per kit: painted concrete, tiled floors, rubber, brushed steel, rust, water-stained ceilings, lab tile, carpet, archive paper. Decals: water damage, scorch, signage, warning stripes, handwritten notes.
 
 ### Audio (P1)
-- **Voice-over**: 490 lines across 20 speakers (script: 06_DIALOGUE_AND_AUDIO_SCRIPT.md). Radio processing presets per band.
+- **Voice-over**: 538 lines across 23 speaker tags (script: 06_DIALOGUE_AND_AUDIO_SCRIPT.md). Radio processing presets per band.
 - **Music**: main theme, menu loop, per-area ambient beds (12), chase, the four ending cues, credits theme, the lullaby (solo voice).
 - **SFX**: replace/upgrade the procedural set; add per-surface footsteps (concrete, metal grate, carpet, water, tile), cloth, receiver foley (dial clicks, antenna, squelch), creature voice set.
 - **Credit**: sound design credited to **Ajay Gohil** in the end credits as specified by the project owner.

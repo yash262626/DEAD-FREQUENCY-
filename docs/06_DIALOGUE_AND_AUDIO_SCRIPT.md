@@ -86,6 +86,10 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **DANIEL** — That's my voice.
 **DANIEL** — That is my voice.
 
+### Pickup — Comms annex keycard
+
+**DANIEL** — Something just walked past that door. Slowly. Like it was listening for me.
+
 ### Document — “A child's mitten”
 
 > A small red mitten, hand-knitted, one thumb chewed soft. Sewn inside the cuff, a name tape in blue thread:
@@ -376,7 +380,7 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 
 ### Pressure plate
 
-**DANIEL** — That'll hold it.
+**DANIEL** — That'll hold it. And that was loud.
 
 ### Document — “Staff hearing survey”
 
@@ -577,6 +581,7 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **HALE (103.7 MHz)** — Then you've read more than most of my people ever did. Where are you, exactly?
 **DANIEL** — Control room. The main bus is dead.
 **HALE (103.7 MHz)** — Restart it. The breaker gallery is through the east door. Then get yourself to the Communications Centre.
+**HALE (103.7 MHz)** — And the tunnel door's hydraulic. Ruiz kept its accumulator in her workshop, under this room. There's fluid in the turbine-hall stores.
 **HALE (103.7 MHz)** — If you can get the uplink running, we call for extraction. All of us.
 **DANIEL** — All of you. How many of you are down here?
 **HALE (103.7 MHz)** — Enough. Move, Arlen. And keep that set off unless you need it. It hears the carrier.
@@ -601,6 +606,10 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **RUIZ (1998)** — Because the turbines are off, and something in here keeps saying it back to me.
 **DANIEL** — C, A, D, B.
 
+### Pickup — Hydraulic fluid
+
+**DANIEL** — Hydraulic fluid. Five litres, sealed. Heavier than it looks.
+
 ### Pickup — Hand crank
 
 **DANIEL** — Hand crank. For a shutter, or a lift, or a very small car.
@@ -612,6 +621,10 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **RUIZ (TAPE)** — He used to call me in from the yard on his CB. 'Ana. Ana, dinner.' Every night for twelve years.
 **RUIZ (TAPE)** — That's how it works, I think. It doesn't need to be in the room. Somebody, somewhere, just has to have said your name into a radio once.
 **RUIZ (TAPE)** — Everybody's had their name said into a radio once.
+
+### Interaction — “Refill and prime the accumulator”
+
+**DANIEL** — Accumulator's primed. The tunnel door has hydraulics again.
 
 ### Trigger `w`
 
@@ -776,6 +789,7 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 ### Puzzle solved — `valves`
 
 **DANIEL** — Pumps are taking it. Listen to that — the whole section's draining.
+**DANIEL** — And everything down here just heard the pumps start.
 
 
 ---
@@ -1026,6 +1040,14 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 **CROSS (TAPE)** — Mira had him in a sling, asleep. She saw me looking and said, 'Ten minutes, Lenny. I'm taking him up at two-forty. I promise.'
 **CROSS (TAPE)** — It's two forty-one. Nobody's come back up the line.
 
+### Pickup — Traction fuse
+
+**DANIEL** — Traction fuse. Big as a loaf of bread.
+
+### Interaction — “Fit the traction fuse”
+
+**DANIEL** — Fuse is in.
+
 ### Trigger `R`
 
 **MIRA (96.1 MHz)** — Daniel? You're on the platform. I can hear the rails singing.
@@ -1081,9 +1103,14 @@ Speaker tags: `NAME (1998)` = 89.1 echo of the past · `NAME (96.1 MHz)` etc. = 
 > Cross took the card home AGAIN.
 > Just ask him on the radio. He says it every night.
 
-### Puzzle solved — `trac`
+### Puzzle solved — `power`
 
 **PA** — Traction restored. Next service: Containment. Staff only.
+
+### Puzzle solved — `trac`
+
+*[otherwise:]*
+  **DANIEL** — Switches are thrown, but the platform circuit's dead. The traction fuse holder's empty.
 
 ### Puzzle solved — `trac_fail`
 

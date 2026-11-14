@@ -19,7 +19,7 @@ Each profile includes a production brief for the final 3D model, animation and v
 
 **Animation set.** First-person: idle breathing, walk/sprint bob, crouch, lean, flashlight raise, radio raise and dial-turn, interact (pull/push/turn wheel), hide-enter/exit, stumble on hit, winded breathing. Cinematic: look-around, flinch, sit-down-against-wall, mic held to mouth (ending C).
 
-**Voice direction.** Mid baritone, low and even; dry humour; breath audible when frightened. Whispered lines must stay intelligible. Never shouts except in the Ch 5 chase. Reference age 28–35. (490 lines across the cast; Daniel has the most.)
+**Voice direction.** Mid baritone, low and even; dry humour; breath audible when frightened. Whispered lines must stay intelligible. Never shouts except in the Ch 5 chase. Reference age 28–35. (538 lines across the cast; Daniel has the most.)
 
 ---
 

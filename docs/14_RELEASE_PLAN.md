@@ -27,7 +27,7 @@ No sales, awards or reception claims are made anywhere in this plan or the store
 **Tags**: Psychological Horror, Horror, Atmospheric, First-Person, Story Rich, Mystery, Stealth, Multiple Endings, Singleplayer, Indie.
 
 ## Pricing
-Target **₹799–₹999** (premium indie horror). Recommendation: decide after (1) human playtests measure real campaign length and (2) the art and voice passes land. If the campaign remains under ~6 hours at launch, price at the bottom of the band or below; the 10–15 h target supports the top of the band. Regional pricing via Steam's recommended matrix.
+Target **₹799–₹999** (premium indie horror). Recommendation: decide after (1) human playtests measure real campaign length and (2) the art and voice passes land. If the campaign remains under ~7 hours at launch, price at the bottom of the band or below; the 10–15 h target supports the top of the band. Regional pricing via Steam's recommended matrix.
 
 ## Logo brief
 "DEAD FREQUENCY" in a heavy condensed grotesk, all caps, distressed brushed-metal fill with paint chips, faint red/cyan channel split, one horizontal scanline glitch slice. Lock-up variant with a thin oscilloscope trace running through the counters. Must read at 120 px wide on white and black. (The in-game title shader is the reference.)
