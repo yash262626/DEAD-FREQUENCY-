@@ -20,7 +20,11 @@ func _clear():
 	get_tree().paused = false
 	Snd.stop_all_loops()
 	if level and is_instance_valid(level):
-		level.dead = true; level.queue_free()
+		# Detach now, free later: event scripts suspended on UI coroutines (dialogue, waits) can then
+		# resume, see the level is dead and exit cleanly instead of resuming into a freed instance.
+		level.dead = true
+		remove_child(level)
+		_bury(level)
 	level = null
 	if menu and is_instance_valid(menu): menu.queue_free()
 	menu = null
@@ -29,6 +33,18 @@ func _clear():
 	ui.set_hud(false); ui.set_cine(false); ui.sub.bbcode_text = ""
 	if ui.modal != null: ui.close_modal()
 	ui.modals = 0
+
+var _graves := []
+func _bury(n):
+	_graves.append(n)
+	yield(get_tree().create_timer(45.0), "timeout")
+	_graves.erase(n)
+	if is_instance_valid(n): n.free()
+
+func _exit_tree():
+	for n in _graves:
+		if is_instance_valid(n): n.free()
+	_graves.clear()
 
 func _load(d: Dictionary):
 	_clear()

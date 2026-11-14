@@ -437,3 +437,103 @@ func t_play():
 			yield(get_tree(), "idle_frame"); G.skip = true
 			if main.level and is_instance_valid(main.level) and main.level.player and main.level.data.n != n: break
 		print("  ch%02d played in %.1fs, flags=%d, journal=%d" % [n, (OS.get_ticks_msec() - t0) / 1000.0, G.flags.size(), G.journal.size()])
+	if to == 13:
+		var reached = false
+		for i in 4000:
+			yield(get_tree(), "physics_frame"); G.skip = true
+			if main.credits != null and is_instance_valid(main.credits):
+				reached = true; break
+		ok(reached, "full run reaches an ending and the credits")
+		print("  endings unlocked: ", G.endings, "  tapes: ", G.count("tape_ev"), "  achievements: ", G.achievements)
+		if from == 1: ok("D" in G.endings, "the complete walkthrough (all discoveries, trusted Mira, answered) earns ending D")
+
+# ------------------------------------------------------------ endings: each flag combination reaches its ending + credits
+func t_endings():
+	G.test_god = true
+	var cases = [
+		["B", 0, []],
+		["A", 1, ["shutdown_key"]],
+		["C", 1, []],
+		["C", 2, ["trust_mira", "shutdown_key"]],
+		["D", 2, ["trust_mira", "hale_truth", "shutdown_key", "tape_ev1", "tape_ev2", "tape_ev3", "tape_ev4", "tape_ev5"]],
+	]
+	for c in cases:
+		G.new_run(13); G.has_radio = true
+		for f in c[2]: G.set_flag(f)
+		G.flags["_test_choice"] = c[1]
+		G.endings = []
+		main.start_chapter(13)
+		var lv = main.level
+		for i in 600:
+			yield(get_tree(), "physics_frame"); G.skip = true
+			if lv.running == 0: break
+		lv.interact(lv.ent_at("U"))
+		var reached = false
+		for i in 4000:
+			yield(get_tree(), "physics_frame"); G.skip = true
+			if main.credits != null and is_instance_valid(main.credits):
+				reached = true; break
+		ok(reached, "ending %s reaches the credits" % c[0])
+		ok(c[0] in G.endings, "choice %d with %s → ending %s (got %s)" % [c[1], str(c[2]), c[0], str(G.endings)])
+		# credits must show the owner-specified names
+		if reached:
+			var txt = ""
+			for l in main.credits.scroll.get_children():
+				if l is Label: txt += l.text + "|"
+			ok("YASH AIL" in txt and "AJAY GOHIL" in txt and "ADARSH GUPTA" in txt and "TANISH SHETTY" in txt and "SHUBHAM GAONKAR" in txt, "credits list every contributor")
+			ok("A game developed by YASH AIL" in txt and "THE SIGNAL NEVER ENDS." in txt, "final title card text")
+			for i in 3000:
+				yield(get_tree(), "physics_frame")
+				if main.credits.done: break
+			ok(main.credits.done, "credits finish and offer return to menu")
+		main.show_menu()
+		yield(frames(5), "completed")
+	ok(G.endings.size() >= 1, "ending completion saved to profile")
+
+# ------------------------------------------------------------ boot flow: intro → title → menu → new game → pause → menu → continue / chapter select
+func t_flow():
+	G.test_mode = true
+	main.play_intro()
+	var menu_up = false
+	for i in 3000:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if main.menu != null and is_instance_valid(main.menu):
+			menu_up = true; break
+	ok(menu_up, "opening cinematic plays through to the main menu")
+	ok(G.intro_seen, "intro marked as seen")
+	G.skip = false
+	var labels = []
+	for b in main.menu.list.get_children(): labels.append(b.text)
+	ok(labels == ["NEW GAME", "CONTINUE", "CHAPTER SELECTION", "SETTINGS", "CREDITS", "EXIT GAME"], "menu items %s" % str(labels))
+	ok(main.menu.list.get_child(1).disabled, "CONTINUE disabled without a save")
+	ok(main.menu.list.get_child(2).disabled, "CHAPTER SELECTION locked at first launch")
+	main.new_game()
+	yield(frames(5), "completed")
+	ok(main.level != null and main.level.data.n == 1 and G.has_save(), "new game starts chapter 1 and writes a save")
+	for i in 3000:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if main.level.running == 0: break
+	main.ui.pause_menu(); yield(frames(2), "completed")
+	main.ui._menu("mainmenu"); yield(frames(5), "completed")
+	ok(main.menu != null and main.level == null, "pause → main menu returns to the menu")
+	ok(not main.menu.list.get_child(1).disabled, "CONTINUE enabled once a save exists")
+	main.continue_game(); yield(frames(5), "completed")
+	ok(main.level != null and main.level.data.n == 1, "continue resumes chapter 1")
+	G.unlock_chapter(5); main.show_menu(); yield(frames(3), "completed")
+	main.menu._act("chapters"); yield(frames(3), "completed")
+	var enabled = 0
+	for b in main.menu.list.get_children():
+		if not b.disabled: enabled += 1
+	ok(enabled == 6, "chapter select shows 5 unlocked chapters + back (%d)" % enabled)
+	main.select_chapter(5); yield(frames(5), "completed")
+	ok(main.level.data.n == 5 and G.has_radio, "chapter select starts chapter 5 with the receiver")
+	# death → game over → reload checkpoint
+	for i in 3000:
+		yield(get_tree(), "physics_frame"); G.skip = true
+		if main.level.running == 0: break
+	G.skip = false
+	main.level.player.hurt(500)
+	yield(frames(90), "completed")
+	ok(main.ui.modal != null and main.level.dead, "death shows the game-over screen")
+	main.ui._menu("reload"); yield(frames(5), "completed")
+	ok(main.level != null and not main.level.dead and main.level.data.n == 5, "reload checkpoint restores the chapter")

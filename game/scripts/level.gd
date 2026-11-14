@@ -21,7 +21,7 @@ const PALETTES = {
 }
 const CMDS = ["wait", "obj", "flag", "sfx", "music", "lights", "card", "title", "fade", "cine", "cam", "camoff", "give", "take",
 	"checkpoint", "next", "ending", "choice", "if", "ifnot", "unlock", "listener", "hurt", "shake", "toast", "journal", "look",
-	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d"]
+	"text", "monitor", "tp", "loop", "unloop", "credits", "menu", "ach", "radio_on", "reveal", "hide_ent", "show_ent", "ext", "save", "lock", "pulse", "noise_mult", "close", "loop3d", "unloop3d", "group"]
 const BUILTIN = {
 	"S": {"t": "start"}, "L": {"t": "light"}, "F": {"t": "light", "flicker": true}, "R": {"t": "light", "red": true},
 	"P": {"t": "patrol"}, "H": {"t": "hide"}, "V": {"t": "save"}, "D": {"t": "door"},
@@ -48,6 +48,7 @@ var ext = null
 var ext_points := {}
 var power_on := true
 var reveal_on := false
+var force_reveal := false
 var _rng := RandomNumberGenerator.new()
 var _cam_tw: Tween
 var running := 0
@@ -481,7 +482,7 @@ func _physics_process(dt):
 					if e.d.has("flag"): G.set_flag(e.d.flag)
 					run(e.d.get("ev", []))
 		elif e.kind == "ghost":
-			var vis = reveal_on and (pp - e.pos).length() < e.d.get("r", 11.0)
+			var vis = (reveal_on or force_reveal) and (pp - e.pos).length() < e.d.get("r", 11.0)
 			e.node.visible = vis
 			if vis and not e.done:
 				_done(e)
@@ -745,7 +746,7 @@ func _exec(e: Array):
 			if e.size() > 2: player.rotation_degrees.y = e[2]
 		"ach": G.achieve(e[1])
 		"radio_on": radio.force(e[1], e[2] if e.size() > 2 else -1.0)
-		"reveal": reveal_on = e[1]
+		"reveal": force_reveal = e[1]
 		"hide_ent":
 			for x in by_char.get(e[1], []):
 				if x.node: x.node.visible = false
@@ -755,6 +756,7 @@ func _exec(e: Array):
 		"ext":
 			if ext: ext.set_mode(e[1])
 		"noise_mult": noise_mult = float(e[1])
+		"group": return run(data.groups[e[1]])
 		"loop3d":
 			if _loops3d.has(e[1]) and is_instance_valid(_loops3d[e[1]]): _loops3d[e[1]].queue_free()
 			_loops3d[e[1]] = Snd.play3d(e[2], self, pos_of(e[3]) + Vector3(0, 1.4, 0), e[4] if e.size() > 4 else 0.0, 1.0, 26.0)

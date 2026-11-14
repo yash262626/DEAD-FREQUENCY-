@@ -109,5 +109,5 @@ const DATA = {
 		["toast", "Crouch to move quietly. Throw a bottle (G) to pull its attention somewhere else."],
 		["obj", "Cross the turbine hall to the power station control room. Stay away from the clicking."],
 	],
-	"walk": ["1", ["radio", "r"], "k", "i", "l", "j", "w", "M"],
+	"walk": ["1", "T", ["radio", "r"], "k", "i", "l", "j", "w", "M"],
 }

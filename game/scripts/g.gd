@@ -1,8 +1,8 @@
 extends Node
 # Global game state, settings, input map, save/load.
 
-const SAVE := "user://save.json"
-const PROFILE := "user://profile.json"
+var SAVE := "user://save.json"
+var PROFILE := "user://profile.json"
 const SAVE_VERSION := 1
 const LAST_CHAPTER := 13
 
@@ -39,6 +39,12 @@ var test_god := false
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
+	if OS.has_environment("DF_TEST"):
+		# automated tests never touch the player's real save or profile
+		SAVE = "user://test_save.json"; PROFILE = "user://test_profile.json"
+		var d = Directory.new()
+		for f in [SAVE, PROFILE]:
+			if d.file_exists(f): d.remove(f)
 	_setup_input()
 	_setup_buses()
 	load_profile()
