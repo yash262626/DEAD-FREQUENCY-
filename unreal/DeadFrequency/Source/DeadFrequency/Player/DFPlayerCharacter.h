@@ -38,7 +38,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player") void Hurt(float Amount);
 	UFUNCTION(BlueprintCallable, Category = "Player") void SetLocked(bool bInLocked) { bLocked = bInLocked; }
 
-	UFUNCTION(BlueprintPure, Category = "Player") bool IsHidden() const { return HidingSpot.IsValid(); }
+	/** In a locker or under a desk (named so it does not shadow AActor::IsHidden, the render flag). */
+	UFUNCTION(BlueprintPure, Category = "Player") bool IsInHiding() const { return HidingSpot.IsValid(); }
 	UFUNCTION(BlueprintPure, Category = "Player") AActor* GetHidingSpot() const { return HidingSpot.Get(); }
 	UFUNCTION(BlueprintPure, Category = "Player") bool IsTorchOn() const { return bTorchOn; }
 	UFUNCTION(BlueprintPure, Category = "Player") bool IsSprinting() const { return bSprinting; }
@@ -57,6 +58,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Player") bool bHasTorch = false;
 	/** Set by water volumes: footsteps are louder. */
 	UPROPERTY(BlueprintReadWrite, Category = "Player") bool bInWater = false;
+	/** Story-controlled footstep loudness (the noise_mult command). */
+	UPROPERTY(BlueprintReadWrite, Category = "Player") float NoiseMultiplier = 1.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Audio") TObjectPtr<USoundBase> FootstepSound;
 	UPROPERTY(EditDefaultsOnly, Category = "Audio") TObjectPtr<USoundBase> TorchClickSound;
@@ -71,9 +74,12 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type Reason) override;
 
 private:
 	void BuildInput();
+	/** Field of view, look sensitivity and inversion, crouch mode, brightness, film grain (UDFGameUserSettings). */
+	void ApplySettings();
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void SprintOn(const FInputActionValue& Value) { bSprintHeld = true; }
@@ -112,4 +118,8 @@ private:
 	bool bWinded = false;
 	bool bLocked = false;
 	bool bDead = false;
+	bool bToggleCrouch = true;
+	bool bInvertY = false;
+	float LookScale = 1.f;
+	FDelegateHandle SettingsHandle;
 };

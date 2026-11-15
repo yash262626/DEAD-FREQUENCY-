@@ -52,6 +52,9 @@ public:
 	/** A "choice" is waiting for Choose(). */
 	void AwaitChoice(const TArray<FDFChoiceOption>& Options);
 
+	/** The level is closing: stop without running anything else (no OnFinished). */
+	void Cancel();
+
 	bool IsFinished() const { return bFinished; }
 	const FString& GetChapterKey() const { return ChapterKey; }
 	FName GetId() const { return Id; }
@@ -114,10 +117,23 @@ public:
 	/** A transmitter, tape or note: its spoken lines first, then its script (as the Godot radio did). */
 	UDFSequenceRunner* RunLegendEntry(const FString& Key, const FString& Symbol);
 
+	/** A line with no script behind it (the Listener's mimicry): it waits its turn like any other line. */
+	UFUNCTION(BlueprintCallable, Category = "Story")
+	void Say(const FString& Speaker, const FString& Text, const FString& Vo, float Seconds = -1.f);
+
 	/** True while any sequence runs (the radio does not lock onto a new transmission meanwhile). */
 	bool IsBusy() const;
 
 	void SetCommandHandler(UObject* Handler);
+
+	/** A map is about to load: every running script and queued line belonged to the old world. */
+	void StopAll();
+	/** A new run: no flags, items, journal, objective or checkpoint. */
+	void ResetRun();
+	/** The Godot count(prefix): set flags whose name starts with Prefix (tape_ev...). */
+	int32 CountFlags(const FString& Prefix) const;
+	/** Reads Content/Data/Story/<File> (staged as loose files in packaged builds). */
+	static bool LoadStoryFile(const FString& File, FString& Out);
 
 	// --- run state (saved with the run) ---
 	UFUNCTION(BlueprintCallable, Category = "Story") void SetFlag(FName Flag, int32 Value = 1);
@@ -162,9 +178,10 @@ private:
 		float Seconds = 0.f;
 	};
 
-	bool LoadJson(const FString& File, FString& Out) const;
+	bool LoadJson(const FString& File, FString& Out) const { return LoadStoryFile(File, Out); }
 	void Wait(UDFSequenceRunner* Runner, float Seconds);
 	void QueueLine(UDFSequenceRunner* Runner, const FDFStoryStep& Step);
+	void Enqueue(FPendingLine&& Line);
 	void NextLine();
 	static float ReadingTime(const FString& Text);
 

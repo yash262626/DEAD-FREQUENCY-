@@ -6,7 +6,6 @@
 #include "Engine/GameInstance.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/Controller.h"
-#include "Perception/AISense_Hearing.h"
 #include "Radio/DFTransmitter.h"
 #include "Story/DFStorySubsystem.h"
 
@@ -315,8 +314,7 @@ void UDFRadioComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 			{
 				Story->SetFlag(TEXT("m_radio"), Story->GetFlag(TEXT("m_radio")) + 1);   // what it learns from (Godot hear())
 			}
-			const float Reach = Loud * HearMultiplier(Story, TEXT("Radio"));
-			UAISense_Hearing::ReportNoiseEvent(GetWorld(), Me, Loud, Owner, Reach * DF_METRES, TEXT("Radio"));
+			DFReportNoise(GetWorld(), Me, Loud, Owner, TEXT("Radio"), HearMultiplier(Story, TEXT("Radio")));
 		}
 	}
 	const float Reach = Loud * HearMultiplier(Story, TEXT("Radio")) * DF_METRES;

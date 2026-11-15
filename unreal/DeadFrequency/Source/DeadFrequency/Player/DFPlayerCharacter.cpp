@@ -1,5 +1,8 @@
 #include "Player/DFPlayerCharacter.h"
 
+#include "AI/DFListenerController.h"
+#include "EngineUtils.h"
+
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SpotLightComponent.h"
@@ -14,9 +17,9 @@
 #include "InputMappingContext.h"
 #include "InputModifiers.h"
 #include "Kismet/GameplayStatics.h"
-#include "Perception/AISense_Hearing.h"
 #include "Player/DFInteractable.h"
 #include "Radio/DFRadioComponent.h"
+#include "Settings/DFGameUserSettings.h"
 #include "Story/DFStorySubsystem.h"
 
 ADFPlayerCharacter::ADFPlayerCharacter()
@@ -60,6 +63,33 @@ void ADFPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	BuildInput();
+	ApplySettings();
+	SettingsHandle = UDFGameUserSettings::OnApplied.AddUObject(this, &ADFPlayerCharacter::ApplySettings);
+}
+
+void ADFPlayerCharacter::EndPlay(const EEndPlayReason::Type Reason)
+{
+	UDFGameUserSettings::OnApplied.Remove(SettingsHandle);
+	Super::EndPlay(Reason);
+}
+
+void ADFPlayerCharacter::ApplySettings()
+{
+	const UDFGameUserSettings* S = UDFGameUserSettings::GetDFSettings();
+	if (!S)
+	{
+		return;
+	}
+	Camera->SetFieldOfView(FMath::Clamp(S->FieldOfView, 60.f, 100.f));
+	LookScale = FMath::Clamp(S->LookSensitivity, 0.1f, 4.f);
+	bInvertY = S->bInvertY;
+	bToggleCrouch = S->bToggleCrouch;
+	// brightness is exposure compensation on the player camera: 0.5-1.5 maps to -1 EV .. +0.58 EV
+	FPostProcessSettings& PP = Camera->PostProcessSettings;
+	PP.bOverride_AutoExposureBias = true;
+	PP.AutoExposureBias = FMath::Log2(FMath::Clamp(S->Brightness, 0.5f, 1.5f));
+	PP.bOverride_FilmGrainIntensity = true;
+	PP.FilmGrainIntensity = S->bFilmGrain ? 0.18f : 0.f;
 }
 
 // ------------------------------------------------------------------------------------------------ input (in code)
@@ -187,7 +217,7 @@ void ADFPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 void ADFPlayerCharacter::Move(const FInputActionValue& Value)
 {
-	MoveInput = (bLocked || IsHidden()) ? FVector2D::ZeroVector : Value.Get<FVector2D>();
+	MoveInput = (bLocked || IsInHiding()) ? FVector2D::ZeroVector : Value.Get<FVector2D>();
 }
 
 void ADFPlayerCharacter::Look(const FInputActionValue& Value)
@@ -196,14 +226,22 @@ void ADFPlayerCharacter::Look(const FInputActionValue& Value)
 	{
 		return;
 	}
-	const FVector2D Axis = Value.Get<FVector2D>();
+	const FVector2D Axis = Value.Get<FVector2D>() * LookScale;
 	AddControllerYawInput(Axis.X);
-	AddControllerPitchInput(Axis.Y);
+	AddControllerPitchInput(bInvertY ? -Axis.Y : Axis.Y);
 }
 
 void ADFPlayerCharacter::CrouchOn(const FInputActionValue& Value)
 {
-	if (!bLocked && !IsHidden())
+	if (bLocked || IsInHiding())
+	{
+		return;
+	}
+	if (bToggleCrouch && bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
 	{
 		Crouch();
 	}
@@ -211,7 +249,10 @@ void ADFPlayerCharacter::CrouchOn(const FInputActionValue& Value)
 
 void ADFPlayerCharacter::CrouchOff(const FInputActionValue& Value)
 {
-	UnCrouch();
+	if (!bToggleCrouch)
+	{
+		UnCrouch();
+	}
 }
 
 void ADFPlayerCharacter::InteractPressed(const FInputActionValue& Value)
@@ -220,7 +261,7 @@ void ADFPlayerCharacter::InteractPressed(const FInputActionValue& Value)
 	{
 		return;
 	}
-	if (IsHidden())
+	if (IsInHiding())
 	{
 		ExitHiding();
 		return;
@@ -298,7 +339,7 @@ void ADFPlayerCharacter::Tick(float DeltaSeconds)
 	}
 
 	// sprint and stamina
-	bSprinting = bSprintHeld && MoveInput.Y > 0.2f && !bIsCrouched && !bWinded && !bLocked && !IsHidden();
+	bSprinting = bSprintHeld && MoveInput.Y > 0.2f && !bIsCrouched && !bWinded && !bLocked && !IsInHiding();
 	if (bSprinting)
 	{
 		SprintRecent = 3.f;
@@ -320,7 +361,7 @@ void ADFPlayerCharacter::Tick(float DeltaSeconds)
 	GetCharacterMovement()->MaxWalkSpeed = bSprinting ? SprintSpeed : WalkSpeed;
 
 	// lean: the head slides 42 cm and rolls 12.6 degrees
-	Lean = FMath::FInterpTo(Lean, IsHidden() ? 0.f : LeanTarget, DeltaSeconds, 8.f);
+	Lean = FMath::FInterpTo(Lean, IsInHiding() ? 0.f : LeanTarget, DeltaSeconds, 8.f);
 	// BaseEyeHeight is relative to the capsule centre; ACharacter switches it to CrouchedEyeHeight while crouched
 	Camera->SetRelativeLocation(FVector(0.f, Lean * 42.f, BaseEyeHeight));
 	if (AController* C = GetController())
@@ -383,14 +424,15 @@ void ADFPlayerCharacter::Footsteps(float DeltaSeconds)
 
 void ADFPlayerCharacter::ReportNoise(float LoudMetres, FName Kind)
 {
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetActorLocation(), LoudMetres, this, LoudMetres * DF_METRES, Kind);
+	// story sequences can make the player quieter or louder (Godot noise_mult, footsteps only)
+	DFReportNoise(GetWorld(), GetActorLocation(), Kind == TEXT("Step") ? LoudMetres * NoiseMultiplier : LoudMetres, this, Kind);
 }
 
 void ADFPlayerCharacter::UpdateInteraction()
 {
 	AActor* Found = nullptr;
 	FText Prompt;
-	if (!bLocked && !IsHidden())
+	if (!bLocked && !IsInHiding())
 	{
 		const FVector Start = Camera->GetComponentLocation();
 		const FVector End = Start + Camera->GetForwardVector() * 270.f;
@@ -409,7 +451,7 @@ void ADFPlayerCharacter::UpdateInteraction()
 			}
 		}
 	}
-	else if (IsHidden())
+	else if (IsInHiding())
 	{
 		Prompt = NSLOCTEXT("DeadFrequency", "ComeOut", "Come out");
 	}
@@ -441,6 +483,11 @@ void ADFPlayerCharacter::EnterHiding(AActor* Spot)
 	}
 	GetCharacterMovement()->DisableMovement();
 	ReportNoise(4.f, TEXT("Door"));
+	// if it was watching when the door closed, the hiding place is no secret
+	for (TActorIterator<ADFListenerController> It(GetWorld()); It; ++It)
+	{
+		It->PlayerHid(Spot);
+	}
 
 	// the Listener checks the places you use most (Godot: G.flags["m_hide_<uid>"])
 	if (const UGameInstance* GI = GetGameInstance())
@@ -455,7 +502,7 @@ void ADFPlayerCharacter::EnterHiding(AActor* Spot)
 
 void ADFPlayerCharacter::ExitHiding()
 {
-	if (!IsHidden())
+	if (!IsInHiding())
 	{
 		return;
 	}

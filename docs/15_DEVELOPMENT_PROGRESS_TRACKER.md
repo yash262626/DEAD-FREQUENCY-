@@ -4,7 +4,23 @@ Status key: **Tested** = implemented and covered by a passing automated test · 
 
 Latest full regression (2026-11-15, after the second reference pass): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 · slice 17/0 · texq 3/0 — 800 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
 
-## AAA graphics and 4K transformation (current brief)
+## Unreal Engine 5 migration (current brief)
+The owner chose Unreal Engine 5 as the primary engine. The Godot 3.5 game stays in `game/` as the playable backup; the
+Unreal project is separate, in `unreal/DeadFrequency/`. Plan: [24](24_UNREAL_ENGINE_5_MIGRATION_PLAN.md).
+
+| Item | Status |
+|---|---|
+| Migration roadmap, architecture, asset pipeline, timeline | **Done** — docs/24 |
+| Separate UE 5.8 project (uproject, config, targets, LFS rules) | **Implemented** — not opened in the editor yet |
+| Story data converted (13 chapters, prologue, 4 endings, slice, items, achievements, credits, mimicry) | **Tested** — parity script: 640/640 lines, 0 missing, 0 extra; +9 mimicry lines still to add to the VO package |
+| C++ foundation: story runtime, radio, player, Listener AI, run/profile/saves, game mode, settings | **Partial** — written, **not compiled** (no Unreal machine connected) |
+| Level director, UI (HUD, subtitles, cards, menus, credits), cinematics | **Planned** — needs the editor |
+| Listener production model, skin, rig, animations | **Planned** — needs a character artist/animator decision (docs/24 §8) |
+| Environments, first-person HX-7, torch and hands | **Planned** |
+| Unreal vertical slice for approval | **Blocked** — needs a Windows PC with UE 5.8 and Visual Studio 2022 connected to the sessions |
+| Performance on RTX 3060-class hardware | **Awaiting hardware** — nothing measured |
+
+## AAA graphics and 4K transformation (previous brief)
 | Item | Status |
 |---|---|
 | Visual audit + 4K vertical slice, the brief's ten items | **Done** — docs/21 §2 (item-by-item, with gaps); **not photoreal, not AAA** |

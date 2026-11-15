@@ -132,6 +132,15 @@ void UDFSequenceRunner::Advance()
 	}
 }
 
+void UDFSequenceRunner::Cancel()
+{
+	Stack.Reset();
+	PendingOptions.Reset();
+	bWaiting = false;
+	bResumeRequested = false;
+	bFinished = true;
+}
+
 void UDFSequenceRunner::Finish()
 {
 	if (bFinished)
@@ -213,7 +222,7 @@ void UDFStorySubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	UE_LOG(LogDeadFrequency, Log, TEXT("Story: %d scripts, %d mimicry lines"), Chapters.Num(), Mimicry.Lines.Num() + Mimicry.NewGamePlus.Num());
 }
 
-bool UDFStorySubsystem::LoadJson(const FString& File, FString& Out) const
+bool UDFStorySubsystem::LoadStoryFile(const FString& File, FString& Out)
 {
 	return FFileHelper::LoadFileToString(Out, *(FPaths::ProjectContentDir() / DFStory::Dir / File));
 }
@@ -295,6 +304,47 @@ UDFSequenceRunner* UDFStorySubsystem::RunLegendEntry(const FString& Key, const F
 	return Runner;
 }
 
+void UDFStorySubsystem::StopAll()
+{
+	FTimerManager& Timers = GetGameInstance()->GetTimerManager();
+	for (UDFSequenceRunner* Runner : Running)
+	{
+		if (Runner)
+		{
+			Timers.ClearTimer(Runner->WaitTimer);
+			Runner->Cancel();
+		}
+	}
+	Running.Reset();
+	Timers.ClearTimer(LineTimer);
+	LineQueue.Reset();
+	bLineActive = false;
+}
+
+void UDFStorySubsystem::ResetRun()
+{
+	StopAll();
+	Flags.Reset();
+	Inventory.Reset();
+	Journal.Reset();
+	Objective.Reset();
+	Checkpoint.Reset();
+	CurrentChapter.Reset();
+}
+
+int32 UDFStorySubsystem::CountFlags(const FString& Prefix) const
+{
+	int32 N = 0;
+	for (const TPair<FName, int32>& Flag : Flags)
+	{
+		if (Flag.Value != 0 && Flag.Key.ToString().StartsWith(Prefix))
+		{
+			++N;
+		}
+	}
+	return N;
+}
+
 bool UDFStorySubsystem::IsBusy() const
 {
 	return Running.Num() > 0;
@@ -369,6 +419,21 @@ void UDFStorySubsystem::QueueLine(UDFSequenceRunner* Runner, const FDFStoryStep&
 	Line.Text = Step.Arg(1);
 	Line.Vo = Step.Vo;
 	Line.Seconds = Step.ArgFloat(2, ReadingTime(Line.Text));
+	Enqueue(MoveTemp(Line));
+}
+
+void UDFStorySubsystem::Say(const FString& Speaker, const FString& Text, const FString& Vo, float Seconds)
+{
+	FPendingLine Line;
+	Line.Speaker = Speaker;
+	Line.Text = Text;
+	Line.Vo = Vo;
+	Line.Seconds = Seconds > 0.f ? Seconds : ReadingTime(Text);
+	Enqueue(MoveTemp(Line));
+}
+
+void UDFStorySubsystem::Enqueue(FPendingLine&& Line)
+{
 	LineQueue.Add(MoveTemp(Line));
 	if (!bLineActive)
 	{

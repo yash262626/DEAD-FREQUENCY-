@@ -17,6 +17,13 @@ Evidence: native 4K captures in [`docs/screenshots/slice4k/`](docs/screenshots/s
 
 **Graphics settings:** presets Low, Medium, High, Ultra, Cinematic; resolution up to 3840 × 2160; render scale 50–150 %; texture quality; shadows; reflections; ambient occlusion; anti-aliasing (FXAA, MSAA 2×/4×/8×); view distance; V-Sync; frame-rate limit.
 
+## Unreal Engine 5 (in progress)
+DEAD FREQUENCY is moving to **Unreal Engine 5** for its commercial release. The separate Unreal project lives in
+[`unreal/DeadFrequency/`](unreal/DeadFrequency/) and the plan — architecture, asset pipeline, timeline, decisions — is
+[docs/24](docs/24_UNREAL_ENGINE_5_MIGRATION_PLAN.md). Today it holds the converted story data (parity-checked against
+the Godot game) and core C++ that has **not been compiled yet**; nothing in it is playable until a machine with
+Unreal Engine 5.8 builds it. The Godot 3.5 game below stays complete and playable as the backup.
+
 ## What's in this repository
 - A complete, playable campaign in **Godot 3.5**: 2-minute opening cinematic, 13 chapters with optional wings, 4 endings, New Game+ ("Second Signal"), end credits.
 - The radio system (four bands plus hidden carriers, directional antenna, battery, exposure), a sound-hunting enemy that learns (and remembers between runs), stealth, puzzles, saves, menus, settings, subtitles, controller support.

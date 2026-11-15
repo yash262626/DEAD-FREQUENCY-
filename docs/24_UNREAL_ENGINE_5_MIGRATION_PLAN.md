@@ -23,7 +23,7 @@ target hardware and been shown with in-engine captures.
 | Content | Count | Source in the Godot game |
 |---|---|---|
 | Story scripts | 13 chapters + prologue + 4 endings (18), plus New Game+ "Second Signal" | `game/data/ch00–ch13.gd`, `endings.gd` |
-| Spoken / radio lines | **640** lines, 24 characters (voice-over ids already assigned) | `docs/vo/vo_script.csv` |
+| Spoken / radio lines | **640** scripted lines, 24 characters (voice-over ids already assigned), plus **9** lines the Listener speaks in borrowed voices (5, and 4 New Game+ variants) that the recording script does not list yet: **649 to record** | `docs/vo/vo_script.csv`; `scripts/listener.gd` (mimicry) |
 | Documents and notes | 48 | legend kind `note` |
 | Tapes (incl. 7 Evelyn tapes) | 14 | kind `tape` |
 | Radio transmissions | 24, on 8 frequencies (88.0 silent band, 89.1, 92.3, 93.3, 96.1, 99.7, 101.3, 104.4) and 4 bands (89.1 ECHO, 94.6 PROXIMITY, 101.3 FORECAST, 107.9 UNSEEN) | kind `radio`, `scripts/radio.gd` |
@@ -40,7 +40,8 @@ target hardware and been shown with in-engine captures.
 The conversion is already done and verified: `tools/ue/godot_to_ue.py` turns the exported Godot data into
 `unreal/DeadFrequency/Content/Data/Story/*.json` and writes `PARITY.md` — **640 of 640 voice lines found again with
 the same ids, speakers and text, nothing missing, nothing extra**, all documents, tapes, transmissions, devices,
-doors, puzzle groups and walkthroughs carried per chapter. Level layouts carry over as the original 2 m grids
+doors, puzzle groups and walkthroughs carried per chapter. The Listener's 9 mimicry lines are converted separately
+(`listener_mimicry.json`, with voice-over ids) and must be added to the recording package before casting. Level layouts carry over as the original 2 m grids
 (greybox reference only; every level is re-authored in Unreal).
 
 ## 2. Project architecture (Unreal Engine 5.8)
@@ -291,3 +292,22 @@ used; contractor fees; voice actors; the Unreal royalty after launch (above US$1
 | Story regressions while porting | Converted data with parity checks; the Godot game stays as the reference; automated full playthrough |
 | Unreal Engine 6 arriving during production | Stay on 5.8 to launch; evaluate an upgrade afterwards |
 | Repository size | Binary content in LFS or Perforce, never in plain Git |
+
+## 10. Progress
+
+**2026-11-15 — foundation written, not compiled.** No machine with Unreal Engine is connected to these sessions yet,
+so nothing below has been built or run; it counts as done only after it compiles and passes its tests on the build
+machine.
+
+| Part | State |
+|---|---|
+| Separate project `unreal/DeadFrequency/` (uproject, config, build targets, LFS rules) | Written; Godot game untouched |
+| Story data (18 scripts + slice, items, achievements, credits, titles, mimicry) | Converted; parity **verified by script** (640/640 lines, 0 missing, 0 extra) |
+| Story runtime (`UDFStorySubsystem`, sequence runner, one voice at a time, flow and UI commands) | Written, not compiled |
+| Radio (`UDFRadioComponent`, `ADFTransmitter`): tuning, bands, lock, exposure, noise the Listener hears | Written, not compiled |
+| Player (`ADFPlayerCharacter`): movement, stamina, lean, torch and cells, footsteps as noise, interaction, hiding; input defined in code | Written, not compiled |
+| The Listener's mind (`ADFListenerController`): 8 states, hearing through AI Perception with the Godot localisation rules, sight rules, learning, mimicry, New Game+ adaptations, fairness cap | Written, not compiled |
+| Run and profile (`UDFGameInstance`, `UDFSaveGame`, `UDFProfileSave`): new game, continue, chapter select, New Game+, slice, chapter flow, endings, CRC-sealed saves with backup slot, achievements, memory between runs | Written, not compiled |
+| `ADFGameMode` (checkpoint PlayerStarts, run state to the pawn, chapter start) | Written, not compiled |
+| Settings (`UDFGameUserSettings`): presets on Unreal scalability 0–4, upscaler choice with fallback to TSR, hardware ray tracing on Epic+, FOV, look, crouch mode, brightness, accessibility, audio levels | Written, not compiled |
+| Level director (world-side story commands), UI widgets, Listener mesh and animation, environments, audio, automation tests | Not started — they need the editor |
