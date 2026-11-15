@@ -1,0 +1,20 @@
+{
+ "archive_key": "Archive keycard",
+ "battery": "Power cell",
+ "bottle": "Glass bottle",
+ "comms_key": "Comms annex keycard",
+ "crank": "Hand crank",
+ "crystal": "Tuning crystal",
+ "fluid": "Hydraulic fluid",
+ "fuse": "Ceramic fuse",
+ "hale_badge": "Hale's security badge",
+ "lab_key": "Research keycard",
+ "med_key": "Medical wing keycard",
+ "medkit": "Medkit",
+ "radio": "HX-7 field receiver",
+ "res_key": "Quarters master key",
+ "shutdown_key": "Dr. Voss's shutdown key",
+ "tape_reel": "Voiceprint reel — E. Voss",
+ "tram_fuse": "Traction fuse",
+ "valve": "Valve wheel"
+}

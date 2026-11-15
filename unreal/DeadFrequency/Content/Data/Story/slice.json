@@ -1,0 +1,539 @@
+{
+ "number": 99,
+ "title": "THE SIGNAL ROOM",
+ "subtitle": "SUBLEVEL 3 — COMMUNICATIONS",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "H",
+   "kind": "hide",
+   "props": {
+    "block": "true",
+    "eye": "0.6",
+    "low": "true",
+    "noviz": "true",
+    "off": "[0.5,0.3]",
+    "out": "Come out",
+    "prompt": "Hide under the desk",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "block": "true",
+    "noviz": "true",
+    "p": "console",
+    "prompt": "Power up the main receiver",
+    "size": "(1.2, 1.4, 2.6)"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "sl_echo",
+    "r": "8",
+    "title": "Corridor, 1998"
+   },
+   "sequence": -1,
+   "lines": 2
+  },
+  {
+   "symbol": "f",
+   "kind": "radio",
+   "props": {
+    "f": "101.3",
+    "flag": "sl_fore",
+    "r": "9",
+    "title": "Forecast"
+   },
+   "sequence": -1,
+   "lines": 3
+  },
+  {
+   "symbol": "k",
+   "kind": "mark",
+   "props": {
+    "block": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "t",
+   "kind": "trig",
+   "props": {},
+   "sequence": 4,
+   "lines": -1
+  },
+  {
+   "symbol": "u",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "v",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "###################",
+  "##########......k##",
+  "##########......k##",
+  "##...v.e....uU..k##",
+  "##.#######......k##",
+  "##.#######...H..k##",
+  "##.################",
+  "##f################",
+  "##.################",
+  "##t################",
+  "##S################",
+  "###################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 16,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 16,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "v",
+   "cell": {
+    "x": 5,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 7,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 12,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 13,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 16,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 16,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 13,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 16,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 2,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "t",
+   "cell": {
+    "x": 2,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 10
+   }
+  }
+ ],
+ "props": {
+  "amb_db": "-28",
+  "amb_loop": "hum",
+  "art": "res://slice/Slice.tscn",
+  "card_top": "VERTICAL SLICE",
+  "face": "0",
+  "h": "3.8",
+  "hq": "true",
+  "music": "drone_c",
+  "pal": "comms"
+ },
+ "walkthrough": [],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "music",
+     "args": [
+      "drone_c",
+      "-14"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Sublevel three. Everything down here still smells like it's running."
+     ],
+     "vo": "daniel_d1c2f365aa"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find the communications room, C3-14."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "0"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "89.1"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "rx",
+      "static",
+      "-22"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (89.1 MHz)",
+      "If anyone finds this console still running: don't answer it. Whatever calls you on this band is not who it sounds like."
+     ],
+     "vo": "evelyn_3386c491dd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (89.1 MHz)",
+      "It doesn't hear our voices. It hears the carrier. Every time we key a transmitter, it learns where we are."
+     ],
+     "vo": "evelyn_9e8202ce30"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Evelyn Voss. October '98."
+     ],
+     "vo": "daniel_7d943a43ac"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "0"
+     ]
+    },
+    {
+     "command": "art",
+     "args": [
+      "energy",
+      "TrofferFlicker",
+      "0"
+     ]
+    },
+    {
+     "command": "art",
+     "args": [
+      "on",
+      "Beacon"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.4"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "rx"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "2",
+      "0.6",
+      "v"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Something's in the vent."
+     ],
+     "vo": "daniel_6c86bd022b"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "v",
+      "watch"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Hide under the desk by the south wall. Stay silent."
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2.5"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "u"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "34"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "goto",
+      "v"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "9"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "art",
+     "args": [
+      "off",
+      "Beacon"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...It's gone back up. For now."
+     ],
+     "vo": "daniel_b373c2f793"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "2"
+     ]
+    },
+    {
+     "command": "text",
+     "args": [
+      "END OF THE VERTICAL SLICE",
+      "4"
+     ]
+    },
+    {
+     "command": "menu",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (1998)",
+      "Somebody's been in the vent again. The grille's on the floor."
+     ],
+     "vo": "ruiz_0a11d1c854"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Leave it. Nobody goes in the ducts. Nobody fits in the ducts."
+     ],
+     "vo": "okafor_247d57e77c"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (101.3 MHz)",
+      "When the red light comes on, get under the desk by the south wall. Don't move. Don't breathe."
+     ],
+     "vo": "daniel_541645cc46"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...That's my voice."
+     ],
+     "vo": "daniel_ee145e865f"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "C3-14. If the main receiver down here still works, I can hear what this place heard."
+     ],
+     "vo": "daniel_912fa3078b"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find the communications room, C3-14."
+     ]
+    }
+   ]
+  }
+ ]
+}

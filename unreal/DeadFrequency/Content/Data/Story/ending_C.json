@@ -1,0 +1,615 @@
+{
+ "ending": "C",
+ "number": -1,
+ "title": "ENDING C",
+ "subtitle": "",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "A",
+   "kind": "prop",
+   "props": {
+    "p": "aperture",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "B",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "c": "0.6,0.75,1,1",
+    "e": "2.4",
+    "r": "16"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "prop",
+   "props": {
+    "p": "monitor"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "R",
+   "kind": "light",
+   "props": {
+    "e": "1.6",
+    "r": "12",
+    "red": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "U",
+   "kind": "prop",
+   "props": {
+    "p": "console"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "prop",
+   "props": {
+    "p": "recorder"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "####################################",
+  "#......................#...........#",
+  "#..........A...........#..M....r...#",
+  "#..o..............o....#...........#",
+  "#.....x....B...........#....c......#",
+  "#..R................R..#....L......#",
+  "#..o.......L.......o...#....n......#",
+  "#........m...e.........#...........#",
+  "#..........U...........#...........#",
+  "#......................#...........#",
+  "#..o................o..#...........#",
+  "#..........S...........#...........#",
+  "#......................#...........#",
+  "####################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 11,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 26,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 31,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 18,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 6,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 11,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 28,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 20,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 28,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 19,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 28,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 9,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 13,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 11,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 20,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 11,
+    "y": 11
+   }
+  }
+ ],
+ "props": {
+  "ext_mode": "storm",
+  "exterior": "true",
+  "h": "7.5",
+  "music": "",
+  "pal": "chamber"
+ },
+ "walkthrough": [],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "x",
+      "watch"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "face"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "U",
+      "A",
+      "0",
+      "",
+      "1.7",
+      "2.8"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "1"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "final_silence"
+     ],
+     "then": 1,
+     "else": -1
+    },
+    {
+     "command": "if",
+     "args": [
+      "final_send"
+     ],
+     "then": 2,
+     "else": -1
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "4"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE)",
+      "Again."
+     ],
+     "vo": "listener_8ed6dddbe5"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "0.2"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "tp",
+     "args": [
+      "n",
+      "0"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Current time: zero two — forty-three."
+     ],
+     "vo": "pa_f40e4bfbe4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...The annex. I'm back in the annex."
+     ],
+     "vo": "daniel_39c7720219"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The recorder. The monitor. Two forty-three. It's always two forty-three."
+     ],
+     "vo": "daniel_dc091d4b08"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "There's a microphone. Somebody has to warn him. Somebody has to tell him before he comes in."
+     ],
+     "vo": "daniel_eba72b95ed"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "c",
+      "r",
+      "4",
+      "",
+      "1.6",
+      "1.1"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "101.3"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "(into the microphone, broken) Daniel..."
+     ],
+     "vo": "daniel_542516d500"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Whatever happens. Do not open the door."
+     ],
+     "vo": "daniel_883a9f8ab6"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "2"
+     ]
+    },
+    {
+     "command": "ext",
+     "args": [
+      "storm"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@far",
+      "@gate",
+      "0"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "2"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@far",
+      "@gate",
+      "7",
+      "@road1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH (KESSLER)",
+      "Northline to Arlen. You at the gate yet?"
+     ],
+     "vo": "dispatch_b34742927e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "At the gate. Snow gave up about a mile back. Now it's just rain."
+     ],
+     "vo": "daniel_bb3251f0de"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "2.5"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 3,
+     "else": -1
+    },
+    {
+     "command": "text",
+     "args": [
+      "ENDING C — THE LOOP",
+      "3",
+      "34"
+     ]
+    },
+    {
+     "command": "title",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "credits",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The key — I don't have the key. Mira, I don't have her key—"
+     ],
+     "vo": "daniel_0c5fc98ea4"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Signal— Mira? Mira, answer. Why isn't anybody answering? It's just me. It's just my voice—"
+     ],
+     "vo": "daniel_37235a92fd"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH (KESSLER)",
+      "...It asked for you by name, Danny. I'm sorry. I'm so sorry."
+     ],
+     "vo": "dispatch_84a43e8afe"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "He's never said that before. Not any of the other times."
+     ],
+     "vo": "daniel_f027b64d51"
+    }
+   ]
+  }
+ ]
+}

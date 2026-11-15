@@ -1,0 +1,800 @@
+{
+ "number": 0,
+ "title": "PROLOGUE",
+ "subtitle": "",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "2",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "3",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "4",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "5",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "prop",
+   "props": {
+    "p": "console",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "npc",
+   "props": {
+    "rot": "90",
+    "tint": "0.9,0.95,1,1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "prop",
+   "props": {
+    "p": "glass",
+    "rot": "90"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "npc",
+   "props": {
+    "rot": "90",
+    "tint": "0.25,0.3,0.4,1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "prop",
+   "props": {
+    "p": "monitor",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "npc",
+   "props": {
+    "rot": "180"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "npc",
+   "props": {
+    "rot": "180"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "prop",
+   "props": {
+    "p": "shade",
+    "rot": "90"
+   },
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "######################",
+  "#S.L.m..1.#4...R...5.#",
+  "#.n.c.o...D..........#",
+  "#.....e...#.k.k....g.#",
+  "#.3..L..2.#........x.#",
+  "######################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 1,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 5,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 8,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "4",
+   "cell": {
+    "x": 11,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 15,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "5",
+   "cell": {
+    "x": 19,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 4,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 6,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 10,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 6,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 12,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 14,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 19,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "3",
+   "cell": {
+    "x": 2,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 5,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "2",
+   "cell": {
+    "x": 8,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 19,
+    "y": 4
+   }
+  }
+ ],
+ "props": {
+  "ext_mode": "storm",
+  "exterior": "true",
+  "music": "",
+  "pal": "comms"
+ },
+ "walkthrough": [],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "hide_ent",
+     "args": [
+      "x"
+     ]
+    },
+    {
+     "command": "ext",
+     "args": [
+      "storm"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "cine",
+      "rain",
+      "-14"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2.5"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "thunder",
+      "-4"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "3"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "static",
+      "static",
+      "-30"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "text",
+     "args": [
+      "OCTOBER 17, 1998 — 02:43 AM",
+      "3",
+      "26"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@air1",
+      "@gate",
+      "0"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "2.5"
+     ]
+    },
+    {
+     "command": "music",
+     "args": [
+      "drone_a",
+      "-8"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@air1",
+      "@gate",
+      "9",
+      "@air2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "thunder",
+      "-2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (RECORDING)",
+      "Project log. Doctor Evelyn Voss, director, HELIX-9. Nineteenth consecutive night on the carrier."
+     ],
+     "vo": "evelyn_4ca8c9c9ca"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@road1",
+      "@mast",
+      "6",
+      "@road2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (RECORDING)",
+      "We built this place to listen. I think I finally understand what that costs."
+     ],
+     "vo": "evelyn_609b8c90f6"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "0.6"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "static"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "cine",
+      "hum",
+      "-16"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "3",
+      "c",
+      "0"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "0.8"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "3",
+      "c",
+      "5",
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR",
+      "Carrier's holding at one-oh-seven point nine. Doctor… it's answering."
+     ],
+     "vo": "okafor_1f7167c51d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "It can't answer. We haven't sent anything."
+     ],
+     "vo": "evelyn_e5062f089d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR",
+      "Then who is it talking to?"
+     ],
+     "vo": "okafor_5b6338d4bb"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "1",
+      "m",
+      "3.5",
+      "",
+      "1.5",
+      "1.2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-6"
+     ]
+    },
+    {
+     "command": "monitor",
+     "args": [
+      "[\"CARRIER LOCK  107.9 MHz\",\"INBOUND TRANSMISSION\",\"ORIGIN: UNRESOLVED\",\"TIMESTAMP: 17 OCT 2026\"]",
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "Twenty twenty-six. That's not a fault, Tunde. That's a date."
+     ],
+     "vo": "evelyn_1bc6e52a13"
+    },
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "loop",
+     "args": [
+      "cine",
+      "alarm",
+      "-12"
+     ]
+    },
+    {
+     "command": "music",
+     "args": [
+      "drone_b",
+      "-6"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "4",
+      "k",
+      "4",
+      "5",
+      "1.3"
+     ]
+    },
+    {
+     "command": "move",
+     "args": [
+      "k#1",
+      "5",
+      "3.2"
+     ]
+    },
+    {
+     "command": "move",
+     "args": [
+      "k#2",
+      "4",
+      "2.6"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "2",
+      "0.8",
+      "k"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "2",
+      "0.75",
+      "4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Attention. Containment fault, sublevel four. All personnel remain at your stations."
+     ],
+     "vo": "pa_4555850708"
+    },
+    {
+     "command": "move",
+     "args": [
+      "n",
+      "2",
+      "4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (RADIO)",
+      "Hale to all posts. Seal the lower levels. Nobody opens the Door. Nobody."
+     ],
+     "vo": "marcus_c61f82019f"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "2",
+      "e",
+      "4",
+      "",
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "Mayday, mayday. This is HELIX-9 to any station. Can anyone hear me?"
+     ],
+     "vo": "evelyn_10d1e35995"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "We opened it. We opened it, and something heard us."
+     ],
+     "vo": "evelyn_c32639c013"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA",
+      "Doctor Voss — the lift's still running. Come with us. Please."
+     ],
+     "vo": "mira_33ddf3b08d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "Take him, Mira. Take him up to the surface and do not look back."
+     ],
+     "vo": "evelyn_d47a7e5252"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA",
+      "I'm not leaving you down here—"
+     ],
+     "vo": "mira_2641836b57"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "Go!"
+     ],
+     "vo": "evelyn_623427f458"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "5",
+      "g",
+      "0",
+      "",
+      "1.5"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "cine"
+     ]
+    },
+    {
+     "command": "music",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "show_ent",
+     "args": [
+      "x"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "0",
+      "0.5"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "5",
+      "g",
+      "3.2",
+      "",
+      "1.5"
+     ]
+    },
+    {
+     "command": "hide_ent",
+     "args": [
+      "x"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-4"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "static",
+      "static",
+      "-14"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (STATIC)",
+      "…whatever happens… do not open the door."
+     ],
+     "vo": "daniel_26e50ec337"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "Who is this? Identify yourself. Who is on this channel?"
+     ],
+     "vo": "evelyn_08cd805394"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_down",
+      "2"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "0.15"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "static"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "3.5"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "whisper",
+      "0",
+      "0.8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "VOICE",
+      "Can anyone hear me?",
+      "2.6"
+     ],
+     "vo": "voice_3d0fbf92f2"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "title",
+     "args": [
+      "HELIX-9 HAS BEEN SILENT FOR TWENTY-EIGHT YEARS"
+     ]
+    },
+    {
+     "command": "menu",
+     "args": []
+    }
+   ]
+  }
+ ]
+}

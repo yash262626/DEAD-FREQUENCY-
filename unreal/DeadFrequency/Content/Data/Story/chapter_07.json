@@ -1,0 +1,1309 @@
+{
+ "number": 7,
+ "title": "THE SIGNAL ROOM",
+ "subtitle": "SUBLEVEL 4 — COMMUNICATIONS CENTRE",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {
+  "arr": 1
+ },
+ "legend": [
+  {
+   "symbol": "K",
+   "kind": "door",
+   "props": {
+    "code": "7225",
+    "label": "STOREROOM — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {
+    "msg": "Research labs. Locked down until comms report in. Fine. Comms will report in.",
+    "needflag": "c7_uplink"
+   },
+   "sequence": 2,
+   "lines": -1
+  },
+  {
+   "symbol": "N",
+   "kind": "note",
+   "props": {
+    "text": "Rami —\n\nIf anything happens tonight, where do I listen for you?\n— M.\n\n(Underneath, in Rami's handwriting:)\n104.4. Only you know it. Don't tell Hale. Don't tell anybody.\nAnd Mira — if it's me but it doesn't sound like a joke, it isn't me.",
+    "title": "Sticky note on the storeroom shelf"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "note",
+   "props": {
+    "flag": "mira_p3",
+    "text": "Loop 1,906.\n\nI've tried every frequency on the set. 96.1 is the only one that ever answers, and it is always someone who isn't there.\n\nTonight somebody answered and said his name was Arlen. Arlen. I've heard that name before — it asked Hale for an Arlen, weeks ago. Before all this.",
+    "title": "Mira's notebook — page 3 of 5"
+   },
+   "sequence": 3,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev4",
+    "title": "Dr. Voss — Run 18"
+   },
+   "sequence": -1,
+   "lines": 9
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "fail": "The uplink won't take. The feed horns need aligning first, and the tuning-crystal socket is empty.",
+    "if": "solved_arr",
+    "need": "crystal",
+    "p": "console",
+    "prompt": "Bring the uplink online"
+   },
+   "sequence": 10,
+   "lines": -1
+  },
+  {
+   "symbol": "a",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "arr",
+    "label": "Feed horns",
+    "p": "dish",
+    "prompt": "Turn the north feed horn",
+    "target": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "arr",
+    "label": "Feed horns",
+    "p": "dish",
+    "prompt": "Turn the east feed horn",
+    "target": "3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "prop",
+   "props": {
+    "p": "console"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "arr",
+    "label": "Feed horns",
+    "p": "dish",
+    "prompt": "Turn the south feed horn",
+    "target": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "note",
+   "props": {
+    "text": "To whoever is on comms tonight:\n\nI read the storeroom code out on my 'numbers station' test, 99.7, every night at 02:00, because SOMEBODY (Mira) keeps locking herself out.\n\nHale says this is a security breach.\nI say it's a numbers station, and numbers stations are cool.\n\n— R.H.",
+    "title": "Taped to Haddad's monitor"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "j",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "pell3",
+    "r": "12",
+    "title": "Pell — the stranger (3 of 4)"
+   },
+   "sequence": -1,
+   "lines": 11
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "crystal"
+   },
+   "sequence": 16,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "HX UPLINK — FEED HORN ALIGNMENT\n\nThe three feed horns in the feed room steer the surface arrays.\nThey must match tonight's array headings or the uplink will not lock.\n\nHeadings are read aloud at the start of every shift.\nDO NOT WRITE THEM DOWN. — M. Hale\n\n(The rest of the card has been scrubbed blank.)",
+    "title": "Alignment card"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "radio",
+   "props": {
+    "f": "99.7",
+    "flag": "c7_numbers",
+    "r": "16",
+    "title": "99.7 — numbers"
+   },
+   "sequence": -1,
+   "lines": 17
+  },
+  {
+   "symbol": "w",
+   "kind": "radio",
+   "props": {
+    "f": "104.4",
+    "flag": "c7_rami",
+    "r": "14",
+    "title": "104.4 — Rami's last broadcast"
+   },
+   "sequence": -1,
+   "lines": 18
+  },
+  {
+   "symbol": "x",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "c7_align",
+    "r": "14",
+    "title": "Signal Room, 1998"
+   },
+   "sequence": -1,
+   "lines": 20
+  }
+ ],
+ "map": [
+  "##############################",
+  "#....#.............#........Q#",
+  "#.S..#..c...c...c..#..T...L..#",
+  "#....#.....L...j...#.........#",
+  "#.L..#..x...U...c..#..n......#",
+  "##D#######D#############D#####",
+  "#....L......P.......L....P...M",
+  "######D#########K#######D#####",
+  "#............#......#........#",
+  "#..a....b....#..k...#..h.....#",
+  "#............#......#....r...#",
+  "#.....g......#..V...#..L.....#",
+  "#..L.........#.e..N.#.....H..#",
+  "#............#......#...w....#",
+  "##############################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 28,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 8,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 12,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 16,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 22,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 26,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 15,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 2,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 8,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 12,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 16,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 22,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 2,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 10,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 24,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 5,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 12,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 25,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 29,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 6,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "K",
+   "cell": {
+    "x": 16,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 24,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "a",
+   "cell": {
+    "x": 3,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 8,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 16,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 23,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 25,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 6,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 16,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 23,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 15,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "N",
+   "cell": {
+    "x": 18,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 26,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 24,
+    "y": 13
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"P\",\"mode\":\"patrol\"}]",
+  "amb_db": "-22",
+  "amb_loop": "hum",
+  "face": "180",
+  "music": "drone_c",
+  "pal": "comms"
+ },
+ "walkthrough": [
+  "[\"radio\",\"x\"]",
+  "[\"radio\",\"j\"]",
+  "[\"radio\",\"r\"]",
+  "K",
+  "k",
+  "Q",
+  "N",
+  "[\"radio\",\"w\"]",
+  "a",
+  "a",
+  "b",
+  "b",
+  "b",
+  "g",
+  "T",
+  "U",
+  "M"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The Communications Centre. My kind of room. Somebody here knew what they were doing."
+     ],
+     "vo": "daniel_607b35d366"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Uplink, then Northline. Then out. Whatever 'out' means now."
+     ],
+     "vo": "daniel_4376e963e6"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Bring the uplink online: align the feed horns and find a tuning crystal."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "beep_hi",
+      "-4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's the lock tone. Arrays are aligned."
+     ],
+     "vo": "daniel_ba91107e35"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Fit a tuning crystal and bring the uplink online in the Signal Room."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Labs. Whatever they were really doing down here, it's through this door."
+     ],
+     "vo": "daniel_d629a35575"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Somebody called Arlen answered her. Before me. Or — me, before."
+     ],
+     "vo": "daniel_dfa9619a59"
+    },
+    {
+     "command": "if",
+     "args": [
+      "mira_p1"
+     ],
+     "then": 4,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p2"
+     ],
+     "then": 5,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p3"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p4"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p5"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "mira_all"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "notebook"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's every page. If she left one more, it's where she is."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Run eighteen. I'm recording in the comms office because I don't want Marcus to hear this yet."
+     ],
+     "vo": "evelyn_03249026d8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "The correspondent asked for someone by name tonight. Not one of us. It said 'Arlen'. Clearly. Twice. In Tunde's voice."
+     ],
+     "vo": "evelyn_44cfba9aa8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "There is no Arlen on site. There is no Arlen in the Directorate. I've checked every file we have."
+     ],
+     "vo": "evelyn_bd69884927"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Mira thinks it's a word it has stitched together out of pieces. I don't. I think it's a name it hasn't heard yet. I think it remembers forward."
+     ],
+     "vo": "evelyn_388a5a6fac"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Danny laughed when it said it. He laughed, and he reached for the speaker."
+     ],
+     "vo": "evelyn_7a085f8e9b"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "beep_hi",
+      "-4"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "x",
+      "U",
+      "4",
+      "",
+      "1.7",
+      "1.1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Uplink established."
+     ],
+     "vo": "pa_8f1a59b9e7"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Northline, this is Arlen on the HELIX-9 uplink. Kessler, do you copy? Anyone at Northline?"
+     ],
+     "vo": "daniel_3d123e3426"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "static",
+      "-8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (UPLINK)",
+      "—Danny? Danny, is that you? Christ. Where have you been?"
+     ],
+     "vo": "kessler_1e270a2c94"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Inside. Four hours, like we said. I missed a check-in, I know—"
+     ],
+     "vo": "daniel_fd8b5e12ff"
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (UPLINK)",
+      "Danny, you've been gone nine days."
+     ],
+     "vo": "kessler_72e92a6f34"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...No."
+     ],
+     "vo": "daniel_dd67a07d93"
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (UPLINK)",
+      "Your truck's at the gate under a foot of snow. We sent a team in on day three. The blast door is welded shut, Danny. Rusted shut. Nobody's been through that door since the nineties."
+     ],
+     "vo": "kessler_312bdef6dd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I walked through it. It was standing open. I walked through it."
+     ],
+     "vo": "daniel_c6d32ac71a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (UPLINK)",
+      "...Then how are you talking to me?"
+     ],
+     "vo": "kessler_1141407d26"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "0"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER? (UPLINK)",
+      "Four hours, Danny. Check in on the hour."
+     ],
+     "vo": "kessler_f2f2e36bb7"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Kessler?"
+     ],
+     "vo": "daniel_ecfbfb2d2e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER? (UPLINK)",
+      "Four hours, Danny. Four hours, Danny."
+     ],
+     "vo": "kessler_324f4b6400"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_down",
+      "-2"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Uplink established. Thank you, Daniel."
+     ],
+     "vo": "pa_4bd0464136"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It's on the line. It went up the line. It's in his radio."
+     ],
+     "vo": "daniel_c1083cb667"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Good work, Arlen. The uplink's live — but it's a whisper. Nobody hears a whisper through a mountain."
+     ],
+     "vo": "hale_464fd65932"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "You need power behind the signal. The only transmitter big enough is the one in the Final Experiment chamber. Go through the labs. The transport line runs down to it."
+     ],
+     "vo": "hale_1b8c6fd84a"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Danny— Daniel. Don't. Whatever Marcus wants switched on down there, don't."
+     ],
+     "vo": "mira_4647c28cdf"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "You called me Danny."
+     ],
+     "vo": "daniel_3549ae3738"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Did I? I'm sorry. I'm tired, Daniel. I'm so tired. Please. Not the chamber."
+     ],
+     "vo": "mira_071d2ce847"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "No way back up. And she's down there. So: down."
+     ],
+     "vo": "daniel_2a23b559c7"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c7_uplink"
+     ]
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The research labs are through the door at the east end of the corridor."
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "ambush"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "Okafor. He's in the Signal Room now. He's at the uplink console, talking to someone. He keeps saying 'Northline'."
+     ],
+     "vo": "pell_25ee2750c0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "There is no Northline, Jonah."
+     ],
+     "vo": "okafor_b404dda420"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "He says he's been gone nine days. Tunde, he says it like it's bad news."
+     ],
+     "vo": "pell_5dcc6e9d5a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Nine days. He heard me say that. Before I'd said it."
+     ],
+     "vo": "daniel_b3dac570f0"
+    },
+    {
+     "command": "if",
+     "args": [
+      "pell1"
+     ],
+     "then": 12,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell2"
+     ],
+     "then": 13,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell3"
+     ],
+     "then": 14,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell4"
+     ],
+     "then": 15,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "pell_all"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Tuning crystal. Still in its cotton. Somebody kept spares like a professional."
+     ],
+     "vo": "daniel_2e16647364"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (99.7 MHz)",
+      "Test, test. This is Rami's very serious numbers station, for very serious spies."
+     ],
+     "vo": "haddad_7271bf65ca"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (99.7 MHz)",
+      "Tonight's numbers are: seven. Two. Two. Five. Again: seven. Two. Two. Five."
+     ],
+     "vo": "haddad_df79b45070"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (99.7 MHz)",
+      "Mira, if you're listening, that's the storeroom. Stop locking yourself out."
+     ],
+     "vo": "haddad_179b3c8c9d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Seven-two-two-five."
+     ],
+     "vo": "daniel_559761c146"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (104.4 MHz, 02:47)",
+      "Mira. If you're hearing this, it's Rami. No jokes. Listen."
+     ],
+     "vo": "haddad_53a8fc2341"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (104.4 MHz, 02:47)",
+      "Hale is on every channel at once. Security, the PA, my set, the lift phone. Four different conversations. Same minute."
+     ],
+     "vo": "haddad_9dc334f9e0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (104.4 MHz, 02:47)",
+      "Nobody can be on every channel at once, Mira. Nobody. Whatever's talking in his voice, it isn't him."
+     ],
+     "vo": "haddad_b7b9ee8945"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (104.4 MHz, 02:47)",
+      "Trust Hale in person. Not on the radio. Never on the radio."
+     ],
+     "vo": "haddad_a6a5f4a6cb"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hale on every channel at once."
+     ],
+     "vo": "daniel_3e1d415511"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c5_hale"
+     ],
+     "then": 19,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "And the Hale I've been talking to has only ever been on the radio."
+     ],
+     "vo": "daniel_4c4ed28ebb"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (1998)",
+      "Feed horns for the shift. North array's at two. East's at three. South's at one. I'm writing it on the card."
+     ],
+     "vo": "haddad_3b993b7042"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Don't write it on the card, Rami."
+     ],
+     "vo": "okafor_5df598a5c8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HADDAD (1998)",
+      "What, is it going to steal my homework?"
+     ],
+     "vo": "haddad_7a1e450f03"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "It'll steal your voice. Then it'll ask me for the card in your voice."
+     ],
+     "vo": "okafor_1e7b79160f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "North two. East three. South one."
+     ],
+     "vo": "daniel_b47b171355"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,766 @@
+{
+ "ending": "D",
+ "number": -1,
+ "title": "ENDING D",
+ "subtitle": "",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "A",
+   "kind": "prop",
+   "props": {
+    "p": "aperture",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "B",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "c": "0.6,0.75,1,1",
+    "e": "2.4",
+    "r": "16"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "prop",
+   "props": {
+    "p": "monitor"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "R",
+   "kind": "light",
+   "props": {
+    "e": "1.6",
+    "r": "12",
+    "red": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "U",
+   "kind": "prop",
+   "props": {
+    "p": "console"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "prop",
+   "props": {
+    "p": "recorder"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "####################################",
+  "#......................#...........#",
+  "#..........A...........#..M....r...#",
+  "#..o..............o....#...........#",
+  "#.....x....B...........#....c......#",
+  "#..R................R..#....L......#",
+  "#..o.......L.......o...#....n......#",
+  "#........m...e.........#...........#",
+  "#..........U...........#...........#",
+  "#......................#...........#",
+  "#..o................o..#...........#",
+  "#..........S...........#...........#",
+  "#......................#...........#",
+  "####################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 11,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 26,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 31,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 18,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 6,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 11,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 28,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 20,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 28,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 19,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 28,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 9,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 13,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 11,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 20,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 11,
+    "y": 11
+   }
+  }
+ ],
+ "props": {
+  "ext_mode": "dawn",
+  "exterior": "true",
+  "h": "7.5",
+  "music": "",
+  "pal": "chamber"
+ },
+ "walkthrough": [],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "x",
+      "watch"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "face"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "U",
+      "A",
+      "0",
+      "",
+      "1.7",
+      "2.8"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira. I need you on the line. I can't do this alone. That's the whole point."
+     ],
+     "vo": "daniel_3f0fb20e90"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "I'm here. I've been here the whole time."
+     ],
+     "vo": "mira_14d2e27901"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Lind. Okafor. Hale. Evelyn. Every tape I found, every real voice. I'm patching them into the uplink. All of them at once."
+     ],
+     "vo": "daniel_91b74365a6"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "2"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "static",
+      "static",
+      "-14"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "tape_okafor"
+     ],
+     "then": 1,
+     "else": -1
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "I kept my word as long as I could."
+     ],
+     "vo": "hale_5d28b6be87"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LIND (TAPE)",
+      "Take him off the mountain."
+     ],
+     "vo": "lind_f92dca57df"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Little light. Signal and answer."
+     ],
+     "vo": "evelyn_4507a5445b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Signal."
+     ],
+     "vo": "daniel_a07fd4f137"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Answer."
+     ],
+     "vo": "mira_bb0236a3e1"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (EVERY VOICE)",
+      "Daniel— Daniel— Dan—"
+     ],
+     "vo": "listener_c584342fa9"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "screech",
+      "4",
+      "0.6"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "static"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "reveal",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (02:51, 1998)",
+      "...Who's on this channel? Mira — who is that?"
+     ],
+     "vo": "evelyn_0f73d8b763"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mum. It's Danny."
+     ],
+     "vo": "daniel_2b49d3f989"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (02:51, 1998)",
+      "Danny? Oh — oh, look at you. Little light. You got so tall."
+     ],
+     "vo": "evelyn_e74412cd89"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "You can close it now. From your side. I'll close it from mine. Together. Not alone."
+     ],
+     "vo": "daniel_dcc2c0ab0a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (02:51, 1998)",
+      "Together. Yes. Yes, my love."
+     ],
+     "vo": "evelyn_763a99558e"
+    },
+    {
+     "command": "if",
+     "args": [
+      "mira_pages"
+     ],
+     "then": 2,
+     "else": -1
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "I'm staying with her, Danny. I carried you once. Let me carry her now."
+     ],
+     "vo": "mira_ebaef7365a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira—"
+     ],
+     "vo": "daniel_53ab148714"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Signal and answer. Go home."
+     ],
+     "vo": "mira_d2a2d9219e"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "2",
+      "0.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_down",
+      "4",
+      "0.6"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "2"
+     ]
+    },
+    {
+     "command": "reveal",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "ext",
+     "args": [
+      "dawn"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@behind",
+      "@gate",
+      "0"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "2.5"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@behind",
+      "@gate",
+      "12",
+      "@truck"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (LATER)",
+      "The blast door was standing open when I came out. The snow had stopped. It was morning."
+     ],
+     "vo": "daniel_41d9776400"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (LATER)",
+      "Forty-one names went on a stone in Halden the next spring. Mira's is the last one. I asked them to leave room under it."
+     ],
+     "vo": "daniel_f24dfc9a3b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (LATER)",
+      "I still drive with the radio on. Mostly it's static."
+     ],
+     "vo": "daniel_55d123b146"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (RADIO, VERY FAINT)",
+      "(humming)"
+     ],
+     "vo": "mira_5a81a72d11"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (RADIO, VERY FAINT)",
+      "Signal, Danny."
+     ],
+     "vo": "mira_c3cdccfc6a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Answer."
+     ],
+     "vo": "daniel_621c49a5c2"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "3"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 3,
+     "else": -1
+    },
+    {
+     "command": "text",
+     "args": [
+      "ENDING D — THE LAST TRANSMISSION",
+      "3",
+      "34"
+     ]
+    },
+    {
+     "command": "title",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "credits",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (TAPE)",
+      "I love you. That isn't a thing it can take."
+     ],
+     "vo": "okafor_54e22a153f"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "You read my notebook. Didn't you. All of it."
+     ],
+     "vo": "mira_79f94baced"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Every page."
+     ],
+     "vo": "daniel_c15b1712c1"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (PHONE)",
+      "Danny? You're out. You're — Danny, I was the liaison. In ninety-eight. I was coming for you at six."
+     ],
+     "vo": "kessler_ce5f41648b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I know. I've read your handwriting. Twice."
+     ],
+     "vo": "daniel_fedbef9b18"
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (PHONE)",
+      "Then why did you go back in?"
+     ],
+     "vo": "kessler_de5d538af2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Because they were still there, Pete. Somebody had to answer."
+     ],
+     "vo": "daniel_6534b7a6a6"
+    }
+   ]
+  }
+ ]
+}

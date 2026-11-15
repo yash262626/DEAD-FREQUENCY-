@@ -1,0 +1,1551 @@
+{
+ "number": 2,
+ "title": "THE SILENT WING",
+ "subtitle": "SUBLEVEL 1 — ADMINISTRATION",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "trig",
+   "props": {
+    "r": "2.6"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "7",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "8",
+   "kind": "radio",
+   "props": {
+    "f": "88",
+    "flag": "ss1",
+    "ngp": "true",
+    "r": "14",
+    "title": "88.0 — the second signal (1 of 6)"
+   },
+   "sequence": -1,
+   "lines": 4
+  },
+  {
+   "symbol": "G",
+   "kind": "door",
+   "props": {
+    "code": "4406",
+    "label": "SUPERVISOR'S OFFICE — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "K",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {
+    "lock": "med_key",
+    "msg": "Medical gate. Card reader's live. I need a medical keycard."
+   },
+   "sequence": 11,
+   "lines": -1
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "code": "1104",
+    "label": "DESK DRAWER — COMBINATION",
+    "p": "cabinet",
+    "prompt": "Okafor's desk drawer"
+   },
+   "sequence": 12,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "item",
+   "props": {
+    "id": "bottle",
+    "n": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "prop",
+   "props": {
+    "p": "coat"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "d",
+   "kind": "prop",
+   "props": {
+    "p": "desk"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "prop",
+   "props": {
+    "block": "true",
+    "p": "glass",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "j",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "pell1",
+    "r": "12",
+    "title": "Pell — the stranger (1 of 4)"
+   },
+   "sequence": -1,
+   "lines": 13
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "med_key"
+   },
+   "sequence": 18,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "item",
+   "props": {
+    "id": "medkit"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "A beach somewhere warm. A woman in a yellow headscarf laughing at the camera; a boy of about ten holding up a stamp album like a trophy.\n\nOn the back: 'Ada & Chidi, Lagos, Christmas '97.'",
+    "title": "Photo on Okafor's desk"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "c2_okafor",
+    "r": "12",
+    "title": "Okafor's office, 1998"
+   },
+   "sequence": -1,
+   "lines": 19
+  },
+  {
+   "symbol": "r",
+   "kind": "note",
+   "props": {
+    "text": "NIGHT SHIFT — 16/17 OCTOBER 1998\n\nSignals supervisor ........ T. Okafor\nRecords ................... J. Pell\nComms ..................... M. Solace, R. Haddad\nGate (Post One) ........... Cpl. I. Duarte\nSublevel 1 security ....... Sgt. P. Brandt\nMedical on call ........... Dr. S. Lind\nPower ..................... A. Ruiz\nDirector on site .......... Dr. E. Voss (+1 — not on roster, see Hale)\nChief of security ......... M. Hale\n\nTOTAL ON SITE AT 02:00 ..... 41\n\n(Pencil, different hand:) forty-two.",
+    "title": "Night shift roster"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "t",
+   "kind": "note",
+   "props": {
+    "text": "COMMS ANNEX — DUTY SHEET — 16 OCT 1998\n\n18:00  Haddad on. Uplink nominal.\n21:15  Uplink drifting. Haddad realigned the north array. Nominal.\n23:50  Dr. Voss left a tape on the annex machine. Label reads:\n       FOR DANIEL — DO NOT ERASE.\n       Nobody on site called Daniel. Left it where it was. She was very clear.\n01:30  Annex radio opened squelch by itself four times. Logged.\n02:38  Haddad says the monitor is printing tomorrow's date. Then a date that isn't tomorrow.\n02:41  Going down to find Hale.",
+    "title": "Annex duty sheet"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "w",
+   "kind": "trig",
+   "props": {
+    "if": "c2_loose",
+    "r": "1.8"
+   },
+   "sequence": 20,
+   "lines": -1
+  },
+  {
+   "symbol": "y",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "c2_code",
+    "r": "14",
+    "title": "Records, 1998"
+   },
+   "sequence": -1,
+   "lines": 21
+  },
+  {
+   "symbol": "z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "##############################",
+  "#....#.......................#",
+  "#.S..D..d...d...d...d.7..L...#",
+  "#....#........j..............#",
+  "#.L8.#..c.......c.........H..#",
+  "#.t..#...L.......L.......1...#",
+  "#....#.......................#",
+  "###########.#######gggg#######",
+  "###########.#######.z..#######",
+  "###########.#######..k.#######",
+  "#.........#w#######.L..#######",
+  "#..r..L...D.D.....G....#######",
+  "#.....y...#.#######....#######",
+  "#...H.....#.#######V...#######",
+  "######.####.##################",
+  "#.e...P.....L.....P....H.....#",
+  "#.......b.Z.......F......m...M",
+  "#####K########################",
+  "#....L....d.##################",
+  "#.q.......U.##################",
+  "#.H.....n...##################",
+  "##############################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 5,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 8,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 12,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 16,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 20,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "7",
+   "cell": {
+    "x": 22,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 25,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 14,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 2,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "8",
+   "cell": {
+    "x": 3,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 8,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 16,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 26,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "t",
+   "cell": {
+    "x": 2,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 9,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 17,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 25,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 19,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 20,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 21,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 22,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 20,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 21,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 11,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 3,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 6,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 10,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 12,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "G",
+   "cell": {
+    "x": 18,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 6,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 4,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 19,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 2,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 6,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 12,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 18,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 23,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 8,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 10,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "F",
+   "cell": {
+    "x": 18,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 25,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 29,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "K",
+   "cell": {
+    "x": 5,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 5,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 10,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 2,
+    "y": 19
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 10,
+    "y": 19
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 2,
+    "y": 20
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 8,
+    "y": 20
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"if\":\"c2_loose\",\"mode\":\"patrol\"}]",
+  "amb_db": "-24",
+  "amb_loop": "hum",
+  "face": "-90",
+  "music": "drone_b",
+  "pal": "security"
+ },
+ "walkthrough": [
+  "1",
+  "[\"radio\",\"j\"]",
+  "w",
+  "[\"radio\",\"y\"]",
+  "G",
+  "k",
+  "K",
+  "[\"radio\",\"q\"]",
+  "U",
+  "n",
+  "M"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Ow."
+     ],
+     "vo": "daniel_fffa4bde64"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "How long was I out?"
+     ],
+     "vo": "daniel_f63d1c591f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Current time: zero two — forty-three."
+     ],
+     "vo": "pa_f40e4bfbe4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It said that an hour ago. Clocks don't stop because you ask them to."
+     ],
+     "vo": "daniel_3e91ce717c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The monitor knew my name. It knew I was inside before I was."
+     ],
+     "vo": "daniel_04bfbc8e9b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Fine. The uplink can wait. Medical's on the site plan — first-aid station, maybe a hard line to the surface."
+     ],
+     "vo": "daniel_4a1a75d0e4"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Cross the administration wing to the medical gate."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "music",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "z",
+      "watch"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "voice",
+      "-14",
+      "0.9",
+      "z"
+     ]
+    },
+    {
+     "command": "look",
+     "args": [
+      "z",
+      "2"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "(whispering) There's somebody in the supervisor's office."
+     ],
+     "vo": "daniel_186f632dfe"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "1",
+      "z",
+      "4",
+      "",
+      "1.6",
+      "2.2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "-2",
+      "0.6",
+      "z"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hello? I'm with Northline Recovery. Are you hurt?"
+     ],
+     "vo": "daniel_25df5910d7"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "face"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-8"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "1",
+      "z",
+      "3",
+      "g",
+      "1.6",
+      "2.4"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE)",
+      "Hello? I'm with Northline Recovery. Are you hurt?"
+     ],
+     "vo": "listener_fbed075499"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "screech",
+      "-8",
+      "0.7",
+      "z"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.4"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It said what I said. In my voice. It said it back to me."
+     ],
+     "vo": "daniel_256d24ed6b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Okay. Okay. Don't breathe, Arlen. Don't you breathe."
+     ],
+     "vo": "daniel_b09d712e19"
+    },
+    {
+     "command": "ach",
+     "args": [
+      "seen"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c2_loose"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 2,
+     "else": 3
+    },
+    {
+     "command": "music",
+     "args": [
+      "drone_b",
+      "-12"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "94.6 MHz — PROXIMITY. Faster beeps: closer. A sharper tone: you are facing it."
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Lockers hide you. If it watches you get in, the locker is not a hiding place."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Get into the supervisor's office. The records room might know the door code."
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "7",
+      "stalk"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "2",
+      "0.5",
+      "7"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...It's behind me. It's been standing behind me the whole time."
+     ],
+     "vo": "daniel_60cb492849"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "patrol"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "If you can hear this, you came back. So did I. I've stopped being sure I'm the first one to say this."
+     ],
+     "vo": "daniel_d2fd65cc74"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "It remembers where you hid last time. It remembers how loud you were. Don't do anything the same way twice."
+     ],
+     "vo": "daniel_ad0c9113cb"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "Eighty-eight is under its band. It can't hear us here. It's the only place it can't."
+     ],
+     "vo": "daniel_5c05d45341"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I'm talking to myself. On a frequency that doesn't exist."
+     ],
+     "vo": "daniel_98366689da"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ss1"
+     ],
+     "then": 5,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss2"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss3"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss4"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss5"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss6"
+     ],
+     "then": 10,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "ach",
+     "args": [
+      "static_between"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "88.0 is quiet now. Every message is in the journal."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Medical wing. Please have your pass ready."
+     ],
+     "vo": "pa_d260f3dc73"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Pass is ready."
+     ],
+     "vo": "daniel_ff971e3bc8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Thank you. Welcome back, Daniel."
+     ],
+     "vo": "pa_2ed013d609"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...I didn't tell it my name. I never told it my name."
+     ],
+     "vo": "daniel_51515b5cdc"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "journal",
+     "args": [
+      "Okafor's letter",
+      "Ada —\n\nI'm writing this because I won't say it on the radio. Nothing I care about goes on the radio any more. It keeps what it hears.\n\nI love you. I love Chidi. I always meant him to have the stamps.\n\nIf this reaches you and I don't, tell him his father counted heads every night for two years, and the number was always forty-one — and then one night it was forty-two, and nobody could tell me who the extra one was.\n\n— T."
+     ]
+    },
+    {
+     "command": "give",
+     "args": [
+      "battery"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "pickup",
+      "-6"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Taken: Power cell"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "A letter he never sent. 'Nothing I care about goes on the radio.'"
+     ],
+     "vo": "daniel_36ae13843e"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "Records to Okafor. Tunde, there's a man in the open-plan office. Orange jacket. Not one of ours."
+     ],
+     "vo": "pell_e5efb96773"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Nobody's come down tonight, Jonah. The gate would have called it in."
+     ],
+     "vo": "okafor_a55c58ac87"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "He's standing by Haddad's desk. He looks lost. He looks — tired."
+     ],
+     "vo": "pell_039d15a1ab"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Stay in records. Lock the door. I'll tell Hale."
+     ],
+     "vo": "okafor_a32ec8c580"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Orange jacket. Northline orange."
+     ],
+     "vo": "daniel_848fd7e698"
+    },
+    {
+     "command": "if",
+     "args": [
+      "pell1"
+     ],
+     "then": 14,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell2"
+     ],
+     "then": 15,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell3"
+     ],
+     "then": 16,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell4"
+     ],
+     "then": 17,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "pell_all"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Medical wing keycard. Okafor's. There's still a coffee ring on it."
+     ],
+     "vo": "daniel_3fde4c474d"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The medical gate is at the east end of the lower hall."
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "0",
+      "0.7",
+      "M"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "F"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "It's between you and the gate. Wait it out, or give it something else to listen to."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Surface patch, this is Okafor, signals. Put me through to Halden — Corner House. Yes, at this hour."
+     ],
+     "vo": "okafor_1f64ebf96b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "ADA (1998, PATCH)",
+      "Tunde? It's two in the morning."
+     ],
+     "vo": "ada_054f76efdd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "I know. I know. Is Chidi asleep?"
+     ],
+     "vo": "okafor_664f205583"
+    },
+    {
+     "command": "line",
+     "args": [
+      "ADA (1998, PATCH)",
+      "Of course he's asleep. What's wrong?"
+     ],
+     "vo": "ada_ca0d01b9e4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Nothing. Tell him the stamp album's in my desk at work. The drawer combination is his birthday. Eleven, oh-four. He can have the stamps. All of them."
+     ],
+     "vo": "okafor_49df8251cd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "ADA (1998, PATCH)",
+      "Tunde, why are you saying it like that?"
+     ],
+     "vo": "ada_f9cd2314ef"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Like what? Goodnight, Ada. Go back to sleep."
+     ],
+     "vo": "okafor_935512b6d7"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Eleven, oh-four. And he never told her he loved her. Not on the radio."
+     ],
+     "vo": "daniel_74875544eb"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "98.5"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "static",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Northline, this is Arlen. Kessler, do you copy?"
+     ],
+     "vo": "daniel_4e3ba9214f"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH? (98.5 MHz)",
+      "Four hours, Danny. Check in on the hour."
+     ],
+     "vo": "dispatch_4d54e459d5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Kessler, listen to me, there's something in here with me—"
+     ],
+     "vo": "daniel_55f457b27c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH? (98.5 MHz)",
+      "Four hours, Danny. Four hours, Danny. Four hours, Danny."
+     ],
+     "vo": "dispatch_d9a9de653b"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's what he said at the gate. Word for word. Same breath. Same crackle on the 'D'."
+     ],
+     "vo": "daniel_9ec468c2dc"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It's not him. It's him played back. It doesn't make words. It takes them."
+     ],
+     "vo": "daniel_b9dbb3ea3b"
+    },
+    {
+     "command": "journal",
+     "args": [
+      "Something that repeats",
+      "On the corridor set: Kessler's voice. But only the words he had already said to me at the gate, exactly, like a tape.\n\nThe thing in the supervisor's office did the same with mine.\n\nIt doesn't make words. It takes them. Whatever it says, somebody has already said out loud, over the air."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "Records to Okafor. What's on the supervisor's door now? Hale's changed it again."
+     ],
+     "vo": "pell_3e2fb54d5b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Four. Four. Zero. Six. And Jonah — not on the open channel. Not anymore."
+     ],
+     "vo": "okafor_d3cf252cb9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "Why not? Who's going to hear it? There's thirty metres of rock over us."
+     ],
+     "vo": "pell_fa23cc758c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "It's on the channel with us. Anything said over the air, it keeps."
+     ],
+     "vo": "okafor_85f8793a41"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Four-four-zero-six."
+     ],
+     "vo": "daniel_dff68e1253"
+    }
+   ]
+  }
+ ]
+}
