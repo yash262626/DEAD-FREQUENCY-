@@ -56,7 +56,7 @@ Not done in this pass, by the brief's rule (after approval only): the other 12 a
 | 7 | Realistic shadows | Shadowed torch, beacon, troffer and lamp; baked soft shadows elsewhere; shadow atlas up to 8K | `s04`, `s09`, `s10` | Baked fixtures do not shadow moving objects |
 | 8 | High-quality materials | PBR with packed AO/roughness/metal and normal maps; 4K/2K Poly Haven and 1K ambientCG surfaces; wet-surface shader; decals; skin SSS | all shots; docs/23 | More 4K sets; true projected decals (Godot 4) |
 | 9 | Playable first-person experience | Main menu → *VERTICAL SLICE — VISUAL TARGET*, or `--slice`: walk, torch, radio tuning, transmissions, encounter, hiding | gameplay video; `slice` test | — |
-| 10 | Native 4K screenshot evidence | 15 in-game captures at 3840 × 2160 plus creature close-ups at 3840 × 2160 | `docs/screenshots/slice4k/` | — |
+| 10 | Native 4K screenshot evidence | 16 in-game captures at 3840 × 2160 plus creature close-ups, menu and chapter card at 3840 × 2160 | `docs/screenshots/slice4k/` | — |
 
 ## 3. Evidence
 
@@ -82,7 +82,8 @@ the repository small. Software rendering (Mesa llvmpipe) produces the same image
 | `s12_head_close` | The membrane head at about 1.5 m: bell, lip, pores, slits, mucus |
 | `s13_crawl` | The Listener crawling near the vent — "Crawling" |
 | `s14_search_hidden` | Seen from under the desk while the Listener searches the room |
-| `s15_creature_crts` | The Listener in the communications room under the torch, CRTs behind it (one showing the live corridor feed) |
+| `s15_creature_crts` | The Listener in the communications room under the torch, CRTs behind it |
+| `s16_security_feed` | The live security feed: the CRT shows the corridor camera's real-time view, with the Listener walking through it |
 | `creature_front`, `creature_q34`, `creature_head` | The creature under neutral studio light (key + rim), 3840 × 2160, nothing hidden by darkness |
 | `menu`, `chapter_card` | The main menu staged in the slice corridor (heartbeat line under the logo) and the new chapter card, 3840 × 2160 |
 

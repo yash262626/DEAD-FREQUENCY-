@@ -670,6 +670,8 @@ func t_slice():
 	ok(lv.art.get_node("Lightmap").light_data != null, "baked lightmap present")
 	ok(lv.player.hq and lv.player.light_model.get_child_count() == 1 and lv.player._lcd != null and lv.player._tune_knob != null, "modelled hands, torch, live receiver display and tuning knob")
 	ok(not G.has_save(), "the slice never writes the campaign save")
+	ok(lv._feed_vp != null and lv._feed_vp.get_child(0) is Camera and lv._find_material(lv.art, "M_CRT_Feed") != null, "the live security feed renders onto a CRT")
+	ok(lv.art.find_node("TubeFlicker", true, false) != null and lv.env.fog_height_enabled, "flickering tube and ground mist present")
 	# the forecast in the corridor
 	var f = lv.ent_at("f")
 	lv.player.global_transform.origin = f.pos + Vector3(0, 0.05, 2.0); lv.player.rotation_degrees.y = 0
@@ -780,6 +782,7 @@ const SLICE_SHOTS = [
 	["s11_creature_room", Vector3(24.4, 0, 8.3), -55.0, 8.0, true, 0.0, [26.0, 6.4, 120.0, "search"], "hide_no"],
 	["s12_head_close", Vector3(5.0, 0, 11.75), 6.0, 3.0, true, 0.0, [5.1, 9.3, 170.0, "idle"], ""],
 	["s15_creature_crts", Vector3(28.3, 0, 8.4), -72.0, -2.0, true, 0.0, [31.0, 6.7, 110.0, "listen"], ""],
+	["s16_security_feed", Vector3(32.15, 0, 7.75), -62.0, -16.0, false, 0.0, [5.0, 12.5, 180.0, "walk"], ""],
 	["s13_crawl", Vector3(17.4, 0, 6.9), 88.0, -9.0, true, 0.0, [13.2, 7.15, -62.0, "crawl"], ""],
 	["s14_search_hidden", Vector3(27.5, 0, 11.3), 0.0, 6.0, false, 0.0, [26.3, 8.2, 200.0, "search"], "hide"],
 ]
