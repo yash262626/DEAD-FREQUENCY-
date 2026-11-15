@@ -71,6 +71,7 @@ func _initialize():
 	art = Spatial.new(); art.name = "Slice"
 	get_root().add_child(art)
 	var t0 = OS.get_ticks_msec()
+	for n in ["M_CorrFloor", "M_CorrUpper", "M_CorrLower"]: _mat(n)     # cached meshes point at these files: always rewrite them
 	_shell()
 	_dress()
 	_props()
@@ -105,9 +106,21 @@ func _mat(name: String) -> Material:
 		var sm = ShaderMaterial.new(); sm.shader = load("res://slice/shaders/wet_surface.shader")
 		sm.set_shader_param("albedo_tex", t[0]); sm.set_shader_param("normal_tex", t[1]); sm.set_shader_param("arm_tex", t[2])
 		sm.set_shader_param("wet_mask", load("res://slice/tex/wet_mask.png")); sm.set_shader_param("tint", Color(0.95, 0.95, 0.95))
-		sm.set_shader_param("uv_scale", 0.38); sm.resource_name = name
+		sm.set_shader_param("uv_scale", 0.38); sm.set_shader_param("damp", 0.32); sm.resource_name = name
 		ResourceSaver.save("res://slice/materials/M_CorrFloor.tres", sm)
 		mats[name] = load("res://slice/materials/M_CorrFloor.tres")
+		return mats[name]
+	if name in ["M_CorrUpper", "M_CorrLower"]:
+		# water running down the corridor walls and pooling at their feet (slice/shaders/wet_wall.shader)
+		var s = SURF[name]; var t = _tex(s[0])
+		var sm = ShaderMaterial.new(); sm.shader = load("res://slice/shaders/wet_wall.shader")
+		sm.set_shader_param("albedo_tex", t[0]); sm.set_shader_param("normal_tex", t[1]); sm.set_shader_param("arm_tex", t[2])
+		sm.set_shader_param("streak_tex", load("res://slice/tex/wall_streaks.png")); sm.set_shader_param("tint", s[1])
+		sm.set_shader_param("uv_scale", s[2]); sm.set_shader_param("normal_scale", s[5])
+		sm.set_shader_param("wetness", 0.85 if name == "M_CorrUpper" else 1.0); sm.resource_name = name
+		var pth = "res://slice/materials/%s.tres" % name
+		ResourceSaver.save(pth, sm)
+		mats[name] = load(pth)
 		return mats[name]
 	var m = SpatialMaterial.new()
 	match name:
@@ -288,8 +301,19 @@ func _props():
 	_place("industrial_wall_lamp", "", Vector3(4.0, 2.2, 19.8), 90, "wall", {"override": {"industrial_wall_lamp_glass": lamp_glass}})
 	var red_glass = _emissive(Color(1.0, 0.1, 0.05), 3.0)
 	var dead_tube = SpatialMaterial.new(); dead_tube.albedo_color = Color(0.55, 0.56, 0.55); dead_tube.roughness = 0.3
-	for p in [[Vector3(9.4, 2.25, 6.14), 0], [Vector3(13.4, 2.25, 7.86), 180], [Vector3(17.1, 2.25, 6.14), 0]]:
+	for p in [[Vector3(5.2, 2.25, 6.14), 0], [Vector3(9.4, 2.25, 6.14), 0], [Vector3(13.4, 2.25, 7.86), 180], [Vector3(17.1, 2.25, 6.14), 0]]:
 		_place("industrial_wall_lamp", "", p[0], p[1], "wall", {"override": {"industrial_wall_lamp_glass": red_glass}})
+	# one fluorescent tube in the first corridor still works, badly (the level flickers TubeFlicker and this glass)
+	var tube_glass = _emissive(Color(0.86, 0.93, 1.0), 2.4); tube_glass.resource_name = "M_TubeLit"
+	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_d", Vector3(5.0, 3.2, 15.4), 0, "ceil", {"override": {"mounted_fluorescent_lights_glass": tube_glass}})
+	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_d", Vector3(5.0, 3.2, 12.2), 0, "ceil", {"override": {"mounted_fluorescent_lights_glass": dead_tube}})
+	# crates, a toolbox and a bin along the walls, like a corridor nobody cleared
+	_place("cardboard_box_01", "", Vector3(5.62, 0.0, 13.15), 82, "floor")
+	_place("cardboard_box_01", "", Vector3(5.66, 0.0, 12.55), 95, "floor")
+	_place("cardboard_box_01", "", Vector3(5.63, 0.34, 12.85), 70, "floor")
+	_place("metal_toolbox", "", Vector3(4.42, 0.0, 18.6), 100, "floor")
+	_place("metal_trash_can", ["metal_trash_can_rust", "metal_trash_can_rust_lid", "metal_trash_can_rust_handle_left", "metal_trash_can_rust_handle_right"], Vector3(5.62, 0.0, 9.0), 40, "floor")
+	_place("power_box_01", "", Vector3(5.98, 1.3, 16.0), -90, "wall")
 	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_d", Vector3(9.6, 3.2, 7.0), 90, "ceil", {"override": {"mounted_fluorescent_lights_glass": dead_tube}})
 	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_b", Vector3(16.6, 3.2, 7.0), 90, "ceil", {"override": {"mounted_fluorescent_lights_glass": dead_tube}})
 	_place("caged_hanging_light", "", Vector3(17.3, 3.2, 7.25), 20, "ceil")
@@ -345,9 +369,12 @@ func _light(kind: String, pos: Vector3, col: Color, energy: float, rng: float, b
 func _lights():
 	var L = Spatial.new(); L.name = "Lights"; art.add_child(L)
 	var warm = Color(1.0, 0.82, 0.6); var cool = Color(0.82, 0.92, 1.0)
-	_light("omni", Vector3(5.55, 2.15, 10.0), warm, 1.5, 6.5)
-	_light("omni", Vector3(4.45, 2.15, 14.0), warm, 1.5, 6.5)
+	_light("omni", Vector3(5.55, 2.15, 10.0), warm, 1.3, 5.5)
+	_light("omni", Vector3(4.45, 2.15, 14.0), warm, 1.3, 5.5)
 	var red = Color(1.0, 0.13, 0.07)
+	_light("omni", Vector3(5.2, 2.2, 6.42), red, 1.7, 7.0)
+	var tl = _light("spot", Vector3(5.0, 3.05, 15.4), Color(0.82, 0.9, 1.0), 1.6, 6.0, false, {"rot": Vector3(-90, 0, 0), "angle": 70.0, "att": 0.7, "name": "TubeFlicker"})
+	tl.light_bake_mode = Light.BAKE_DISABLED
 	_light("omni", Vector3(9.4, 2.2, 6.42), red, 1.9, 7.5)
 	_light("omni", Vector3(13.4, 2.2, 7.58), red, 1.9, 7.5)
 	_light("omni", Vector3(17.1, 2.2, 6.42), red, 1.6, 6.5)
@@ -355,14 +382,17 @@ func _lights():
 	var bc = _light("spot", Vector3(20.2, 2.62, 7.0), Color(1.0, 0.08, 0.04), 3.0, 11.0, false, {"name": "Beacon", "angle": 32.0, "rot": Vector3(-12, 0, 0)})
 	bc.light_bake_mode = Light.BAKE_DISABLED; bc.shadow_enabled = true; bc.visible = false
 	_light("omni", Vector3(19.4, 2.55, 7.0), Color(1.0, 0.12, 0.08), 0.35, 3.0, true, {"name": "DoorRed"})
-	_light("omni", Vector3(4.32, 2.15, 19.8), warm, 1.3, 6.0)
+	_light("omni", Vector3(4.32, 2.15, 19.8), warm, 1.15, 5.5)
 	# room: troffers that work, CRT glow, desk lamp, receiver dial
 	for p in [Vector3(23, 2.95, 5), Vector3(31, 2.95, 9)]:
-		_light("spot", p, Color(0.88, 0.94, 1.0), 2.2, 7.5, true, {"rot": Vector3(-90, 0, 0), "angle": 80.0, "att": 0.6})
+		_light("spot", p, Color(0.86, 0.93, 1.0), 2.0, 7.5, true, {"rot": Vector3(-90, 0, 0), "angle": 80.0, "att": 0.6, "indirect": 1.6})
 	_light("spot", Vector3(27, 2.95, 9), Color(0.88, 0.94, 1.0), 1.8, 7.5, false, {"rot": Vector3(-90, 0, 0), "angle": 80.0, "att": 0.6, "name": "TrofferFlicker"})
 	_light("spot", Vector3(28.15, 1.32, 11.5), Color(1.0, 0.78, 0.52), 3.0, 3.0, true, {"rot": Vector3(-70, 180, 0), "angle": 40.0})
 	for z in [4.6, 6.9, 9.2]:
-		_light("omni", Vector3(33.05, 0.98, z), Color(0.4, 1.0, 0.6), 0.4, 2.6)
+		_light("omni", Vector3(33.05, 0.98, z), Color(0.4, 1.0, 0.6), 0.7, 3.4)
+	# the racks' indicator lamps and meters throw a little warm light into the room's west half
+	for p in [Vector3(21.2, 1.4, 4.2), Vector3(21.2, 1.4, 9.8)]:
+		_light("omni", p, Color(1.0, 0.7, 0.4), 0.35, 3.2)
 	_light("omni", Vector3(26.85, 1.15, 7.0), Color(1.0, 0.62, 0.25), 0.7, 2.8)
 
 func _atmosphere():
@@ -370,10 +400,11 @@ func _atmosphere():
 	var fx = load("res://scripts/fx.gd")
 	for p in [Vector3(23, 2.98, 5), Vector3(31, 2.98, 9)]:          # working troffers
 		var b = fx.beam(B, 0.42, 1.25, 2.85, Color(0.85, 0.92, 1.0), 0.045); b.translation = p
-	for p in [[Vector3(9.4, 2.2, 6.3), 1.0], [Vector3(13.4, 2.2, 7.7), -1.0], [Vector3(17.1, 2.2, 6.3), 1.0]]:   # red emergency lamps
-		var b = fx.beam(B, 0.08, 0.95, 2.0, Color(1.0, 0.15, 0.08), 0.06); b.translation = p[0]; b.rotation_degrees = Vector3(38 * p[1], 0, 0)
+	for p in [[Vector3(5.2, 2.2, 6.3), 1.0], [Vector3(9.4, 2.2, 6.3), 1.0], [Vector3(13.4, 2.2, 7.7), -1.0], [Vector3(17.1, 2.2, 6.3), 1.0]]:   # red emergency lamps
+		var b = fx.beam(B, 0.08, 1.05, 2.1, Color(1.0, 0.15, 0.08), 0.085); b.translation = p[0]; b.rotation_degrees = Vector3(38 * p[1], 0, 0)
 	for p in [[Vector3(5.55, 2.15, 10.0), -1.0], [Vector3(4.45, 2.15, 14.0), 1.0], [Vector3(4.32, 2.15, 19.8), 1.0]]:   # bulkhead lamps
-		var b = fx.beam(B, 0.08, 0.9, 1.9, Color(1.0, 0.85, 0.62), 0.05); b.translation = p[0]; b.rotation_degrees = Vector3(0, 0, -38 * p[1])
+		var b = fx.beam(B, 0.08, 1.0, 2.0, Color(1.0, 0.85, 0.62), 0.07); b.translation = p[0]; b.rotation_degrees = Vector3(0, 0, -38 * p[1])
+	var tb = fx.beam(B, 0.3, 1.05, 3.0, Color(0.82, 0.9, 1.0), 0.06); tb.translation = Vector3(5.0, 3.12, 15.4); tb.name = "TubeBeam"
 	# puddles (reflective, not baked) and effect markers the level turns into particles
 	var W = Spatial.new(); W.name = "Wet"; art.add_child(W)
 	for p in [[Vector3(5.25, 0.004, 17.0), 1.4, 0], [Vector3(4.75, 0.004, 13.4), 0.9, 1], [Vector3(12.7, 0.004, 7.35), 1.1, 0], [Vector3(31.2, 0.004, 4.0), 1.2, 1]]:
@@ -432,16 +463,17 @@ func _probes_and_lightmap():
 func _environment():
 	var env = Environment.new()
 	env.background_mode = Environment.BG_COLOR; env.background_color = Color(0, 0, 0)
-	env.ambient_light_color = Color(0.03, 0.035, 0.04); env.ambient_light_energy = 0.15
-	env.tonemap_mode = Environment.TONE_MAPPER_ACES_FITTED; env.tonemap_exposure = 1.25; env.tonemap_white = 6.0
-	env.fog_enabled = true; env.fog_color = Color(0.035, 0.04, 0.045); env.fog_depth_enabled = true
-	env.fog_depth_begin = 3.0; env.fog_depth_end = 34.0; env.fog_depth_curve = 1.6
-	env.glow_enabled = true; env.glow_intensity = 0.55; env.glow_strength = 1.0; env.glow_bloom = 0.04
-	env.glow_hdr_threshold = 1.0; env.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
+	env.ambient_light_color = Color(0.03, 0.035, 0.04); env.ambient_light_energy = 0.1
+	env.tonemap_mode = Environment.TONE_MAPPER_ACES_FITTED; env.tonemap_exposure = 1.08; env.tonemap_white = 6.0
+	env.fog_enabled = true; env.fog_color = Color(0.05, 0.056, 0.062); env.fog_depth_enabled = true
+	env.fog_depth_begin = 2.0; env.fog_depth_end = 26.0; env.fog_depth_curve = 1.4
+	env.fog_height_enabled = true; env.fog_height_min = 2.4; env.fog_height_max = -0.6; env.fog_height_curve = 1.6   # mist on the floor
+	env.glow_enabled = true; env.glow_intensity = 0.75; env.glow_strength = 1.0; env.glow_bloom = 0.075
+	env.glow_hdr_threshold = 0.85; env.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
 	env.set("glow_levels/1", true); env.set("glow_levels/2", true); env.set("glow_levels/3", true); env.set("glow_levels/5", false)
 	env.ssao_enabled = true; env.ssao_radius = 0.6; env.ssao_intensity = 1.6; env.ssao_radius2 = 2.0; env.ssao_intensity2 = 0.6
 	env.ss_reflections_enabled = true; env.ss_reflections_max_steps = 48; env.ss_reflections_depth_tolerance = 0.25
-	env.adjustment_enabled = true; env.adjustment_contrast = 1.06; env.adjustment_saturation = 0.88
+	env.adjustment_enabled = true; env.adjustment_contrast = 1.13; env.adjustment_saturation = 0.86
 	var we = WorldEnvironment.new(); we.name = "Env"; we.environment = env; art.add_child(we)
 
 func _cameras():

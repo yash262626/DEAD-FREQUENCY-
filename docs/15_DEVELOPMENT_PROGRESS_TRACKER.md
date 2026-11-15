@@ -2,7 +2,7 @@
 
 Status key: **Tested** = implemented and covered by a passing automated test · **Implemented** = in the game and exercised by playthrough/visual checks, no dedicated assertion · **Partial** · **Planned** · **Blocked** (cannot be done in this environment) · **Awaiting external** (needs people, money or hardware outside this project).
 
-Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 · slice 15/0 · texq 3/0 — 798 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
+Latest full regression (2026-11-15, after the second reference pass): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 · slice 15/0 · texq 3/0 — 798 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
 
 ## AAA graphics and 4K transformation (current brief)
 | Item | Status |
@@ -17,6 +17,7 @@ Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/
 | Gameplay recording | **Done** — `docs/media/slice_gameplay.mp4` (720p30, silent) |
 | Asset and texture specifications | **Done** — docs/23 |
 | Godot 4 isolated benchmark + engine evaluation | **Done** — docs/22; recommends Godot 4; **migration awaiting owner approval** |
+| Second reference pass (pale veined creature, trumpet membrane, stalking stance, wet walls, haze, live CRT feed, menu, chapter card, HUD) | **Implemented** — docs/21 §0; evidence re-captured at native 4K |
 | All chapters, main menu, UI, cinematics at the new standard | **Awaiting approval** (the brief forbids it before approval) |
 
 ## Final deliverables (as requested)

@@ -8,8 +8,10 @@ func _draw():
 	var st = ui.stat
 	var f = ui.font(13, "m")
 	var x = 28.0; var y = s.y - 34.0
+	if ui.compact_radio:
+		_minimal(s, st, f)
 	# flashlight battery
-	if st.light or st.batt < 25:
+	elif st.light or st.batt < 25:
 		draw_string(f, Vector2(x, y), "LIGHT", Color(1, 1, 1, 0.45))
 		for i in 5:
 			var on = st.batt > i * 20
@@ -54,3 +56,22 @@ func _draw():
 	draw_rect(Rect2(o.x + 286, o.y + 88, 26 * r.batt / 100.0, 10), Color(0.9, 0.85, 0.6, 0.8) if r.batt > 20 else Color(0.9, 0.2, 0.15, 0.9))
 	# exposure lamp: the more the Listener can hear you, the brighter it burns
 	draw_circle(o + Vector2(w - 22, 100 - 78), 5, Color(1.0, 0.15, 0.1, 0.15 + 0.85 * r.danger))
+
+func _minimal(s, st, f):
+	# high-quality levels (the reference's clean HUD): bottom right, a torch, its battery and charge; the receiver's
+	# own charge while it is on (its frequency is on the set in Daniel's hand)
+	var x = s.x - 168.0; var y = s.y - 34.0
+	var r = ui.radio_state
+	if r.on and r.batt < 100.0:
+		draw_string(f, Vector2(x, y - 26), "HX-7  %d%%" % int(round(r.batt)), Color(0.6, 1.0, 0.7, 0.6))
+	if not (st.light or st.batt < 25): return
+	var c = Color(1, 1, 1, 0.55)
+	draw_rect(Rect2(x, y - 10, 18, 7), c)                                    # torch: barrel and head
+	draw_colored_polygon(PoolVector2Array([Vector2(x + 18, y - 12), Vector2(x + 26, y - 14), Vector2(x + 26, y + 1), Vector2(x + 18, y - 1)]), c)
+	var bx = x + 40
+	draw_rect(Rect2(bx, y - 13, 36, 15), c, false, 1.2)
+	draw_rect(Rect2(bx + 36, y - 9, 3, 7), c)
+	var k = clamp(st.batt / 100.0, 0.0, 1.0)
+	draw_rect(Rect2(bx + 2, y - 11, 32 * k, 11), Color(0.92, 0.9, 0.82, 0.8) if st.batt > 20 else Color(0.9, 0.2, 0.15, 0.9))
+	draw_string(f, Vector2(bx + 48, y), "%d%%" % int(round(st.batt)), Color(1, 1, 1, 0.6))
+	if st.cells > 0: draw_string(f, Vector2(bx + 92, y), "+%d" % st.cells, Color(1, 1, 1, 0.35))

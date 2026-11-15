@@ -1,6 +1,6 @@
 # DEAD FREQUENCY — Testing Plan & Results
 
-Latest full run: **2026-11-14**, build 0.11 (4K vertical slice), Godot 3.5.2 on Ubuntu 24.04 under Xvfb with Mesa llvmpipe (software OpenGL, no GPU): 12 suites, 798 checks, 0 failures.
+Latest full run: **2026-11-15**, build 0.12 (vertical slice, second reference pass), Godot 3.5.2 on Ubuntu 24.04 under Xvfb with Mesa llvmpipe (software OpenGL, no GPU): 12 suites, 798 checks, 0 failures.
 
 ## 1. Automated suites (each runs in a real Godot 3.5.2 instance)
 Run with `tools/test.sh <suite>`. A suite fails if any check fails **or** the engine logs any `SCRIPT ERROR` / `ERROR` line. CI runs every suite except `vo` (which needs a test recording).

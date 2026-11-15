@@ -1,6 +1,6 @@
 # DEAD FREQUENCY — Godot 4 Isolated Visual Benchmark and Engine Evaluation
 
-Date: 2026-11-14. Status: **benchmark built and rendered; no migration started.** The Godot 3.5 game is untouched by
+Date: 2026-11-14. Status: **benchmark built and rendered; no migration started.** (It was rendered before the 2026-11-15 reference pass, so it shows the Listener v2 and the earlier lighting; the engine comparison it makes is unchanged.) The Godot 3.5 game is untouched by
 the benchmark and remains the shipping build and the backup.
 
 ![Godot 3.5 game (left) and Godot 4 benchmark (right): the Listener under the torch](screenshots/g4/compare_s10_creature_close.jpg)

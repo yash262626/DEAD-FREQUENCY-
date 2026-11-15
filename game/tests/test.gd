@@ -776,9 +776,10 @@ const SLICE_SHOTS = [
 	["s07_console", Vector3(25.85, 0, 7.05), -90.0, -24.0, true, 89.1, null, ""],
 	["s08_encounter", Vector3(27.5, 0, 11.3), 10.0, 4.0, false, 0.0, [25.6, 7.4, 160.0, "listen"], "hide"],
 	["s09_hunt", Vector3(5.1, 0, 12.4), 0.0, 6.0, true, 0.0, [5.0, 9.4, 180.0, "run"], ""],
-	["s10_creature_close", Vector3(5.05, 0, 11.7), 0.0, 16.0, true, 0.0, [5.0, 9.9, 180.0, "listen"], ""],
+	["s10_creature_close", Vector3(5.05, 0, 12.3), 0.0, 4.0, true, 0.0, [5.0, 9.6, 155.0, "listen"], ""],
 	["s11_creature_room", Vector3(24.4, 0, 8.3), -55.0, 8.0, true, 0.0, [26.0, 6.4, 120.0, "search"], "hide_no"],
-	["s12_head_close", Vector3(5.05, 0, 11.15), 0.0, 30.0, true, 0.0, [5.0, 9.9, 180.0, "listen"], ""],
+	["s12_head_close", Vector3(5.0, 0, 11.75), 6.0, 3.0, true, 0.0, [5.1, 9.3, 170.0, "idle"], ""],
+	["s15_creature_crts", Vector3(28.3, 0, 8.4), -72.0, -2.0, true, 0.0, [31.0, 6.7, 110.0, "listen"], ""],
 	["s13_crawl", Vector3(17.4, 0, 6.9), 88.0, -9.0, true, 0.0, [13.2, 7.15, -62.0, "crawl"], ""],
 	["s14_search_hidden", Vector3(27.5, 0, 11.3), 0.0, 6.0, false, 0.0, [26.3, 8.2, 200.0, "search"], "hide"],
 ]

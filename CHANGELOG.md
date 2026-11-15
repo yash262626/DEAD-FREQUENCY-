@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.12 — second reference pass on the vertical slice (awaiting approval)
+- **Listener v3** toward the owner's new creature reference: pale, translucent, veined flesh with dried blood; a deep trumpet-shaped membrane head (dark red inside with black pores, pale outside, mucus strands); hunched stalking stance with the arms hanging to the floor (forward-kinematics checked); bone-heat gaps re-weighted (floating skull nodules fixed); depth-aware subsurface scattering (no more blocky bleeding).
+- **Environment:** wet-wall shader (water running down the corridor walls and pooling at their feet), damp floors everywhere, ground mist, stronger light shafts and bloom, a darker, more contrasty grade; a red emergency lamp closing the first corridor; a dying fluorescent tube (light, glass and haze cone flicker together); crates, a toolbox and a bin; the comms room re-lit by its practicals.
+- **Live security feed:** a real camera in the corridor renders the scene (the Listener included) onto a CRT in C3-14 at 12 frames a second, with scanlines, roll and noise. First-person models stay off it (render layer 2).
+- **Presentation:** chapter cards in signal red over a burning horizon with a lattice mast and blinking beacon; main menu staged in the slice corridor with a heartbeat line under the logo; minimal HUD in high-quality levels (objective header, torch battery and charge, receiver charge).
+- **Evidence:** all views re-captured at native 3840 × 2160 plus a new creature-in-the-comms-room view; new studio views; gameplay video re-recorded.
+- Tools: `tools/pack_creature_maps.py` (bakes → game textures), `tools/gen_wall_streaks.py`; `listener_v2.py` gains an `anim` stage (re-key animations without rebuilding).
+
 ## 0.11 — 4K graphics pass on the vertical slice (awaiting approval)
 - **The Listener v2**, rebuilt toward the owner's reference sheet (original design): 2.27 m emaciated, asymmetric body with an uneven ribcage, long four-joint clawed fingers, translucent skin; a pleated, veined acoustic membrane head with slits, pores and cartilage rods; 4K skin maps, 2K membrane, 1K claws; subsurface scattering, transmission and a wet clearcoat; 78-bone rig; idle, listen, walk, run, search, crawl and attack animations chosen by the AI state; three body LODs switched by distance.
 - **First person:** worn leather gloves; the HX-7 shows a live seven-segment display (frequency, band, signal bars) and its tuning knob turns as you tune; the torch hand clicks when the light toggles.

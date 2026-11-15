@@ -220,7 +220,7 @@ func _apply_quality():
 	for l in lights:
 		l.node.shadow_enabled = int(s.shadows) >= 1 and not l.d.get("noshadow", false)
 	if art:
-		for nm in ["TrofferFlicker", "HangLamp", "Beacon"]:
+		for nm in ["TrofferFlicker", "HangLamp", "Beacon", "TubeFlicker"]:
 			var al = art.find_node(nm, true, false)
 			if al: al.shadow_enabled = int(s.shadows) >= 1
 	if player: player.apply_quality()
@@ -366,9 +366,17 @@ func _load_art():
 			if m.name.begins_with("steam"): Fx.steam(self, m.global_transform.origin)
 			elif m.name.begins_with("drip"): Fx.drips(self, m.global_transform.origin, m.global_transform.origin.y)
 	if data.get("grade", true): Fx.grade(self)
-	for nm in ["TrofferFlicker", "HangLamp"]:
+	for nm in ["TrofferFlicker", "HangLamp", "TubeFlicker"]:
 		var l = art.find_node(nm, true, false)
 		if l: _flick.append({"node": l, "base": l.light_energy, "t": _rng.randf() * 5.0})
+	# the dying fluorescent tube: its glass and its haze cone flicker with its light
+	for f in _flick:
+		if f.node.name == "TubeFlicker":
+			f["mat"] = _find_material(art, "M_TubeLit")
+			if f.mat: f["base_e"] = f.mat.emission_energy
+			f["beam"] = art.find_node("TubeBeam", true, false)
+			if f.beam: f["beam_e"] = f.beam.material_override.get_shader_param("energy")
+	if data.get("hq", false): _crt_feed()
 
 func _art_process(dt: float):
 	for f in _flick:
@@ -376,8 +384,73 @@ func _art_process(dt: float):
 		if f.t <= 0.0:
 			f.t = _rng.randf_range(0.04, 0.5) if _rng.randf() < 0.35 else _rng.randf_range(0.8, 3.5)
 			f.node.light_energy = f.base * (_rng.randf_range(0.0, 0.4) if _rng.randf() < 0.5 else 1.0)
+			var k = f.node.light_energy / max(0.001, f.base)
+			if f.get("mat"): f.mat.emission_energy = f.base_e * k
+			if f.get("beam"): f.beam.material_override.set_shader_param("energy", f.beam_e * k)
 	var b = art.find_node("Beacon", true, false)
 	if b and b.visible: b.rotation.y += dt * 3.6
+	if _feed_vp:                                       # the security feed refreshes at 12 frames a second, like the real thing
+		_feed_t -= dt
+		if _feed_t <= 0.0:
+			_feed_t = 1.0 / 12.0; _feed_vp.render_target_update_mode = Viewport.UPDATE_ONCE
+
+func _find_material(n: Node, mname: String) -> Material:
+	if n is MeshInstance and n.mesh:
+		for i in n.mesh.get_surface_count():
+			var m = n.get_surface_material(i) if n.get_surface_material(i) else n.mesh.surface_get_material(i)
+			if m and m.resource_name == mname: return m
+	for c in n.get_children():
+		var r = _find_material(c, mname)
+		if r: return r
+	return null
+
+# A live security-camera feed: the corridor camera renders the real scene (the Listener included) onto the CRT that
+# used to show a waveform. First-person models live on layer 2, which the feed camera does not see.
+const CRT_FEED_SHADER = """
+shader_type spatial;
+render_mode unshaded, cull_back;
+uniform sampler2D feed;
+uniform float energy = 1.45;
+uniform float noise_amt = 0.14;
+void fragment() {
+	vec2 c = UV - 0.5;
+	vec2 uv = 0.5 + c * (1.0 + 0.1 * dot(c, c));
+	vec3 col = texture(feed, uv).rgb;
+	float l = dot(col, vec3(0.3, 0.59, 0.11));
+	col = mix(vec3(l), col, 0.3) * vec3(0.8, 1.0, 0.86);
+	float scan = 0.76 + 0.24 * sin(uv.y * 520.0);
+	float roll = 0.88 + 0.12 * sin(uv.y * 5.0 - TIME * 1.6);
+	float n = fract(sin(dot(floor(uv * vec2(320.0, 240.0)) + floor(TIME * 24.0), vec2(12.9898, 78.233))) * 43758.5453);
+	col = col * 1.6 * scan * roll + (n - 0.5) * noise_amt;
+	float vig = smoothstep(0.78, 0.3, length(c));
+	float inside = step(0.0, uv.x) * step(uv.x, 1.0) * step(0.0, uv.y) * step(uv.y, 1.0);
+	ALBEDO = clamp(col, 0.0, 1.2) * vig * energy * inside;
+}
+"""
+var _feed_vp: Viewport = null
+var _feed_t := 0.0
+func _crt_feed():
+	var target = null; var surf = -1
+	var stack = [art]
+	while stack.size() and target == null:
+		var n = stack.pop_back()
+		if n is MeshInstance and n.mesh:
+			for i in n.mesh.get_surface_count():
+				var m = n.get_surface_material(i) if n.get_surface_material(i) else n.mesh.surface_get_material(i)
+				if m and m.resource_name == "M_CRT_Wave":
+					target = n; surf = i
+		for c in n.get_children(): stack.append(c)
+	if target == null: return
+	_feed_vp = Viewport.new(); _feed_vp.name = "SecurityFeed"; _feed_vp.size = Vector2(320, 240)
+	_feed_vp.render_target_v_flip = true; _feed_vp.hdr = false; _feed_vp.msaa = Viewport.MSAA_DISABLED
+	_feed_vp.shadow_atlas_size = 1024; _feed_vp.render_target_update_mode = Viewport.UPDATE_ONCE
+	add_child(_feed_vp)
+	var fc = Camera.new(); fc.fov = 62; fc.far = 40; fc.cull_mask = 0xFFFFF & ~2; fc.current = true
+	_feed_vp.add_child(fc)
+	fc.look_at_from_position(Vector3(4.45, 2.62, 6.55), Vector3(5.05, 0.7, 15.0), Vector3.UP)    # down the first corridor
+	var sm = ShaderMaterial.new(); sm.shader = Shader.new(); sm.shader.code = CRT_FEED_SHADER
+	sm.set_shader_param("feed", _feed_vp.get_texture()); sm.resource_name = "M_CRT_Feed"
+	target.set_surface_material(surf, sm)
 
 func _hide_visuals(n: Node):
 	for c in n.get_children():

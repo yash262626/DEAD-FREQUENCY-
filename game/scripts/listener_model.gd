@@ -1,6 +1,6 @@
 extends Spatial
-# The Listener's body for the high-quality path — version 2 (tools/blender/listener_v2.py): original sculpted
-# creature with 4K baked skin maps, a translucent pleated membrane 'ear', keratin claws, a 78-bone rig, three LODs
+# The Listener's body for the high-quality path — version 3 (tools/blender/listener_v2.py): original sculpted
+# creature with 4K baked pale, veined skin maps, a translucent trumpet-shaped membrane 'ear', keratin claws, a 78-bone rig, three LODs
 # (switched by camera distance; Godot 3 has no automatic LOD) and seven animations:
 # idle, listen, walk, run, search, crawl, attack.
 var anim: AnimationPlayer
@@ -26,15 +26,15 @@ func _ready():
 	for mi in meshes:
 		if mi.name.find("Membrane") >= 0: membrane = mi
 	var skin = SpatialMaterial.new()
-	skin.albedo_texture = load("res://assets/creature2/skin_albedo.jpg"); skin.albedo_color = Color(0.5, 0.36, 0.33)
+	skin.albedo_texture = load("res://assets/creature2/skin_albedo.jpg"); skin.albedo_color = Color(0.93, 0.9, 0.88)   # pale, corpse-white
 	skin.normal_enabled = true; skin.normal_texture = load("res://assets/creature2/skin_nor.png"); skin.normal_scale = 1.5
 	var orm = load("res://assets/creature2/skin_orm.jpg")
 	skin.roughness_texture = orm; skin.roughness_texture_channel = SpatialMaterial.TEXTURE_CHANNEL_GREEN; skin.roughness = 1.0
 	skin.ao_enabled = true; skin.ao_texture = orm; skin.ao_texture_channel = SpatialMaterial.TEXTURE_CHANNEL_RED; skin.ao_light_affect = 0.5
 	skin.metallic_specular = 0.55
-	skin.clearcoat_enabled = true; skin.clearcoat = 0.5; skin.clearcoat_gloss = 0.85          # wet, mucous sheen
-	skin.subsurf_scatter_enabled = true; skin.subsurf_scatter_strength = 0.28                 # light bleeding red through thin tissue
-	skin.transmission_enabled = true; skin.transmission = Color(0.07, 0.012, 0.008)
+	skin.clearcoat_enabled = true; skin.clearcoat = 0.7; skin.clearcoat_gloss = 0.9           # wet, mucous sheen
+	skin.subsurf_scatter_enabled = true; skin.subsurf_scatter_strength = 0.45                 # translucent: light bleeds through thin tissue
+	skin.transmission_enabled = true; skin.transmission = Color(0.2, 0.05, 0.04)
 	var claw = SpatialMaterial.new()
 	claw.albedo_texture = load("res://assets/creature2/claws_albedo.jpg")
 	var corm = load("res://assets/creature2/claws_orm.jpg")
@@ -42,13 +42,13 @@ func _ready():
 	claw.ao_enabled = true; claw.ao_texture = corm; claw.ao_texture_channel = SpatialMaterial.TEXTURE_CHANNEL_RED
 	claw.metallic_specular = 0.7; claw.clearcoat_enabled = true; claw.clearcoat = 0.4
 	var mem = SpatialMaterial.new()
-	mem.albedo_texture = load("res://assets/creature2/membrane_albedo.jpg"); mem.albedo_color = Color(0.56, 0.34, 0.32)
+	mem.albedo_texture = load("res://assets/creature2/membrane_albedo.jpg"); mem.albedo_color = Color(0.86, 0.78, 0.76)
 	var morm = load("res://assets/creature2/membrane_orm.jpg")
 	mem.roughness_texture = morm; mem.roughness_texture_channel = SpatialMaterial.TEXTURE_CHANNEL_GREEN; mem.roughness = 1.0
 	mem.ao_enabled = true; mem.ao_texture = morm; mem.ao_texture_channel = SpatialMaterial.TEXTURE_CHANNEL_RED
-	mem.transmission_enabled = true; mem.transmission = Color(0.3, 0.05, 0.03)              # the torch glows through the membrane
-	mem.subsurf_scatter_enabled = true; mem.subsurf_scatter_strength = 0.6
-	mem.clearcoat_enabled = true; mem.clearcoat = 0.6; mem.clearcoat_gloss = 0.9
+	mem.transmission_enabled = true; mem.transmission = Color(0.26, 0.06, 0.045)            # the torch glows through the membrane
+	mem.subsurf_scatter_enabled = true; mem.subsurf_scatter_strength = 0.45
+	mem.clearcoat_enabled = true; mem.clearcoat = 0.8; mem.clearcoat_gloss = 0.92
 	mem.params_cull_mode = SpatialMaterial.CULL_DISABLED
 	for mi in meshes:
 		for i in mi.mesh.get_surface_count():

@@ -133,6 +133,7 @@ func _build_hands_hq():
 	radio_model = Spatial.new(); radio_model.translation = Vector3(-0.125, _radio_off_y, -0.25); radio_model.rotation_degrees = Vector3(12, 18, 4)
 	hands.add_child(radio_model); radio_model.add_child(fp.radio)
 	_lens = fp.lens; _screen = fp.screen
+	_fp_layer(hands)                  # first-person models on layer 2: the security-feed camera does not see them
 	# the receiver's display shows the live frequency
 	var vp = Viewport.new(); vp.size = Vector2(512, 224); vp.transparent_bg = false; vp.render_target_v_flip = true
 	vp.usage = Viewport.USAGE_2D; vp.render_target_update_mode = Viewport.UPDATE_ALWAYS; add_child(vp)
@@ -144,7 +145,7 @@ func _build_hands_hq():
 	lamp.translation = Vector3(0.125, -0.108, -0.33); lamp.spot_angle = 28; lamp.spot_angle_attenuation = 0.75; lamp.spot_attenuation = 1.1
 	# a faint shaft of light in the dusty air, fading where it meets geometry
 	_beam = load("res://scripts/fx.gd").beam(cam, 0.05, 2.1, 9.0, Color(1.0, 0.95, 0.85), 0.0)
-	_beam.translation = lamp.translation; _beam.rotation_degrees = Vector3(-90, 0, 0)
+	_beam.translation = lamp.translation; _beam.rotation_degrees = Vector3(-90, 0, 0); _beam.layers = 2
 	spill = SpotLight.new(); spill.translation = lamp.translation; spill.spot_range = 16; spill.spot_angle = 52
 	spill.spot_angle_attenuation = 0.9; spill.light_color = lamp.light_color; spill.light_energy = 0.0; cam.add_child(spill)
 
@@ -157,7 +158,7 @@ func _animate_hands(dt: float):
 	radio_model.visible = radio_model.translation.y > _radio_off_y + 0.04
 	if hq:
 		spill.light_energy = lamp.light_energy * 0.25
-		_beam.material_override.set_shader_param("energy", lamp.light_energy * 0.045)
+		_beam.material_override.set_shader_param("energy", lamp.light_energy * 0.065)          # the torch's beam in the haze
 		if radio_on and _lcd:
 			_lcd.text = "%05.1f" % level.radio.f
 			_lcd.band = {89.1: "ECHO", 94.6: "PROXIMITY", 101.3: "FORECAST", 107.9: "UNSEEN"}.get(level.radio.band(), "")
@@ -184,6 +185,10 @@ func apply_quality():
 	cam.fov = G.settings.fov
 	cam.far = [45.0, 80.0, 120.0, 200.0][clamp(int(G.settings.view_dist), 0, 3)]
 	lamp.shadow_enabled = int(G.settings.quality) >= 1 or int(G.settings.shadows) >= 1
+
+func _fp_layer(n: Node):
+	if n is VisualInstance: n.layers = 2
+	for c in n.get_children(): _fp_layer(c)
 
 func _busy() -> bool:
 	return locked or ui.modal != null or level.dead

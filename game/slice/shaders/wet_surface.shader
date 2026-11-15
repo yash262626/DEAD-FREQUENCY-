@@ -10,6 +10,7 @@ uniform vec4 tint : hint_color = vec4(1.0);
 uniform float uv_scale = 0.38;
 uniform float mask_scale = 0.11;
 uniform float wetness = 1.0;
+uniform float damp = 0.0;          // wetness everywhere on top of the pools: a floor that never dries
 uniform float normal_scale = 1.0;
 varying vec3 wpos;
 void vertex() {
@@ -19,7 +20,7 @@ void fragment() {
 	vec2 uv = UV * uv_scale;
 	vec3 alb = texture(albedo_tex, uv).rgb * tint.rgb;
 	vec3 arm = texture(arm_tex, uv).rgb;
-	float wet = clamp(texture(wet_mask, wpos.xz * mask_scale).r * wetness, 0.0, 1.0);
+	float wet = clamp(texture(wet_mask, wpos.xz * mask_scale).r * wetness + damp, 0.0, 1.0);
 	ALBEDO = alb * mix(1.0, 0.42, wet);
 	ROUGHNESS = mix(arm.g, 0.035, wet);
 	METALLIC = 0.0;

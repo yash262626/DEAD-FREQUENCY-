@@ -162,26 +162,27 @@ MC = Vector((-0.02, 2.02, -0.43))
 def MP(u, v, w):                      # membrane-local (u right, v up, w forward) -> Godot
     return (MC.x + u, MC.y + v, MC.z - w)
 def outline(th):
-    s = abs(math.sin(th))
-    r = 0.34 * (0.8 + 0.32 * s ** 0.7)
-    r *= 1.0 - 0.2 * math.exp(-(th / 0.2) ** 2)                      # cleft between the two lobes
-    r *= 1.0 - 0.55 * min(1.0, max(0.0, (abs(th) - math.radians(105)) / math.radians(45)))   # tucks under the head
-    r *= 1.0 + 0.05 * math.sin(th * 5 + 0.7) + 0.03 * math.sin(th * 11)
+    # v3: one trumpet bell, a little taller than wide, with a lumpy fleshy lip
+    r = 0.25 * (1.0 + 0.06 * math.cos(2 * th))
+    r *= 1.0 + 0.05 * math.sin(th * 5 + 0.7) + 0.035 * math.sin(th * 11 + 0.3) + 0.02 * math.sin(th * 17)
     return r
 N_PLEAT = 17
 def surf(r, th, R):
+    # a deep funnel opening forward (about 0.37 m deep), the lip flaring outward like a trumpet's bell
     t = r / R
-    w = 0.15 * t ** 1.6 + 0.024 * t ** 1.1 * math.sin(N_PLEAT * th) - 0.045 * math.exp(-(th / 0.22) ** 2) * t + 0.035 * max(0.0, (t - 0.8) / 0.2) ** 2
-    return (r * math.sin(th), r * math.cos(th) * 0.96, w)
+    flare = 1.0 + 0.32 * max(0.0, (t - 0.62) / 0.38) ** 2
+    w = 0.30 * t ** 1.35 + 0.07 * max(0.0, (t - 0.8) / 0.2) ** 2 + 0.012 * t ** 1.1 * math.sin(N_PLEAT * th)
+    return (r * flare * math.sin(th), r * flare * math.cos(th) * 0.97, w)
 def membrane():
-    rings, segs = 26, 160
-    th0, th1 = math.radians(-150), math.radians(150)
+    rings, segs = 30, 180
+    th0, th1 = -math.pi, math.pi                                   # a closed bell
     bm = bmesh.new(); grid = []
     for i in range(rings + 1):
         row = []
-        for j in range(segs + 1):
+        for j in range(segs):
             th = th0 + (th1 - th0) * j / segs; R = outline(th); r = 0.036 + (R - 0.036) * i / rings
             row.append(bm.verts.new(G(*MP(*surf(r, th, R)))))
+        row.append(row[0])
         grid.append(row)
     for i in range(rings):
         for j in range(segs):
@@ -200,20 +201,19 @@ def membrane():
     # cartilage rods along every pleat crest (behind), and a lumpy rim
     for k in range(-8, 9):
         th = (math.pi / 2 + 2 * math.pi * k) / N_PLEAT
-        if abs(th) > math.radians(140): continue
         R = outline(th); pts = []; rr = []
         for t in (0.1, 0.3, 0.55, 0.8, 0.97):
             u, v, w = surf(R * t, th, R); pts.append(MP(u, v, w - 0.009)); rr.append(0.0075 * (1.0 - 0.6 * t) + 0.002)
         parts.append(tapered(f"rod{k}", pts, rr, "cartilage", res=5))
     rim = []
-    for j in range(61):
-        th = math.radians(-148) + math.radians(296) * j / 60; R = outline(th); u, v, w = surf(R, th, R); rim.append(MP(u, v, w))
-    parts.append(tapered("rim", rim, [0.006 + 0.0025 * math.sin(j * 1.7) for j in range(61)], "cartilage", res=3))
+    for j in range(73):
+        th = -math.pi + 2 * math.pi * j / 72; R = outline(th); u, v, w = surf(R, th, R); rim.append(MP(u, v, w))
+    parts.append(tapered("rim", rim, [0.0065 + 0.003 * math.sin(j * 1.7) for j in range(73)], "cartilage", res=3))
     # veins on the front surface, branching outward between the rods
-    for k in range(14):
-        th = random.uniform(-2.3, 2.3); R = outline(th); pts = []; rr = []
+    for k in range(26):                     # veins inside the bell and, every other one, raised on its outside
+        th = random.uniform(-math.pi, math.pi); R = outline(th); pts = []; rr = []; side = 0.0045 if k % 2 == 0 else -0.0115
         for t in (0.12, 0.3, 0.5, 0.72, 0.9):
-            th2 = th + random.uniform(-0.06, 0.06); u, v, w = surf(R * t, th2, R); pts.append(MP(u, v, w + 0.0045)); rr.append(0.0028 * (1.1 - t))
+            th2 = th + random.uniform(-0.06, 0.06); u, v, w = surf(R * t, th2, R); pts.append(MP(u, v, w + side)); rr.append(0.003 * (1.1 - t))
         parts.append(tapered(f"vein{k}", pts, rr, "membrane", res=5, bevel_res=2))
     # the pit: papillae around the central opening, and a dark throat behind it
     for k in range(16):
@@ -222,11 +222,11 @@ def membrane():
         parts.append(tapered(f"papilla{k}", [base, tip], [0.0055, 0.0008], "cartilage", res=2))
     parts.append(ellipsoid("throat", MP(0, 0, -0.03), (0.045, 0.05, 0.035), "throat", seg=16))
     # wet strands hanging from the lower rim and the pit
-    for k, th in enumerate((-2.25, -1.9, 1.95, 2.3, 0.0)):
+    for k, th in enumerate((-2.95, -2.6, -2.2, -1.75, 1.8, 2.25, 2.7, 3.05, 0.0)):    # mucus hanging from the lower lip
         if th == 0.0: start = MP(0.0, -0.05, 0.01)
         else:
             R = outline(th); u, v, w = surf(R * 0.97, th, R); start = MP(u, v, w)
-        L = random.uniform(0.07, 0.2); s0 = Vector(start)
+        L = random.uniform(0.08, 0.3); s0 = Vector(start)
         parts.append(tapered(f"drip{k}", [tuple(s0), tuple(s0 + Vector((0.004, -L * 0.5, -0.004))), tuple(s0 + Vector((0.006, -L, -0.006)))], [0.0035, 0.0018, 0.0028], "membrane", res=4))
     ms = [realize(p) if (p.type == 'CURVE' or p.modifiers) else p for p in parts]
     return join("membrane", ms)
@@ -294,19 +294,46 @@ def skin_nodes(m, kind):
     def mul(a, b, fac=1.0):
         m_ = nt.nodes.new('ShaderNodeMixRGB'); m_.blend_type = 'MULTIPLY'; m_.inputs['Fac'].default_value = fac
         nt.links.new(a, m_.inputs[1]); nt.links.new(b, m_.inputs[2]); return m_
-    def vor(scale, c_line, width):
+    def warp(amount, scale):                # object coordinates pushed around by noise: organic, branching vein lines
+        n = noise(scale, 4.0)
+        sub = nt.nodes.new('ShaderNodeVectorMath'); sub.operation = 'SUBTRACT'; nt.links.new(n.outputs['Color'], sub.inputs[0]); sub.inputs[1].default_value = (0.5, 0.5, 0.5)
+        sc_ = nt.nodes.new('ShaderNodeVectorMath'); sc_.operation = 'SCALE'; sc_.inputs['Scale'].default_value = amount; nt.links.new(sub.outputs['Vector'], sc_.inputs[0])
+        add = nt.nodes.new('ShaderNodeVectorMath'); add.operation = 'ADD'; nt.links.new(tc.outputs['Object'], add.inputs[0]); nt.links.new(sc_.outputs['Vector'], add.inputs[1])
+        return add.outputs['Vector']
+    def vor(scale, c_line, width, warped=0.0):
         v = nt.nodes.new('ShaderNodeTexVoronoi'); v.feature = 'DISTANCE_TO_EDGE'; v.inputs['Scale'].default_value = scale
-        nt.links.new(tc.outputs['Object'], v.inputs['Vector'])
+        nt.links.new(warp(warped, 2.5) if warped else tc.outputs['Object'], v.inputs['Vector'])
         return ramp(v.outputs['Distance'], c_line, (1, 1, 1, 1), 0.0, width)
+    def dots(scale, c_dot, size):           # pores / dark spots
+        v = nt.nodes.new('ShaderNodeTexVoronoi'); v.feature = 'F1'; v.inputs['Scale'].default_value = scale
+        nt.links.new(tc.outputs['Object'], v.inputs['Vector'])
+        return ramp(v.outputs['Distance'], c_dot, (1, 1, 1, 1), size, size + 0.07)
+    def streaks(c):                          # blood that has run down the body and dried
+        mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (9.0, 9.0, 0.7); nt.links.new(tc.outputs['Object'], mp.inputs['Vector'])
+        n = nt.nodes.new('ShaderNodeTexNoise'); n.inputs['Scale'].default_value = 3.0; n.inputs['Detail'].default_value = 4.0; nt.links.new(mp.outputs['Vector'], n.inputs['Vector'])
+        return ramp(n.outputs['Fac'], (1, 1, 1, 1), c, 0.6, 0.74)
     if kind == "skin":
-        base = ramp(noise(3.5).outputs['Fac'], (0.36, 0.17, 0.15, 1), (0.62, 0.46, 0.41, 1), 0.3, 0.75)
-        c = mul(base.outputs['Color'], vor(5.0, (0.16, 0.03, 0.05, 1), 0.03).outputs['Color'], 0.92)
-        c = mul(c.outputs['Color'], vor(13.0, (0.32, 0.09, 0.1, 1), 0.025).outputs['Color'], 0.7)
-        c = mul(c.outputs['Color'], ramp(noise(1.1, 3.0).outputs['Fac'], (0.55, 0.32, 0.3, 1), (1, 1, 1, 1), 0.4, 0.65).outputs['Color'], 1.0)
+        # v3: pale, translucent, corpse-white flesh with pink blotches, red veins and dried blood running down
+        base = ramp(noise(3.0).outputs['Fac'], (0.66, 0.58, 0.53, 1), (0.86, 0.81, 0.76, 1), 0.3, 0.75)
+        c = mul(base.outputs['Color'], ramp(noise(1.2, 3.0).outputs['Fac'], (0.86, 0.6, 0.58, 1), (1, 1, 1, 1), 0.35, 0.65).outputs['Color'], 1.0)
+        c = mul(c.outputs['Color'], vor(4.5, (0.42, 0.04, 0.05, 1), 0.022, 0.16).outputs['Color'], 0.95)
+        c = mul(c.outputs['Color'], vor(11.0, (0.62, 0.2, 0.2, 1), 0.02, 0.1).outputs['Color'], 0.8)
+        c = mul(c.outputs['Color'], streaks((0.5, 0.06, 0.06, 1)).outputs['Color'], 0.9)
     elif kind == "membrane":
-        base = ramp(noise(6.0).outputs['Fac'], (0.42, 0.14, 0.13, 1), (0.72, 0.42, 0.38, 1), 0.3, 0.8)
-        c = mul(base.outputs['Color'], vor(9.0, (0.2, 0.02, 0.04, 1), 0.04).outputs['Color'], 0.95)
-        c = mul(c.outputs['Color'], vor(22.0, (0.4, 0.08, 0.09, 1), 0.03).outputs['Color'], 0.6)
+        # outside pale and veined like the body; inside the bell (facing forward) raw dark red with black pores
+        outer = ramp(noise(5.0).outputs['Fac'], (0.7, 0.52, 0.5, 1), (0.88, 0.74, 0.7, 1), 0.3, 0.8)
+        outer = mul(outer.outputs['Color'], vor(8.0, (0.45, 0.04, 0.06, 1), 0.035, 0.12).outputs['Color'], 0.95)
+        inner = ramp(noise(7.0).outputs['Fac'], (0.34, 0.07, 0.07, 1), (0.6, 0.24, 0.22, 1), 0.3, 0.8)
+        inner = mul(inner.outputs['Color'], dots(26.0, (0.1, 0.01, 0.015, 1), 0.08).outputs['Color'], 1.0)
+        inner = mul(inner.outputs['Color'], vor(14.0, (0.3, 0.02, 0.03, 1), 0.03, 0.08).outputs['Color'], 0.8)
+        geo = nt.nodes.new('ShaderNodeNewGeometry'); sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Normal'], sep.inputs[0])
+        side = ramp(sep.outputs['Y'], (0, 0, 0, 1), (1, 1, 1, 1), -0.1, 0.35)          # Blender +Y is the creature's forward
+        c = nt.nodes.new('ShaderNodeMixRGB'); nt.links.new(side.outputs['Color'], c.inputs['Fac'])
+        nt.links.new(outer.outputs['Color'], c.inputs[1]); nt.links.new(inner.outputs['Color'], c.inputs[2])
+    elif kind == "cartilage":   # the bell's rods, lip and papillae: darker, redder flesh
+        c = ramp(noise(9.0).outputs['Fac'], (0.38, 0.1, 0.09, 1), (0.62, 0.32, 0.29, 1), 0.3, 0.8)
+    elif kind == "throat":
+        c = ramp(noise(9.0).outputs['Fac'], (0.05, 0.005, 0.008, 1), (0.16, 0.02, 0.025, 1), 0.3, 0.8)
     else:   # claw: dark keratin
         c = ramp(noise(14.0).outputs['Fac'], (0.07, 0.055, 0.045, 1), (0.22, 0.18, 0.14, 1), 0.3, 0.8)
     nt.links.new(c.outputs['Color'], bsdf.inputs['Base Color'])
@@ -327,7 +354,8 @@ def bake(hi, lo, cl, mem):
     sc = bpy.context.scene; sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.use_denoising = False
     sc.render.bake.margin = 12
     skin_nodes(lo.data.materials[0], "skin"); skin_nodes(cl.data.materials[0], "claw")
-    skin_nodes(mem.data.materials[0], "membrane"); skin_nodes(mem.data.materials[1], "claw")
+    for m in mem.data.materials:             # by name: the joined membrane carries membrane, cartilage and throat materials
+        skin_nodes(m, "membrane" if m.name.startswith("membrane") else ("throat" if m.name.startswith("throat") else "cartilage"))
     sc.cycles.samples = 1
     n = bake_img(lo, "l2_normal", TEX, False)
     bpy.ops.object.select_all(action='DESELECT'); hi.select_set(True); lo.select_set(True); bpy.context.view_layer.objects.active = lo
@@ -376,6 +404,21 @@ def rig(lo, cl, mem):
     bpy.ops.object.select_all(action='DESELECT'); lo.select_set(True); arm.select_set(True); bpy.context.view_layer.objects.active = arm
     bpy.ops.object.parent_set(type='ARMATURE_AUTO')
     print("body weights", len(lo.vertex_groups))
+    # bone heat leaves detached islands (skull nodules, the crown) unweighted, and unweighted vertices stay behind at
+    # their rest position when the body bends: give each one to the nearest bone
+    segs = [(b.name, arm.matrix_world @ b.head_local, arm.matrix_world @ b.tail_local) for b in arm.data.bones if b.use_deform]
+    def nearest(p):
+        best, bd = None, 1e9
+        for n, h, t in segs:
+            ab = t - h; k = max(0.0, min(1.0, (p - h).dot(ab) / max(1e-9, ab.dot(ab)))); d = (p - (h + ab * k)).length
+            if d < bd: best, bd = n, d
+        return best
+    orphans = 0
+    for v in lo.data.vertices:
+        if sum(g.weight for g in v.groups) < 1e-4:
+            n = nearest(lo.matrix_world @ v.co)
+            (lo.vertex_groups.get(n) or lo.vertex_groups.new(name=n)).add([v.index], 1.0, 'REPLACE'); orphans += 1
+    print("orphan vertices given to their nearest bone:", orphans)
     # claws ride rigidly on their nearest finger/toe tip bone
     tips = {}
     for s in "LR":
@@ -433,6 +476,18 @@ def animate(arm):
             a = TAU * (t + ph)
             pb[f"upperarm_{s}"].rotation_euler.x = amp * S(a) + raise_
             pb[f"forearm_{s}"].rotation_euler.x = 0.18 + 0.22 * max(0.0, S(a)) + raise_ * 0.6
+    def hunch(k=1.0, arms=True):
+        # the new reference's posture: the upper body folds forward from the spine (the legs hang from the hips, not the
+        # spine, so the feet stay planted), the neck lifts the funnel back to face forward and the arms hang to the floor
+        pb["spine"].rotation_euler.x += 0.38 * k; pb["chest"].rotation_euler.x += 0.27 * k; pb["upperchest"].rotation_euler.x += 0.16 * k
+        pb["neck1"].rotation_euler.x += -0.47 * k; pb["neck2"].rotation_euler.x += -0.15 * k
+        if arms:
+            for s in "LR": pb[f"upperarm_{s}"].rotation_euler.x += 0.93 * k
+    def stance(k=1.0):
+        # bent knees with the feet planted (forward-kinematics check: ankles 12 cm, toes 5 cm off the floor), hips 30 cm lower
+        pb["root"].location.y += -0.27 * k
+        for s in "LR":
+            pb[f"thigh_{s}"].rotation_euler.x += 0.386 * k; pb[f"shin_{s}"].rotation_euler.x += -0.952 * k; pb[f"foot_{s}"].rotation_euler.x += 0.792 * k
     def idle(t):
         b = S(TAU * t)
         pb["chest"].rotation_euler.x = 0.03 * b; pb["upperchest"].rotation_euler.x = 0.025 * b
@@ -440,6 +495,7 @@ def animate(arm):
         pb["neck1"].rotation_euler.y = 0.15 * S(TAU * t + 0.6); pb["head"].rotation_euler.z = 0.1 * S(TAU * t * 2.0)
         membrane_flare(0.06 + 0.05 * S(TAU * t * 2))
         fingers(t, 0.14, 0.07)
+        stance(1.0); hunch(1.0)
     def listen(t):
         pb["spine"].rotation_euler.x = 0.1; pb["chest"].rotation_euler.x = 0.08
         pb["neck1"].rotation_euler.y = 0.5 * S(TAU * t); pb["neck2"].rotation_euler.x = 0.18 * S(2 * TAU * t)
@@ -447,24 +503,25 @@ def animate(arm):
         membrane_flare(0.32 + 0.12 * S(TAU * t * 3))           # spreads wide while it listens
         pb["upperarm_L"].rotation_euler.x = 0.45; pb["forearm_L"].rotation_euler.x = 0.9
         fingers(t, 0.08, 0.15, "L"); fingers(t, 0.15, 0.06, "R")
+        stance(0.8); hunch(0.9)
     def walk(t):
         legs(t, 0.4, 0.55, 0.12, drag=0.55); arms(t, 0.18)
         pb["root"].location.y = 0.028 * C(2 * TAU * t)
         pb["chest"].rotation_euler.z = 0.08 * S(TAU * t); pb["hips"].rotation_euler.z = -0.06 * S(TAU * t)
         pb["neck1"].rotation_euler.x = 0.05 * S(2 * TAU * t); pb["head"].rotation_euler.z = 0.12 * S(TAU * t * 0.5)
         membrane_flare(0.1); fingers(t, 0.1, 0.05)
+        hunch(0.8)
     def run(t):
         legs(t, 0.85, 1.25, 0.4, drag=0.8); arms(t, 0.6, 0.35)
         pb["root"].location.y = 0.05 * C(2 * TAU * t)
         pb["hips"].rotation_euler.x = 0.32; pb["spine"].rotation_euler.x = 0.2; pb["chest"].rotation_euler.z = 0.12 * S(TAU * t)
         pb["neck1"].rotation_euler.x = -0.35; pb["head"].rotation_euler.x = -0.15
         membrane_flare(-0.12); fingers(t, 0.04, 0.1)
+        hunch(0.5)
     def search(t):
-        pb["hips"].rotation_euler.x = 0.25; pb["spine"].rotation_euler.x = 0.3; pb["chest"].rotation_euler.x = 0.15
-        for s in "LR":
-            pb[f"thigh_{s}"].rotation_euler.x = 0.55; pb[f"shin_{s}"].rotation_euler.x = -0.95; pb[f"foot_{s}"].rotation_euler.x = 0.3
+        stance(1.0); hunch(1.1)
         pb["neck1"].rotation_euler.y = 0.7 * S(TAU * t); pb["head"].rotation_euler.x = 0.2 + 0.1 * S(2 * TAU * t)
-        pb["upperarm_R"].rotation_euler.x = 0.9 + 0.2 * S(TAU * t); pb["forearm_R"].rotation_euler.x = 0.4
+        pb["upperarm_R"].rotation_euler.x += 0.3 + 0.25 * S(TAU * t); pb["forearm_R"].rotation_euler.x = 0.4
         fingers(t, -0.05, 0.18, "R"); fingers(t, 0.15, 0.06, "L")
         membrane_flare(0.25 + 0.1 * S(TAU * t * 2))
     def crawl(t):

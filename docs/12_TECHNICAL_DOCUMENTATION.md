@@ -39,6 +39,9 @@ DEAD-FREQUENCY-/
 │  ├─ test.sh                 runs a test suite or utility headless under Xvfb
 │  ├─ import_assets.sh        imports textures into game/.import after a fresh clone (CI uses it)
 │  ├─ record_slice.sh         records a gameplay video of the slice (fixed 30 fps game time → ffmpeg)
+│  ├─ pack_creature_maps.py   Listener bakes → game textures (albedo with cavity shading, ORM, normal)
+│  ├─ gen_wall_streaks.py     the tileable wall water-streak mask
+│  ├─ evidence_images.py      captures → evidence JPEGs (refuses to label anything but 3840×2160 as 4K)
 │  ├─ fetch_polyhaven.py      fetches CC0 Poly Haven models/surfaces (records id and resolution)
 │  ├─ blender/                Blender 4.0 headless scripts: slice architecture, dressing, first-person items, listener_v2.py
 │  ├─ package_release.sh      builds the clean Windows release folder + zip (README, credits, notices, licences, checksums)
@@ -86,6 +89,14 @@ All sound is synthesised at first launch (`snd.gd`, cache version 5): ambience b
 
 ## Authored art scenes (vertical slice)
 A chapter can name an authored scene: `"art": "res://slice/Slice.tscn"`. The level then keeps its grid only as invisible collision and navigation, instances the art scene (meshes with lightmap UVs, baked `BakedLightmap`, reflection probes, lights, light shafts, puddles, effect markers, `WorldEnvironment`) and uses the scene's environment; entities marked `"noviz"` keep their logic and interaction volume but hide their placeholder visuals. `"hq": true` switches on the modelled first-person rig (`scripts/fp_models.gd`) and the new Listener body (`scripts/listener_model.gd`). Pipeline: `tools/fetch_polyhaven.py` (CC0 assets) → `tools/write_texture_imports.py` (import flags) → `tools/blender/*.py` (Blender 4.0 headless: architecture, dressing, first-person items, creature with bakes/rig/animations, exported as glTF) → `tools/import_assets.sh` → `slice/build_slice.gd` (assembles the scene, xatlas lightmap UVs, materials) → `DF_BAKE=res://slice/Slice.tscn godot3 --path game --editor` (bakes through the `addons/df_tools` editor plugin, which does nothing unless `DF_BAKE` is set). Design, evidence and the engine decision: docs/21.
+
+## Slice rendering features (high-quality levels)
+- **Wet surfaces:** `slice/shaders/wet_surface.shader` (floors: world-space pools plus an overall `damp` level) and `slice/shaders/wet_wall.shader` (walls: a world-space streak mask, `slice/tex/wall_streaks.png`, makes water run down and pool at the foot of the wall). Wet areas darken, drop roughness and flatten the normal map, so lamps streak across them in the reflection probes and SSR.
+- **Live security feed:** `level.gd: _crt_feed()` finds the CRT surface named `M_CRT_Wave`, renders a 320 × 240 `Viewport` from a camera in the first corridor (12 updates a second) and shows it through a CRT shader (curvature, scanlines, roll, noise). First-person models and the torch's haze cone are on render layer 2, which that camera does not see.
+- **Flickering practicals:** lights named `TrofferFlicker`, `HangLamp` and `TubeFlicker` flicker; the tube's emissive glass (`M_TubeLit`) and haze cone follow its light.
+- **Cinematic depth of field:** `level.gd: _cine_dof()` pulls a far-field blur in during scripted moments of authored-art levels.
+- **Subsurface scattering** is depth-aware (`rendering/quality/subsurface_scattering/follow_surface=true`, quality high), which stops skin scattering from bleeding onto the floor in blocks.
+- **Presentation:** chapter cards draw a red horizon, skyline and lattice mast (`scripts/card_horizon.gd`); the main menu stages the slice corridor (falls back to the old exterior in automated tests unless `DF_MENU_ART` is set); a minimal HUD (`hud_draw.gd: _minimal`) replaces the receiver panel where the modelled HX-7 is the radio UI.
 
 ## Graphics settings and the world viewport
 The 3D world renders in its own `Viewport` (`main.gd: _make_world / apply_world_settings`) shown full-screen behind the UI, so the 3D resolution can differ from the window: **render scale** 50–150 % (UI always native), anti-aliasing per viewport (off, FXAA, MSAA 2×/4×/8×), shadow atlas 1K–8K. Input is forwarded to the world viewport.

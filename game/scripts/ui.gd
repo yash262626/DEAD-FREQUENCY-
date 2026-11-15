@@ -19,6 +19,7 @@ var fade_rect: ColorRect
 var post: ColorRect
 var sub: RichTextLabel
 var obj_lbl: Label
+var obj_head: Label
 var prompt_lbl: Label
 var cross: ColorRect
 var toast_lbl: Label
@@ -74,7 +75,8 @@ func _ready():
 	prompt_lbl.anchor_left = 0; prompt_lbl.anchor_right = 1; prompt_lbl.anchor_top = 0.56; prompt_lbl.anchor_bottom = 0.56
 	prompt_lbl.margin_bottom = 30; root.add_child(prompt_lbl)
 	obj_lbl = _lbl("", 16, "r", Color(0.8, 0.82, 0.8, 0.9))
-	obj_lbl.rect_position = Vector2(28, 22); obj_lbl.modulate.a = 0; root.add_child(obj_lbl)
+	obj_lbl.rect_position = Vector2(28, 40); obj_lbl.modulate.a = 0; root.add_child(obj_lbl)
+	obj_head = _lbl("O B J E C T I V E", 11, "m", Color(0.62, 0.64, 0.62, 0.8)); obj_head.rect_position = Vector2(0, -18); obj_lbl.add_child(obj_head)
 	toast_lbl = _lbl("", 16, "b", Color(0.9, 0.85, 0.6)); toast_lbl.align = Label.ALIGN_RIGHT
 	toast_lbl.anchor_left = 1; toast_lbl.anchor_right = 1; toast_lbl.margin_left = -620; toast_lbl.margin_right = -28
 	toast_lbl.margin_top = 22; toast_lbl.modulate.a = 0; root.add_child(toast_lbl)
@@ -226,6 +228,7 @@ static func vo_id(who: String, text: String) -> String:
 func objective(text: String):
 	objective_text = text
 	obj_lbl.text = "▸ " + text if text != "" else ""
+	obj_head.visible = text != ""
 	obj_lbl.modulate.a = 1.0
 	Snd.play("click", -10)
 	yield(get_tree().create_timer(6.0, false), "timeout")
@@ -251,20 +254,24 @@ func chapter_card(num: int, title: String, subt := "", tint := Color(0.75, 0.2, 
 	var c = Control.new(); c.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.modulate.a = 0
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var bg = ColorRect.new(); bg.color = Color(0, 0, 0, 1); bg.set_anchors_and_margins_preset(Control.PRESET_WIDE); c.add_child(bg)
+	var sky = Control.new(); sky.set_script(load("res://scripts/card_horizon.gd")); sky.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	sky.mouse_filter = Control.MOUSE_FILTER_IGNORE; c.add_child(sky)
 	var fog = ColorRect.new(); fog.set_anchors_and_margins_preset(Control.PRESET_WIDE)
-	var fm = ShaderMaterial.new(); fm.shader = Shader.new(); fm.shader.code = FOG_SHADER; fog.material = fm; c.add_child(fog)
-	var v = VBoxContainer.new(); v.anchor_right = 1; v.anchor_top = 0.5; v.anchor_bottom = 0.5
+	var fm = ShaderMaterial.new(); fm.shader = Shader.new()
+	fm.shader.code = FOG_SHADER.replace("shader_type canvas_item;", "shader_type canvas_item;\nrender_mode blend_add;")     # mist drifting over the sky
+	fog.material = fm; c.add_child(fog)
+	var v = VBoxContainer.new(); v.anchor_right = 1; v.anchor_top = 0.42; v.anchor_bottom = 0.42
 	v.margin_top = -100; v.margin_bottom = 100; v.alignment = BoxContainer.ALIGN_CENTER
 	v.add_constant_override("separation", 16); v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	c.add_child(v)
-	var a = _lbl(top if top != "" else "CHAPTER %02d" % num, 20, "m", Color(0.6, 0.62, 0.63)); a.align = Label.ALIGN_CENTER; v.add_child(a)
+	var a = _lbl(_spaced(top if top != "" else "CHAPTER %02d" % num), 20, "m", Color(0.84, 0.85, 0.86)); a.align = Label.ALIGN_CENTER; v.add_child(a)
 	var lc = CenterContainer.new(); lc.mouse_filter = Control.MOUSE_FILTER_IGNORE; v.add_child(lc)
 	var line = ColorRect.new(); line.color = tint; line.rect_min_size = Vector2(2, 2); lc.add_child(line)
 	var t = _spaced(title); var sz = 54
 	for z in [54, 48, 42, 38, 34, 30]:
 		sz = z
 		if font(z, "b").get_string_size(t).x < W - 120: break
-	var b = _lbl(t, sz, "b", Color(0.92, 0.93, 0.94)); b.align = Label.ALIGN_CENTER; v.add_child(b)
+	var b = _lbl(t, sz, "b", Color(0.84, 0.13, 0.1)); b.align = Label.ALIGN_CENTER; v.add_child(b)      # the title in signal red
 	var s2 = _lbl(subt, 18, "m", Color(0.55, 0.57, 0.58)); s2.align = Label.ALIGN_CENTER; v.add_child(s2)
 	root.add_child(c)
 	Snd.play("impact", -6, 0.8 + 0.03 * (num % 5)); Snd.play("static", -18, 0.6 + 0.05 * (num % 4))
