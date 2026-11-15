@@ -353,7 +353,11 @@ func _animate_hq(dt: float, speed: float):
 		body.play("run", speed / 4.4)
 	elif speed > 0.25:
 		body.play("walk", speed / 1.9)
-	elif st in [S.INVESTIGATE, S.SEARCH, S.AMBUSH]:
+	elif st == S.SEARCH:
+		body.play("search")
+	elif st == S.AMBUSH:
+		body.play("crawl", 0.0)          # coiled low, waiting
+	elif st == S.INVESTIGATE:
 		body.play("listen")
 	else:
 		body.play("idle")

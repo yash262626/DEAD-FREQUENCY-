@@ -87,8 +87,12 @@ var spill: SpotLight
 var _beam: MeshInstance
 var _radio_on_y := -0.24
 var _radio_off_y := -0.62
-var _lcd_label: Label
-var _lcd_band: Label
+var _lcd = null
+var _tune_knob: Spatial
+var _click := 0.0
+var _was_light := false
+
+
 var _lcd_bars: ColorRect
 
 func _build_hands():
@@ -132,16 +136,10 @@ func _build_hands_hq():
 	# the receiver's display shows the live frequency
 	var vp = Viewport.new(); vp.size = Vector2(512, 224); vp.transparent_bg = false; vp.render_target_v_flip = true
 	vp.usage = Viewport.USAGE_2D; vp.render_target_update_mode = Viewport.UPDATE_ALWAYS; add_child(vp)
-	var bg = ColorRect.new(); bg.color = Color(0.045, 0.085, 0.04); bg.rect_size = vp.size; vp.add_child(bg)
-	_lcd_label = Label.new(); _lcd_label.add_font_override("font", ui.font(132, "m")); _lcd_label.add_color_override("font_color", Color(0.47, 1.0, 0.55))
-	_lcd_label.rect_position = Vector2(18, 4); vp.add_child(_lcd_label)
-	var mhz = Label.new(); mhz.text = "MHz"; mhz.add_font_override("font", ui.font(40, "m")); mhz.add_color_override("font_color", Color(0.35, 0.8, 0.42))
-	mhz.rect_position = Vector2(400, 112); vp.add_child(mhz)
-	_lcd_band = Label.new(); _lcd_band.add_font_override("font", ui.font(34, "m")); _lcd_band.add_color_override("font_color", Color(0.4, 0.9, 0.48))
-	_lcd_band.rect_position = Vector2(26, 142); vp.add_child(_lcd_band)
+	_lcd = load("res://scripts/lcd7.gd").new(); _lcd.rect_size = vp.size; _lcd.font = ui.font(34, "m"); vp.add_child(_lcd)
 	ui.compact_radio = true          # the receiver in his hand is the radio UI
-	_lcd_bars = ColorRect.new(); _lcd_bars.color = Color(0.43, 0.95, 0.5); _lcd_bars.rect_position = Vector2(26, 186); _lcd_bars.rect_size = Vector2(10, 18); vp.add_child(_lcd_bars)
 	_screen.albedo_texture = vp.get_texture(); _screen.emission_texture = vp.get_texture()
+	_tune_knob = fp.radio.find_node("TuneKnob", true, false)
 	# torch beam: a tight hot spot plus a wide, dim spill, from the lens
 	lamp.translation = Vector3(0.125, -0.108, -0.33); lamp.spot_angle = 28; lamp.spot_angle_attenuation = 0.75; lamp.spot_attenuation = 1.1
 	# a faint shaft of light in the dusty air, fading where it meets geometry
@@ -160,11 +158,18 @@ func _animate_hands(dt: float):
 	if hq:
 		spill.light_energy = lamp.light_energy * 0.25
 		_beam.material_override.set_shader_param("energy", lamp.light_energy * 0.045)
-		if radio_on and _lcd_label:
-			_lcd_label.text = "%05.1f" % level.radio.f
-			var bd = level.radio.band()
-			_lcd_band.text = {89.1: "ECHO", 94.6: "PROXIMITY", 101.3: "FORECAST", 107.9: "UNSEEN"}.get(bd, "")
-			_lcd_bars.rect_size.x = 20 + 300 * clamp(level.radio.sig, 0.0, 1.0)
+		if radio_on and _lcd:
+			_lcd.text = "%05.1f" % level.radio.f
+			_lcd.band = {89.1: "ECHO", 94.6: "PROXIMITY", 101.3: "FORECAST", 107.9: "UNSEEN"}.get(level.radio.band(), "")
+			_lcd.bars = clamp(level.radio.sig, 0.0, 1.0); _lcd.update()
+			if _tune_knob: _tune_knob.rotation.y = lerp_angle(_tune_knob.rotation.y, -(level.radio.f - 88.0) * 0.62, min(1.0, 18 * dt))
+		# the thumb clicks the torch's tail switch; the receiver tilts up to be read
+		if light_on != _was_light:
+			_was_light = light_on; _click = 1.0
+		_click = max(0.0, _click - dt * 7.0)
+		light_model.translation.z = -0.25 + 0.012 * sin(_click * PI)
+		light_model.rotation_degrees.x = 5.0 - 4.0 * sin(_click * PI)
+		radio_model.rotation_degrees.x = lerp(radio_model.rotation_degrees.x, 6.0 if radio_on else 14.0, min(1.0, 6 * dt))
 	_lens.emission_enabled = light_on
 	_lens.emission = Color(1.0, 0.95, 0.8); _lens.emission_energy = 3.0
 	_screen.emission_energy = 1.0 + (level.radio.sig * 1.5 if radio_on else 0.0)
@@ -177,7 +182,8 @@ func _animate_hands(dt: float):
 
 func apply_quality():
 	cam.fov = G.settings.fov
-	lamp.shadow_enabled = int(G.settings.quality) >= 1
+	cam.far = [45.0, 80.0, 120.0, 200.0][clamp(int(G.settings.view_dist), 0, 3)]
+	lamp.shadow_enabled = int(G.settings.quality) >= 1 or int(G.settings.shadows) >= 1
 
 func _busy() -> bool:
 	return locked or ui.modal != null or level.dead

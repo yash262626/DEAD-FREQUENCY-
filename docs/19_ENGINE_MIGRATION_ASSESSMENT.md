@@ -1,5 +1,7 @@
 # DEAD FREQUENCY — Engine Migration Assessment (Godot 4 / Unreal Engine 5)
 
+> **Update (2026-11-14):** an isolated Godot 4.7 benchmark of the vertical slice now exists and was rendered — results, side-by-side images and the full evaluation (rendering, lighting, materials, creature, performance, asset compatibility, cost, effort) are in [22_GODOT4_VISUAL_BENCHMARK.md](22_GODOT4_VISUAL_BENCHMARK.md). The environment blockers listed below for Godot 4 no longer apply (the official binary runs here on software Vulkan); GPU measurements are still missing.
+>
 > **Superseded (2026-11-14) by [21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md](21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md).** The owner has since set a modern, near-photorealistic visual target. The vertical slice built for it shows that, once authored assets exist, Godot 3.5's renderer becomes the limit (no shadowed volumetric fog, no real-time GI for the torch, no TAA, no decals, no LOD). **New recommendation: migrate to Godot 4.x (Forward+)**, or UE5 if the owner can fund GPU hardware, artists and a full rebuild. Still no migration has been started; it needs the owner's explicit approval. The analysis below is kept for the record.
 
 *Original recommendation:* do not migrate now. Finish content, art, audio and Windows QA on Godot 3.5; reassess a Godot 4 port after the first Windows playtest.

@@ -190,3 +190,24 @@ def prism(name, p0, p1, p3, depth, normal, matname, coll=None, bevel=0.0):
     ob = mesh_object(name, bm, matname, coll)
     if bevel > 0: add_bevel(ob, bevel, 2)
     return ob
+
+def tapered(name, pts, radii, matname, coll=None, res=6, bevel_res=4):
+    """Smooth tube through Godot-space points with a radius per point (muscle strands, tendons, claws, veins)."""
+    cu = bpy.data.curves.new(name, 'CURVE'); cu.dimensions = '3D'
+    cu.bevel_depth = 1.0; cu.bevel_resolution = bevel_res; cu.resolution_u = res; cu.use_fill_caps = True
+    sp = cu.splines.new('BEZIER'); sp.bezier_points.add(len(pts) - 1)
+    for i, p in enumerate(pts):
+        bp = sp.bezier_points[i]; bp.co = G(*p); bp.handle_left_type = 'AUTO'; bp.handle_right_type = 'AUTO'
+        bp.radius = radii[i] if isinstance(radii, (list, tuple)) else radii
+    ob = bpy.data.objects.new(name, cu); _link(ob, coll)
+    cu.materials.append(mat(matname))
+    return ob
+
+def ellipsoid(name, center, radii, matname, coll=None, seg=20):
+    bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=seg, v_segments=max(8, seg // 2), radius=1.0)
+    for v in bm.verts: v.co = Vector((v.co.x * radii[0], v.co.y * radii[2], v.co.z * radii[1]))
+    ob = mesh_object(name, bm, matname, coll); ob.location = G(*center)
+    return ob
+
+def select_only(ob):
+    bpy.ops.object.select_all(action='DESELECT'); ob.select_set(True); bpy.context.view_layer.objects.active = ob

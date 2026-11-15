@@ -28,8 +28,8 @@ model	vintage_radio_transceiver	2k	https://polyhaven.com/a/vintage_radio_transce
 texture	painted_concrete_02	2k	https://polyhaven.com/a/painted_concrete_02
 texture	peeling_painted_wall	2k	https://polyhaven.com/a/peeling_painted_wall
 texture	concrete_wall_006	2k	https://polyhaven.com/a/concrete_wall_006
-texture	dirty_concrete	2k	https://polyhaven.com/a/dirty_concrete
-texture	concrete_floor_worn_001	2k	https://polyhaven.com/a/concrete_floor_worn_001
+texture	dirty_concrete	4k	https://polyhaven.com/a/dirty_concrete
+texture	concrete_floor_worn_001	4k	https://polyhaven.com/a/concrete_floor_worn_001
 texture	garage_floor	2k	https://polyhaven.com/a/garage_floor
 texture	old_linoleum_flooring_01	2k	https://polyhaven.com/a/old_linoleum_flooring_01
 texture	ceiling_interior	2k	https://polyhaven.com/a/ceiling_interior

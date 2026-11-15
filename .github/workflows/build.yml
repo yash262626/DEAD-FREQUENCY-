@@ -21,7 +21,7 @@ jobs:
         run: tools/import_assets.sh
       - name: Run the test suite
         run: |
-          for t in validate flags layout save systems ai flow endings ngplus play; do
+          for t in validate flags layout save systems ai flow endings ngplus play slice texq; do
             DF_TIMEOUT=900 tools/test.sh "$t" > "log_$t.txt" 2>&1; rc=$?
             grep -E "FAIL|RESULT|ENGINE ERRORS" "log_$t.txt"
             [ $rc -eq 0 ] || { echo "test suite '$t' failed"; exit 1; }

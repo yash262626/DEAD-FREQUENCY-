@@ -6,7 +6,17 @@ var PROFILE := "user://profile.json"
 var STATS := "user://playtest.json"
 const SAVE_VERSION := 1
 const LAST_CHAPTER := 13
-const RESOLUTIONS = [Vector2(1280, 720), Vector2(1600, 900), Vector2(1920, 1080), Vector2(2560, 1440)]
+const RESOLUTIONS = [Vector2(1280, 720), Vector2(1600, 900), Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
+const RSCALES = [0.5, 0.67, 0.75, 0.85, 1.0, 1.25, 1.5]          # 3D render scale (UI always renders at native resolution)
+const FPS_LIMITS = [0, 30, 60, 120, 144]
+# Low, Medium, High, Ultra, Cinematic. Choosing a preset sets every item; each item can then be changed on its own.
+const PRESETS = [
+	{"rscale": 2, "shadows": 0, "reflections": 0, "ao": 0, "aa": 1, "view_dist": 0, "textures": 0},
+	{"rscale": 3, "shadows": 1, "reflections": 0, "ao": 1, "aa": 1, "view_dist": 1, "textures": 1},
+	{"rscale": 4, "shadows": 2, "reflections": 1, "ao": 2, "aa": 2, "view_dist": 2, "textures": 1},
+	{"rscale": 4, "shadows": 3, "reflections": 2, "ao": 2, "aa": 3, "view_dist": 3, "textures": 1},
+	{"rscale": 5, "shadows": 3, "reflections": 2, "ao": 2, "aa": 3, "view_dist": 3, "textures": 1},
+]
 
 signal settings_changed
 signal toast(text)
@@ -35,6 +45,7 @@ var settings := {
 	"quality": 2, "fullscreen": false, "vsync": true, "brightness": 1.0,
 	"subtitles": true, "sub_size": 1, "head_bob": true, "toggle_crouch": true,
 	"hold_skip": true, "reduce_flashes": false, "resolution": 0,
+	"rscale": 4, "shadows": 2, "reflections": 1, "ao": 2, "aa": 2, "view_dist": 2, "fps_limit": 0, "textures": 1,
 }
 
 var skip := false          # cinematic fast-forward
@@ -106,7 +117,18 @@ func _vol(bus, v):
 	AudioServer.set_bus_volume_db(i, linear2db(max(v, 0.0001)))
 	AudioServer.set_bus_mute(i, v <= 0.001)
 
+func apply_preset(q: int):
+	settings.quality = q
+	for k in PRESETS[q]: settings[k] = PRESETS[q][k]
+
+func render_scale() -> float:
+	return RSCALES[clamp(int(settings.rscale), 0, RSCALES.size() - 1)]
+
 func apply_settings():
+	Engine.target_fps = FPS_LIMITS[clamp(int(settings.fps_limit), 0, FPS_LIMITS.size() - 1)]
+	# texture quality: "Half" uploads every texture loaded from now on at half resolution (compressed textures simply
+	# drop their top mip level, so it costs nothing at load time); it takes effect when the next level loads
+	VisualServer.texture_set_shrink_all_x2_on_set_data(int(settings.textures) == 0)
 	_vol("Master", settings.master); _vol("Music", settings.music)
 	_vol("SFX", settings.sfx); _vol("Voice", settings.sfx)
 	if not test_mode:
@@ -137,6 +159,7 @@ func load_profile():
 		for k in d.settings:
 			if settings.has(k): settings[k] = d.settings[k]
 	settings.quality = int(settings.quality); settings.sub_size = int(settings.sub_size); settings.resolution = int(settings.resolution)
+	for k in ["rscale", "shadows", "reflections", "ao", "aa", "view_dist", "fps_limit", "textures"]: settings[k] = int(settings[k])
 	unlocked = int(d.get("unlocked", 1)); endings = d.get("endings", [])
 	achievements = d.get("achievements", []); intro_seen = d.get("intro_seen", false)
 	ng_unlocked = d.get("ng_unlocked", false)

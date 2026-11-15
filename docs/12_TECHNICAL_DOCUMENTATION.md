@@ -7,7 +7,7 @@ The brief preferred Unreal Engine 5 (C++/Blueprints, Lumen, Nanite). The develop
 |---|---|
 | OS / hardware | Ubuntu 24.04 container, 4 CPU cores, 15 GB RAM, **no GPU** (software rendering via Mesa llvmpipe) |
 | Unreal Engine, Unity, Blender | not installed; UE5 needs an Epic account, ~100 GB and a GPU — not possible here |
-| Godot 4 | official binary downloaded and checksum-verified, but **running a downloaded binary was blocked** by the environment's safety policy |
+| Godot 4 | first blocked by the environment's safety policy; after the owner allowed the download hosts, the official 4.7.2 binary was downloaded, SHA-512 verified and run on Mesa lavapipe (software Vulkan). Used **only** for the isolated visual benchmark `benchmark_godot4/` (docs/22) — the game stays on 3.5 |
 | Godot 3.5.2 | available from the Ubuntu archive (`apt install godot3`) — **used** |
 | Other | g++, clang, cmake, Python 3, Node, ffmpeg, Xvfb |
 
@@ -31,10 +31,16 @@ DEAD-FREQUENCY-/
 │  ├─ data/                   story: story.gd (registry, credits, achievements), ch00–ch13.gd, endings.gd
 │  ├─ textures/               20 CC0 PBR sets from ambientCG (albedo, normal, packed AO/rough/metal) + committed .import settings
 │  ├─ fonts/                  Liberation fonts 2.1.5 (SIL OFL 1.1)
+│  ├─ slice/                  the vertical slice: build_slice.gd, Slice.tscn + baked lightmap, art/ (glTF), tex/, shaders/
+│  ├─ assets/                 Poly Haven models and surfaces, fp/ (hands, torch, HX-7), creature2/ (the Listener v2)
 │  └─ tests/                  automated test harness (Test.tscn, test.gd)
+├─ benchmark_godot4/          isolated Godot 4.7 project: the slice rebuilt from the same assets for the engine evaluation (docs/22)
 ├─ tools/
 │  ├─ test.sh                 runs a test suite or utility headless under Xvfb
 │  ├─ import_assets.sh        imports textures into game/.import after a fresh clone (CI uses it)
+│  ├─ record_slice.sh         records a gameplay video of the slice (fixed 30 fps game time → ffmpeg)
+│  ├─ fetch_polyhaven.py      fetches CC0 Poly Haven models/surfaces (records id and resolution)
+│  ├─ blender/                Blender 4.0 headless scripts: slice architecture, dressing, first-person items, listener_v2.py
 │  ├─ package_release.sh      builds the clean Windows release folder + zip (README, credits, notices, licences, checksums)
 │  ├─ playtest_report.py      turns playtesters' playtest.json logs into measured chapter times
 │  ├─ time_budget.py          campaign-length model → docs/17_TIME_BUDGET.md
@@ -44,7 +50,7 @@ DEAD-FREQUENCY-/
 │  └─ fix_oneliners.py        guards against a GDScript 3 one-line `if` pitfall
 ├─ release/                   player README.txt template and icon.ico for the release package
 ├─ licenses/                  Godot (+ its third-party components) and Liberation font licence texts, shipped with builds
-├─ docs/                      production documents 01–20, notices, privacy, screenshots, VO package
+├─ docs/                      production documents 01–23, notices, privacy, screenshots, gameplay video (docs/media), VO package
 └─ .github/workflows/build.yml  tests → Windows/Linux export → Wine smoke test + release zip (manual or v* tags)
 ```
 
@@ -81,8 +87,23 @@ All sound is synthesised at first launch (`snd.gd`, cache version 5): ambience b
 ## Authored art scenes (vertical slice)
 A chapter can name an authored scene: `"art": "res://slice/Slice.tscn"`. The level then keeps its grid only as invisible collision and navigation, instances the art scene (meshes with lightmap UVs, baked `BakedLightmap`, reflection probes, lights, light shafts, puddles, effect markers, `WorldEnvironment`) and uses the scene's environment; entities marked `"noviz"` keep their logic and interaction volume but hide their placeholder visuals. `"hq": true` switches on the modelled first-person rig (`scripts/fp_models.gd`) and the new Listener body (`scripts/listener_model.gd`). Pipeline: `tools/fetch_polyhaven.py` (CC0 assets) → `tools/write_texture_imports.py` (import flags) → `tools/blender/*.py` (Blender 4.0 headless: architecture, dressing, first-person items, creature with bakes/rig/animations, exported as glTF) → `tools/import_assets.sh` → `slice/build_slice.gd` (assembles the scene, xatlas lightmap UVs, materials) → `DF_BAKE=res://slice/Slice.tscn godot3 --path game --editor` (bakes through the `addons/df_tools` editor plugin, which does nothing unless `DF_BAKE` is set). Design, evidence and the engine decision: docs/21.
 
+## Graphics settings and the world viewport
+The 3D world renders in its own `Viewport` (`main.gd: _make_world / apply_world_settings`) shown full-screen behind the UI, so the 3D resolution can differ from the window: **render scale** 50–150 % (UI always native), anti-aliasing per viewport (off, FXAA, MSAA 2×/4×/8×), shadow atlas 1K–8K. Input is forwarded to the world viewport.
+
+| Preset | Render scale | Textures | Shadows | Reflections | AO | AA | View distance |
+|---|---|---|---|---|---|---|---|
+| Low | 75 % | Half | Off (1K atlas) | Off | Off | FXAA | Near (45 m) |
+| Medium | 85 % | Full | On (2K atlas) | Off | Low | FXAA | Medium (80 m) |
+| High | 100 % | Full | On (4K atlas) | Screen-space | High | MSAA 2× | Far (120 m) |
+| Ultra | 100 % | Full | On (8K atlas) | SSR high | High | MSAA 4× | Very far (200 m) |
+| Cinematic | 125 % (supersampled) | Full | On (8K atlas) | SSR high | High | MSAA 4× | Very far |
+
+Every item can then be changed on its own; also window resolution up to 3840 × 2160, V-Sync and a frame-rate limit (30/60/120/144/unlimited). **Texture quality *Half*** (`scripts/texq.gd`) swaps each mipmapped texture of 1,024 px or more for its own mip chain without the top level when a level or the Listener loads — half the resolution, a quarter of the memory, no re-compression (Godot 3.5's `texture_set_shrink_all_x2_on_set_data` crashes on compressed textures, so it is not used).
+
+**Benchmark:** `DeadFrequency.exe --benchmark` flies the slice along a fixed path with the torch on and the Listener present, runs each preset for 24 s with V-Sync and the limiter off, and writes `benchmark.txt` (GPU, driver, average fps, 1 % low, worst frame) to the user data folder; `--benchmark --4k` renders the 3D at 3840 × 2160 × the preset's render scale on any screen.
+
 ## Testing
-`tools/test.sh <suite>` runs a suite in a real engine instance (Xvfb + software GL). Suites and results: 13_TESTING_PLAN.md. Tests write to separate `test_save.json` / `test_profile.json` / `test_playtest.json` files and never touch player data. Utility modes: `introtime`, `gallery` (`DF_OUT`, `DF_ONLY`), `perf`, `export` (story data as JSON for the doc generators), `licenses` (writes `licenses/GODOT_ENGINE_LICENSE.txt` from the engine's own copyright data).
+`tools/test.sh <suite>` runs a suite in a real engine instance (Xvfb + software GL). Suites and results: 13_TESTING_PLAN.md. Tests write to separate `test_save.json` / `test_profile.json` / `test_playtest.json` files and never touch player data. Utility modes: `introtime`, `gallery` (`DF_OUT`, `DF_ONLY`), `perf`, `export` (story data as JSON for the doc generators), `licenses` (writes `licenses/GODOT_ENGINE_LICENSE.txt` from the engine's own copyright data), `sliceshots` (the slice evidence views; `DF_RES`/`DF_SCREEN` 3840x2160 for native 4K, `DF_PRESET` 0–4, `DF_SETTLE` frames), `sliceperf`, `texq`, `slicerec` (the scripted gameplay recording behind `tools/record_slice.sh`; run with `DF_GODOT_ARGS="--fixed-fps 30"`).
 
 ## Chapter data format (abridged)
 ```gdscript
@@ -103,7 +124,7 @@ Validation (`tools/test.sh validate|flags|layout`) checks every map character, c
 
 ## Performance
 - Levels: 1 merged mesh per surface type + props; 6–20 lights per level, shadows on High+; fog and post-processing per preset.
-- Graphics presets: **Low** (no glow/SSAO/light shadows), **Medium** (glow, flashlight shadows), **High** (+ SSAO, light shadows), **Ultra** (+ screen-space reflections). MSAA 2×.
+- Graphics presets: Low, Medium, High, Ultra, Cinematic — see *Graphics settings* above. Glow is on from Medium up; on Low only baked light and unshadowed lights remain.
 - Measured here (`tools/test.sh perf`, **no GPU — Mesa llvmpipe software rasteriser on 4 CPU cores**, 1280×720): level build 20–70 ms; 10–15 fps on Low, 4–5 fps on High; the Windows build under Wine with the same software rasteriser: 1.7 fps on High. These numbers only show the CPU-side cost is small; they say nothing about GPU performance, which has **not been measured** and is the first item of the release checklist (target 60 fps at 1080p High on a GTX 1060-class GPU).
 
 ## Known technical limitations

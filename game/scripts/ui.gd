@@ -130,7 +130,7 @@ func _theme() -> Theme:
 func _process(dt):
 	var m = post.material
 	m.set_shader_param("dmg", clamp((60.0 - stat.hp) / 60.0, 0, 1) if hud_on else 0.0)
-	m.set_shader_param("stat", radio_state.danger if hud_on else 0.0)
+	m.set_shader_param("stat", (radio_state.danger * (0.35 if compact_radio else 1.0)) if hud_on else 0.0)
 	m.set_shader_param("hide", 1.0 if (hud_on and stat.hidden and not stat.get("hide_open", false)) else 0.0)
 	# hold-to-skip for cinematics
 	if in_cine and not G.skip:
@@ -576,8 +576,16 @@ const SET_SPEC = [
 	["master", "Master volume", "slider", 0, 1], ["music", "Music volume", "slider", 0, 1], ["sfx", "Effects & voice volume", "slider", 0, 1],
 	["sens", "Look sensitivity", "slider", 0.2, 3], ["fov", "Field of view", "slider", 60, 100],
 	["brightness", "Brightness", "slider", 0.6, 1.8],
-	["quality", "Graphics preset", "opt", ["Low", "Medium", "High", "Ultra"]],
-	["resolution", "Window resolution", "opt", ["1280 × 720", "1600 × 900", "1920 × 1080", "2560 × 1440"]],
+	["quality", "Graphics preset", "opt", ["Low", "Medium", "High", "Ultra", "Cinematic"]],
+	["resolution", "Window resolution", "opt", ["1280 × 720", "1600 × 900", "1920 × 1080", "2560 × 1440", "3840 × 2160 (4K)"]],
+	["rscale", "Render scale (3D)", "opt", ["50 %", "67 %", "75 %", "85 %", "100 %", "125 %", "150 %"]],
+	["textures", "Texture quality", "opt", ["Half (low video memory)", "Full"]],
+	["shadows", "Shadow quality", "opt", ["Low", "Medium", "High", "Ultra"]],
+	["reflections", "Reflections", "opt", ["Off", "Screen-space", "Screen-space (high)"]],
+	["ao", "Ambient occlusion", "opt", ["Off", "Low", "High"]],
+	["aa", "Anti-aliasing", "opt", ["Off", "FXAA", "MSAA 2×", "MSAA 4×", "MSAA 8×"]],
+	["view_dist", "View distance", "opt", ["Near", "Medium", "Far", "Very far"]],
+	["fps_limit", "Frame-rate limit", "opt", ["Unlimited", "30", "60", "120", "144"]],
 	["sub_size", "Subtitle size", "opt", ["Small", "Medium", "Large"]],
 	["fullscreen", "Fullscreen", "check"], ["vsync", "V-Sync", "check"], ["subtitles", "Subtitles", "check"],
 	["invert_y", "Invert Y axis", "check"], ["head_bob", "Head bob", "check"], ["toggle_crouch", "Toggle crouch", "check"],
@@ -628,6 +636,10 @@ func settings_menu():
 	var b = _btn("Back", self, "_set_close"); v.add_child(b)
 	_open_modal(d); first.grab_focus()
 func _set(val, key):
+	if key == "quality":
+		G.apply_preset(int(val)); G.apply_settings()
+		close_modal(false); settings_menu()          # show the preset's values
+		return
 	G.settings[key] = val; G.apply_settings()
 func _set_close():
 	G.save_profile(); close_modal()

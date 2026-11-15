@@ -99,6 +99,16 @@ func _tex(path: String) -> Array:
 
 func _mat(name: String) -> Material:
 	if mats.has(name): return mats[name]
+	if name == "M_CorrFloor":
+		# wet concrete: pools and streaks that mirror the lamps
+		var t = _tex("assets/surfaces/concrete_floor_worn_001")
+		var sm = ShaderMaterial.new(); sm.shader = load("res://slice/shaders/wet_surface.shader")
+		sm.set_shader_param("albedo_tex", t[0]); sm.set_shader_param("normal_tex", t[1]); sm.set_shader_param("arm_tex", t[2])
+		sm.set_shader_param("wet_mask", load("res://slice/tex/wet_mask.png")); sm.set_shader_param("tint", Color(0.95, 0.95, 0.95))
+		sm.set_shader_param("uv_scale", 0.38); sm.resource_name = name
+		ResourceSaver.save("res://slice/materials/M_CorrFloor.tres", sm)
+		mats[name] = load("res://slice/materials/M_CorrFloor.tres")
+		return mats[name]
 	var m = SpatialMaterial.new()
 	match name:
 		"M_TrofferOn":
@@ -276,9 +286,12 @@ func _props():
 	_place("industrial_wall_lamp", "", Vector3(4.14, 2.2, 14.0), 90, "wall", {"override": {"industrial_wall_lamp_glass": lamp_glass}})
 	_place("industrial_wall_lamp", "", Vector3(5.86, 2.2, 18.0), -90, "wall")          # dead lamp
 	_place("industrial_wall_lamp", "", Vector3(4.0, 2.2, 19.8), 90, "wall", {"override": {"industrial_wall_lamp_glass": lamp_glass}})
-	_place("industrial_wall_lamp", "", Vector3(13.0, 2.2, 6.14), 0, "wall", {"override": {"industrial_wall_lamp_glass": lamp_glass}})
-	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_d", Vector3(9.6, 3.2, 7.0), 90, "ceil")
-	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_b", Vector3(16.6, 3.2, 7.0), 90, "ceil")
+	var red_glass = _emissive(Color(1.0, 0.1, 0.05), 3.0)
+	var dead_tube = SpatialMaterial.new(); dead_tube.albedo_color = Color(0.55, 0.56, 0.55); dead_tube.roughness = 0.3
+	for p in [[Vector3(9.4, 2.25, 6.14), 0], [Vector3(13.4, 2.25, 7.86), 180], [Vector3(17.1, 2.25, 6.14), 0]]:
+		_place("industrial_wall_lamp", "", p[0], p[1], "wall", {"override": {"industrial_wall_lamp_glass": red_glass}})
+	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_d", Vector3(9.6, 3.2, 7.0), 90, "ceil", {"override": {"mounted_fluorescent_lights_glass": dead_tube}})
+	_place("mounted_fluorescent_lights", "mounted_fluorescent_lights_b", Vector3(16.6, 3.2, 7.0), 90, "ceil", {"override": {"mounted_fluorescent_lights_glass": dead_tube}})
 	_place("caged_hanging_light", "", Vector3(17.3, 3.2, 7.25), 20, "ceil")
 	_place("korean_fire_extinguisher_01", "", Vector3(4.22, 0.0, 16.7), 90, "floor")
 	_place("fire_alarm", "", Vector3(4.0, 1.45, 15.9), 90, "wall")
@@ -334,9 +347,10 @@ func _lights():
 	var warm = Color(1.0, 0.82, 0.6); var cool = Color(0.82, 0.92, 1.0)
 	_light("omni", Vector3(5.55, 2.15, 10.0), warm, 1.5, 6.5)
 	_light("omni", Vector3(4.45, 2.15, 14.0), warm, 1.5, 6.5)
-	_light("omni", Vector3(13.0, 2.15, 6.45), warm, 1.4, 6.5)
-	_light("spot", Vector3(9.6, 3.1, 7.0), cool, 2.2, 7.0, true, {"rot": Vector3(-90, 0, 0), "angle": 75.0})
-	_light("spot", Vector3(16.6, 3.1, 7.0), cool, 2.2, 7.0, true, {"rot": Vector3(-90, 0, 0), "angle": 75.0})
+	var red = Color(1.0, 0.13, 0.07)
+	_light("omni", Vector3(9.4, 2.2, 6.42), red, 1.9, 7.5)
+	_light("omni", Vector3(13.4, 2.2, 7.58), red, 1.9, 7.5)
+	_light("omni", Vector3(17.1, 2.2, 6.42), red, 1.6, 6.5)
 	_light("omni", Vector3(17.3, 2.42, 7.25), Color(1.0, 0.78, 0.5), 1.0, 5.0, false, {"name": "HangLamp"})
 	var bc = _light("spot", Vector3(20.2, 2.62, 7.0), Color(1.0, 0.08, 0.04), 3.0, 11.0, false, {"name": "Beacon", "angle": 32.0, "rot": Vector3(-12, 0, 0)})
 	bc.light_bake_mode = Light.BAKE_DISABLED; bc.shadow_enabled = true; bc.visible = false
@@ -356,8 +370,8 @@ func _atmosphere():
 	var fx = load("res://scripts/fx.gd")
 	for p in [Vector3(23, 2.98, 5), Vector3(31, 2.98, 9)]:          # working troffers
 		var b = fx.beam(B, 0.42, 1.25, 2.85, Color(0.85, 0.92, 1.0), 0.045); b.translation = p
-	for p in [Vector3(9.6, 3.12, 7.0), Vector3(16.6, 3.12, 7.0)]:   # corridor fluorescents
-		var b = fx.beam(B, 0.3, 0.95, 2.9, Color(0.85, 0.92, 1.0), 0.04); b.translation = p
+	for p in [[Vector3(9.4, 2.2, 6.3), 1.0], [Vector3(13.4, 2.2, 7.7), -1.0], [Vector3(17.1, 2.2, 6.3), 1.0]]:   # red emergency lamps
+		var b = fx.beam(B, 0.08, 0.95, 2.0, Color(1.0, 0.15, 0.08), 0.06); b.translation = p[0]; b.rotation_degrees = Vector3(38 * p[1], 0, 0)
 	for p in [[Vector3(5.55, 2.15, 10.0), -1.0], [Vector3(4.45, 2.15, 14.0), 1.0], [Vector3(4.32, 2.15, 19.8), 1.0]]:   # bulkhead lamps
 		var b = fx.beam(B, 0.08, 0.9, 1.9, Color(1.0, 0.85, 0.62), 0.05); b.translation = p[0]; b.rotation_degrees = Vector3(0, 0, -38 * p[1])
 	# puddles (reflective, not baked) and effect markers the level turns into particles
@@ -369,9 +383,36 @@ func _atmosphere():
 		m.normal_enabled = true; m.normal_texture = load("res://assets/surfaces/concrete_floor_worn_001/nor_gl.jpg"); m.normal_scale = 0.15
 		q.material_override = m; q.translation = p[0]; q.rotation_degrees.y = p[1] * 40.0; q.use_in_baked_light = false
 		q.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF; W.add_child(q)
+	_decals()
 	var F = Spatial.new(); F.name = "FX"; art.add_child(F)
 	for m in [["steam_valve", Vector3(4.42, 2.72, 12.6)], ["drip_1", Vector3(4.75, 3.17, 13.4)], ["drip_2", Vector3(5.3, 3.17, 16.9)], ["drip_3", Vector3(31.2, 2.98, 4.0)]]:
 		var p3 = Position3D.new(); p3.name = m[0]; p3.translation = m[1]; F.add_child(p3)
+
+func _decal(parent: Node, tex: String, size: Vector2, pos: Vector3, normal: Vector3, spin := 0.0, wet := false):
+	# a textured quad 3 mm off the surface (Godot 3 has no projected decals)
+	var q = MeshInstance.new(); var qm = QuadMesh.new(); qm.size = size; q.mesh = qm
+	var m = SpatialMaterial.new(); m.flags_transparent = true; m.albedo_texture = load("res://slice/tex/%s.png" % tex)
+	m.roughness = 0.12 if wet else 0.75; m.metallic_specular = 0.7 if wet else 0.4
+	q.material_override = m; q.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF; q.use_in_baked_light = false
+	parent.add_child(q)
+	var up = Vector3.UP if abs(normal.y) < 0.9 else Vector3.FORWARD
+	q.transform = Transform(Basis(), pos + normal * 0.003).looking_at(pos + normal * 0.003 - normal, up)
+	q.rotate_object_local(Vector3.FORWARD, deg2rad(spin))
+
+func _decals():
+	var D = Spatial.new(); D.name = "Decals"; art.add_child(D)
+	# water leaking down the walls
+	for d in [[Vector3(4.0, 2.35, 12.6), Vector3.RIGHT], [Vector3(6.0, 2.2, 16.9), Vector3.LEFT], [Vector3(11.6, 2.25, 6.0), Vector3.BACK], [Vector3(32.2, 1.9, 2.0), Vector3.BACK]]:
+		_decal(D, "decal_leak", Vector2(0.7, 2.1), d[0], d[1], 0.0, true)
+	# rust running from the pipe flanges
+	for z in [16.0, 13.0, 10.0, 19.0]:
+		_decal(D, "decal_rust", Vector2(0.35, 1.0), Vector3(4.0, 2.25, z), Vector3.RIGHT)
+	# floor grime in the corners and along the walls
+	for p in [Vector3(4.45, 0.0, 21.4), Vector3(5.6, 0.0, 8.9), Vector3(6.6, 0.0, 7.6), Vector3(18.5, 0.0, 6.4), Vector3(22.2, 0.0, 3.3), Vector3(33.0, 0.0, 11.4), Vector3(4.4, 0.0, 15.2)]:
+		_decal(D, "decal_grime", Vector2(1.4, 1.4), p, Vector3.UP, p.x * 37.0)
+	# something dragged itself from the vent towards the comms door
+	_decal(D, "decal_smear", Vector2(3.4, 0.85), Vector3(13.2, 0.0, 7.05), Vector3.UP, 0.0, true)
+	_decal(D, "decal_smear", Vector2(1.6, 0.4), Vector3(11.0, 2.0, 6.0), Vector3.BACK, -70.0, true)
 
 func _probes_and_lightmap():
 	for p in [[Vector3(5, 1.6, 15), Vector3(1.05, 1.65, 7.6)], [Vector3(12, 1.6, 7), Vector3(8.2, 1.65, 1.05)], [Vector3(27, 1.5, 7), Vector3(7.05, 1.55, 5.05)]]:

@@ -2,14 +2,22 @@
 
 Status key: **Tested** = implemented and covered by a passing automated test · **Implemented** = in the game and exercised by playthrough/visual checks, no dedicated assertion · **Partial** · **Planned** · **Blocked** (cannot be done in this environment) · **Awaiting external** (needs people, money or hardware outside this project).
 
-Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 · slice 13/0 — 793 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
+Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/0 · save 22/0 · systems 29/0 · ai 12/0 · flow 15/0 · endings 26/0 · ngplus 15/0 · play 225/0 · slice 15/0 · texq 3/0 — 798 checks, 0 failures · vo 4/0 (with a fixture recording) · introtime 135 s · `--smoketest` 15/15 from source (Linux) and from the exported exe under Wine 9.0.
 
-## Visual quality rebuild (current brief)
+## AAA graphics and 4K transformation (current brief)
 | Item | Status |
 |---|---|
-| Technical visual audit + engine decision | **Done** — docs/21; recommendation Godot 4 (UE5 alternative); migration **awaiting owner approval** |
-| Vertical slice: corridor, communications room, receiver, torch, Listener encounter, lighting, materials, atmosphere | **Implemented and tested** (`slice` suite 13/0); screenshots in docs/screenshots/slice; **not AAA photoreal**; GPU performance unmeasured |
-| Upgrade of the remaining chapters, main menu, UI | **Awaiting approval** of the slice's standard (per brief) |
+| Visual audit + 4K vertical slice, the brief's ten items | **Done** — docs/21 §2 (item-by-item, with gaps); **not photoreal, not AAA** |
+| Native 4K evidence (3840 × 2160) | **Done** — 14 in-game views + 3 creature studio views, `docs/screenshots/slice4k/` |
+| The Listener to the reference (anatomy, membrane, skin, veins, asymmetry, rig, animation, SSS, LODs) | **Implemented and tested** (`slice`, `texq`) — procedural sculpt; membrane LOD still to do (K8) |
+| First person: gloves, torch, HX-7 with live display and turning knob, beam falloff, interaction motion | **Implemented and tested** (`slice`) — no finger animation |
+| Environment: corridor and room, 4K surfaces, wet floors, decals, red emergency lighting | **Implemented** (visual QA via `sliceshots`) |
+| Graphics settings: 5 presets, 4K, render scale, texture quality, shadows, reflections, AO, AA, view distance, V-Sync, frame limit | **Implemented**; texture quality **Tested** (`texq`); others exercised by `sliceshots`/benchmark |
+| GPU performance measurements | **Awaiting hardware** — `--benchmark [--4k]` ready for the owner's PC; nothing measured on a GPU |
+| Gameplay recording | **Done** — `docs/media/slice_gameplay.mp4` (720p30, silent) |
+| Asset and texture specifications | **Done** — docs/23 |
+| Godot 4 isolated benchmark + engine evaluation | **Done** — docs/22; recommends Godot 4; **migration awaiting owner approval** |
+| All chapters, main menu, UI, cinematics at the new standard | **Awaiting approval** (the brief forbids it before approval) |
 
 ## Final deliverables (as requested)
 | # | Deliverable | Status |
@@ -24,7 +32,7 @@ Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/
 | 8 | Automated test reports | **Tested** — 13_TESTING_PLAN.md, 16_BUG_REPORTS.md |
 | 9 | Updated GDD | **Implemented** — 01 |
 | 10 | Updated Story Bible | **Implemented** — 02 (incl. New Game+ canon) |
-| 11 | Updated technical documentation | **Implemented** — 12, 19 (engine migration assessment) |
+| 11 | Updated technical documentation | **Implemented** — 12, 19, 21, 22 (Godot 4 benchmark), 23 (asset specs) |
 | 12 | Updated progress tracker | this document |
 | 13 | Steam release package | **Implemented** — 20_STEAM_RELEASE_PACKAGE.md, PRIVACY.md, THIRD_PARTY_NOTICES.md; integration **awaiting App ID** |
 
@@ -71,7 +79,7 @@ Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/
 ## Honest gaps against the brief
 | Brief | Reality | Why / next step |
 |---|---|---|
-| Unreal Engine 5 / realistic graphics | Godot 3.5; stylised procedural geometry with CC0 PBR textures | UE5 impossible here (no GPU); migration options assessed in 19 — awaiting decision |
+| Photorealistic 4K graphics | Campaign: procedural geometry with CC0 PBR textures. Vertical slice: authored 4K-capable art, not photoreal | Godot 4 benchmarked (22) and recommended; UE5 not needed; awaiting the owner's approval of the slice and the engine path |
 | Professional characters and animation | Procedural rigs with code animation | Needs a character artist/animator |
 | 10–15 h campaign | Modelled 5.4–14 h incl. optional content, unmeasured | Playtests first; then scope more content where players finish fastest |
 | Professional audio, soundtrack, VO | Systems ready; placeholders only | Sound designer (credited: Ajay Gohil), composer, voice cast |
@@ -81,7 +89,7 @@ Latest full regression (2026-11-14): validate 257/0 · flags 161/0 · layout 18/
 ## Roadmap
 1. Owner runs `DeadFrequency.exe --smoketest` on Windows and plays chapters 1–3; fix anything found.
 2. Playtest round 1 (5 players): replace the time-budget model with measured data.
-3. Decide engine path (19): stay on 3.5 or port to Godot 4 for real-time GI.
+3. Decide engine path (22): stay on 3.5 or port to Godot 4 (recommended); run `--benchmark` on the target GPU first.
 4. Commission creature + Daniel arms model, environment kit for 2 areas as a vertical slice of the final art style.
 5. Audio: sound designer pass on creature/radio/footsteps; record VO for chapters 1–3; composer stems for tension/chase.
 6. Steamworks: App ID, achievements, Auto-Cloud, Coming Soon page.

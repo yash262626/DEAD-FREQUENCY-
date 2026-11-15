@@ -19,7 +19,7 @@ static func materials() -> Dictionary:
 	var lcd = _tex(_m(Color(1, 1, 1), 0.3), "res://assets/fp/lcd.png")
 	lcd.emission_enabled = true; lcd.emission_texture = lcd.albedo_texture; lcd.emission_energy = 1.0
 	var meter = _tex(_m(Color(1, 1, 1), 0.4), "res://slice/tex/meter.png"); meter.emission_enabled = true; meter.emission_texture = meter.albedo_texture; meter.emission_energy = 0.4
-	var glove = _tex(_m(Color(0.055, 0.05, 0.045), 0.5), "", "res://assets/fp/leather_nor.png", 40.0, 0.8)
+	var glove = _tex(_m(Color(1, 1, 1), 0.55), "res://slice/tex/glove_albedo.png", "res://assets/fp/leather_nor.png", 40.0, 0.8)   # worn, scuffed leather
 	glove.clearcoat_enabled = true; glove.clearcoat = 0.25; glove.clearcoat_gloss = 0.5
 	return {
 		"M_TorchAlu": _m(Color(0.06, 0.062, 0.068), 0.36, 0.85),

@@ -207,16 +207,37 @@ func _apply_ai():
 			break
 
 func _apply_quality():
-	var q = int(G.settings.quality)
-	env.ssao_enabled = q >= 2
+	var s = G.settings; var q = int(s.quality)
+	env.ssao_enabled = int(s.ao) >= 1
+	env.ssao_quality = Environment.SSAO_QUALITY_LOW if int(s.ao) == 1 else Environment.SSAO_QUALITY_HIGH
+	env.ssao_blur = Environment.SSAO_BLUR_2x2 if int(s.ao) == 1 else Environment.SSAO_BLUR_3x3
 	if art == null:
 		env.ssao_intensity = 1.5; env.ssao_radius = 1.2
 	env.glow_enabled = q >= 1
 	env.adjustment_brightness = G.settings.brightness
-	env.ss_reflections_enabled = q >= 3
+	env.ss_reflections_enabled = int(s.reflections) >= 1
+	env.ss_reflections_max_steps = 32 if int(s.reflections) == 1 else 96
 	for l in lights:
-		l.node.shadow_enabled = q >= 2 and not l.d.get("noshadow", false)
+		l.node.shadow_enabled = int(s.shadows) >= 1 and not l.d.get("noshadow", false)
+	if art:
+		for nm in ["TrofferFlicker", "HangLamp", "Beacon"]:
+			var al = art.find_node(nm, true, false)
+			if al: al.shadow_enabled = int(s.shadows) >= 1
 	if player: player.apply_quality()
+
+var _dof_tw = null
+func _cine_dof(on: bool):
+	# authored-art scenes: during scripted moments the background falls out of focus (a far-field depth of field
+	# pulled in over 0.8 s) and comes back when the player has control again
+	if env == null: return
+	if _dof_tw: _dof_tw.kill()
+	if on:
+		env.dof_blur_far_enabled = true
+		env.dof_blur_far_distance = 3.2; env.dof_blur_far_transition = 4.0
+		env.dof_blur_far_quality = Environment.DOF_BLUR_QUALITY_HIGH if int(G.settings.quality) >= 3 else Environment.DOF_BLUR_QUALITY_MEDIUM
+	_dof_tw = create_tween()          # bound to the level: it dies with it
+	_dof_tw.tween_property(env, "dof_blur_far_amount", 0.09 if on else 0.0, 0.8)
+	if not on: _dof_tw.tween_callback(env, "set", ["dof_blur_far_enabled", false])
 
 func _noise_tex(seed_: int, period: float, normal := false) -> NoiseTexture:
 	var t = NoiseTexture.new(); var n = OpenSimplexNoise.new()
@@ -328,8 +349,10 @@ var _flick := []
 func _load_art():
 	art = load(data.art).instance(); art.name = "Art"
 	var cams = art.get_node_or_null("Cams")
-	if cams: art.remove_child(cams); cams.free()          # preview cameras must never take the view
+	if cams:                                              # preview cameras must never take the view
+		art.remove_child(cams); cams.free()
 	add_child(art)
+	load("res://scripts/texq.gd").apply(art)             # texture quality (Half: every large texture at half resolution)
 	var we = art.get_node_or_null("Env")
 	if we:
 		for c in get_children():
@@ -853,6 +876,7 @@ func _exec(e: Array):
 		"cine":
 			ui.set_cine(e[1]); player.locked = e[1]
 			if not e[1]: _cam_off()
+			if art: _cine_dof(e[1])
 		"cam": return _cam(e)
 		"camoff": _cam_off()
 		"give":

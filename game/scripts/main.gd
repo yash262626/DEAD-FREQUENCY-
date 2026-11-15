@@ -11,11 +11,14 @@ func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	ui = load("res://scripts/ui.gd").new(); add_child(ui)
 	ui.connect("menu_action", self, "_on_menu_action")
+	_make_world()
 	randomize()
 	if G.test_mode: return
 	if "--smoketest" in OS.get_cmdline_args():
 		_smoketest()
 		return
+	if "--benchmark" in OS.get_cmdline_args():
+		_benchmark(); return
 	if "--slice" in OS.get_cmdline_args():
 		start_slice(); return
 	if "--menu" in OS.get_cmdline_args(): show_menu()
@@ -94,6 +97,68 @@ func _smoketest():
 	print("log: ", ProjectSettings.globalize_path("user://smoketest.log"))
 	get_tree().quit(1 if _smoke_fail > 0 else 0)
 
+# ---------------------------------------------------------------- performance benchmark for real hardware
+# DeadFrequency.exe --benchmark        : every preset, at the current window size
+# DeadFrequency.exe --benchmark --4k   : the 3D rendered at 3840 x 2160 (times the preset's render scale) on any screen
+# Flies the vertical slice along a fixed path with the torch on and the Listener in the room, then writes
+# user://benchmark.txt (GPU, driver, presets, average fps, 1 % low, worst frame) and quits.
+func _bench_pose(t: float):
+	var path = [[Vector3(5.0, 0, 21.0), 0.0], [Vector3(5.1, 0, 14.0), 4.0], [Vector3(5.0, 0, 8.6), -55.0], [Vector3(10.0, 0, 7.0), -90.0],
+		[Vector3(17.0, 0, 7.0), -90.0], [Vector3(21.6, 0, 7.1), -100.0], [Vector3(25.0, 0, 9.4), -50.0], [Vector3(29.5, 0, 5.2), 35.0], [Vector3(31.0, 0, 9.6), 125.0]]
+	var f = clamp(t, 0.0, 0.9999) * (path.size() - 1); var i = int(f); var k = f - i
+	var a = path[i]; var b = path[i + 1]
+	level.player.global_transform.origin = a[0].linear_interpolate(b[0], k) + Vector3(0, 0.05, 0)
+	level.player.rotation_degrees.y = lerp(a[1], b[1], k)
+
+func _benchmark():
+	G.STATS = "user://bench_playtest.json"
+	var four_k = "--4k" in OS.get_cmdline_args()
+	var out = ["DEAD FREQUENCY performance benchmark", "Date: %s" % str(OS.get_datetime()),
+		"OS: %s   Engine: %s   CPU threads: %d" % [OS.get_name(), Engine.get_version_info().string, OS.get_processor_count()],
+		"GPU: %s   Vendor: %s" % [VisualServer.get_video_adapter_name(), VisualServer.get_video_adapter_vendor()],
+		"Window: %s   Mode: %s   V-Sync: off   Frame limit: off" % [str(OS.window_size), "3D at 3840x2160 x render scale" if four_k else "3D at window size x render scale"], ""]
+	print(out[3])
+	var keep_vsync = OS.vsync_enabled
+	OS.vsync_enabled = false
+	start_slice()
+	for i in 3000:
+		yield(get_tree(), "idle_frame"); G.skip = true
+		if level and level.running == 0: break
+	G.skip = false; G.test_god = true
+	ui.fade_rect.color.a = 0; ui.objective_text = ""
+	for e in level.ents:
+		if e.kind in ["trig", "radio", "use"]: e.done = true
+	level.player.locked = true; level.player.light_on = true
+	level.spawn_listener("u", "watch"); level.listener.force_anim = "idle"
+	for q in [0, 1, 2, 3, 4]:
+		G.apply_preset(q); G.settings.fps_limit = 0; G.apply_settings()
+		world_size_override = (Vector2(3840, 2160) * G.render_scale()).round() if four_k else Vector2()
+		apply_world_settings()
+		var t0 = OS.get_ticks_msec()
+		while OS.get_ticks_msec() - t0 < 2500:
+			_bench_pose(0.0); yield(get_tree(), "idle_frame")
+		var dur = (4.0 if OS.has_environment("DF_BENCH_SHORT") else 24.0); var times = []; var start = OS.get_ticks_usec(); var last = start
+		while true:
+			var now = OS.get_ticks_usec(); var el = (now - start) / 1000000.0
+			if el >= dur: break
+			_bench_pose(el / dur)
+			yield(get_tree(), "idle_frame")
+			var n2 = OS.get_ticks_usec(); times.append((n2 - last) / 1000.0); last = n2
+		var total = 0.0
+		for x in times: total += x
+		var sorted_t = times.duplicate(); sorted_t.sort()
+		var p99 = sorted_t[clamp(int(ceil(sorted_t.size() * 0.99)) - 1, 0, sorted_t.size() - 1)] if sorted_t.size() > 0 else total
+		var line = "%-10s 3D %4d x %-4d  frames %5d   avg %6.1f fps   1%% low %6.1f fps   worst frame %7.1f ms" % [
+			["Low", "Medium", "High", "Ultra", "Cinematic"][q], world.size.x, world.size.y, times.size(),
+			1000.0 * times.size() / max(1.0, total), 1000.0 / max(0.001, p99), sorted_t[-1] if sorted_t.size() else 0.0]
+		out.append(line); print(line)
+	world_size_override = Vector2(); OS.vsync_enabled = keep_vsync
+	var f = File.new()
+	if f.open("user://benchmark.txt", File.WRITE) == OK:
+		f.store_string(PoolStringArray(out).join("\n") + "\n"); f.close()
+	print("written: ", ProjectSettings.globalize_path("user://benchmark.txt"))
+	get_tree().quit()
+
 func _clear():
 	get_tree().paused = false
 	Snd.stop_all_loops()
@@ -101,9 +166,10 @@ func _clear():
 		# Detach now, free later: event scripts suspended on UI coroutines (dialogue, waits) can then
 		# resume, see the level is dead and exit cleanly instead of resuming into a freed instance.
 		level.dead = true
-		remove_child(level)
+		level.get_parent().remove_child(level)
 		_bury(level)
 	level = null
+	world_view.visible = false
 	if menu and is_instance_valid(menu): menu.queue_free()
 	menu = null
 	if credits and is_instance_valid(credits): credits.queue_free()
@@ -113,6 +179,48 @@ func _clear():
 	ui.modals = 0
 
 var _graves := []
+# ---------------------------------------------------------------- 3D viewport: render scale, AA, shadow atlas
+# Levels render into their own Viewport, shown full-screen beneath the UI. This gives a true 3D-only render scale
+# (the HUD and text stay native), per-world MSAA/FXAA and shadow-atlas size, and lets a 3840 x 2160 frame be
+# rendered and measured even on a smaller screen (benchmark and capture tools set world_size_override).
+var world: Viewport
+var world_view: TextureRect
+var world_size_override := Vector2()
+
+func _make_world():
+	world = Viewport.new(); world.name = "World3D"
+	world.usage = Viewport.USAGE_3D; world.hdr = true; world.audio_listener_enable_3d = true
+	world.render_target_v_flip = true; world.render_target_update_mode = Viewport.UPDATE_ALWAYS
+	world.shadow_atlas_quad_0 = Viewport.SHADOW_ATLAS_QUADRANT_SUBDIV_1; world.shadow_atlas_quad_1 = Viewport.SHADOW_ATLAS_QUADRANT_SUBDIV_4
+	world.shadow_atlas_quad_2 = Viewport.SHADOW_ATLAS_QUADRANT_SUBDIV_16; world.shadow_atlas_quad_3 = Viewport.SHADOW_ATLAS_QUADRANT_SUBDIV_64
+	add_child(world)
+	var cl = CanvasLayer.new(); cl.layer = 0; cl.name = "WorldLayer"; add_child(cl)
+	world_view = TextureRect.new(); world_view.name = "WorldView"
+	world_view.anchor_right = 1.0; world_view.anchor_bottom = 1.0; world_view.expand = true
+	world_view.stretch_mode = TextureRect.STRETCH_SCALE; world_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	world_view.texture = world.get_texture(); world_view.visible = false
+	cl.add_child(world_view)
+	get_tree().root.connect("size_changed", self, "apply_world_settings")
+	G.connect("settings_changed", self, "apply_world_settings")
+	apply_world_settings()
+
+func apply_world_settings():
+	var s = G.settings
+	var px = OS.window_size if not G.test_mode else get_tree().root.size
+	var sz = world_size_override if world_size_override != Vector2() else (px * G.render_scale()).round()
+	world.size = Vector2(max(64, sz.x), max(64, sz.y))
+	world.get_texture().flags = Texture.FLAG_FILTER
+	var aa = int(s.aa)
+	world.fxaa = aa == 1
+	world.msaa = [Viewport.MSAA_DISABLED, Viewport.MSAA_DISABLED, Viewport.MSAA_2X, Viewport.MSAA_4X, Viewport.MSAA_8X][clamp(aa, 0, 4)]
+	world.shadow_atlas_size = [1024, 2048, 4096, 8192][clamp(int(s.shadows), 0, 3)]
+
+func _input(ev):
+	if world_view and world_view.visible: world.input(ev)
+
+func _unhandled_input(ev):
+	if world_view and world_view.visible: world.unhandled_input(ev)
+
 func _bury(n):
 	_graves.append(n)
 	yield(get_tree().create_timer(45.0), "timeout")
@@ -127,7 +235,8 @@ func _exit_tree():
 func _load(d: Dictionary):
 	_clear()
 	ui.fade_rect.color.a = 1.0
-	level = LevelScript.new(); level.pause_mode = Node.PAUSE_MODE_STOP; add_child(level)
+	level = LevelScript.new(); level.pause_mode = Node.PAUSE_MODE_STOP; world.add_child(level)
+	world_view.visible = true
 	level.build(d, self, ui)
 
 func play_intro():

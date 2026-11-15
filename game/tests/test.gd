@@ -13,6 +13,7 @@ func ok(cond: bool, what: String):
 func _ready():
 	G.test_mode = true
 	G.settings.quality = int(OS.get_environment("DF_Q")) if OS.has_environment("DF_Q") else 0
+	if OS.has_environment("DF_PRESET"): G.apply_preset(int(OS.get_environment("DF_PRESET")))   # every quality item of the preset
 	main = load("res://scripts/main.gd").new(); add_child(main)
 	call_deferred("_go")
 
@@ -131,7 +132,7 @@ func t_systems():
 	yield(frames(10), "completed")
 	var lv = main.level; var p = lv.player
 	for e in lv.ents:
-		if e.kind in ["trig", "radio"]: e.done = true
+		if e.kind == "trig": e.done = true
 	p.global_transform.origin = lv.pos_of("1") + Vector3(0, 0.1, 0); p.rotation_degrees.y = -90
 	yield(frames(20), "completed")
 	var x0 = p.global_transform.origin.x
@@ -165,8 +166,9 @@ func t_systems():
 	Input.action_press("radio"); yield(frames(3), "completed"); Input.action_release("radio")
 	ok(lv.radio.on, "radio toggles on")
 	lv.radio.f = 94.0
-	Input.action_press("tune_up"); yield(frames(2), "completed"); Input.action_release("tune_up"); yield(frames(2), "completed")
-	ok(abs(lv.radio.f - 94.1) < 0.01, "dial tunes in 0.1 MHz steps")
+	# a tap lasts exactly one rendered frame: held across a slow frame (a loaded machine), the 0.35 s auto-repeat would fire
+	Input.action_press("tune_up"); yield(get_tree(), "idle_frame"); yield(get_tree(), "idle_frame"); Input.action_release("tune_up"); yield(frames(2), "completed")
+	ok(abs(lv.radio.f - 94.1) < 0.01, "dial tunes in 0.1 MHz steps (%.1f)" % lv.radio.f)
 	var rb = G.radio_batt; yield(frames(30), "completed"); ok(G.radio_batt < rb, "radio drains its cell")
 	lv.radio.f = 107.9; yield(frames(5), "completed"); ok(lv.reveal_on, "107.9 enables reveal")
 	lv.radio.f = 92.5; lv.radio.force(true, 96.1); yield(frames(2), "completed"); lv.radio.force(false)
@@ -666,7 +668,7 @@ func t_slice():
 	var lv = main.level
 	ok(lv.art != null and lv.env == lv.art.get_node("Env").environment, "authored art scene and its environment loaded")
 	ok(lv.art.get_node("Lightmap").light_data != null, "baked lightmap present")
-	ok(lv.player.hq and lv.player.light_model.get_child_count() == 1 and lv.player._lcd_label != null, "modelled hands, torch and live receiver display")
+	ok(lv.player.hq and lv.player.light_model.get_child_count() == 1 and lv.player._lcd != null and lv.player._tune_knob != null, "modelled hands, torch, live receiver display and tuning knob")
 	ok(not G.has_save(), "the slice never writes the campaign save")
 	# the forecast in the corridor
 	var f = lv.ent_at("f")
@@ -676,13 +678,19 @@ func t_slice():
 		yield(get_tree(), "physics_frame"); G.skip = true
 		if G.flag("sl_fore"): break
 	ok(G.flag("sl_fore"), "101.3 forecast received in the corridor")
-	ok(lv.player._lcd_label.text == "101.3", "receiver display shows the tuned frequency (%s)" % lv.player._lcd_label.text)
+	ok(lv.player._lcd.text == "101.3" and lv.player._lcd.band == "FORECAST", "receiver display shows the tuned frequency and band (%s %s)" % [lv.player._lcd.text, lv.player._lcd.band])
 	lv.radio.on = false
 	# the main receiver starts the encounter
 	var u = lv.ent_at("U")
 	lv.player.global_transform.origin = lv.pos_of("u") + Vector3(0, 0.05, 0)
 	G.skip = true
 	lv.interact(u)
+	var dof = false
+	for i in 30:                          # the event runner starts on the next idle frame
+		yield(get_tree(), "idle_frame")
+		if lv.env.dof_blur_far_enabled:
+			dof = true; break
+	ok(dof, "cinematic depth of field during the scripted encounter")
 	for i in 600:
 		yield(get_tree(), "physics_frame")
 		if lv.listener and is_instance_valid(lv.listener): break
@@ -692,6 +700,8 @@ func t_slice():
 	lv.player.toggle_hide(h)
 	yield(frames(10), "completed")
 	ok(lv.player.hidden and lv.player.head.translation.y < 1.2, "hiding under the desk lowers the view")
+	yield(frames(60), "completed")
+	ok(not lv.env.dof_blur_far_enabled, "depth of field released when the player has control")
 	ok(lv.listener.body.anim.current_animation != "", "creature animation playing (%s)" % lv.listener.body.anim.current_animation)
 	var hurt = false
 	for i in 4000:
@@ -701,6 +711,43 @@ func t_slice():
 	G.skip = false
 	ok(not hurt, "staying hidden and silent, the player is not found")
 	ok(main.menu != null and is_instance_valid(main.menu), "the slice ends and returns to the menu")
+
+func t_texq():
+	# texture quality: Half swaps every large texture for its own half-resolution mip chain
+	yield(_slice_ready(), "completed")
+	var lv = main.level
+	yield(frames(5), "completed")
+	var mem_full = Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)
+	var full = _tex_area(lv.art)
+	G.settings.textures = 0
+	load("res://scripts/texq.gd").apply(lv.art)
+	yield(frames(5), "completed")
+	var mem_half = Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)
+	var half = _tex_area(lv.art)
+	print("  texture memory: full %.0f MB, half %.0f MB; large textures: %d (largest %d px) -> largest %d px" % [mem_full / 1048576.0, mem_half / 1048576.0, full[0], full[2], half[2]])
+	ok(full[0] > 10 and half[1] * 4 == full[1], "every large texture in the slice is at half resolution (texels %d -> %d)" % [full[1], half[1]])
+	ok(mem_half < mem_full * 0.8, "texture memory drops (%.0f -> %.0f MB)" % [mem_full / 1048576.0, mem_half / 1048576.0])
+	lv.spawn_listener("v", "watch")
+	yield(frames(3), "completed")
+	var skin = lv.listener.body.lods[0].get_surface_material(0).albedo_texture
+	ok(skin.get_width() == 2048, "the Listener's 4K skin loads at 2K (%d)" % skin.get_width())
+	G.settings.textures = 1
+
+func _tex_area(n: Node, seen := {}, acc := [0, 0, 0]) -> Array:
+	# [count, total texels, largest width] of the mipmapped textures of 1024 px or more (the ones Half affects)
+	if n is MeshInstance and n.mesh:
+		for i in n.mesh.get_surface_count():
+			var m = n.get_surface_material(i) if n.get_surface_material(i) else n.mesh.surface_get_material(i)
+			if m is SpatialMaterial:
+				for k in SpatialMaterial.TEXTURE_MAX:
+					var t = m.get_texture(k)
+					if t == null or seen.has(t): continue
+					seen[t] = true
+					var big = t.get_width() >= 1024 if t is StreamTexture else t.get_width() >= 512
+					if big and t.get_data() and t.get_data().has_mipmaps():
+						acc[0] += 1; acc[1] += t.get_width() * t.get_height(); acc[2] = max(acc[2], t.get_width())
+	for ch in n.get_children(): _tex_area(ch, seen, acc)
+	return acc
 
 func t_sliceperf():
 	# frame cost of the slice at the corridor start and inside the comms room, per graphics preset
@@ -728,7 +775,12 @@ const SLICE_SHOTS = [
 	["s06_room", Vector3(20.9, 0, 7.2), -96.0, -6.0, false, 0.0, null, ""],
 	["s07_console", Vector3(25.85, 0, 7.05), -90.0, -24.0, true, 89.1, null, ""],
 	["s08_encounter", Vector3(27.5, 0, 11.3), 10.0, 4.0, false, 0.0, [25.6, 7.4, 160.0, "listen"], "hide"],
-	["s09_hunt", Vector3(5.1, 0, 12.4), 0.0, 6.0, true, 0.0, [5.0, 9.6, 0.0, "run"], ""],
+	["s09_hunt", Vector3(5.1, 0, 12.4), 0.0, 6.0, true, 0.0, [5.0, 9.4, 180.0, "run"], ""],
+	["s10_creature_close", Vector3(5.05, 0, 11.7), 0.0, 16.0, true, 0.0, [5.0, 9.9, 180.0, "listen"], ""],
+	["s11_creature_room", Vector3(24.4, 0, 8.3), -55.0, 8.0, true, 0.0, [26.0, 6.4, 120.0, "search"], "hide_no"],
+	["s12_head_close", Vector3(5.05, 0, 11.15), 0.0, 30.0, true, 0.0, [5.0, 9.9, 180.0, "listen"], ""],
+	["s13_crawl", Vector3(17.4, 0, 6.9), 88.0, -9.0, true, 0.0, [13.2, 7.15, -62.0, "crawl"], ""],
+	["s14_search_hidden", Vector3(27.5, 0, 11.3), 0.0, 6.0, false, 0.0, [26.3, 8.2, 200.0, "search"], "hide"],
 ]
 
 func t_sliceshots():
@@ -760,8 +812,100 @@ func t_sliceshots():
 			lv.player.hidden = true; lv.player.hide_ent = lv.ent_at("H")
 		else:
 			lv.player.hidden = false; lv.player.hide_ent = null
-		yield(frames(70), "completed")
+		yield(frames(int(OS.get_environment("DF_SETTLE")) if OS.has_environment("DF_SETTLE") else 70), "completed")
 		_save("%s/%s.png" % [out, s[0]])
+
+# ------------------------------------------------------------ gameplay recording of the slice (PNG sequence; tools/record_slice.sh)
+# Real gameplay, scripted only at the controller: the player walks with the movement actions, raises and tunes the
+# HX-7 with its own actions, the forecast arrives through the radio system, the console starts the real encounter
+# script and the real Listener AI searches while the player hides. Run with DF_GODOT_ARGS="--fixed-fps 30": every
+# rendered frame is exactly 1/30 s of game time, however slowly the machine renders.
+var _rec_out := ""
+var _rec_n := 0
+var _rec_max := 100000
+
+func _rec():
+	yield(get_tree(), "idle_frame")
+	if _rec_n < _rec_max:
+		var img = get_viewport().get_texture().get_data(); img.flip_y()
+		img.save_png("%s/f%05d.png" % [_rec_out, _rec_n])
+	_rec_n += 1
+
+func _rec_wait(sec: float):
+	for i in int(sec * 30.0): yield(_rec(), "completed")
+
+func _rec_turn(pl, yaw: float, pitch: float, sec: float):
+	var y0 = pl.rotation_degrees.y; var p0 = rad2deg(pl.pitch)
+	var dy = wrapf(yaw - y0, -180.0, 180.0); var n = max(1, int(sec * 30.0))
+	for i in n:
+		var k = smoothstep(0.0, 1.0, float(i + 1) / n)
+		pl.rotation_degrees.y = y0 + dy * k
+		pl.pitch = deg2rad(lerp(p0, pitch, k)); pl.head.rotation.x = pl.pitch
+		yield(_rec(), "completed")
+
+func _rec_walk(pl, to: Vector3, pitch := -3.0, speed := 1.0):
+	for i in 900:
+		var d = to - pl.global_transform.origin; d.y = 0
+		if d.length() < 0.3: break
+		var err = wrapf(rad2deg(atan2(-d.x, -d.z)) - pl.rotation_degrees.y, -180.0, 180.0)
+		pl.rotation_degrees.y += clamp(err, -3.5, 3.5)          # turns at up to 105 degrees a second
+		pl.pitch = lerp(pl.pitch, deg2rad(pitch), 0.06); pl.head.rotation.x = pl.pitch
+		if abs(err) < 45.0: Input.action_press("fwd", clamp(d.length() / 1.2, 0.35, 1.0) * speed)
+		else: Input.action_release("fwd")
+		yield(_rec(), "completed")
+	Input.action_release("fwd")
+
+func _rec_tap(action: String):
+	Input.action_press(action); yield(_rec(), "completed"); Input.action_release(action)
+
+func t_slicerec():
+	_rec_out = OS.get_environment("DF_OUT")
+	if OS.has_environment("DF_FRAMES"): _rec_max = int(OS.get_environment("DF_FRAMES"))
+	G.test_god = true                      # a safety net only: it disables hurt() and nothing else
+	main.start_slice()
+	while main.level == null: yield(_rec(), "completed")
+	var lv = main.level; var pl = lv.player
+	lv.radio.f = 100.0                     # the receiver was left just below the forecast band
+	while lv.running > 0 and _rec_n < 900: yield(_rec(), "completed")     # title card, fade-in, first line
+	yield(_rec_wait(0.6), "completed")
+	yield(_rec_walk(pl, Vector3(5.0, 0, 18.4)), "completed")          # the trigger line plays as we pass
+	yield(_rec_wait(1.2), "completed")
+	yield(_rec_tap("radio"), "completed")                              # raise the HX-7
+	yield(_rec_wait(0.8), "completed")
+	Input.action_press("tune_up")
+	for i in 150:
+		yield(_rec(), "completed")
+		if lv.radio.f >= 101.25: break
+	Input.action_release("tune_up")
+	yield(_rec_walk(pl, Vector3(5.0, 0, 17.3), -2.0, 0.5), "completed")
+	for i in 300:                                                      # hold the antenna on the source until it locks
+		yield(_rec(), "completed")
+		if G.flag("sl_fore"): break
+	yield(_rec_wait(2.5), "completed")
+	yield(_rec_walk(pl, Vector3(5.0, 0, 9.4), -3.0, 0.6), "completed")
+	yield(_rec_wait(1.0), "completed")
+	yield(_rec_tap("radio"), "completed")                              # lower it: the carrier gives you away
+	yield(_rec_walk(pl, Vector3(5.6, 0, 7.1)), "completed")
+	yield(_rec_turn(pl, -90.0, -2.0, 0.7), "completed")
+	for p in [Vector3(10.0, 0, 7.0), Vector3(16.0, 0, 7.0), Vector3(20.5, 0, 7.1), Vector3(24.6, 0, 7.05)]:
+		yield(_rec_walk(pl, p), "completed")
+	yield(_rec_turn(pl, -90.0, -20.0, 0.9), "completed")
+	yield(_rec_wait(0.7), "completed")
+	var u = lv.ent_at("U")
+	yield(_rec_tap("interact"), "completed")
+	if lv.running == 0 and not u.done: lv.interact(u)                  # same call the interact key makes
+	for i in 2400:                                                     # the encounter script: the receiver, Evelyn, the lights fail
+		yield(_rec(), "completed")
+		if lv.listener and is_instance_valid(lv.listener) and not pl.locked: break
+	yield(_rec_wait(1.0), "completed")
+	yield(_rec_turn(pl, 160.0, -4.0, 0.9), "completed")
+	yield(_rec_walk(pl, Vector3(26.6, 0, 9.6), -6.0), "completed")
+	pl.toggle_hide(lv.ent_at("H"))                                     # same call the interact key makes on the desk
+	var hold = float(OS.get_environment("DF_HIDE_SEC")) if OS.has_environment("DF_HIDE_SEC") else 24.0
+	yield(_rec_wait(hold), "completed")
+	ok(_rec_n > 300, "recorded %d frames (%.1f s at 30 fps)" % [min(_rec_n, _rec_max), min(_rec_n, _rec_max) / 30.0])
+	ok(G.flag("sl_fore"), "the forecast was received through the radio system")
+	ok(lv.listener and is_instance_valid(lv.listener), "the Listener is in the room")
 
 # ------------------------------------------------------------ export all story data as JSON (docs are generated from it)
 func t_export():

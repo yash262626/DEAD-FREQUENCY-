@@ -8,18 +8,22 @@ First-person psychological horror for Windows PC. October 17, 1998, 02:43: the H
 
 ![Title](docs/screenshots/00_title.png)
 
-## Vertical slice — the new visual target
-![Vertical slice: the communications room](docs/screenshots/slice/s06_room.jpg)
+## Vertical slice — the new visual target (4K)
+![The Listener in the red emergency corridor — in-game, captured at 3840 × 2160](docs/screenshots/slice/s04_listener_corridor.jpg)
 
-One area — the Sublevel 3 service corridor and communications room — has been rebuilt to a new standard as a playable vertical slice: authored geometry, CC0 photoscanned props and 2K PBR surfaces, baked global illumination, reflection probes, light shafts, wet floors, a colour grade, modelled hands, torch and HX-7 receiver, and a new rigged, animated Listener. Play it from the main menu (*VERTICAL SLICE — VISUAL TARGET*) or with `--slice`. It is a big step up from the campaign but **not AAA photorealism**; the audit, the engine decision (Godot 4 recommended) and the evidence are in [21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md](docs/21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md). The other chapters are unchanged until the owner approves the standard and the engine path.
+One area — the Sublevel 3 service corridor and communications room — is rebuilt to a new standard as a playable vertical slice that renders natively at **3840 × 2160**: authored geometry, CC0 Poly Haven props, 4K/2K PBR surfaces, wet floors and decals, baked global illumination, red emergency lighting, a redesigned Listener (original creature built to the owner's reference sheet: acoustic membrane head, emaciated asymmetric body, clawed fingers, 4K skin with subsurface scattering, 78-bone rig, seven animations, LODs), gloved hands with a knurled torch and an HX-7 whose display and tuning knob are live, and cinematic depth of field in scripted moments. Play it from the main menu (*VERTICAL SLICE — VISUAL TARGET*) or with `--slice`.
+
+Evidence: native 4K captures in [`docs/screenshots/slice4k/`](docs/screenshots/slice4k/), a gameplay recording ([`docs/media/slice_gameplay.mp4`](docs/media/slice_gameplay.mp4)), the approval package ([21](docs/21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md)), an isolated Godot 4 benchmark and engine evaluation ([22](docs/22_GODOT4_VISUAL_BENCHMARK.md)) and asset/texture specifications ([23](docs/23_ASSET_AND_TEXTURE_SPECIFICATIONS.md)). It is a big step up from the campaign but **not photorealism and not AAA**, and **no GPU frame rate has been measured** (this was built on a machine without a GPU) — run `DeadFrequency.exe --benchmark` on your PC for real numbers. The other chapters are unchanged until the owner approves the standard and the engine path.
+
+**Graphics settings:** presets Low, Medium, High, Ultra, Cinematic; resolution up to 3840 × 2160; render scale 50–150 %; texture quality; shadows; reflections; ambient occlusion; anti-aliasing (FXAA, MSAA 2×/4×/8×); view distance; V-Sync; frame-rate limit.
 
 ## What's in this repository
 - A complete, playable campaign in **Godot 3.5**: 2-minute opening cinematic, 13 chapters with optional wings, 4 endings, New Game+ ("Second Signal"), end credits.
 - The radio system (four bands plus hidden carriers, directional antenna, battery, exposure), a sound-hunting enemy that learns (and remembers between runs), stealth, puzzles, saves, menus, settings, subtitles, controller support.
 - CC0 PBR materials (ambientCG), procedural audio with adaptive music, a voice-over recording package ready for actors.
-- 20 production documents in [`docs/`](docs/), an automated test suite that plays the whole campaign, and a built-in `--smoketest` for release builds.
+- 23 production documents in [`docs/`](docs/), an automated test suite that plays the whole campaign, and a built-in `--smoketest` for release builds.
 
-What is **not** done, plainly: the campaign length is a model (3.9–10.1 h main path, 5.4–14.0 h with optional content) until playtests measure it — the 10–15 hour target is not claimed; there is no recorded voice acting (placeholder radio voice + full subtitles); the look is stylised, not photoreal; the Windows build has passed a smoke test under Wine but has **not** been run on real Windows hardware; Steamworks is not integrated. Details: [progress tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md).
+What is **not** done, plainly: the campaign length is a model (3.9–10.1 h main path, 5.4–14.0 h with optional content) until playtests measure it — the 10–15 hour target is not claimed; there is no recorded voice acting (placeholder radio voice + full subtitles); the campaign still has the older procedural look and the slice is not photoreal; the Windows build has passed a smoke test under Wine but has **not** been run on real Windows hardware; Steamworks is not integrated. Details: [progress tracker](docs/15_DEVELOPMENT_PROGRESS_TRACKER.md).
 
 ## Play from source
 1. Install **Godot 3.5.x** (standard build) from godotengine.org, or `sudo apt install godot3` on Ubuntu.
@@ -57,6 +61,7 @@ tools/test.sh endings    # all four endings + credits
 tools/test.sh ngplus     # New Game+ memory, 88.0 content, Listener adaptations
 tools/test.sh play       # the full campaign, chapter 1 → ending D
 tools/test.sh slice      # the vertical slice: art scene, baked light, HQ models, forecast, encounter, hiding, return to menu
+tools/test.sh texq       # texture quality Half: every large texture at half resolution, memory drops
 ```
 Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`). Latest results: [13_TESTING_PLAN.md](docs/13_TESTING_PLAN.md).
 
@@ -83,7 +88,9 @@ Requires `godot3` and `xvfb-run` (`sudo apt install godot3 xvfb`). Latest result
 | 18 | [Audio Production Plan & VO](docs/18_AUDIO_PRODUCTION_PLAN.md) — recording script in [`docs/vo/`](docs/vo/) |
 | 19 | [Engine Migration Assessment](docs/19_ENGINE_MIGRATION_ASSESSMENT.md) |
 | 20 | [Steam Release Package](docs/20_STEAM_RELEASE_PACKAGE.md) |
-| 21 | [Visual Audit, Engine Decision & Vertical Slice](docs/21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md) |
+| 21 | [Visual Audit, 4K Vertical Slice & Approval Package](docs/21_VISUAL_AUDIT_AND_VERTICAL_SLICE.md) |
+| 22 | [Godot 4 Visual Benchmark & Engine Evaluation](docs/22_GODOT4_VISUAL_BENCHMARK.md) |
+| 23 | [Asset & Texture Specifications](docs/23_ASSET_AND_TEXTURE_SPECIFICATIONS.md) |
 |  | [Third-Party Notices](docs/THIRD_PARTY_NOTICES.md) · [Privacy](docs/PRIVACY.md) |
 |  | [Changelog](CHANGELOG.md) |
 
@@ -92,4 +99,4 @@ Docs 04–08 are generated from the game data (`python3 tools/gen_docs.py <expor
 ## Credits
 Developed by **YASH AIL** · Sound Effects by **AJAY GOHIL** · Game Design & Creative Support **ADARSH GUPTA** · Gameplay Testing & Quality Assurance **TANISH SHETTY** · Environment Design & Production Support **SHUBHAM GAONKAR**
 
-Built with Godot Engine (MIT). Fonts: Liberation (SIL Open Font License). Surface textures: ambientCG (CC0). Full notices and licence texts: [`docs/THIRD_PARTY_NOTICES.md`](docs/THIRD_PARTY_NOTICES.md), [`licenses/`](licenses/).
+Built with Godot Engine (MIT). Fonts: Liberation (SIL Open Font License). Textures and props: ambientCG and Poly Haven (CC0). Full notices and licence texts: [`docs/THIRD_PARTY_NOTICES.md`](docs/THIRD_PARTY_NOTICES.md), [`licenses/`](licenses/).

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.11 — 4K graphics pass on the vertical slice (awaiting approval)
+- **The Listener v2**, rebuilt toward the owner's reference sheet (original design): 2.27 m emaciated, asymmetric body with an uneven ribcage, long four-joint clawed fingers, translucent skin; a pleated, veined acoustic membrane head with slits, pores and cartilage rods; 4K skin maps, 2K membrane, 1K claws; subsurface scattering, transmission and a wet clearcoat; 78-bone rig; idle, listen, walk, run, search, crawl and attack animations chosen by the AI state; three body LODs switched by distance.
+- **First person:** worn leather gloves; the HX-7 shows a live seven-segment display (frequency, band, signal bars) and its tuning knob turns as you tune; the torch hand clicks when the light toggles.
+- **Environment:** red emergency lamps along the corridor, a wet-floor shader (world-space puddles and streaks: darker, glossier, flatter), leak, rust, grime and creature-smear decals, 4K Poly Haven surfaces for the corridor walls and floor.
+- **Graphics settings:** presets Low, Medium, High, Ultra and Cinematic; 3840 × 2160 window resolution; 3D render scale 50–150 % (the 3D world renders in its own viewport); texture quality Full/Half; shadow quality; reflections; ambient occlusion; anti-aliasing (FXAA, MSAA 2×/4×/8×); view distance; V-Sync; frame-rate limit.
+- **Benchmark mode:** `--benchmark` (and `--benchmark --4k`) flies the slice per preset and writes average fps, 1 % low and worst frame to `benchmark.txt`, for measuring on real GPUs.
+- **Godot 4 isolated visual benchmark** (`benchmark_godot4/`, docs/22): the slice rebuilt from the same assets in Godot 4.7 with SDFGI, shadowed volumetric fog, decals, TAA and skin SSS; side-by-side evidence and an engine evaluation. No migration started.
+- **Evidence:** native 3840 × 2160 in-game captures (`docs/screenshots/slice4k/`), a silent 720p gameplay recording of the slice (`docs/media/slice_gameplay.mp4`, `tools/record_slice.sh`), asset and texture specifications (docs/23).
+- Tests: new `texq` suite; `sliceshots` gains creature close-ups (membrane, crawl, searching while you hide) and native-4K options; `slicerec` recording controller.
+
 ## 0.10 — vertical slice (visual target, awaiting approval)
 - Sublevel 3 service corridor and communications room rebuilt as an authored scene: bevelled architecture, pipes, trays, doors, raised floor, suspended ceiling, equipment racks, operator console with CRTs, main receiver, signage, chart, clock (02:43), papers, cables.
 - 27 CC0 Poly Haven models and 14 2K Poly Haven surfaces (fetched by `tools/fetch_polyhaven.py`, listed in THIRD_PARTY_NOTICES).

@@ -116,6 +116,21 @@ for o in ms:
     if not o.name.startswith(("rx_lcd", "rx_label", "rx_grille", "rx_meter")) or o.name.endswith(("_frame", "_rim")):
         world_uv(o, 1.0)
 tex = [o for o in ms if o.name.startswith(("rx_lcd", "rx_label", "rx_grille", "rx_meter")) and not o.name.endswith(("_frame", "_rim"))]
+# the knobs stay separate so the game can turn them: origin on the knob axis
+knobs = {}
+for nm in ("rx_tune", "rx_tune_cap", "rx_vol"):
+    o = [x for x in ms if x.name == nm]
+    if o: knobs[nm] = o[0]
 join("fp_radio_screens", tex)
-join("fp_radio", [o for o in ms if o not in tex])
+if "rx_tune" in knobs and "rx_tune_cap" in knobs:
+    t = join("rx_tune_knob", [knobs["rx_tune"], knobs["rx_tune_cap"]])
+    knobs = {"rx_tune_knob": t, "rx_vol": knobs.get("rx_vol")}
+for nm, o in knobs.items():
+    if o is None: continue
+    bpy.ops.object.select_all(action='DESELECT'); o.select_set(True); bpy.context.view_layer.objects.active = o
+    c = sum((o.matrix_world @ v.co for v in o.data.vertices), Vector()) / len(o.data.vertices)
+    bpy.context.scene.cursor.location = c
+    bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
+    o.name = "TuneKnob" if nm == "rx_tune_knob" else "VolKnob"
+join("fp_radio", [o for o in R.all_objects if o.type == 'MESH' and o.name not in ("fp_radio_screens", "TuneKnob", "VolKnob")])
 export(os.path.join(OUT, "fp_radio.gltf"), R)
