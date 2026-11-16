@@ -96,11 +96,11 @@ def normal_dx(n):
 # ------------------------------------------------------------------------------------------------ body
 
 PAL = {k: srgb_to_lin(v) for k, v in {
-    "pale": (206, 196, 188), "cool": (176, 182, 190), "sallow": (198, 188, 160), "flush": (200, 128, 126),
-    "bruise": (150, 124, 150), "vein_deep": (122, 136, 170), "vein": (118, 70, 96), "cap": (186, 100, 104),
-    "mottle_r": (196, 156, 150), "mottle_b": (168, 170, 186),
-    "grime": (112, 100, 86), "blood_dry": (52, 16, 12), "blood_wet": (96, 14, 12), "keratin": (128, 112, 82),
-    "keratin_tip": (42, 34, 28), "nail_bed": (150, 88, 82),
+    "pale": (178, 168, 158), "cool": (150, 156, 162), "sallow": (170, 160, 130), "flush": (176, 112, 108),
+    "bruise": (128, 104, 124), "vein_deep": (104, 116, 146), "vein": (92, 52, 70), "cap": (160, 86, 88),
+    "mottle_r": (168, 128, 120), "mottle_b": (138, 142, 156),
+    "grime": (92, 82, 70), "blood_dry": (46, 14, 11), "blood_wet": (84, 12, 10), "keratin": (120, 106, 84),
+    "keratin_tip": (34, 28, 24), "nail_bed": (150, 88, 82),
 }.items()}
 
 
@@ -165,9 +165,9 @@ def body_maps(normal, ao, thick, pos, part, masks):
 # ------------------------------------------------------------------------------------------------ membrane
 
 HPAL = {k: srgb_to_lin(v) for k, v in {
-    "outer": (206, 176, 170), "outer_thin": (214, 150, 146), "cartilage": (222, 210, 182), "inner": (118, 22, 26),
-    "throat": (34, 6, 8), "pore": (16, 4, 5), "vein_o": (146, 46, 68), "vein_i": (64, 8, 14), "lip": (92, 30, 28),
-    "mucus": (150, 120, 96), "blood_dry": (52, 16, 12),
+    "outer": (164, 136, 128), "outer_thin": (172, 116, 110), "cartilage": (190, 178, 150), "inner": (84, 20, 22),
+    "throat": (18, 4, 5), "pore": (10, 3, 4), "vein_o": (110, 36, 48), "vein_i": (46, 6, 10), "lip": (70, 24, 22),
+    "mucus": (128, 104, 84), "blood_dry": (46, 14, 11),
 }.items()}
 
 
@@ -194,7 +194,7 @@ def head_maps(normal, ao, thick, pos, attrs, veins):
     col = col * (0.4 + 0.6 * ao[..., None] ** 0.8)
     mucus = smoothstep(0.7, 0.85, value_noise3(pos, 0.25, seed=13, octaves=3)) * (inner | lip)
     col = lerp(col, HPAL["mucus"], 0.25 * mucus)
-    rough = np.where(inner, 0.16 + 0.1 * pores + 0.05 * n1, 0.42 + 0.08 * (n1 - 0.5) - 0.1 * thin)
+    rough = np.where(inner, 0.3 + 0.12 * pores + 0.08 * n1, 0.46 + 0.08 * (n1 - 0.5) - 0.08 * thin)
     rough = np.where(lip, 0.3, rough) - 0.08 * mucus
     sss = np.clip(np.where(inner, 0.7, 0.95) * (1 - 0.35 * strut), 0, 1)
     col[~covered] = HPAL["inner"] * 0.5

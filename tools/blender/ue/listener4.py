@@ -17,6 +17,9 @@ Stages (each reads the previous stage's output from tools/blender/work/ue/listen
     bake [size]       Cycles bakes: normal, AO, thickness, curvature source, position, part id, vein/blood masks
     textures [size]   compose the final PBR maps (Unreal naming) into SourceArt/Characters/Listener/Textures
     lookdev [pose]    textured renders (Blender materials built from the Unreal maps); pose = rest | stance
+    lods              LOD1-3 (decimated, weights and UVs kept) and the physics-capsule spec
+    export            FBX for Unreal 5.8: SK_Listener (+LODs), one A_Listener_<Clip> per animation
+    validate          re-import every FBX into a clean scene and check it
 """
 import json
 import os
@@ -672,9 +675,9 @@ def stage_lookdev(pose="rest", views="front,q34,headq,torso,hand,back", engine="
         if o.name.startswith("hi_") or o.name.endswith("_quads"):
             o.hide_render = True
     body, head = bpy.data.objects["Listener_Body"], bpy.data.objects["Listener_Head"]
-    skin = ld_material("LD_Skin", "Listener_Body", sss_scale=0.5, sss_amount=0.6)
-    claw = ld_material("LD_Claw", "Listener_Body", sss_amount=0.0, coat=0.3)
-    memb = ld_material("LD_Membrane", "Listener_Membrane", sss_scale=0.9, sss_radius=(1.0, 0.25, 0.2), sss_amount=0.8, coat=0.25)
+    skin = ld_material("LD_Skin", "Listener_Body", sss_scale=0.35, sss_amount=0.35)
+    claw = ld_material("LD_Claw", "Listener_Body", sss_amount=0.0, coat=0.15)
+    memb = ld_material("LD_Membrane", "Listener_Membrane", sss_scale=0.6, sss_radius=(1.0, 0.22, 0.16), sss_amount=0.5, coat=0.08)
     body.data.materials.clear()
     body.data.materials.append(skin)
     body.data.materials.append(claw)
@@ -693,8 +696,9 @@ def stage_lookdev(pose="rest", views="front,q34,headq,torso,hand,back", engine="
         bpy.context.view_layer.update()
         J["hand_l"] = np.array(arm.matrix_world @ arm.pose.bones["hand_l"].head)
         J["head"] = np.array(arm.matrix_world @ arm.pose.bones["head"].head)
-    U.floor(0.0, color=(0.03, 0.03, 0.035), rough=0.45)
-    horror_lights((0, -5, 140))
+    U.floor(0.0, color=(0.018, 0.018, 0.02), rough=0.8)
+    horror_lights((0, -5, 140), scale=0.55)
+    sc.view_settings.exposure = -0.3
     if engine == "eevee":
         U.eevee((1200, 1600), samples=64, sss=True, bloom=False)
     else:
@@ -729,6 +733,232 @@ def stage_lookdev(pose="rest", views="front,q34,headq,torso,hand,back", engine="
         out.append(p)
         log("rendered", name)
     U.contact_sheet(out, os.path.join(WORK, "sheet_%s.jpg" % tag), 3, thumb=(800, 800), labels=views.split(","))
+
+
+# ------------------------------------------------------------------------------------------------ animation
+
+def stage_anim(names="Idle,Walk,Stalk,Run,Crawl,Listen,Attack,Drag"):
+    import anim as A
+    import listener_anim as LA
+    bpy.ops.wm.open_mainfile(filepath=os.path.join(WORK, "listener_rigged.blend"))
+    arm = bpy.data.objects["Armature"]
+    rig = A.Rig(arm)
+    arm.animation_data_create()
+    for name in names.split(","):
+        t = time.time()
+        poses, loop = LA.make_clip(rig, name)
+        act = LA.write_action(arm, "A_Listener_" + name, len(poses), poses, loop)
+        act["df_speed_cm_s"] = LA.CLIPS[name][2]
+        log("%s: %d frames%s (%.0fs)" % (name, len(poses), " loop" if loop else "", time.time() - t))
+    arm.animation_data.action = bpy.data.actions.get("A_Listener_Idle")
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(WORK, "listener_anim.blend"), compress=True)
+
+
+def stage_anim_sheets(names="Idle,Walk,Stalk,Run,Crawl,Listen,Attack,Drag", per=6, video="1"):
+    """Contact sheet per clip (EEVEE clay) and a preview video per clip (Workbench)."""
+    bpy.ops.wm.open_mainfile(filepath=os.path.join(WORK, "listener_anim.blend"))
+    sc = bpy.context.scene
+    arm = bpy.data.objects["Armature"]
+    for o in sc.objects:
+        if o.name.startswith("hi_") or o.name.endswith("_quads"):
+            o.hide_render = True
+    clay = U.principled("Clay", (0.66, 0.63, 0.6), rough=0.55)
+    for n in ("Listener_Body", "Listener_Head"):
+        ob = bpy.data.objects[n]
+        ob.data.materials.clear()
+        ob.data.materials.append(clay)
+    U.floor(0.0, color=(0.2, 0.2, 0.21))
+    U.studio((0, 0, 110), radius=480, key=0.3)
+    cam = U.camera("cam", (-330, -300, 120), (0, -10, 95), lens=40)
+    sc.camera = cam
+    for name in names.split(","):
+        act = bpy.data.actions["A_Listener_" + name]
+        arm.animation_data.action = act
+        nf = int(act.frame_range[1]) + 1
+        frames = np.linspace(0, nf - 1, per).astype(int)
+        U.eevee((720, 820), samples=16)
+        outs = []
+        for f in frames:
+            sc.frame_set(int(f))
+            p = os.path.join(WORK, "anim_%s_%03d.png" % (name, f))
+            U.render(p)
+            outs.append(p)
+        U.contact_sheet(outs, os.path.join(WORK, "sheet_anim_%s.jpg" % name), per, labels=["%s  f%d" % (name, f) for f in frames])
+        for p in outs:
+            os.remove(p)
+        if video == "1":
+            sc.render.engine = "BLENDER_WORKBENCH"
+            sc.display.shading.light = "STUDIO"
+            sc.display.shading.color_type = "SINGLE"
+            sc.display.shading.single_color = (0.7, 0.66, 0.62)
+            sc.display.shading.show_shadows = True
+            sc.render.resolution_x, sc.render.resolution_y = 640, 720
+            sc.frame_start, sc.frame_end = 0, nf - 1
+            reps = 3 if act.get("df_loop") else 1
+            vdir = os.path.join(WORK, "vid_" + name)
+            os.makedirs(vdir, exist_ok=True)
+            for f in range(nf):
+                sc.frame_set(f)
+                sc.render.filepath = os.path.join(vdir, "f%04d.png" % f)
+                bpy.ops.render.render(write_still=True)
+            seq = os.path.join(vdir, "f%04d.png")
+            out = os.path.join(WORK, "anim_%s.mp4" % name)
+            loop_args = ["-stream_loop", str(reps - 1)] if reps > 1 else []
+            import subprocess
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error"] + loop_args + ["-framerate", "30", "-i", seq,
+                            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", out], check=True)
+            for f in os.listdir(vdir):
+                os.remove(os.path.join(vdir, f))
+            os.rmdir(vdir)
+        log("sheets for", name)
+
+
+# ------------------------------------------------------------------------------------------------ LODs, collision, export
+
+LOD_RATIOS = (0.5, 0.25, 0.1)
+
+
+def stage_lods():
+    bpy.ops.wm.open_mainfile(filepath=os.path.join(WORK, "listener_anim.blend"))
+    arm = bpy.data.objects["Armature"]
+    coll = bpy.data.collections.new("LODs")
+    bpy.context.scene.collection.children.link(coll)
+    for k, ratio in enumerate(LOD_RATIOS, start=1):
+        for base in ("Listener_Body", "Listener_Head"):
+            src = bpy.data.objects[base]
+            ob = src.copy()
+            ob.data = src.data.copy()
+            ob.name = "%s_LOD%d" % (base, k)
+            coll.objects.link(ob)
+            d = ob.modifiers.new("decimate", "DECIMATE")
+            d.decimate_type = "COLLAPSE"
+            d.ratio = ratio if base == "Listener_Body" else min(1.0, ratio * 1.2)
+            d.use_collapse_triangulate = True
+            bpy.ops.object.select_all(action="DESELECT")
+            ob.select_set(True)
+            bpy.context.view_layer.objects.active = ob
+            # decimate before the armature modifier (it must stay last)
+            while ob.modifiers[0].name != "decimate":
+                bpy.ops.object.modifier_move_up(modifier="decimate")
+            bpy.ops.object.modifier_apply(modifier="decimate")
+            ob.parent = arm
+            log("%s: %d triangles" % (ob.name, len(ob.data.polygons)))
+    # physics capsules: per bone, radius from the vertices it mostly owns
+    body = bpy.data.objects["Listener_Body"]
+    V = U.get_verts(body)
+    gidx = {g.index: g.name for g in body.vertex_groups}
+    owner = np.full(len(V), -1)
+    best = np.zeros(len(V))
+    for v in body.data.vertices:
+        for g in v.groups:
+            if g.weight > best[v.index]:
+                best[v.index] = g.weight
+                owner[v.index] = g.group
+    caps = []
+    for bn in ("pelvis", "spine_01", "spine_03", "spine_05", "neck_01", "neck_02", "head", "thigh_l", "calf_l", "foot_l",
+               "thigh_r", "calf_r", "foot_r", "upperarm_l", "lowerarm_l", "hand_l", "upperarm_r", "lowerarm_r", "hand_r"):
+        b = arm.data.bones[bn]
+        h, t = np.array(b.head_local), np.array(b.tail_local)
+        gi = [i for i, n in gidx.items() if n == bn]
+        if not gi:
+            continue
+        sel = V[owner == gi[0]]
+        if len(sel) < 10:
+            continue
+        ab = t - h
+        tt = np.clip(((sel - h) @ ab) / (ab @ ab), 0, 1)
+        dist = np.linalg.norm(sel - (h + tt[:, None] * ab), axis=1)
+        caps.append({"bone": bn, "radius_cm": round(float(np.percentile(dist, 70)), 2), "length_cm": round(float(np.linalg.norm(ab)), 2)})
+    if True:
+        caps.append({"bone": "head", "sphere_center_offset_cm": [0, 22, 0], "radius_cm": 16.0, "note": "membrane horn"})
+    os.makedirs(os.path.join(ART, "Export"), exist_ok=True)
+    with open(os.path.join(ART, "Export", "SK_Listener_PhysicsCapsules.json"), "w") as f:
+        json.dump({"units": "cm", "capsules": caps, "pawn_capsule": {"radius_cm": 40, "half_height_cm": 115}}, f, indent=1)
+    log("physics capsules: %d" % len(caps))
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(WORK, "listener_final.blend"), compress=True)
+
+
+FBX_COMMON = dict(apply_unit_scale=True, apply_scale_options="FBX_SCALE_NONE", global_scale=1.0, axis_forward="-Z",
+                  axis_up="Y", use_mesh_modifiers=True, mesh_smooth_type="FACE", use_tspace=True, add_leaf_bones=False,
+                  primary_bone_axis="Y", secondary_bone_axis="X", armature_nodetype="NULL", use_armature_deform_only=False,
+                  path_mode="STRIP", embed_textures=False)
+
+
+def stage_export():
+    bpy.ops.wm.open_mainfile(filepath=os.path.join(WORK, "listener_final.blend"))
+    out = os.path.join(ART, "Export")
+    os.makedirs(out, exist_ok=True)
+    sc = bpy.context.scene
+    arm = bpy.data.objects["Armature"]
+    body, head = bpy.data.objects["Listener_Body"], bpy.data.objects["Listener_Head"]
+    # Unreal material slot names
+    body.data.materials[0].name = "M_Listener_Skin"
+    body.data.materials[1].name = "M_Listener_Claws"
+    head.data.materials[0].name = "M_Listener_Membrane"
+    arm.animation_data.action = None
+    for pb in arm.pose.bones:
+        pb.matrix_basis.identity()
+
+    def export(path, objs, anim=False):
+        bpy.ops.object.select_all(action="DESELECT")
+        for o in objs:
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = arm
+        bpy.ops.export_scene.fbx(filepath=path, use_selection=True,
+                                 object_types={"ARMATURE", "MESH"} if not anim else {"ARMATURE"},
+                                 bake_anim=anim, bake_anim_use_all_actions=False, bake_anim_use_nla_strips=False,
+                                 bake_anim_force_startend_keying=True, bake_anim_step=1.0, bake_anim_simplify_factor=0.0,
+                                 **FBX_COMMON)
+        log("exported", os.path.basename(path), "%.1f MB" % (os.path.getsize(path) / 1e6))
+
+    export(os.path.join(out, "SK_Listener.fbx"), [arm, body, head])
+    for k in range(1, len(LOD_RATIOS) + 1):
+        export(os.path.join(out, "SK_Listener_LOD%d.fbx" % k),
+               [arm, bpy.data.objects["Listener_Body_LOD%d" % k], bpy.data.objects["Listener_Head_LOD%d" % k]])
+    for act in bpy.data.actions:
+        if not act.name.startswith("A_Listener_"):
+            continue
+        arm.animation_data.action = act
+        sc.frame_start, sc.frame_end = 0, int(act.frame_range[1])
+        export(os.path.join(out, act.name + ".fbx"), [arm], anim=True)
+    arm.animation_data.action = None
+    # the artist-facing source file: game meshes (tris) + quad sources + rig + actions, textures linked
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(ART, "Listener.blend"), compress=True, relative_remap=True)
+
+
+def stage_validate():
+    """Import each FBX into an empty scene (default units) and report what Unreal will receive."""
+    out = os.path.join(ART, "Export")
+    report = []
+    for f in sorted(os.listdir(out)):
+        if not f.endswith(".fbx"):
+            continue
+        bpy.ops.wm.read_factory_settings(use_empty=True)
+        bpy.ops.import_scene.fbx(filepath=os.path.join(out, f), automatic_bone_orientation=False)
+        arms = [o for o in bpy.context.scene.objects if o.type == "ARMATURE"]
+        meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+        line = {"file": f, "bones": len(arms[0].data.bones) if arms else 0}
+        if meshes:
+            bpy.context.view_layer.update()
+            zs = []
+            for o in meshes:
+                co = np.empty(len(o.data.vertices) * 3, np.float32)
+                o.data.vertices.foreach_get("co", co)
+                co = co.reshape(-1, 3)
+                M = np.array(o.matrix_world)
+                zs.extend((co @ M[:3, :3].T + M[:3, 3])[:, 2].tolist())
+            line.update(tris=sum(len(o.data.polygons) for o in meshes), verts=sum(len(o.data.vertices) for o in meshes),
+                        uv_maps=sorted({u.name for o in meshes for u in o.data.uv_layers}),
+                        materials=sorted({m.name for o in meshes for m in o.data.materials if m}),
+                        vertex_groups=max(len(o.vertex_groups) for o in meshes), height_m=round(max(zs) - min(zs), 3),
+                        root=[b.name for b in arms[0].data.bones if b.parent is None] if arms else [])
+        if arms and arms[0].animation_data and arms[0].animation_data.action:
+            a = arms[0].animation_data.action
+            line.update(action=a.name, frames=int(a.frame_range[1] - a.frame_range[0] + 1), curves=len(a.fcurves))
+        report.append(line)
+        log(json.dumps(line))
+    with open(os.path.join(out, "validation.json"), "w") as fp:
+        json.dump(report, fp, indent=1)
 
 
 def _rgb(nodes, c):
@@ -901,7 +1131,7 @@ def stage_rigtest():
     for s in "lr":
         LA.foot_plant(P, c, s, 0.0, 0.0)
     LA.struts_flare(P, c, 24.0)
-    LA.rot_w(P, "head", Z, 30)
+    LA.rot_w(P, "head", LA.Z, 30)
     for s in "lr":
         LA.relax_hand(P, c, s, -0.2, spread=1.2)
     poses["membrane flared"] = P

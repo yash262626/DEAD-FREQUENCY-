@@ -46,13 +46,13 @@ def posture(P, c, hunch=1.0, crouch=0.0, neck_lift=1.0, arms=1.0, lean=0.0, yaw=
     i = P.rig.index["pelvis"]
     P.basis[i][:3, 3] += np.array([0.0, 0.0, 0.0])
     P.solve()
-    rot_w(P, "pelvis", X, 6.0 * hunch + 14.0 * crouch + lean * 0.3)
+    rot_w(P, "pelvis", X, 10.0 * hunch + 14.0 * crouch + lean * 0.3)
     rot_w(P, "pelvis", Z, yaw * 0.6)
-    for name, a in (("spine_01", 5), ("spine_02", 8), ("spine_03", 11), ("spine_04", 11), ("spine_05", 8)):
+    for name, a in (("spine_01", 6), ("spine_02", 10), ("spine_03", 16), ("spine_04", 16), ("spine_05", 12)):
         rot_w(P, name, X, a * hunch + lean * 0.14)
         rot_w(P, name, Z, -yaw * 0.12)
         rot_w(P, name, -Y, side_bend * 0.2)
-    for name, a in (("neck_01", -14), ("neck_02", -16), ("head", -12)):
+    for name, a in (("neck_01", -8), ("neck_02", -16), ("head", -18)):
         rot_w(P, name, X, a * neck_lift * hunch)
     # arms hang under gravity whatever the torso does
     for s in "lr":
@@ -319,12 +319,12 @@ def clip_crawl(rig, c, f, nf, sp):
     duty = 0.72
     stance_len = 100 * T * duty
     P = base_pose(rig)
-    pelvis_offset(P, [1.2 * np.sin(2 * np.pi * ph), 6.0, -52.0 - 1.5 * (0.5 + 0.5 * np.cos(4 * np.pi * ph))])
-    rot_w(P, "pelvis", X, 52.0)
+    pelvis_offset(P, [1.2 * np.sin(2 * np.pi * ph), 14.0, -60.0 - 1.5 * (0.5 + 0.5 * np.cos(4 * np.pi * ph))])
+    rot_w(P, "pelvis", X, 72.0)
     for name, a in (("spine_01", 6), ("spine_02", 6), ("spine_03", 5), ("spine_04", 2), ("spine_05", -4)):
         rot_w(P, name, X, a)
         rot_w(P, name, Z, 3.0 * np.cos(2 * np.pi * ph) * (1 if name < "spine_03" else -1))
-    for name, a in (("neck_01", -38), ("neck_02", -30), ("head", -14)):
+    for name, a in (("neck_01", -34), ("neck_02", -28), ("head", -20)):
         rot_w(P, name, X, a)
     for s, off in (("l", 0.0), ("r", 0.5)):
         y, lz, pitch = gait_foot((ph + off) % 1.0, duty, stance_len, 9)

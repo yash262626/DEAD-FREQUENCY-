@@ -108,15 +108,18 @@ def membrane_weights(theta, u, layer, struts):
     span = np.mod(a1 - a0, 2 * np.pi)
     f = np.mod(th - a0, 2 * np.pi) / np.maximum(span, 1e-6)
     f = f * f * (3 - 2 * f)
-    for strut_rank, frac in ((prev_i, 1 - f), (idx, f)):
-        sid = order[strut_rank]
-        # along the chain: 01 (0.22-0.5), 02 (0.5-0.78), 03 (0.78-tip), smooth hand-offs
-        seg = [np.clip(1 - np.abs(uc - c) / w, 0, 1) for c, w in ((0.36, 0.2), (0.64, 0.2), (0.92, 0.2))]
-        seg[2] = np.maximum(seg[2], (uc > 0.92).astype(float))
-        tot = seg[0] + seg[1] + seg[2] + 1e-9
+    nv = len(theta)
+    ang_w = np.zeros((nv, len(angs)))
+    ang_w[np.arange(nv), order[prev_i]] += 1 - f
+    ang_w[np.arange(nv), order[idx]] += f
+    # along the chain: 01 (0.22-0.5), 02 (0.5-0.78), 03 (0.78-tip), smooth hand-offs
+    seg = [np.clip(1 - np.abs(uc - c) / w, 0, 1) for c, w in ((0.36, 0.2), (0.64, 0.2), (0.92, 0.2))]
+    seg[2] = np.maximum(seg[2], (uc > 0.92).astype(float))
+    tot = seg[0] + seg[1] + seg[2] + 1e-9
+    for sid in range(len(angs)):
         for j in range(3):
             nm = "membrane_strut_%02d_%02d" % (sid + 1, j + 1)
-            W[nm] = W.get(nm, 0.0) + rest * frac * seg[j] / tot
+            W[nm] = rest * ang_w[:, sid] * seg[j] / tot
     return W
 
 
