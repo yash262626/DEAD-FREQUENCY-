@@ -1,0 +1,591 @@
+{
+ "number": 13,
+ "title": "THE LAST TRANSMISSION",
+ "subtitle": "OCTOBER 17 — 02:43",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "A",
+   "kind": "prop",
+   "props": {
+    "p": "aperture",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "B",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "c": "0.6,0.75,1,1",
+    "e": "2.4",
+    "r": "16"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "P",
+   "kind": "note",
+   "props": {
+    "flag": "mira_pages",
+    "only_if": "mira_all",
+    "text": "If you're reading this, you found all of them.\n\nThen you're the one who answers.\n\nI kept the notebook so someone would know we tried. I didn't think it would be you. I hoped. Eleven thousand times, I hoped.\n\n— M.\n(Loop: the last one.)",
+    "title": "Mira's notebook — the last page"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "R",
+   "kind": "light",
+   "props": {
+    "e": "1.6",
+    "r": "12",
+    "red": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "p": "console",
+    "prompt": "The Aperture console"
+   },
+   "sequence": 2,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "14"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "14"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "14"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "########################",
+  "#......................#",
+  "#..........A...........#",
+  "#..o..............o....#",
+  "#.....x....B...........#",
+  "#..R................R..#",
+  "#..o.......L.......o...#",
+  "#........m...e.........#",
+  "#..........U...........#",
+  "#......................#",
+  "#..o................o..#",
+  "#..........S...........#",
+  "#.................P....#",
+  "########################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 11,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 18,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 6,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 11,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 20,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 19,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 9,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 13,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 11,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 20,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 11,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 18,
+    "y": 12
+   }
+  }
+ ],
+ "props": {
+  "ai": "[]",
+  "amb_db": "-20",
+  "amb_loop": "hum",
+  "face": "0",
+  "h": "7.5",
+  "music": "drone_c",
+  "pal": "chamber"
+ },
+ "walkthrough": [
+  "[\"choice\",2]",
+  "P",
+  "U"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "x",
+      "watch"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "S",
+      "A",
+      "6",
+      "U",
+      "1.7",
+      "2.8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Current time: zero two — forty-three."
+     ],
+     "vo": "pa_f40e4bfbe4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The Door."
+     ],
+     "vo": "daniel_4b3b56b691"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "-2",
+      "0.5",
+      "x"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Danny. You're here. I can see you. I can see you on the glass, like a reflection that walks."
+     ],
+     "vo": "mira_062b87274d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Where are you?"
+     ],
+     "vo": "daniel_70aa8caffc"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Right beside you. Twenty-eight years to the left."
+     ],
+     "vo": "mira_da2bf530dd"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "107.9"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "look",
+     "args": [
+      "m",
+      "1.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...I see you. Mira. I can see you."
+     ],
+     "vo": "daniel_751a9fb01c"
+    },
+    {
+     "command": "look",
+     "args": [
+      "e",
+      "1.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (02:51, 1998)",
+      "Mira, the seal's going — I need both hands on this — Mira, who are you talking to?"
+     ],
+     "vo": "evelyn_21ca94534f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Nobody. Nobody, Evelyn. Keep your hands on the seal."
+     ],
+     "vo": "mira_5a0778c3e5"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "face"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The Aperture console."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "She left it where she'd be. Right here. At the Door."
+     ],
+     "vo": "daniel_5db646c703"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "look",
+     "args": [
+      "A",
+      "2.8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (EVELYN'S VOICE)",
+      "Open it, Danny. Open it, and we all come home. Me. Mira. Forty-one people. Open the door."
+     ],
+     "vo": "listener_b6544ac790"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE)",
+      "Daniel. Whatever happens. Do not open the door."
+     ],
+     "vo": "listener_6885a328e2"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Whatever you choose, I'm here. You hear me? You're not alone."
+     ],
+     "vo": "mira_a2cec13df5"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "choice",
+     "args": [
+      "The Aperture console. One master switch. Three positions."
+     ],
+     "options": [
+      {
+       "label": "OPEN the Door.",
+       "sequence": 3
+      },
+      {
+       "label": "SHUT IT DOWN. Turn the key. Silence.",
+       "sequence": 4
+      },
+      {
+       "label": "ANSWER IT. Send the last transmission.",
+       "sequence": 7
+      }
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1"
+     ]
+    },
+    {
+     "command": "ending",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "final_open"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Everyone comes home."
+     ],
+     "vo": "daniel_b31b9f32e5"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "final_silence"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "shutdown_key"
+     ],
+     "then": 5,
+     "else": 6
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I'm sorry. I'm so sorry."
+     ],
+     "vo": "daniel_01b8021a72"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The key— her key. I never took her key."
+     ],
+     "vo": "daniel_8c5aa1fac6"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "final_send"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Signal..."
+     ],
+     "vo": "daniel_389b324ff6"
+    }
+   ]
+  }
+ ]
+}

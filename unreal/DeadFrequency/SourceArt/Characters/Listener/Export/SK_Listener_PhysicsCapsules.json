@@ -1,0 +1,114 @@
+{
+ "units": "cm",
+ "capsules": [
+  {
+   "bone": "pelvis",
+   "radius_cm": 11.79,
+   "length_cm": 12.19
+  },
+  {
+   "bone": "spine_01",
+   "radius_cm": 11.68,
+   "length_cm": 12.0
+  },
+  {
+   "bone": "spine_03",
+   "radius_cm": 15.56,
+   "length_cm": 13.42
+  },
+  {
+   "bone": "spine_05",
+   "radius_cm": 6.44,
+   "length_cm": 5.76
+  },
+  {
+   "bone": "neck_01",
+   "radius_cm": 5.98,
+   "length_cm": 9.1
+  },
+  {
+   "bone": "neck_02",
+   "radius_cm": 5.34,
+   "length_cm": 11.88
+  },
+  {
+   "bone": "head",
+   "radius_cm": 5.84,
+   "length_cm": 8.08
+  },
+  {
+   "bone": "thigh_l",
+   "radius_cm": 7.41,
+   "length_cm": 54.03
+  },
+  {
+   "bone": "calf_l",
+   "radius_cm": 4.84,
+   "length_cm": 52.59
+  },
+  {
+   "bone": "foot_l",
+   "radius_cm": 4.59,
+   "length_cm": 18.63
+  },
+  {
+   "bone": "thigh_r",
+   "radius_cm": 7.54,
+   "length_cm": 54.03
+  },
+  {
+   "bone": "calf_r",
+   "radius_cm": 4.84,
+   "length_cm": 52.59
+  },
+  {
+   "bone": "foot_r",
+   "radius_cm": 4.18,
+   "length_cm": 18.63
+  },
+  {
+   "bone": "upperarm_l",
+   "radius_cm": 5.32,
+   "length_cm": 41.0
+  },
+  {
+   "bone": "lowerarm_l",
+   "radius_cm": 2.83,
+   "length_cm": 39.0
+  },
+  {
+   "bone": "hand_l",
+   "radius_cm": 1.96,
+   "length_cm": 10.0
+  },
+  {
+   "bone": "upperarm_r",
+   "radius_cm": 4.89,
+   "length_cm": 41.0
+  },
+  {
+   "bone": "lowerarm_r",
+   "radius_cm": 2.9,
+   "length_cm": 39.0
+  },
+  {
+   "bone": "hand_r",
+   "radius_cm": 1.97,
+   "length_cm": 10.0
+  },
+  {
+   "bone": "head",
+   "sphere_center_offset_cm": [
+    0,
+    22,
+    0
+   ],
+   "radius_cm": 16.0,
+   "note": "membrane horn"
+  }
+ ],
+ "pawn_capsule": {
+  "radius_cm": 40,
+  "half_height_cm": 115
+ }
+}

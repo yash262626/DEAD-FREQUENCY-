@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""Generate the voice-over recording package from the shipped story data.
+
+Outputs:
+  docs/vo/vo_script.csv           every spoken line: id, filename, character, chapter, scene, direction, processing, subtitle
+  docs/vo/VO_RECORDING_SCRIPT.md  the same, grouped by character then chapter (what a session director reads from)
+The game plays res://vo/<id>.ogg automatically when that file exists (ui.gd vo_id()), so recordings drop in
+without code changes. The id is <speaker>_<first 10 hex of md5("SPEAKER TAG|text")>.
+Usage: python3 tools/vo_package.py <story_export.json> docs/vo
+"""
+import json, sys, os, csv, hashlib, re
+src, out = sys.argv[1], sys.argv[2]
+D = json.load(open(src))
+
+def vo_id(who, text):
+    base = who.split(" ")[0].replace("?", "").lower() or "system"
+    return "%s_%s" % (base, hashlib.md5((who + "|" + text).encode("utf-8")).hexdigest()[:10])
+
+def processing(who):
+    w = who.upper()
+    if "(TAPE" in w or "(REEL" in w or "BRIEFING" in w or "(RECORDING" in w: return "1990s tape: band-limit 250–5k Hz, light hiss, slight wow"
+    if "MHZ" in w or "(RADIO" in w or "(UPLINK" in w or "(PATCH" in w or "ECHO" in w or "(1998" in w or re.search(r"\(0?2:\d\d", w):
+        return "radio: band-limit 300–3.4k Hz, carrier whine, squelch tail"
+    if w.startswith("PA"): return "facility PA: horn speaker, long concrete reverb"
+    if "(BEHIND" in w: return "through a door/bulkhead: muffled, low-pass 1.2k Hz"
+    if "(LATER" in w: return "close, dry, intimate (voice-over)"
+    return "dry, close; game adds room reverb"
+
+def direction(who, text, chapter, scene):
+    w = who.upper(); d = []
+    if "?" in who.split("(")[0] or w.startswith("LISTENER"):
+        d.append("the Listener wearing this voice: identical timbre, slightly too even, no breath between phrases")
+    if "(whisper" in text.lower() or "whispering" in text.lower(): d.append("whispered")
+    if "(singing" in text.lower(): d.append("sung softly, unaccompanied, not performed")
+    if "(humming" in text.lower(): d.append("hummed, barely audible")
+    if text.rstrip().endswith("—") or text.rstrip().endswith("-"): d.append("cut off mid-word")
+    caps = [x for x in re.findall(r"\b[A-Z]{3,}\b", text) if x not in ("HELIX", "ECHO", "NORTHLINE", "LIAISON", "LONG", "EAR", "STATUS", "SUBJECT", "SIGNAL", "DANIEL", "ARLEN")]
+    if caps and not w.startswith(("PA", "DIRECTORATE")): d.append("rising, urgent on: " + ", ".join(caps))
+    if text.count("?") >= 1 and not d: d.append("asking, uncertain")
+    if w.startswith("DANIEL") and chapter in (12, 13, 14): d.append("exhausted, steady")
+    if w.startswith("MIRA") and chapter >= 9: d.append("tender; she knows who he is now")
+    if w.startswith("EVELYN") and "(TAPE" in w and chapter >= 11: d.append("a goodbye; holding it together")
+    if w.startswith("HALE (TAPE"): d.append("weary, clipped, guilt under control")
+    if not d: d.append("natural, grounded")
+    return "; ".join(d)
+
+def lines_of(evs, scene, chapter, acc):
+    for e in evs or []:
+        if not isinstance(e, list) or not e: continue
+        c = str(e[0])
+        if (c == "" or c != c.lower()) and len(e) > 1 and isinstance(e[1], str):
+            if c in ("", "VOICES"): pass
+            acc.append((c, e[1], scene))
+        elif c in ("if", "ifnot"):
+            lines_of(e[2], scene + " [if %s]" % e[1], chapter, acc)
+            if len(e) > 3: lines_of(e[3], scene + " [otherwise]", chapter, acc)
+        elif c == "choice":
+            for o in e[2]: lines_of(o[1], scene + " [choice: %s]" % o[0], chapter, acc)
+
+rows = []
+for ch in D["chapters"]:
+    chap = 14 if "ending" in ch else ch["n"]
+    title = ("ENDING " + ch["ending"]) if "ending" in ch else ("PROLOGUE" if ch["n"] == 0 else "CH%02d %s" % (ch["n"], ch["title"]))
+    acc = []
+    lines_of(ch.get("pre_ev", []) + ch.get("start_ev", []), "opening", chap, acc)
+    for k, l in ch["leg"].items():
+        name = l.get("title") or l.get("prompt") or ("trigger " + k)
+        lines_of(l.get("lines"), "%s: %s" % (l["t"], name), chap, acc)
+        lines_of(l.get("ev"), "%s: %s" % (l["t"], name), chap, acc)
+    for g, evs in ch.get("groups", {}).items():
+        lines_of(evs, "puzzle solved: " + g, chap, acc)
+    for i, (who, text, scene) in enumerate(acc):
+        vid = vo_id(who, text)
+        char = who.split(" ")[0].replace("?", "") or "SYSTEM"
+        rows.append({"id": vid, "file": "vo/%s.ogg" % vid, "character": char, "speaker_tag": who, "chapter": title,
+                     "order": i + 1, "scene": scene, "direction": direction(who, text, chap, scene),
+                     "processing": processing(who), "subtitle": text})
+
+os.makedirs(out, exist_ok=True)
+with open(os.path.join(out, "vo_script.csv"), "w", newline="") as f:
+    w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
+
+chars = {}
+for r in rows: chars.setdefault(r["character"], []).append(r)
+md = ["# DEAD FREQUENCY — Voice-Over Recording Script", "",
+      "*Generated by `tools/vo_package.py` from the shipped data. %d lines, %d characters. Nothing has been recorded yet.*" % (len(rows), len(chars)), "",
+      "**Delivery spec:** 48 kHz / 24-bit mono WAV, one file per line, named exactly as the `file` column (deliver WAV; the build converts to Ogg Vorbis q6). Record dry in a treated booth, 15–20 cm, pop filter. Leave 0.5 s room tone head and tail. Dialogue loudness target −18 LUFS (short-term), peaks below −3 dBFS. Processing in the `processing` column is applied in post, not in the booth. "
+      "Lines tagged *the Listener wearing this voice* are recorded by the same actor as the character, a second take each, flatter, with no breaths between phrases. "
+      "Drop finished files into `game/vo/` with the given names; the game uses them instead of the placeholder radio voice automatically.", "",
+      "| Character | Lines |", "|---|---|"]
+for c in sorted(chars, key=lambda x: -len(chars[x])): md.append("| %s | %d |" % (c, len(chars[c])))
+for c in sorted(chars, key=lambda x: -len(chars[x])):
+    md += ["", "---", "", "## %s" % c, ""]
+    cur = None
+    for r in chars[c]:
+        if r["chapter"] != cur:
+            cur = r["chapter"]; md += ["", "### %s" % cur, "", "| File | Scene | Direction | Line |", "|---|---|---|---|"]
+        md.append("| `%s` | %s | %s | %s |" % (r["id"], r["scene"].replace("|", "/"), r["direction"], r["subtitle"].replace("|", "/")))
+open(os.path.join(out, "VO_RECORDING_SCRIPT.md"), "w").write("\n".join(md) + "\n")
+print("vo package:", len(rows), "lines,", len(chars), "characters")

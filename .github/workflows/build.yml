@@ -1,0 +1,93 @@
+# DEAD FREQUENCY — automated tests and PC builds.
+# Runs only when started by hand (Actions tab → "build" → Run workflow) or when a version tag (v*) is pushed,
+# so ordinary pushes do not spend Actions minutes.
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot 3.5 (Ubuntu package), virtual display and Mesa
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y godot3 xvfb libgl1-mesa-dri
+      - name: Import assets (textures) into the .import cache
+        run: tools/import_assets.sh
+      - name: Run the test suite
+        run: |
+          for t in validate flags layout save systems ai flow endings ngplus play slice texq; do
+            DF_TIMEOUT=900 tools/test.sh "$t" > "log_$t.txt" 2>&1; rc=$?
+            grep -E "FAIL|RESULT|ENGINE ERRORS" "log_$t.txt"
+            [ $rc -eq 0 ] || { echo "test suite '$t' failed"; exit 1; }
+          done
+
+  export:
+    needs: test
+    runs-on: ubuntu-24.04
+    container: barichello/godot-ci:3.5.2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Place export templates
+        run: |
+          mkdir -p ~/.local/share/godot/templates
+          cp -r /root/.local/share/godot/templates/3.5.2.stable ~/.local/share/godot/templates/ 2>/dev/null || true
+      - name: Export Windows and Linux builds
+        run: |
+          mkdir -p build/windows build/linux
+          cd game
+          godot --no-window --export "Windows Desktop" ../build/windows/DeadFrequency.exe
+          godot --no-window --export "Linux/X11" ../build/linux/DeadFrequency.x86_64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DeadFrequency-windows
+          path: build/windows
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DeadFrequency-linux
+          path: build/linux
+
+  # Launches the exported Windows .exe under Wine on a virtual display and runs the built-in smoke test
+  # (menu, new game, chapters 1/5/12, save/load, ending A to credits, screenshots). This is a compatibility
+  # smoke test, not a substitute for testing on real Windows PCs (see docs/13_TESTING_PLAN.md, section 9).
+  wine-smoke:
+    needs: export
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: DeadFrequency-windows
+          path: build/windows
+      - name: Install Wine, virtual display and Mesa
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y wine64 xvfb libgl1-mesa-dri zip
+      - name: Run DeadFrequency.exe --smoketest under Wine
+        env:
+          WINEPREFIX: /home/runner/.wine-df
+          WINEDEBUG: -all
+        run: |
+          xvfb-run -a wineboot -i
+          cd build/windows
+          timeout 900 xvfb-run -a -s "-screen 0 1280x720x24" wine DeadFrequency.exe --resolution 1280x720 --smoketest | grep -aE "PASS|FAIL|RESULT"
+          d="$WINEPREFIX/drive_c/users/$USER/AppData/Roaming/Godot/app_userdata/DEAD FREQUENCY"
+          mkdir -p "$GITHUB_WORKSPACE/smoke" && cp "$d"/smoketest.log "$d"/smoke_*.png "$GITHUB_WORKSPACE/smoke/"
+          grep -q "RESULT: 0 failures" "$GITHUB_WORKSPACE/smoke/smoketest.log"
+      - name: Build the release package
+        run: tools/package_release.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wine-smoke-test
+          path: smoke
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DeadFrequency-release-package
+          path: build/DeadFrequency-*-Windows-x64.zip

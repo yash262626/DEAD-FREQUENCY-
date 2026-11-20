@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://slice/shaders/wet_wall.shader" type="Shader" id=1]
+[ext_resource path="res://assets/surfaces/dirty_concrete/nor_gl.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/surfaces/dirty_concrete/arm.jpg" type="Texture" id=3]
+[ext_resource path="res://slice/tex/wall_streaks.png" type="Texture" id=4]
+[ext_resource path="res://assets/surfaces/dirty_concrete/diff.jpg" type="Texture" id=5]
+
+[resource]
+resource_name = "M_CorrUpper"
+shader = ExtResource( 1 )
+shader_param/tint = Color( 0.86, 0.86, 0.84, 1 )
+shader_param/uv_scale = 0.3
+shader_param/streak_scale = 0.32
+shader_param/wetness = 0.85
+shader_param/foot_height = 0.5
+shader_param/normal_scale = 1.0
+shader_param/albedo_tex = ExtResource( 5 )
+shader_param/normal_tex = ExtResource( 2 )
+shader_param/arm_tex = ExtResource( 3 )
+shader_param/streak_tex = ExtResource( 4 )

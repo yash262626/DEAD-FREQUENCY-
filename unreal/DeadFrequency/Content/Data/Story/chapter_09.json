@@ -1,0 +1,1448 @@
+{
+ "number": 9,
+ "title": "DEAD LINE",
+ "subtitle": "SUBLEVEL 5 — TRANSPORT LINE",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {
+  "power": 1,
+  "trac": 2,
+  "trac_fail": 5
+ },
+ "legend": [
+  {
+   "symbol": "O",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "note",
+   "props": {
+    "flag": "mira_p4",
+    "text": "Loop 7,040.\n\nI ride the lift up every time. Every time it stops between floors. Every time I hear him laugh at the top, in Ines's arms, and every time the doors open on the bulkhead instead.\n\nI am not going to stop riding it.",
+    "title": "Mira's notebook — page 4 of 5"
+   },
+   "sequence": 6,
+   "lines": -1
+  },
+  {
+   "symbol": "R",
+   "kind": "trig",
+   "props": {
+    "if": "c9_power",
+    "r": "2.2"
+   },
+   "sequence": 12,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_cross",
+    "title": "Cross — transport"
+   },
+   "sequence": -1,
+   "lines": 13
+  },
+  {
+   "symbol": "Y",
+   "kind": "use",
+   "props": {
+    "fail": "Tram's dead. No traction power.",
+    "if": "c9_reveal",
+    "p": "tram",
+    "prompt": "Start the tram",
+    "rot": "90",
+    "size": "(2.2, 2.6, 5.2)"
+   },
+   "sequence": 14,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "a",
+   "kind": "note",
+   "props": {
+    "text": "HELIX-9 TRANSPORT — SERVICE 02:30 — CONTAINMENT (STAFF ONLY)\n\nVoss, E. (Director)\nOkafor, T.\nSolace, M.  + D. (infant — see below)\nKowalczyk, J.\nMensah, A.\nFerreira, L.\nVarga, P.\nIto, K.\nNyberg, H.\nAchterberg, R.\nFofanah, K.\n\n(Operator's note:) D. should NOT be on this tram. Told the Director. She said Mira's taking him up at 02:40.\nIt's 02:30. — L. Cross",
+    "title": "Last service manifest"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "use",
+   "props": {
+    "p": "switch",
+    "prompt": "Throw the booth traction switch",
+    "seq": "trac",
+    "step": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "f",
+   "kind": "item",
+   "props": {
+    "id": "tram_fuse"
+   },
+   "sequence": 15,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "medkit"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "6"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "HELIX-9 TRANSPORT LINE\n\nLast service nightly: 02:30 — CONTAINMENT (staff only)\n\nTRACTION RESTORE: three switches, in the order on the operator's card.\n\n(The card is missing. Pencil on the wall where it used to be pinned:)\nCross took the card home AGAIN.\nJust ask him on the radio. He says it every night.",
+    "title": "Transport booth — procedures"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "c9_order",
+    "r": "16",
+    "title": "Transport, 1998"
+   },
+   "sequence": -1,
+   "lines": 16
+  },
+  {
+   "symbol": "p",
+   "kind": "use",
+   "props": {
+    "p": "switch",
+    "prompt": "Throw the platform traction switch",
+    "seq": "trac",
+    "step": "3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "use",
+   "props": {
+    "fail": "Traction fuse holder. Empty. The depot office off the yard should keep spares.",
+    "need": "tram_fuse",
+    "p": "switch",
+    "prompt": "Fit the traction fuse"
+   },
+   "sequence": 17,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "prop",
+   "props": {
+    "p": "crate"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "y",
+   "kind": "use",
+   "props": {
+    "p": "switch",
+    "prompt": "Throw the yard traction switch",
+    "seq": "trac",
+    "step": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "################################",
+  "#nQ.V#.......L.......L..q...p..#",
+  "#.S..D...........R...m.........#",
+  "#b...#.........................#",
+  "#....#.........Y...............#",
+  "###D#######################D####",
+  "#..............................#",
+  "#..x...x......L.......x......o.#",
+  "#H...............Z.............#",
+  "#..e...x..............x...L....#",
+  "#..............................#",
+  "#........P...y.............P...#",
+  "################O###############",
+  "##############..L.....##########",
+  "##############.a...T..##########",
+  "##############.f...k..##########",
+  "################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 1,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 2,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 4,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 21,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 24,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "p",
+   "cell": {
+    "x": 28,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 5,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 17,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 21,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 1,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "Y",
+   "cell": {
+    "x": 15,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 27,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 3,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 7,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 14,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 22,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 29,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 1,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 17,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 3,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 7,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 22,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 26,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 9,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 13,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 27,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "O",
+   "cell": {
+    "x": 16,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 16,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "a",
+   "cell": {
+    "x": 15,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 19,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 15,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 19,
+    "y": 15
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"mode\":\"patrol\"}]",
+  "amb_db": "-28",
+  "amb_loop": "hum",
+  "face": "-90",
+  "music": "drone_a",
+  "pal": "transport"
+ },
+ "walkthrough": [
+  "[\"radio\",\"o\"]",
+  "Q",
+  "y",
+  "b",
+  "p",
+  "O",
+  "a",
+  "T",
+  "f",
+  "q",
+  "R",
+  "Y"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The transport line. Rails into the dark, and a tram that hasn't moved since nineteen ninety-eight."
+     ],
+     "vo": "daniel_7360461932"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Containment's at the end of the line. So is she."
+     ],
+     "vo": "daniel_5cee7d86df"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Restore traction power: three switches in the right order, and a traction fuse on the platform."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c9_power"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "2"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.3"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Traction restored. Next service: Containment. Staff only."
+     ],
+     "vo": "pa_4f1e0b1966"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Board the tram on the platform."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "c9_fuse"
+     ],
+     "then": 3,
+     "else": 4
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "group",
+     "args": [
+      "power"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Switches are thrown, but the platform circuit's dead. The traction fuse holder's empty."
+     ],
+     "vo": "daniel_8357e014ab"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find a traction fuse. The depot office is off the yard."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "alarm",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Wrong switch. The whole board dropped — and the yard heard it."
+     ],
+     "vo": "daniel_1b9afbd0f8"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p1"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p2"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p3"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p4"
+     ],
+     "then": 10,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p5"
+     ],
+     "then": 11,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "mira_all"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "notebook"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's every page. If she left one more, it's where she is."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "music",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Daniel? You're on the platform. I can hear the rails singing."
+     ],
+     "vo": "mira_3de2bd087f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Tram's live. I'm coming down to you. Containment. Ten minutes."
+     ],
+     "vo": "daniel_2dc12d52d3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Don't. Please. Not if Marcus sent you."
+     ],
+     "vo": "mira_54c0a534c0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Nobody sent me. I'm coming because you're there."
+     ],
+     "vo": "daniel_3b31d8e2c0"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Can I tell you something stupid? There's a song. I hum it when I'm frightened. I've hummed it eleven thousand times down here."
+     ],
+     "vo": "mira_8787642b6a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I heard you. In the lift. I knew the tune."
+     ],
+     "vo": "daniel_d7895c9109"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "You couldn't. Evelyn wrote the words. Nobody alive knows them but me."
+     ],
+     "vo": "mira_310c201b97"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "(singing, barely) Little light, little light... hold the line through the night..."
+     ],
+     "vo": "mira_3a66590e64"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "(singing, without meaning to) ...if the dark calls your name, it is not me."
+     ],
+     "vo": "daniel_93b4f1c8b1"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Where did you learn that?"
+     ],
+     "vo": "mira_78f1030762"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I don't know. I've always known it. I sang it under the covers when I was small. My mum — the woman who raised me — said I came with it."
+     ],
+     "vo": "daniel_ce01ee1ffd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Came with it."
+     ],
+     "vo": "mira_1def589b94"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Daniel. When's your birthday?"
+     ],
+     "vo": "mira_cecba0a28c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Fourteenth of August."
+     ],
+     "vo": "daniel_88bd398663"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "...Danny?"
+     ],
+     "vo": "mira_fab6136266"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "107.9"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "look",
+     "args": [
+      "m",
+      "1.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Mira?"
+     ],
+     "vo": "daniel_feb0fc893b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "I carried you up that lift. Two forty-four. You had your hand in my hair the whole way up and you never cried once."
+     ],
+     "vo": "mira_732fb67fa2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "I gave you to Ines at the gate. I pinned your name to your blanket, and I told her: don't let them ever bring him back here."
+     ],
+     "vo": "mira_6285b5f6f3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "And then I went back down for your mother."
+     ],
+     "vo": "mira_bae37e6509"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "My mother."
+     ],
+     "vo": "daniel_c67955caa3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Evelyn. Evelyn Voss. You're her son, Danny. You're Evelyn's boy."
+     ],
+     "vo": "mira_1a10bd6275"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The file. The birthday. Subject D. I kept telling myself — I kept—"
+     ],
+     "vo": "daniel_069c757780"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Look at you. You got so old. You got so tall."
+     ],
+     "vo": "mira_3ba4123444"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "You haven't aged a day."
+     ],
+     "vo": "daniel_a8b869bfac"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "(a laugh that breaks) It's only been one night, Danny. It's only ever been one night."
+     ],
+     "vo": "mira_81ab8027a7"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "Mira",
+      "She carried me up the lift at 02:44 on the 17th of October 1998. She gave me to the gate guard, Ines Duarte, with my name pinned to my blanket. Then she went back down for my mother.\n\nMy mother was Dr. Evelyn Voss.\n\nAnd she sang it over the radio. The song. Evelyn never once let it go out over the air. Now it has."
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c9_reveal"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "lullaby_aired"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "0"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Arlen. Get on the tram. Now. It heard every word of that, and it's coming for you."
+     ],
+     "vo": "hale_1207cb959a"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "hunt"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "screech",
+      "4",
+      "1",
+      "Z"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Get on the tram!"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "CROSS (TAPE)",
+      "Cross. Transport. I'm not supposed to keep a log, so this is a log."
+     ],
+     "vo": "cross_d8c50fa1bd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "CROSS (TAPE)",
+      "Took the Run Nineteen crew down at two-thirty. Eleven and a half, if you count the baby. I counted the baby."
+     ],
+     "vo": "cross_1f2f0fb19e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "CROSS (TAPE)",
+      "Mira had him in a sling, asleep. She saw me looking and said, 'Ten minutes, Lenny. I'm taking him up at two-forty. I promise.'"
+     ],
+     "vo": "cross_e40ad24df3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "CROSS (TAPE)",
+      "It's two forty-one. Nobody's come back up the line."
+     ],
+     "vo": "cross_679b535d7f"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "0"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "cine",
+      "tram",
+      "-6",
+      "0.8"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Go, go, go—"
+     ],
+     "vo": "daniel_7be486852e"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Danny? Are you on it?"
+     ],
+     "vo": "mira_a1c9bd7b13"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I'm on it. It's behind us. I think it's behind us."
+     ],
+     "vo": "daniel_f887cca255"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Talk to me. Keep talking. It's harder for it when you're not alone."
+     ],
+     "vo": "mira_cb689cad71"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "What do I talk about?"
+     ],
+     "vo": "daniel_d254dc9c08"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Anything. What you did. Who you turned into. I've wondered for eleven thousand nights."
+     ],
+     "vo": "mira_17ac3f9eb6"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "4",
+      "0.5"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.5"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "2",
+      "0.5"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "2",
+      "0.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...There's something on the roof."
+     ],
+     "vo": "daniel_b498de160f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Then keep talking. Don't stop. Don't let it have the quiet."
+     ],
+     "vo": "mira_ae8885fc80"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I fix radios. I used to run rescue comms in the mountains. Then one night I listened to the wrong voice, and four people froze on Harrow Pass. So now I fix radios."
+     ],
+     "vo": "daniel_fdad26159c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Whose voice?"
+     ],
+     "vo": "mira_63e4136f7c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mine."
+     ],
+     "vo": "daniel_4e6250665d"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "...Danny. That's what it does."
+     ],
+     "vo": "mira_7d7b0cba30"
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.5"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "-2",
+      "0.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "We're slowing. Containment. We're here."
+     ],
+     "vo": "daniel_255d19f3a7"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "cine"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Traction fuse. Big as a loaf of bread."
+     ],
+     "vo": "daniel_12ce75a900"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "CROSS (1998)",
+      "Transport to control. Traction's dropped again. I'm restoring."
+     ],
+     "vo": "cross_88d021bb4c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Order, Lenny."
+     ],
+     "vo": "okafor_8a0ace28c9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "CROSS (1998)",
+      "Yard, booth, platform. Same as every night. Yard, booth, platform. Why?"
+     ],
+     "vo": "cross_d303eb6061"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Because something's been saying it to me in your voice all night, and I wanted to hear the real one."
+     ],
+     "vo": "okafor_f38a9f7021"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Yard. Booth. Platform."
+     ],
+     "vo": "daniel_ce399cb0c0"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c9_fuse"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "beep",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Fuse is in."
+     ],
+     "vo": "daniel_46d466a309"
+    },
+    {
+     "command": "if",
+     "args": [
+      "solved_trac"
+     ],
+     "then": 18,
+     "else": 19
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "group",
+     "args": [
+      "power"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Fuse is in. Now the traction switches: the order is on the operator's channel."
+     ]
+    }
+   ]
+  }
+ ]
+}

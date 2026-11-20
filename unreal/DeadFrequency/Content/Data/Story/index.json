@@ -1,0 +1,112 @@
+{
+ "chapters": [
+  {
+   "file": "chapter_00.json",
+   "number": 0,
+   "title": "PROLOGUE",
+   "ending": ""
+  },
+  {
+   "file": "chapter_01.json",
+   "number": 1,
+   "title": "THE ARRIVAL",
+   "ending": ""
+  },
+  {
+   "file": "chapter_02.json",
+   "number": 2,
+   "title": "THE SILENT WING",
+   "ending": ""
+  },
+  {
+   "file": "chapter_03.json",
+   "number": 3,
+   "title": "WHAT REMAINS",
+   "ending": ""
+  },
+  {
+   "file": "chapter_04.json",
+   "number": 4,
+   "title": "BELOW THE SURFACE",
+   "ending": ""
+  },
+  {
+   "file": "chapter_05.json",
+   "number": 5,
+   "title": "THE VOICES",
+   "ending": ""
+  },
+  {
+   "file": "chapter_06.json",
+   "number": 6,
+   "title": "NO WAY BACK",
+   "ending": ""
+  },
+  {
+   "file": "chapter_07.json",
+   "number": 7,
+   "title": "THE SIGNAL ROOM",
+   "ending": ""
+  },
+  {
+   "file": "chapter_08.json",
+   "number": 8,
+   "title": "THE ECHO PROJECT",
+   "ending": ""
+  },
+  {
+   "file": "chapter_09.json",
+   "number": 9,
+   "title": "DEAD LINE",
+   "ending": ""
+  },
+  {
+   "file": "chapter_10.json",
+   "number": 10,
+   "title": "WHAT LISTENS",
+   "ending": ""
+  },
+  {
+   "file": "chapter_11.json",
+   "number": 11,
+   "title": "EVERY VOICE EVER LOST",
+   "ending": ""
+  },
+  {
+   "file": "chapter_12.json",
+   "number": 12,
+   "title": "02:43",
+   "ending": ""
+  },
+  {
+   "file": "chapter_13.json",
+   "number": 13,
+   "title": "THE LAST TRANSMISSION",
+   "ending": ""
+  },
+  {
+   "file": "ending_A.json",
+   "number": -1,
+   "title": "ENDING A",
+   "ending": "A"
+  },
+  {
+   "file": "ending_B.json",
+   "number": -1,
+   "title": "ENDING B",
+   "ending": "B"
+  },
+  {
+   "file": "ending_C.json",
+   "number": -1,
+   "title": "ENDING C",
+   "ending": "C"
+  },
+  {
+   "file": "ending_D.json",
+   "number": -1,
+   "title": "ENDING D",
+   "ending": "D"
+  }
+ ]
+}

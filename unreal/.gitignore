@@ -1,0 +1,13 @@
+# Unreal build products and caches (never committed)
+DeadFrequency/Binaries/
+DeadFrequency/Intermediate/
+DeadFrequency/Saved/
+DeadFrequency/DerivedDataCache/
+DeadFrequency/Build/
+DeadFrequency/Plugins/*/Binaries/
+DeadFrequency/Plugins/*/Intermediate/
+DeadFrequency/.vs/
+DeadFrequency/*.sln
+DeadFrequency/*.VC.db
+DeadFrequency/.idea/
+DeadFrequency/Packaged/

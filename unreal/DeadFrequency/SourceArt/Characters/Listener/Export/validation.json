@@ -1,0 +1,134 @@
+[
+ {
+  "file": "A_Listener_Attack.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 54,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Crawl.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 36,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Drag.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 84,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Idle.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 120,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Listen.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 72,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Run.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 18,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Stalk.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 30,
+  "curves": 1009
+ },
+ {
+  "file": "A_Listener_Walk.fbx",
+  "bones": 100,
+  "action": "Armature|Scene",
+  "frames": 30,
+  "curves": 1009
+ },
+ {
+  "file": "SK_Listener.fbx",
+  "bones": 100,
+  "tris": 92844,
+  "verts": 46535,
+  "uv_maps": [
+   "UVMap"
+  ],
+  "materials": [
+   "M_Listener_Claws",
+   "M_Listener_Membrane",
+   "M_Listener_Skin"
+  ],
+  "vertex_groups": 71,
+  "height_m": 2.502,
+  "root": [
+   "root"
+  ]
+ },
+ {
+  "file": "SK_Listener_LOD1.fbx",
+  "bones": 100,
+  "tris": 47234,
+  "verts": 23716,
+  "uv_maps": [
+   "UVMap"
+  ],
+  "materials": [
+   "M_Listener_Claws",
+   "M_Listener_Membrane",
+   "M_Listener_Skin"
+  ],
+  "vertex_groups": 71,
+  "height_m": 2.502,
+  "root": [
+   "root"
+  ]
+ },
+ {
+  "file": "SK_Listener_LOD2.fbx",
+  "bones": 100,
+  "tris": 23616,
+  "verts": 11883,
+  "uv_maps": [
+   "UVMap"
+  ],
+  "materials": [
+   "M_Listener_Claws",
+   "M_Listener_Membrane",
+   "M_Listener_Skin"
+  ],
+  "vertex_groups": 71,
+  "height_m": 2.501,
+  "root": [
+   "root"
+  ]
+ },
+ {
+  "file": "SK_Listener_LOD3.fbx",
+  "bones": 100,
+  "tris": 9445,
+  "verts": 4769,
+  "uv_maps": [
+   "UVMap"
+  ],
+  "materials": [
+   "M_Listener_Claws",
+   "M_Listener_Membrane",
+   "M_Listener_Skin"
+  ],
+  "vertex_groups": 71,
+  "height_m": 2.503,
+  "root": [
+   "root"
+  ]
+ }
+]

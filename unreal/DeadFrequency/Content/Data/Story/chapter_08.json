@@ -1,0 +1,1907 @@
+{
+ "number": 8,
+ "title": "THE ECHO PROJECT",
+ "subtitle": "SUBLEVEL 5 — RESEARCH",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {
+  "annex": 1,
+  "proto": 2
+ },
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "trig",
+   "props": {
+    "r": "2.6"
+   },
+   "sequence": 3,
+   "lines": -1
+  },
+  {
+   "symbol": "8",
+   "kind": "radio",
+   "props": {
+    "f": "88",
+    "flag": "ss4",
+    "ngp": "true",
+    "r": "14",
+    "title": "88.0 — the second signal (4 of 6)"
+   },
+   "sequence": -1,
+   "lines": 4
+  },
+  {
+   "symbol": "A",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_colonel",
+    "title": "Directorate — Long Ear status"
+   },
+   "sequence": -1,
+   "lines": 11
+  },
+  {
+   "symbol": "B",
+   "kind": "note",
+   "props": {
+    "text": "ANNEX — CELL 2 — PREPARED FOR SUBJECT D.\n\n- Soundproofed. Carrier piped in, 24 hours.\n- Observation window, one-way.\n- Cot: standard issue.\n- No toys. (Toys are noise.)\n\nNo mother on site after transfer.",
+    "title": "Cell 2 — preparation order"
+   },
+   "sequence": 12,
+   "lines": -1
+  },
+  {
+   "symbol": "C",
+   "kind": "door",
+   "props": {
+    "code": "6024",
+    "label": "COLD ROOM — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "E",
+   "kind": "trig",
+   "props": {
+    "if": "c8_longear",
+    "r": "2"
+   },
+   "sequence": 13,
+   "lines": -1
+  },
+  {
+   "symbol": "K",
+   "kind": "use",
+   "props": {
+    "fail": "Two-person lockdown release. The key here and a foot pedal by the far wall have to be held at the same time. There's one of me.",
+    "if": "c8_hold",
+    "p": "console",
+    "prompt": "Turn the lockdown release key"
+   },
+   "sequence": 14,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {
+    "lock": "lab_key",
+    "msg": "Transport line. Research keycard only."
+   },
+   "sequence": 17,
+   "lines": -1
+  },
+  {
+   "symbol": "N",
+   "kind": "door",
+   "props": {
+    "c": "0.5,0.45,0.12,1",
+    "msg": "Lockdown shutter. The lab won't release the transport airlock until both lockdown keys are turned at the release console.",
+    "needflag": "c8_lockdown"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "O",
+   "kind": "door",
+   "props": {
+    "msg": "Inner door. Dead — the annex has no power of its own.",
+    "needflag": "solved_annex"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev5",
+    "title": "Dr. Voss — the night before Run 19"
+   },
+   "sequence": -1,
+   "lines": 18
+  },
+  {
+   "symbol": "Y",
+   "kind": "door",
+   "props": {
+    "c": "0.7,0.72,0.74,1",
+    "msg": "Just wall. Except it rings hollow when I knock on it.",
+    "needflag": "c8_annex_found"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "a",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "proto",
+    "label": "Prototype taps",
+    "p": "valve",
+    "prompt": "Turn tap I",
+    "target": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "proto",
+    "label": "Prototype taps",
+    "p": "valve",
+    "prompt": "Turn tap II",
+    "target": "3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "prop",
+   "props": {
+    "p": "crib"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "d",
+   "kind": "note",
+   "props": {
+    "text": "LAB 2 — ACOUSTIC RESPONSE TRIALS\nSUBJECT: D. (14 months)\n\nTrials 1–6: carrier ON → subject turns toward the array, stills, smiles. Carrier OFF → no response.\n\nTrial 7: carrier ON, array transmitting NOTHING. The carrier modulates on its own. It is copying the subject's babble. Back to him.\n\nTrial 8: subject laughs. The carrier laughs.\n\n(E.V.:) It doesn't want us. It wants him. It has been listening for him.\n(S.L.:) Then for God's sake get him out of here.\n(M.S.:) I'll take him up tonight. — M.",
+    "title": "Lab 2 — response trials, Subject D"
+   },
+   "sequence": 19,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "proto",
+    "label": "Prototype taps",
+    "p": "valve",
+    "prompt": "Turn tap III",
+    "target": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "f",
+   "kind": "radio",
+   "props": {
+    "f": "101.3",
+    "if": "c8_loose",
+    "r": "12",
+    "title": "Forecast — the lights"
+   },
+   "sequence": 20,
+   "lines": 21
+  },
+  {
+   "symbol": "g",
+   "kind": "ghost",
+   "props": {
+    "r": "9",
+    "text": "COLD ROOM\n6 0 2 4"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "ghost",
+   "props": {
+    "r": "7",
+    "text": "THE ANNEX IS BELOW\nPULL THE SHELF"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "i",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "annex",
+    "label": "Annex relays",
+    "p": "valve",
+    "prompt": "Turn relay wheel I",
+    "target": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "j",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "annex",
+    "label": "Annex relays",
+    "p": "valve",
+    "prompt": "Turn relay wheel II",
+    "target": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "lab_key"
+   },
+   "sequence": 22,
+   "lines": -1
+  },
+  {
+   "symbol": "l",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "annex",
+    "label": "Annex relays",
+    "p": "valve",
+    "prompt": "Turn relay wheel III",
+    "target": "3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "use",
+   "props": {
+    "p": "monitor",
+    "prompt": "Play the briefing reel"
+   },
+   "sequence": 23,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "OCTOBER 1998\n\n14  Danny — 14 months. Hearing assessment 6.\n15  Directorate call. They want Phase III by the 20th. They want the future. They don't care what comes with it.\n16  Run 19 prep. Marcus refuses to sign. Signed it myself.\n17  RUN 19 — 02:40\n     (underlined twice:) Mira takes D. up BEFORE we start. Non-negotiable.\n18  —",
+    "title": "Evelyn's desk calendar"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "prop",
+   "props": {
+    "p": "dish"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "p",
+   "kind": "note",
+   "props": {
+    "text": "APERTURE PROTOTYPE (1:20) — CALIBRATION\n\nTap I ..... 1\nTap II .... 3\nTap III ... 2\n\nE.V.: The prototype never opened far enough to transmit. It only ever received one thing, on 101.3, in a voice none of us recognised. I'm keeping the card in case it does it again.",
+    "title": "Prototype calibration card"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "s",
+   "kind": "use",
+   "props": {
+    "p": "shelf",
+    "prompt": "Pull the shelf"
+   },
+   "sequence": 24,
+   "lines": -1
+  },
+  {
+   "symbol": "t",
+   "kind": "note",
+   "props": {
+    "text": "DIRECTORATE ANNEX — POWER-UP PROTOCOL\n\nAfter any blackout, set the relay wheels:\n  I ..... 2\n  II .... 1\n  III ... 3\n\nDo not improvise. The annex is not on the facility grid and nobody upstairs is coming to fix it.\n\n— P.K., liaison",
+    "title": "Annex power protocol"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "u",
+   "kind": "prop",
+   "props": {
+    "p": "tank"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "v",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "w",
+   "kind": "plate",
+   "props": {
+    "flag": "c8_hold"
+   },
+   "sequence": 25,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "pcrate",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "y",
+   "kind": "radio",
+   "props": {
+    "f": "93.3",
+    "flag": "c8_longear_code",
+    "r": "12",
+    "title": "93.3 — Long Ear"
+   },
+   "sequence": -1,
+   "lines": 26
+  },
+  {
+   "symbol": "z",
+   "kind": "use",
+   "props": {
+    "code": "5270",
+    "label": "LONG EAR — ACCESS CODE",
+    "p": "terminal",
+    "prompt": "Directorate terminal"
+   },
+   "sequence": 27,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "################################",
+  "#....#...............K.#.......#",
+  "#.S..D..u...u...u...L..D..T..L.#",
+  "#.L8.#.................#..n....#",
+  "######..u...u...u...H..#.......#",
+  "#....#.........1.......#########",
+  "#.m..#..u...u...u...f..#.......#",
+  "#....D...........L.....D..d....#",
+  "#.L..#..H.....x........#.c.....#",
+  "#v...#.w...............#.......#",
+  "##########D#####################",
+  "#..h.C.....g..........Z...P..N.M",
+  "#...k#######################.###",
+  "#s..V#######################.###",
+  "##Y#########################Q###",
+  "#..i...j...l.....#.....L.....###",
+  "#..........y....t#.a..o..b..e###",
+  "#H......L........#.p.........###",
+  "########O#######################",
+  "#..c........z....###############",
+  "#......E.......A.###############",
+  "#..L..B..........###############",
+  "################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "K",
+   "cell": {
+    "x": 21,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 5,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 8,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 12,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 16,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 23,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 26,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 29,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 2,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "8",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 26,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 8,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 12,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 16,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 20,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 15,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 2,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 8,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 12,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 16,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 20,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 5,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 17,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 23,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 26,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 2,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 8,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 14,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 25,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "v",
+   "cell": {
+    "x": 1,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 7,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 10,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 3,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "C",
+   "cell": {
+    "x": 5,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 11,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 22,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 26,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "N",
+   "cell": {
+    "x": 29,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 31,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 4,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "s",
+   "cell": {
+    "x": 1,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 4,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "Y",
+   "cell": {
+    "x": 2,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 28,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "i",
+   "cell": {
+    "x": 3,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 7,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "l",
+   "cell": {
+    "x": 11,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 23,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 11,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "t",
+   "cell": {
+    "x": 16,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "a",
+   "cell": {
+    "x": 19,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 22,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 25,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 28,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 1,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 8,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "p",
+   "cell": {
+    "x": 19,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "O",
+   "cell": {
+    "x": 8,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 3,
+    "y": 19
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 12,
+    "y": 19
+   }
+  },
+  {
+   "symbol": "E",
+   "cell": {
+    "x": 7,
+    "y": 20
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 15,
+    "y": 20
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 21
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 6,
+    "y": 21
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"if\":\"c8_loose\",\"mode\":\"patrol\"}]",
+  "amb_db": "-26",
+  "amb_loop": "hum",
+  "face": "-90",
+  "music": "drone_c",
+  "pal": "lab"
+ },
+ "walkthrough": [
+  "m",
+  "1",
+  "[\"radio\",\"f\"]",
+  "T",
+  "n",
+  "d",
+  "C",
+  "k",
+  "s",
+  "Y",
+  "i",
+  "i",
+  "j",
+  "l",
+  "l",
+  "l",
+  "[\"radio\",\"y\"]",
+  "t",
+  "O",
+  "z",
+  "A",
+  "B",
+  "[\"crate\",\"x\",\"w\"]",
+  "K",
+  "Q",
+  "p",
+  "a",
+  "b",
+  "b",
+  "b",
+  "e",
+  "e",
+  "N",
+  "M"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Research. Everything's white down here. White's the colour of a place that wants you to think it's clean."
+     ],
+     "vo": "daniel_72e885fb37"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find out what HELIX-9 was for. Then find a way through to the transport line."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "2",
+      "0.8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Annex power restored. Directorate personnel only."
+     ],
+     "vo": "pa_90c91dd15c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'Directorate personnel only.' Nobody told it the Directorate never came back."
+     ],
+     "vo": "daniel_0993a34108"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The annex's inner door has power."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "0",
+      "1.4"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.3"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "101.3"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (101.3 MHz)",
+      "Don't open it. Don't just close it. Answer it. And don't do it alone."
+     ],
+     "vo": "daniel_d2bf550d27"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's me. Me, later. Telling me something I haven't worked out yet."
+     ],
+     "vo": "daniel_00f8d5e8a3"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "The prototype",
+      "The 1:20 prototype Aperture received one message, on 101.3, in my voice:\n\n'Don't open it. Don't just close it. Answer it. And don't do it alone.'"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c8_proto"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "101.3"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (101.3 MHz)",
+      "In twenty seconds it comes through the south door. Get in a locker. Don't look at it."
+     ],
+     "vo": "daniel_8c71cc1234"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's me again. My voice. Telling me what happens next."
+     ],
+     "vo": "daniel_0b7f3e993e"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "101.3 MHz — FORECAST. What it tells you will happen, happens."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Hide. Now."
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "14"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "door",
+      "0",
+      "0.7",
+      "Z"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c8_loose"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "patrol"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "1"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "8"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find a way out: the transport exit needs a research keycard, and the lab lockdown lifted at the release console."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "Peter Kessler was twenty-nine in nineteen ninety-eight. Directorate liaison to HELIX-9."
+     ],
+     "vo": "daniel_ffeabc7eb0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "He drove up the mountain at six that morning to collect Subject D. He found the blast door rusted shut, and a gate guard who would not tell him where the baby had gone."
+     ],
+     "vo": "daniel_b3193d3a5f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "He never stopped looking. He just stopped looking for Subject D, and started looking for me."
+     ],
+     "vo": "daniel_f6f051d229"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ss1"
+     ],
+     "then": 5,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss2"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss3"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss4"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss5"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss6"
+     ],
+     "then": 10,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "ach",
+     "args": [
+      "static_between"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "88.0 is quiet now. Every message is in the journal."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "COLONEL (TAPE, 1998)",
+      "Long Ear, status. The Director is resisting transfer. I've reminded her that the boy is a Directorate asset the moment he can hear a carrier without a set."
+     ],
+     "vo": "colonel_f5c9ad3709"
+    },
+    {
+     "command": "line",
+     "args": [
+      "COLONEL (TAPE, 1998)",
+      "When Run Nineteen completes, we take him up the mountain at six. My liaison will handle it. Young man. Very keen."
+     ],
+     "vo": "colonel_202d8df1b8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "COLONEL (TAPE, 1998)",
+      "If the boy is half of what Voss says he is, we'll never need a receiver again. We'll just need him."
+     ],
+     "vo": "colonel_16536f6741"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'No toys. Toys are noise.' That cot was for me."
+     ],
+     "vo": "daniel_ec7a27e850"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "2",
+      "0.6",
+      "O"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "j",
+      "stalk"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It's in the relay room. Between me and the only way out."
+     ],
+     "vo": "daniel_723a82734f"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Watch it. It won't move while you're looking at it."
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "6"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "-2",
+      "1.2"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c8_lockdown"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "K"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Laboratory lockdown lifted. Transport airlock released."
+     ],
+     "vo": "pa_0287b22402"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "One man, two keys. Hale would hate this."
+     ],
+     "vo": "daniel_e5ecca9f16"
+    },
+    {
+     "command": "if",
+     "args": [
+      "u:c8_k1"
+     ],
+     "then": 15,
+     "else": 16
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Lockdown's lifted and you have the keycard. The transport line is at the east end of the south corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Lockdown's lifted. Now the research keycard — try the cold room off the south corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Rails, going down into the dark. Of course they are."
+     ],
+     "vo": "daniel_ed3f709021"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Run nineteen is tomorrow night. Tonight. It's past midnight. Tonight."
+     ],
+     "vo": "evelyn_a67af479a1"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Marcus wants me to stop. Sara wants Danny off the mountain. Mira won't look at me."
+     ],
+     "vo": "evelyn_bb3cb506e6"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Here is what I know. The correspondent isn't on the other side of the Aperture. It's in the line itself. It's made of the line."
+     ],
+     "vo": "evelyn_44b825ed06"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Every voice that ever went out and never came back — it's that. It's what's left of them. And it is so hungry to be heard."
+     ],
+     "vo": "evelyn_04307b8a04"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Open the Aperture all the way and it comes through. Close it all the way and the echo stops for ever — everything that's left of them goes silent, and we never hear any of it again."
+     ],
+     "vo": "evelyn_40e810e4b4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "I keep thinking there's a third way. A way to answer it. To give it what it wants without letting it out."
+     ],
+     "vo": "evelyn_48f5001373"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "I'm going to try. God help me. I'm going to try."
+     ],
+     "vo": "evelyn_5159eede90"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Subject D. 'It wants him. It's been listening for him.'"
+     ],
+     "vo": "daniel_4da7c6b5ba"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The beacon asked for me by name. Arlen, Daniel. Like it already knew where to look."
+     ],
+     "vo": "daniel_6f4eafa7a0"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "wait",
+     "args": [
+      "30"
+     ]
+    },
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "1"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "20"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (101.3 MHz)",
+      "In thirty seconds the lights go out. It will be listening between the tanks. Walk. Don't run."
+     ],
+     "vo": "daniel_47d1c8979f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Walk, don't run. Okay. Okay."
+     ],
+     "vo": "daniel_e9f006bd06"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Research keycard. 'E. VOSS — ALL AREAS.'"
+     ],
+     "vo": "daniel_5229ea4187"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The transport line is through the door at the east end of the south corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "v",
+      "m",
+      "3",
+      "",
+      "1.5",
+      "1.2"
+     ]
+    },
+    {
+     "command": "monitor",
+     "args": [
+      "[\"DIRECTORATE OF SIGNAL RESEARCH\",\"PROJECT ECHO — BRIEFING 04/96\",\"CLASSIFICATION: HELIX\"]",
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (BRIEFING, 1996)",
+      "Gentlemen. Every radio signal ever transmitted is still travelling. You know that. It thins, it scatters, but it doesn't stop."
+     ],
+     "vo": "evelyn_24a0dc2452"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (BRIEFING, 1996)",
+      "What you don't know is that some of it comes back. Not reflected — returned, through a layer of the deep crust we're calling the echo shelf. Delayed by years. Sometimes decades."
+     ],
+     "vo": "evelyn_15a66f6173"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (BRIEFING, 1996)",
+      "And some of it arrives before it was sent."
+     ],
+     "vo": "evelyn_f0abcdb707"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (BRIEFING, 1996)",
+      "HELIX-9 sits on the thinnest point of that shelf on this continent. With the array, we hear the past. With the Aperture, we believe we can hear the future."
+     ],
+     "vo": "evelyn_49b979bf01"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DIRECTORATE (BRIEFING, 1996)",
+      "And transmit?"
+     ],
+     "vo": "directorate_9a6887af7c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (BRIEFING, 1996)",
+      "In principle, both ways. The Aperture isn't a receiver, Colonel. It's a door."
+     ],
+     "vo": "evelyn_13c58c5710"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DIRECTORATE (BRIEFING, 1996)",
+      "Then what's on the other side of it, Doctor?"
+     ],
+     "vo": "directorate_8c9839784a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (BRIEFING, 1996)",
+      "Everything anyone has ever said. Waiting to be heard."
+     ],
+     "vo": "evelyn_c33e8d427d"
+    },
+    {
+     "command": "monitor",
+     "args": [
+      "[\"PHASE III — THE APERTURE\",\"\\\"OPEN THE LINE BOTH WAYS\\\"\"]",
+      "1.8"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "They didn't build a listening post. They built a door."
+     ],
+     "vo": "daniel_3edebd640d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'Whatever happens, do not open the door.'"
+     ],
+     "vo": "daniel_5c786854e6"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c8_brief"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "2",
+      "0.6"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.3"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c8_annex_found"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It's on rails. The whole shelf rolls back — and there's a door in the floor wall behind it."
+     ],
+     "vo": "daniel_0c51bcb5ee"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "A hidden door under the cold room. Whatever the Directorate kept down here, it's behind it."
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "s"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "-2",
+      "0.7",
+      "w"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "The far pedal is held down."
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Pedal's down. Nobody works alone, Hale said. Fine. I've got a crate."
+     ],
+     "vo": "daniel_1e2894de34"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DIRECTORATE (93.3 MHz)",
+      "Long Ear. Long Ear. Five. Two. Seven. Zero. Long Ear."
+     ],
+     "vo": "directorate_bf695bac66"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DIRECTORATE (93.3 MHz)",
+      "Long Ear. Five. Two. Seven. Zero."
+     ],
+     "vo": "directorate_067d184308"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Five-two-seven-zero. A numbers station with one listener."
+     ],
+     "vo": "daniel_2659dfdf28"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "monitor",
+     "args": [
+      "[\"DIRECTORATE OF SIGNAL RESEARCH\",\"PROJECT LONG EAR\",\"OBJECTIVE: A LISTENER WHO REQUIRES NO EQUIPMENT\",\"SUBJECT: D.  (14 MONTHS)\",\"TRANSFER: 17 OCT 1998 — 06:00\",\"LIAISON: P. K—\"]",
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'A listener who requires no equipment.' They didn't want the Door. They wanted the baby who could hear through it."
+     ],
+     "vo": "daniel_94196e768a"
+    },
+    {
+     "command": "journal",
+     "args": [
+      "Project Long Ear",
+      "The Directorate's own programme, run from a hidden annex under the research labs. Objective: a listener who requires no equipment. Subject: D., fourteen months. Transfer scheduled for 06:00 on 17 October 1998.\n\nThe liaison's name is cut off on the screen: P. K—"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c8_longear"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "long_ear"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  }
+ ]
+}

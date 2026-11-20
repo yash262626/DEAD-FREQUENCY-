@@ -1,0 +1,1539 @@
+{
+ "number": 4,
+ "title": "BELOW THE SURFACE",
+ "subtitle": "SUBLEVEL 3 — RESIDENTIAL",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "2",
+   "kind": "trig",
+   "props": {
+    "if": "u:c4_t1",
+    "r": "2.4"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "8",
+   "kind": "radio",
+   "props": {
+    "f": "88",
+    "flag": "ss2",
+    "ngp": "true",
+    "r": "14",
+    "title": "88.0 — the second signal (2 of 6)"
+   },
+   "sequence": -1,
+   "lines": 3
+  },
+  {
+   "symbol": "A",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "B",
+   "kind": "door",
+   "props": {
+    "code": "0814",
+    "label": "QUARTERS 2 — VOSS — CODE"
+   },
+   "sequence": 10,
+   "lines": -1
+  },
+  {
+   "symbol": "E",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "G",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "K",
+   "kind": "door",
+   "props": {},
+   "sequence": 11,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {
+    "lock": "res_key",
+    "msg": "Maintenance shaft. Heavy lock. The caretaker's master key would open it."
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "O",
+   "kind": "door",
+   "props": {
+    "code": "0309",
+    "label": "CARETAKER — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev2",
+    "title": "Dr. Voss — personal log (lullaby)"
+   },
+   "sequence": -1,
+   "lines": 12
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "code": "4091",
+    "label": "CLUB CABINET — CODE",
+    "p": "cabinet",
+    "prompt": "Club cabinet"
+   },
+   "sequence": 13,
+   "lines": -1
+  },
+  {
+   "symbol": "W",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "X",
+   "kind": "prop",
+   "props": {
+    "p": "recorder"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Y",
+   "kind": "use",
+   "props": {
+    "p": "ladder",
+    "prompt": "Climb down the maintenance shaft"
+   },
+   "sequence": 14,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "prop",
+   "props": {
+    "p": "bed"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "prop",
+   "props": {
+    "p": "crib"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "d",
+   "kind": "note",
+   "props": {
+    "text": "SUBLEVEL 3 — RESIDENTIAL\n\nQuarters 1 ........ Solace, M. (signals)\nQuarters 2 ........ Voss, E. (Director) + dependant\nQuarters 3 ........ Hale, M. (security)\nCaretaker ......... Ostrowski, B.\n\nDoor codes are set by residents. Forgotten your code? See the caretaker.\nCaretaker's own office code was set by M. Solace, as Mr. Ostrowski 'does not do numbers'.\n\nLaundry: Tues & Fri. PLEASE stop leaving radios on in the laundry.",
+    "title": "Residents' directory"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "f",
+   "kind": "note",
+   "props": {
+    "text": "Tucked into the mirror frame. Dr. Voss, younger than her ID photo, holding a baby up toward the camera. Beside them a young woman, laughing, one hand cupped over the baby's head. Her badge reads SOLACE.\n\nOn the back, in pencil:\n'Danny, 1 yr. Little light. — M.'",
+    "title": "Photograph"
+   },
+   "sequence": 15,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "note",
+   "props": {
+    "text": "Kate —\n\nI'm not allowed to tell you where I am, which is a strange thing to write in a letter I'm not going to send.\n\nThe work here is not what they told me. I won't say more. I'll say this: there's a girl here, Mira, about your age, who carries the Director's boy everywhere like he's her own. Tonight she asked me straight out if I would keep them safe.\n\nI said yes. I'm a man who says yes to that question. You know that about me. I hope you still know it.\n\nIf I don't come home, it's because I kept my word.\n\n— Dad",
+    "title": "Unsent letter — M. Hale"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "res_key"
+   },
+   "sequence": 17,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "SUBLEVEL 3 AMATEUR RADIO CLUB — STATION LOG\n\n02 Feb 98  Antenna re-strung. Lovely clean return off the shelf. Picked up a 1961 shipping forecast.\n14 Mar 98  02:43. Weak voice on 101.3, no call sign:\n           'Is anyone still there? This is Arlen.'\n           Asked for a call sign. Static. (B.O.)\n15 Mar 98  Nobody on site called Arlen. Hale asked me not to write it down again.\n02 Oct 98  Club cabinet code now changes weekly. I read it out on my request show, 92.3, after the one record. Members only — you know who you are.\n\n— B. Ostrowski, Caretaker & Club Secretary",
+    "title": "Radio club — station log"
+   },
+   "sequence": 18,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "prop",
+   "props": {
+    "p": "coat"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "p",
+   "kind": "note",
+   "props": {
+    "text": "A polaroid pinned above the coffee urn. A lopsided cake with one candle. Twelve people in hairnets and lab coats crowded round a high chair, all of them pulling faces at a baby who is pulling one back.\n\nMarker on the white strip:\nHAPPY 1st BIRTHDAY DANNY!!  14.08.98\nlove from the canteen crew",
+    "title": "Photo on the canteen wall"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "item",
+   "props": {
+    "id": "bottle",
+    "n": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "radio",
+   "props": {
+    "f": "92.3",
+    "flag": "c4_bram",
+    "r": "12",
+    "title": "92.3 — Bram's request show"
+   },
+   "sequence": -1,
+   "lines": 19
+  },
+  {
+   "symbol": "t",
+   "kind": "note",
+   "props": {
+    "text": "M —\n\nIf you ever need me and you can't find me: 96.1. I leave a set on it, always, by the bed.\n\nIf it isn't my voice, you'll know. You always know.\n\n— E.\n\n(Underneath, in different handwriting:)\n96.1. She never answers any more.",
+    "title": "Note on Mira's mirror"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "prop",
+   "props": {
+    "p": "console"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "y",
+   "kind": "radio",
+   "props": {
+    "f": "96.1",
+    "r": "26",
+    "title": "Mira Solace — first contact"
+   },
+   "sequence": -1,
+   "lines": 20
+  }
+ ],
+ "map": [
+  "################################",
+  "#.....#......#.......#.........#",
+  "#..S..#..b...#..b..c.#..b......#",
+  "#.....#......#.......#.....Z...#",
+  "#.8L..#...L..#...L...#...L.....#",
+  "#..d..#..t...#.f..T..#.h....q..#",
+  "##D#####A#######B#######E#######",
+  "#..............................#",
+  "#..L.....P.......L........P..L.#",
+  "#...........2.....y............#",
+  "####K#######O######W#######M####",
+  "#......#.........#......#......#",
+  "#..X...#..k..L...#..p...#..L...#",
+  "#......#.........#......#......#",
+  "#..o...#...V.....#..L...#..H...#",
+  "#......#..e......#....H.#....Y.#",
+  "####################G###########",
+  "#################...L....#######",
+  "#################.x.....U#######",
+  "#################.n...r..#######",
+  "################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 3,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 9,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 16,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 19,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 24,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 27,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "8",
+   "cell": {
+    "x": 2,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 10,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 17,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 25,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "t",
+   "cell": {
+    "x": 9,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 15,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 18,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 23,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 28,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 2,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 8,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 16,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "E",
+   "cell": {
+    "x": 24,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 9,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 17,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 26,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 29,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "2",
+   "cell": {
+    "x": 12,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 18,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "K",
+   "cell": {
+    "x": 4,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "O",
+   "cell": {
+    "x": 12,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "W",
+   "cell": {
+    "x": 19,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 27,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "X",
+   "cell": {
+    "x": 3,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 10,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "p",
+   "cell": {
+    "x": 20,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 27,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 11,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 27,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 10,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 22,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "Y",
+   "cell": {
+    "x": 29,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "G",
+   "cell": {
+    "x": 20,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 18,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 24,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 18,
+    "y": 19
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 22,
+    "y": 19
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"if\":\"c4_mira\",\"mode\":\"patrol\"},{\"at\":\"Z\",\"if\":\"c4_opened\",\"mode\":\"patrol\"}]",
+  "amb_db": "-28",
+  "amb_loop": "hum",
+  "face": "180",
+  "music": "drone_a",
+  "pal": "residential"
+ },
+ "walkthrough": [
+  "t",
+  "2",
+  "[\"radio\",\"y\"]",
+  "B",
+  "f",
+  "T",
+  "O",
+  "k",
+  "G",
+  "[\"radio\",\"r\"]",
+  "n",
+  "U",
+  "M",
+  "Y"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Carpet. Curtains over painted windows. Somebody tried to make this place feel like home."
+     ],
+     "vo": "daniel_1c6592bf87"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That tune in the lift. I've hummed it my whole life. Mum used to ask where I got it."
+     ],
+     "vo": "daniel_57b1dc9f88"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Search the residential level for a way down to the power station."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c4_knock"
+     ]
+    },
+    {
+     "command": "loop3d",
+     "args": [
+      "knock",
+      "knock",
+      "K",
+      "2"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE DOOR)",
+      "Daniel? Daniel, it's Mira. I'm in the laundry. Open the door."
+     ],
+     "vo": "mira_f047997bd0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Mira? Mira Solace?"
+     ],
+     "vo": "daniel_02bc304723"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE DOOR)",
+      "Daniel? Daniel, it's Mira. I'm in the laundry. Open the door."
+     ],
+     "vo": "mira_f047997bd0"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 2,
+     "else": -1
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Someone is knocking on the laundry door. Her note said: 96.1."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (BEHIND THE DOOR)",
+      "Mira? Mira Solace? It's Daniel. Open the door."
+     ],
+     "vo": "daniel_c9413fd1cf"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's my voice. From the last time I stood here."
+     ],
+     "vo": "daniel_78bd71b3c9"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "The knocking is never her. You know that now. It knows you know."
+     ],
+     "vo": "daniel_7315b23bb8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "Listen for what it gets wrong. It has never heard her laugh on the air. When it laughs as her, it laughs like a recording of a laugh."
+     ],
+     "vo": "daniel_4e0c0b3d4f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "And the dispatch slip, in the gatehouse. Read who sent you."
+     ],
+     "vo": "daniel_0b17c573af"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ss1"
+     ],
+     "then": 4,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss2"
+     ],
+     "then": 5,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss3"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss4"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss5"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss6"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "ach",
+     "args": [
+      "static_between"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "88.0 is quiet now. Every message is in the journal."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Zero-eight-one-four. Fourteenth of August."
+     ],
+     "vo": "daniel_d9b6cd9b57"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "unloop3d",
+     "args": [
+      "knock"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c4_opened"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (TAPE)",
+      "Daniel? Daniel, it's Mira. I'm in the laundry. Open the door."
+     ],
+     "vo": "mira_1c10cd8a24"
+    },
+    {
+     "command": "look",
+     "args": [
+      "X",
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "A tape deck. A cassette deck on the floor, playing her voice into the door."
+     ],
+     "vo": "daniel_c0cc6fc579"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Who pressed play?"
+     ],
+     "vo": "daniel_42a58a62be"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "screech",
+      "4"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.7"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "2",
+      "hunt"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "It's here. Hide, or run."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Personal log. Not for the project file. Not for Hale."
+     ],
+     "vo": "evelyn_b7a66bc33a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "He won't settle tonight unless I sing, so I sing. The one my mother sang. I changed the words. I needed them to be true down here."
+     ],
+     "vo": "evelyn_1be950c7e3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "(softly) Little light, little light, hold the line through the night. If the dark calls your name — it is not me."
+     ],
+     "vo": "evelyn_dda7532c70"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "(softly) Little light, little light, I'll be the voice you know. Signal and answer, and home we go."
+     ],
+     "vo": "evelyn_12b814bcf9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "I only ever sing it in here. Never near a set. Never on a channel. It keeps everything that goes over the air, and I won't give it this."
+     ],
+     "vo": "evelyn_0b1869a361"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "If it ever calls him in my voice, it won't know the words. That's the point. That's the whole point."
+     ],
+     "vo": "evelyn_011dfdb3ac"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "give",
+     "args": [
+      "battery",
+      "2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "pickup",
+      "-6"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Taken: 2 × Power cell"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Spare cells, a soldering iron, and a bag of mints from nineteen ninety-eight. Bram, you were a good man."
+     ],
+     "vo": "daniel_bbe6b61193"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "-4",
+      "0.8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Power station. Forty metres of ladder."
+     ],
+     "vo": "daniel_e3bc03e1c2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Don't look down, Arlen. There's nothing down there you want to see first."
+     ],
+     "vo": "daniel_374083e1d1"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Danny."
+     ],
+     "vo": "daniel_22a1883127"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Solace. That's her. That's Mira."
+     ],
+     "vo": "daniel_6350ccb75c"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c4_mira"
+     ],
+     "then": 16,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'I knew a Daniel,' she said."
+     ],
+     "vo": "daniel_994e2fc16e"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Master key. 'B.O.' scratched in the fob."
+     ],
+     "vo": "daniel_ccd08e0d4e"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Open the maintenance shaft at the east end of the corridor."
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "ambush"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "-8",
+      "0.5",
+      "M"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'Is anyone still there? This is Arlen.' March, ninety-eight."
+     ],
+     "vo": "daniel_6d9fa31752"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Seven months before any of it. Before I was even a year old."
+     ],
+     "vo": "daniel_92c4162887"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "OSTROWSKI (92.3 MHz, 1998)",
+      "Good evening, sublevel three. This is Bram, and this is the only request show broadcast from under a mountain."
+     ],
+     "vo": "ostrowski_49458e137d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OSTROWSKI (92.3 MHz, 1998)",
+      "One record tonight, requested by the canteen crew, for a certain young man who turned one in August. You know who you are, Danny."
+     ],
+     "vo": "ostrowski_acf7d724b4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OSTROWSKI (92.3 MHz, 1998)",
+      "And for club members: the cabinet this week is four. Zero. Nine. One. Four, zero, nine, one. Goodnight, all."
+     ],
+     "vo": "ostrowski_ef54e13eef"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Four-zero-nine-one."
+     ],
+     "vo": "daniel_400a850d9c"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "—anyone. If anyone can hear this. This is Mira Solace, signals, HELIX-9. Please."
+     ],
+     "vo": "mira_7d8da0c040"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I hear you. Mira, I hear you. My name's Daniel Arlen. I'm a contractor. I'm on the residential level."
+     ],
+     "vo": "daniel_6b0b2ea72a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "You can— you can actually hear me? Not an echo, not a— you're answering. You're answering me."
+     ],
+     "vo": "mira_0f93efb524"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I'm answering. Where are you?"
+     ],
+     "vo": "daniel_27ca1e8fbe"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Four. Containment. On the wrong side of the bulkhead. I can't get through it, and the lift won't come down for me any more."
+     ],
+     "vo": "mira_06bd682735"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Then I'll come to you. Northline sent me to fix the uplink. Mira, this place has been dark for twenty-eight years."
+     ],
+     "vo": "daniel_d838f34213"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "...What's the date, Daniel?"
+     ],
+     "vo": "mira_d3a5c3c4c2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Seventeenth of October. Twenty twenty-six."
+     ],
+     "vo": "daniel_1aecccd696"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "It's the seventeenth here too. Nineteen ninety-eight. It's two forty-three in the morning."
+     ],
+     "vo": "mira_599e5aaa43"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "It's always two forty-three. I stopped counting how many times it's been two forty-three."
+     ],
+     "vo": "mira_bab4c5da05"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c4_knock"
+     ],
+     "then": 21,
+     "else": -1
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I need to get down to power, then comms. Where do I go?"
+     ],
+     "vo": "daniel_555c5f8e75"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "The maintenance shaft at the east end goes down to the power station. Bram's master key opens it. The caretaker. He was the caretaker."
+     ],
+     "vo": "mira_ea0b2b1487"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "His office code is my birthday. I set it for him, he could never remember numbers. Zero. Three. Zero. Nine."
+     ],
+     "vo": "mira_0cc3008be2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Zero-three-zero-nine."
+     ],
+     "vo": "daniel_63233b7816"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "...Did you say your name was Daniel?"
+     ],
+     "vo": "mira_89c96e473a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Yes?"
+     ],
+     "vo": "daniel_b179c0b8f5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Nothing. I knew a Daniel. Stay off this channel unless you need me. It listens to this one too."
+     ],
+     "vo": "mira_9f8da434af"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c4_mira"
+     ]
+    },
+    {
+     "command": "ifnot",
+     "args": [
+      "c4_opened"
+     ],
+     "then": 22,
+     "else": -1
+    },
+    {
+     "command": "toast",
+     "args": [
+      "It heard you talking."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Caretaker's office — code 0309. Take the master key to the maintenance shaft at the east end."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "And Daniel — whatever's knocking on a door with my voice, it isn't me. I've never been near you. I haven't been near anyone in a very long time."
+     ],
+     "vo": "mira_df83ea49db"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "patrol"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "c4_knock"
+     ],
+     "then": 23,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "unloop3d",
+     "args": [
+      "knock"
+     ]
+    },
+    {
+     "command": "lock",
+     "args": [
+      "K"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c4_kept_shut"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "door_closed"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The knocking's stopped. Stay in there. Whatever you are, stay in there."
+     ],
+     "vo": "daniel_4c65d5dedb"
+    }
+   ]
+  }
+ ]
+}

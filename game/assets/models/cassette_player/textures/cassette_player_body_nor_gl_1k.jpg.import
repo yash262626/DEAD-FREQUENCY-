@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/cassette_player_body_nor_gl_1k.jpg-c1dcb0978f5cd1e80c72e0a3355f3ac1.s3tc.stex"
+metadata={
+"imported_formats": [ "s3tc" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://assets/models/cassette_player/textures/cassette_player_body_nor_gl_1k.jpg"
+dest_files=[ "res://.import/cassette_player_body_nor_gl_1k.jpg-c1dcb0978f5cd1e80c72e0a3355f3ac1.s3tc.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=1
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=true
+flags/srgb=0
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

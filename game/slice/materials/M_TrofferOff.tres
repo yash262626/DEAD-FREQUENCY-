@@ -1,0 +1,6 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "M_TrofferOff"
+albedo_color = Color( 0.55, 0.57, 0.56, 1 )
+roughness = 0.25

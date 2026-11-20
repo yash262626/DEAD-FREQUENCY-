@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://slice/shaders/wet_wall.shader" type="Shader" id=1]
+[ext_resource path="res://slice/tex/wall_streaks.png" type="Texture" id=2]
+[ext_resource path="res://textures/PaintedPlaster006/albedo.jpg" type="Texture" id=3]
+[ext_resource path="res://textures/PaintedPlaster006/normal.jpg" type="Texture" id=4]
+[ext_resource path="res://textures/PaintedPlaster006/orm.jpg" type="Texture" id=5]
+
+[resource]
+resource_name = "M_CorrLower"
+shader = ExtResource( 1 )
+shader_param/tint = Color( 0.47, 0.56, 0.53, 1 )
+shader_param/uv_scale = 0.5
+shader_param/streak_scale = 0.32
+shader_param/wetness = 1.0
+shader_param/foot_height = 0.5
+shader_param/normal_scale = 1.0
+shader_param/albedo_tex = ExtResource( 3 )
+shader_param/normal_tex = ExtResource( 4 )
+shader_param/arm_tex = ExtResource( 5 )
+shader_param/streak_tex = ExtResource( 2 )

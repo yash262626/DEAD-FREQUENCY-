@@ -1,0 +1,547 @@
+{
+ "ending": "B",
+ "number": -1,
+ "title": "ENDING B",
+ "subtitle": "",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "A",
+   "kind": "prop",
+   "props": {
+    "p": "aperture",
+    "rot": "0"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "B",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "c": "0.6,0.75,1,1",
+    "e": "2.4",
+    "r": "16"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "prop",
+   "props": {
+    "p": "monitor"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "R",
+   "kind": "light",
+   "props": {
+    "e": "1.6",
+    "r": "12",
+    "red": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "U",
+   "kind": "prop",
+   "props": {
+    "p": "console"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "30"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "prop",
+   "props": {
+    "p": "recorder"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "####################################",
+  "#......................#...........#",
+  "#..........A...........#..M....r...#",
+  "#..o..............o....#...........#",
+  "#.....x....B...........#....c......#",
+  "#..R................R..#....L......#",
+  "#..o.......L.......o...#....n......#",
+  "#........m...e.........#...........#",
+  "#..........U...........#...........#",
+  "#......................#...........#",
+  "#..o................o..#...........#",
+  "#..........S...........#...........#",
+  "#......................#...........#",
+  "####################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 11,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 26,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 31,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 18,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 6,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 11,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 28,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 20,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 28,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 19,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 28,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 9,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 13,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 11,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 3,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 20,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 11,
+    "y": 11
+   }
+  }
+ ],
+ "props": {
+  "ext_mode": "dawn",
+  "exterior": "true",
+  "h": "7.5",
+  "music": "",
+  "pal": "chamber"
+ },
+ "walkthrough": [],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "x",
+      "watch"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "face"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "U",
+      "A",
+      "0",
+      "",
+      "1.7",
+      "2.8"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Everyone comes home."
+     ],
+     "vo": "daniel_b31b9f32e5"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "6",
+      "0.6"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "reveal",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "S",
+      "A",
+      "6",
+      "U",
+      "1.7",
+      "2.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "VOICES",
+      "Thank you. Thank you. Thank you."
+     ],
+     "vo": "voices_aba7b31f8d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN",
+      "My little light. Look how tall you got."
+     ],
+     "vo": "evelyn_97897bc3d0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA",
+      "Danny — Danny, wait. Something's wrong. They're not— they don't have faces, Danny—"
+     ],
+     "vo": "mira_455affb5b1"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (EVERY VOICE)",
+      "Thank you, Daniel."
+     ],
+     "vo": "listener_0c73b34ed2"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "reveal",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "ext",
+     "args": [
+      "dawn"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@road2",
+      "@far",
+      "0"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "2.5"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@road2",
+      "@far",
+      "12",
+      "@road1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (LATER)",
+      "We walked out at dawn. Forty-one of them behind me in the snow, talking, laughing, saying my name."
+     ],
+     "vo": "daniel_be78edb028"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (LATER)",
+      "By the time I reached the truck there was only me."
+     ],
+     "vo": "daniel_43c4c0f5bc"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "click",
+      "0"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER (RADIO)",
+      "Danny? Danny, something's happening — every set in the valley just switched itself on—"
+     ],
+     "vo": "kessler_069444d0f2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "KESSLER? (RADIO)",
+      "Four hours, Danny. Four hours, Danny."
+     ],
+     "vo": "kessler_c371f7a80d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE, EVERY RADIO)",
+      "Thank you, Daniel. Thank you, Daniel. Thank you, Daniel."
+     ],
+     "vo": "listener_24b476924e"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "2.5"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 1,
+     "else": -1
+    },
+    {
+     "command": "text",
+     "args": [
+      "ENDING B — THE OPEN DOOR",
+      "3",
+      "34"
+     ]
+    },
+    {
+     "command": "title",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "credits",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "KESSLER? (RADIO)",
+      "Twenty-eight years, Danny. I waited twenty-eight years to send you."
+     ],
+     "vo": "kessler_a4e8c4cf7b"
+    }
+   ]
+  }
+ ]
+}

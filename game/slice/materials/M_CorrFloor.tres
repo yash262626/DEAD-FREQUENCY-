@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://slice/shaders/wet_surface.shader" type="Shader" id=1]
+[ext_resource path="res://assets/surfaces/concrete_floor_worn_001/diff.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/surfaces/concrete_floor_worn_001/nor_gl.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/surfaces/concrete_floor_worn_001/arm.jpg" type="Texture" id=4]
+[ext_resource path="res://slice/tex/wet_mask.png" type="Texture" id=5]
+
+[resource]
+resource_name = "M_CorrFloor"
+shader = ExtResource( 1 )
+shader_param/tint = Color( 0.95, 0.95, 0.95, 1 )
+shader_param/uv_scale = 0.38
+shader_param/mask_scale = 0.11
+shader_param/wetness = 1.0
+shader_param/damp = 0.32
+shader_param/normal_scale = 1.0
+shader_param/albedo_tex = ExtResource( 2 )
+shader_param/normal_tex = ExtResource( 3 )
+shader_param/arm_tex = ExtResource( 4 )
+shader_param/wet_mask = ExtResource( 5 )

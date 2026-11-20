@@ -1,0 +1,1291 @@
+{
+ "number": 10,
+ "title": "WHAT LISTENS",
+ "subtitle": "SUBLEVEL 6 — CONTAINMENT",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "trig",
+   "props": {
+    "r": "2"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "8",
+   "kind": "radio",
+   "props": {
+    "f": "88",
+    "flag": "ss5",
+    "ngp": "true",
+    "r": "14",
+    "title": "88.0 — the second signal (5 of 6)"
+   },
+   "sequence": -1,
+   "lines": 2
+  },
+  {
+   "symbol": "K",
+   "kind": "door",
+   "props": {
+    "c": "0.35,0.12,0.1,1",
+    "msg": "The containment bulkhead. Sealed from this side. The release is on the console.",
+    "sealed": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {},
+   "sequence": 9,
+   "lines": -1
+  },
+  {
+   "symbol": "N",
+   "kind": "door",
+   "props": {
+    "lock": "hale_badge",
+    "msg": "Badge reader. 'CONTAINMENT RECORDS — SECURITY CHIEF ONLY.'"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "use",
+   "props": {
+    "fail": "The release. Not yet — talk to them first.",
+    "if": "c10_dilemma",
+    "p": "switch",
+    "prompt": "Bulkhead release"
+   },
+   "sequence": 10,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev6",
+    "title": "Dr. Voss — the rule"
+   },
+   "sequence": -1,
+   "lines": 14
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "p": "console",
+    "prompt": "Bulkhead intercom"
+   },
+   "sequence": 15,
+   "lines": -1
+  },
+  {
+   "symbol": "W",
+   "kind": "door",
+   "props": {
+    "msg": "Archive lift corridor. Interlocked until the bulkhead cycle completes.",
+    "needflag": "c10_choice"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "item",
+   "props": {
+    "id": "hale_badge"
+   },
+   "sequence": 18,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "prop",
+   "props": {
+    "block": "true",
+    "p": "glass",
+    "rot": "90"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "ghost",
+   "props": {
+    "p": "shade",
+    "r": "10"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "CONTAINMENT BULKHEAD — LOG\n17 OCT 1998\n\n02:47  Containment order issued (Hale).\n02:48:40  Solace, M. through, from the lift. Twenty seconds.\n02:49  Bulkhead closed. Manual. Hale.\n        Persons inside per headcount: 23.\n\n(Hale's hand, pressed hard enough to tear the paper:)\nShe looked at me through the glass. I did it anyway.\nGod forgive me.\n\nTo anyone who ever opens this from out here, for any voice — any voice — you are killing everyone above you.",
+    "title": "Bulkhead log"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "prop",
+   "props": {
+    "p": "coat"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "note",
+   "props": {
+    "flag": "c10_rollcall",
+    "text": "CONTAINMENT — ROLL CALL — 17 OCT 1998 — 02:49\nPersons inside the bulkhead: 23\n\nVoss, E.        Solace, M.      Okafor, T.\nKowalczyk, J.   Mensah, A.      Ferreira, L.\nVarga, P.       Ito, K.         Nyberg, H.\nAchterberg, R.  Fofanah, K.     Quist, D.\nRomano, G.      Abiodun, F.     Park, S.\nLaine, T.       Moreau, C.      Haugen, I.\nDube, N.        Silva, R.       Kerr, A.\nTanaka, M.      Rowe, B.\n\nCounted by M. Hale, through the glass.\n\n(Below, in a different hand:)\nWhoever finds this — don't count them on the last channel. They count back.",
+    "title": "Containment roll call — 02:49"
+   },
+   "sequence": 19,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "################################",
+  "#.....#......#.........g.......#",
+  "#.S...D.o.o..D.1.L.....K...x...#",
+  "#..L8.#o..o..#.........g..o....#",
+  "#.....##D#####..Q.U....#.......#",
+  "#######......#.........#....R..#",
+  "#######..T...#......R..#...o...#",
+  "#######.L..H.#.........#.......#",
+  "#######......#####D#############",
+  "#########N####b.......n#########",
+  "##.h.h.h.L..##V...Z....W.......M",
+  "##.r.h.h.h..##.....L...#########",
+  "################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 23,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 6,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 8,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 10,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 13,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 15,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 17,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "K",
+   "cell": {
+    "x": 23,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 27,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "8",
+   "cell": {
+    "x": 4,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 7,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 10,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 23,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 26,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 8,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 16,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 18,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 28,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 9,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 20,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 27,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 8,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 11,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 18,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "N",
+   "cell": {
+    "x": 9,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 14,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 22,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 3,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 5,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 7,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 9,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 14,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 18,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "W",
+   "cell": {
+    "x": 23,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 31,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 3,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 5,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 7,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 9,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 19,
+    "y": 11
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"if\":\"c10_choice\",\"mode\":\"patrol\"}]",
+  "amb_db": "-26",
+  "amb_loop": "hum",
+  "cloaked": "true",
+  "face": "-90",
+  "music": "drone_d",
+  "pal": "containment"
+ },
+ "walkthrough": [
+  "T",
+  "1",
+  "U",
+  "[\"choice\",1]",
+  "Q",
+  "b",
+  "N",
+  "r",
+  "W",
+  "M"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Containment. Everything painted red, as if red ever kept anything in."
+     ],
+     "vo": "daniel_e2e73c41fd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Coats on the floor. Shoes. Somebody's glasses. Like twenty people just stepped out of themselves."
+     ],
+     "vo": "daniel_5e8de86520"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Down here it cannot be seen at all — except on 107.9, or close enough to touch."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find the containment bulkhead."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "x",
+      "watch"
+     ]
+    },
+    {
+     "command": "loop3d",
+     "args": [
+      "knock",
+      "knock",
+      "K",
+      "4"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE BULKHEAD)",
+      "Danny? Danny, it's me. I'm right here. Open it. Please, it's coming up behind me."
+     ],
+     "vo": "mira_8f92798bb4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira?"
+     ],
+     "vo": "daniel_c82b6a395f"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The bulkhead. Someone is behind it. The console is in the middle of the hall."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "Twenty-eight years he waited for something to say my name. The beacon said it. He sent me."
+     ],
+     "vo": "daniel_469724b7f2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "I don't know whether he wanted me to save them, or to bring it out to him. I asked him once. Last time. He didn't answer."
+     ],
+     "vo": "daniel_16abd8d235"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "Don't open the bulkhead. Whatever it sounds like. You know that. I'm saying it anyway."
+     ],
+     "vo": "daniel_6dbeccd15c"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ss1"
+     ],
+     "then": 3,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss2"
+     ],
+     "then": 4,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss3"
+     ],
+     "then": 5,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss4"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss5"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss6"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "ach",
+     "args": [
+      "static_between"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "88.0 is quiet now. Every message is in the journal."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Archive lift. Down to where they kept everything they couldn't throw away."
+     ],
+     "vo": "daniel_e0b54b4c9e"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "choice",
+     "args": [
+      "The bulkhead release is under your hand."
+     ],
+     "options": [
+      {
+       "label": "Open the bulkhead.",
+       "sequence": 11
+      },
+      {
+       "label": "Keep it sealed.",
+       "sequence": 12
+      }
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE)",
+      "Hold them. Don't send them up yet."
+     ],
+     "vo": "listener_76b9e1779c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...What did you say?"
+     ],
+     "vo": "daniel_eccb34a5a4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE)",
+      "Hold them. Don't send them up yet. Hold them. Don't send them up yet."
+     ],
+     "vo": "listener_938fd50bcc"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Harrow Pass. That's Harrow Pass. The dead channel. My voice. That was — that was YOU."
+     ],
+     "vo": "daniel_e25388c598"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "You sat on my channel and you wore my voice and four people froze on that mountain waiting for me."
+     ],
+     "vo": "daniel_41de9ef11f"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE? (103.7 MHz)",
+      "Hold them. Don't send them up yet."
+     ],
+     "vo": "hale_c842e3b7de"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Hale. That came out of your channel, Hale."
+     ],
+     "vo": "daniel_1294ca8054"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "Harrow Pass",
+      "Three years ago, on a dead channel, my own voice told me to hold the rescue team: 'Hold them. Don't send them up yet.' I held them. Four people died.\n\nTonight it said it again, word for word, from behind the bulkhead. Then it said it on Hale's channel.\n\nIt has been talking to me my whole life."
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c10_choice"
+     ]
+    },
+    {
+     "command": "ifnot",
+     "args": [
+      "c10_opened"
+     ],
+     "then": 13,
+     "else": -1
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The archive lift is past the security post, south of the hall."
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c10_opened"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "alarm",
+      "-6"
+     ]
+    },
+    {
+     "command": "unlock",
+     "args": [
+      "K",
+      "true"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE BULKHEAD)",
+      "Thank you, Danny."
+     ],
+     "vo": "mira_93522e9009"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "hunt"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "screech",
+      "6"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "It's through. Danny, it's through — run. Just keep moving. It's all right. Just keep moving."
+     ],
+     "vo": "mira_d3d8437a63"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "trust_mira"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c10_sealed"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "No. I heard you, Mira. The real one. It stays shut."
+     ],
+     "vo": "daniel_a7d05fdf58"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE BULKHEAD)",
+      "Danny, please—"
+     ],
+     "vo": "mira_0e13fcce65"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "stalk"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Observation deck. Run nineteen minus six hours. I'm putting the rule on tape, because I've finally understood it."
+     ],
+     "vo": "evelyn_b6aed2ff45"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "It can't exist without a listener. It's made of being heard. Two people in a room, talking, checking each other — it's thin. It's weather. It's nothing."
+     ],
+     "vo": "evelyn_d6c7bf2aa8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "But one person alone, listening hard — that's a door it can walk through. That's why it knows when someone is alone. Loneliness is the only shape it can wear."
+     ],
+     "vo": "evelyn_79427a2070"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Marcus's rule was right. Nobody listens alone."
+     ],
+     "vo": "evelyn_0d9688a5ac"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "And I've been listening to it alone for four years."
+     ],
+     "vo": "evelyn_4d2e885bce"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "unloop3d",
+     "args": [
+      "knock"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE BULKHEAD)",
+      "Danny, open it. Please. I can hear it on the stairs."
+     ],
+     "vo": "mira_c9df545b24"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 16,
+     "else": -1
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Danny, that isn't me. I'm not at the bulkhead. I'm in the chamber, with your mother. Whatever is at that door — keep it shut."
+     ],
+     "vo": "mira_5df9fac442"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Arlen, that's her at the door. That's Mira. The thing on the radio is wearing her. Open the bulkhead and get her out."
+     ],
+     "vo": "hale_b9309c1cde"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c6_told"
+     ],
+     "then": 17,
+     "else": -1
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Two Miras. Hale says open it. Mira says keep it shut."
+     ],
+     "vo": "daniel_470a4f9721"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira. Sing it. Sing me the song."
+     ],
+     "vo": "daniel_d9b20003e9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (BEHIND THE BULKHEAD)",
+      "(singing) Little light, little light, hold the line through the night..."
+     ],
+     "vo": "mira_39d9de5197"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "(singing) Little light, little light, hold the line through the night..."
+     ],
+     "vo": "mira_c34f2d9240"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Both. They both know it."
+     ],
+     "vo": "daniel_2b6620cdff"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "I sang it on the air. On the platform. I'm sorry, Danny. I sang it on the air, and now it has it."
+     ],
+     "vo": "mira_311286b363"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Look before you choose. 107.9 shows what hides."
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c10_dilemma"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Decide. The bulkhead release is beside the intercom."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN? (BEHIND THE BULKHEAD)",
+      "Danny, it's Mum. Open it, sweetheart. Let me see how tall you got."
+     ],
+     "vo": "evelyn_295c2a8faa"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Twenty-three is a smaller number than forty-one. Isn't that what she told you, Arlen? You told me so yourself."
+     ],
+     "vo": "hale_f08d9fa2fc"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I said that on the air. I handed it that."
+     ],
+     "vo": "daniel_9c020df0f0"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "journal",
+     "args": [
+      "Hale's badge",
+      "Security chief's badge. M. HALE. Number 5119. The photo has been rubbed almost blank by a thumb."
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Five-one-one-nine. Hale's badge. Left on the desk, like he took it off on purpose."
+     ],
+     "vo": "daniel_e5e9490786"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Twenty-three names. He counted them through the glass before he shut it."
+     ],
+     "vo": "daniel_5d1e8cbbba"
+    }
+   ]
+  }
+ ]
+}

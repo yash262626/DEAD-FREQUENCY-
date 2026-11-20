@@ -1,0 +1,1618 @@
+{
+ "number": 3,
+ "title": "WHAT REMAINS",
+ "subtitle": "SUBLEVEL 2 — MEDICAL",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "trig",
+   "props": {
+    "if": "tape_ev1",
+    "r": "2.2"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "C",
+   "kind": "door",
+   "props": {
+    "code": "3118",
+    "label": "PHARMACY — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "E",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "J",
+   "kind": "ghost",
+   "props": {
+    "r": "7",
+    "text": "LET ME OUT\n2 7 1 1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "N",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_brandt",
+    "title": "Brandt — quarantine"
+   },
+   "sequence": 2,
+   "lines": 5
+  },
+  {
+   "symbol": "Q",
+   "kind": "door",
+   "props": {
+    "msg": "Pneumatics are dead. It won't hold open. Lind's memo — weight on the treadle plate.",
+    "needflag": "c3_plate"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev1",
+    "title": "Dr. Voss — hearing assessment"
+   },
+   "sequence": 6,
+   "lines": 7
+  },
+  {
+   "symbol": "U",
+   "kind": "note",
+   "props": {
+    "flag": "mira_p1",
+    "text": "17 October. 02:43. Loop one? I don't know what to call it.\n\nThe lights went, and then it was 02:43 again, and Evelyn was saying 'Take him, Mira' again — except I had already taken him. My arms still feel the weight of him.\n\nI'm writing this down because the notebook is the only thing that stays where I leave it.",
+    "title": "Mira's notebook — page 1 of 5"
+   },
+   "sequence": 8,
+   "lines": -1
+  },
+  {
+   "symbol": "X",
+   "kind": "door",
+   "props": {
+    "code": "2711",
+    "label": "QUARANTINE — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Y",
+   "kind": "use",
+   "props": {
+    "fail": "Call panel's dead. The fuse carrier is empty.",
+    "need": "fuse",
+    "p": "console",
+    "prompt": "Fit fuse and call the service lift"
+   },
+   "sequence": 14,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "a",
+   "kind": "note",
+   "props": {
+    "text": "MEDICAL RECEPTION — 16/17 OCT 1998\n\n22:40  Okafor, T. — headache, ringing in both ears. Third time this week. Sent back to work. (Lind)\n00:15  Pell, J. — says he heard his own voice in the records stacks. Sedative declined.\n01:20  Dr. Voss brought D. in for the hearing assessment again. D. asleep. Mira stayed with him.\n02:30  Brandt, P. — 'everyone's talking in the walls'. Lind on her way.\n02:43  —",
+    "title": "Reception — night log"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "prop",
+   "props": {
+    "p": "bed"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "f",
+   "kind": "note",
+   "props": {
+    "flag": "c3_file",
+    "text": "PATIENT: VOSS, DANIEL (dependent of Dr. E. Voss)\nDOB: 14-08-1997\nAGE AT ASSESSMENT: 14 months\n\nAUDIOMETRY: Normal range. Unremarkable.\n\nADDITIONAL: Subject reacts to the 107.9 MHz carrier with NO receiver present. Stops crying, turns head toward the array, tracks it. Auditory evoked response off our scale. Repeated x6. Repeated with the carrier switched off: no response.\n\nHe is hearing the carrier. Not through the speaker. Directly.\n\nRecommend D. is removed from site. Director declined.\n— S. Lind, MD",
+    "title": "Patient file — VOSS, D."
+   },
+   "sequence": 15,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "ghost",
+   "props": {
+    "r": "8",
+    "text": "PHARMACY\n3 1 1 8"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "item",
+   "props": {
+    "id": "bottle",
+    "n": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "j",
+   "kind": "ghost",
+   "props": {
+    "r": "9",
+    "text": "IT ONLY KNOWS WHAT IT HEARS.\nSO DON'T LET IT HEAR YOU."
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "pell2",
+    "r": "12",
+    "title": "Pell — the stranger (2 of 4)"
+   },
+   "sequence": -1,
+   "lines": 16
+  },
+  {
+   "symbol": "m",
+   "kind": "item",
+   "props": {
+    "id": "medkit"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "MORGUE — REGISTER\n\nDrawer 1 — empty\nDrawer 2 — empty\nDrawer 3 — empty\nDrawer 4 — OCCUPIED (17 Oct, 02:47)\n             Name: ________\n             Nobody can remember who.\n             Nobody can remember bringing him down.\n             Drawer will not open.\nDrawer 5 — empty",
+    "title": "Morgue register"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "prop",
+   "props": {
+    "p": "coat"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "p",
+   "kind": "plate",
+   "props": {
+    "flag": "c3_plate"
+   },
+   "sequence": 21,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "note",
+   "props": {
+    "text": "STAFF HEARING SURVEY — SEPT/OCT 1998 (Lind)\n\n31 of 40 staff report tinnitus since Run 7.\n22 report hearing their own voice when alone. Always their own voice. Always saying something they have already said.\n9 report it answering them.\n\nNo one reports it when they work in pairs.\n\nRecommendation: nobody works alone. Nobody listens alone. Hale has agreed. The Director has not.",
+    "title": "Staff hearing survey"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "s",
+   "kind": "note",
+   "props": {
+    "text": "Okafor, T. Signals supervisor. 44.\n\nPresents: persistent tinnitus, insomnia. States he hears his own voice in the walls 'saying things I said last week. Things I said on the radio.'\n\nI asked him if it ever says anything new.\n\nHe said: 'Not yet.'\n\nPrescribed: rest. Earplugs. Two people in the room at all times.\n— S.L.",
+    "title": "Treatment log — Okafor, T."
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "t",
+   "kind": "note",
+   "props": {
+    "text": "To whoever has the morgue tonight:\n\nThe service lift's fuse blew again (third time). Spares are in the morgue stores, top shelf.\n\nThe morgue door's pneumatics are shot. It will NOT stay open on its own. Put something heavy on the treadle plate outside it or you'll be shut in with the drawers until morning, and I am not coming to get you.\n\n— S.L.\n\nPS. Pharmacy code is changed. Ask me. Do NOT write it on the wall again, Brandt.",
+    "title": "Memo — S. Lind"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "u",
+   "kind": "prop",
+   "props": {
+    "p": "gurney",
+    "rot": "90"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "w",
+   "kind": "trig",
+   "props": {
+    "r": "2"
+   },
+   "sequence": 22,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "pcrate",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "z",
+   "kind": "item",
+   "props": {
+    "id": "fuse"
+   },
+   "sequence": 23,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "##################################",
+  "#......#.........#....k..#.......#",
+  "#..S...#.b..b..b.#..f....#..T....#",
+  "#......#.........#.......#......j#",
+  "#..a...#.b..b..b.#..L..H.#....L..#",
+  "#...L..#.....L...#......U#..t....#",
+  "#......#.........#....q..#.......#",
+  "###D#######D#########D#######D####",
+  "#....L......P.....1......L.....PY#",
+  "#......g....w....x.....p.........#",
+  "######C######E#########Q##########",
+  "#.......#.........#..........#####",
+  "#..L....#..u.Z.u..#....z.....#####",
+  "#...m...#....L....#..........#####",
+  "#..m..H.#..s......#..L.....n.#####",
+  "#.......#.......V.#..........#####",
+  "#.....e.#...h.J...#..o.......#####",
+  "#############X####################",
+  "#########.b..L..H.################",
+  "#########.......N.################",
+  "#########.m.......################",
+  "##################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 22,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 3,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 9,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 12,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 15,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 20,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 28,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 32,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "a",
+   "cell": {
+    "x": 3,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 9,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 12,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 15,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 23,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 30,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 4,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 24,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "t",
+   "cell": {
+    "x": 28,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 22,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 3,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 11,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 21,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 29,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 5,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 12,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 18,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 25,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 31,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "Y",
+   "cell": {
+    "x": 32,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 7,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 12,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 17,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "p",
+   "cell": {
+    "x": 23,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "C",
+   "cell": {
+    "x": 6,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "E",
+   "cell": {
+    "x": 13,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 23,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 3,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 11,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 13,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 15,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 23,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 4,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 3,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 6,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "s",
+   "cell": {
+    "x": 11,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 21,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 27,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 16,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 6,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 12,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "J",
+   "cell": {
+    "x": 14,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 21,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "X",
+   "cell": {
+    "x": 13,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 10,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 16,
+    "y": 18
+   }
+  },
+  {
+   "symbol": "N",
+   "cell": {
+    "x": 16,
+    "y": 19
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 10,
+    "y": 20
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"if\":\"c3_stalk\",\"mode\":\"stalk\"}]",
+  "amb_db": "-26",
+  "amb_loop": "hum",
+  "face": "180",
+  "music": "drone_c",
+  "pal": "medical"
+ },
+ "walkthrough": [
+  "w",
+  "f",
+  "U",
+  "[\"radio\",\"k\"]",
+  "t",
+  "T",
+  "1",
+  "[\"crate\",\"x\",\"p\"]",
+  "Q",
+  "z",
+  "X",
+  "N",
+  "Y"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Medical. Smells like it was mopped this morning. It wasn't mopped this morning."
+     ],
+     "vo": "daniel_d5c9c0d9b7"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Lift down is on this level. Find it, find power, find a phone."
+     ],
+     "vo": "daniel_95470eee34"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Search the medical wing. The service lift is somewhere along the main corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "whisper",
+      "-6",
+      "0.9",
+      "Z"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN?",
+      "Daniel? Sweetheart? Come here. Come to the ward."
+     ],
+     "vo": "evelyn_e6a140bc42"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Who's there?"
+     ],
+     "vo": "daniel_17738f7a51"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN?",
+      "Daniel? Sweetheart? Come here. Come to the ward."
+     ],
+     "vo": "evelyn_e6a140bc42"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Same words. Same words twice. You're not her. I don't even know her, and you're not her."
+     ],
+     "vo": "daniel_703be0d3db"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c3_stalk"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "stalk"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "It is moving with you now. It freezes while you look at it."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "close",
+     "args": [
+      "X"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "2",
+      "0.7",
+      "X"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.3"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The door. It just shut behind me."
+     ],
+     "vo": "daniel_7f3523d763"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "Z",
+      "patrol"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "N"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "0",
+      "0.6",
+      "X"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Hide."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Something heard the tape. Hide, and wait for it to leave."
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "25"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "u:c3_z1"
+     ],
+     "then": 3,
+     "else": 4
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Fit the fuse in the service lift panel at the east end of the corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Find a way down. The service lift is at the east end of the corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "BRANDT (TAPE)",
+      "Sergeant Paul Brandt. Lind's locked me in. For my own good, she says. I think she's right."
+     ],
+     "vo": "brandt_b194c85ab1"
+    },
+    {
+     "command": "line",
+     "args": [
+      "BRANDT (TAPE)",
+      "It talks to me in my mother's voice. My mother's been dead eleven years. When I was posted north she called me on the base radio every Sunday."
+     ],
+     "vo": "brandt_65881e4303"
+    },
+    {
+     "command": "line",
+     "args": [
+      "BRANDT (TAPE)",
+      "Every Sunday for six years. On the radio. That's how it got her. It's got everyone who ever called anyone on a radio. That's everyone."
+     ],
+     "vo": "brandt_bfa7c8e5ea"
+    },
+    {
+     "command": "line",
+     "args": [
+      "BRANDT (TAPE)",
+      "Lind wrote the code on the outside so the next shift could let me out. I scratched it into the paint as well, in case she forgot."
+     ],
+     "vo": "brandt_3931bb4f63"
+    },
+    {
+     "command": "line",
+     "args": [
+      "BRANDT (TAPE)",
+      "If you're listening to this, don't answer it. Whoever it sounds like. Don't answer."
+     ],
+     "vo": "brandt_d657c073f0"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Voss. Doctor Evelyn Voss. The director."
+     ],
+     "vo": "daniel_b531ee74f0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "She brought her kid down here. Into this."
+     ],
+     "vo": "daniel_883788230b"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "107.9"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The set's drifting on its own— hundred and seven point nine."
+     ],
+     "vo": "daniel_807f17ee07"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "There's writing on the wall. There's— that wasn't there a second ago."
+     ],
+     "vo": "daniel_5846b22866"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "107.9 MHz — UNSEEN. Shows what hides. It is the loudest band: it carries further than any other."
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find a way down. The service lift is at the east end of the corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "t",
+      "T",
+      "5",
+      "j",
+      "1.5",
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Assessment six. Doctor Lind present. Subject is my son, so you can strike 'subject' from the record, Sara."
+     ],
+     "vo": "evelyn_3c2f84bc7a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LIND (TAPE)",
+      "Evelyn, I'm going to say this once, on tape, so it exists. Take him off the mountain."
+     ],
+     "vo": "lind_98735c2c7b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "He sleeps down here. Do you understand what that means to me? Nowhere else does he sleep."
+     ],
+     "vo": "evelyn_7ab5c56df3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LIND (TAPE)",
+      "He sleeps because it sings to him. He turns toward it like a flower. That isn't sleep. That's listening."
+     ],
+     "vo": "lind_3478e392b3"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "...Then he's the first person on this site who isn't afraid of it."
+     ],
+     "vo": "evelyn_806c20cda8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LIND (TAPE)",
+      "That's what frightens me."
+     ],
+     "vo": "lind_c3da986f53"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "click",
+      "0"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira's handwriting. 'The notebook is the only thing that stays.'"
+     ],
+     "vo": "daniel_3f913f5f74"
+    },
+    {
+     "command": "if",
+     "args": [
+      "mira_p1"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p2"
+     ],
+     "then": 10,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p3"
+     ],
+     "then": 11,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p4"
+     ],
+     "then": 12,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p5"
+     ],
+     "then": 13,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "mira_all"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "notebook"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's every page. If she left one more, it's where she is."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "0"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Fuse is seated. Come on, come on..."
+     ],
+     "vo": "daniel_ea791facfb"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "tram",
+      "-6",
+      "0.6",
+      "Y"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "door",
+      "0",
+      "0.8",
+      "Y"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Residential. Sublevel three. Somewhere the lights might still be on."
+     ],
+     "vo": "daniel_1a5a85d09e"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "cine",
+      "tram",
+      "-16",
+      "0.5"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "96.1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "whisper",
+      "-14",
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA? (96.1 MHz)",
+      "(humming, very faint — a lullaby, four slow notes and a fall)"
+     ],
+     "vo": "mira_84d8a060eb"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I know that tune."
+     ],
+     "vo": "daniel_c0229c101e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Why do I know that tune?"
+     ],
+     "vo": "daniel_a5601870c0"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "cine"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Fourteenth of August, nineteen ninety-seven."
+     ],
+     "vo": "daniel_b77aa0027e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's my birthday."
+     ],
+     "vo": "daniel_f70f77d2ce"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's a coincidence. Lots of people. Lots of people were born that day."
+     ],
+     "vo": "daniel_fc012cff78"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "Records to medical. Doctor Lind? The man in the orange jacket — he's in your records office. He's reading the files."
+     ],
+     "vo": "pell_5705779413"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LIND (1998)",
+      "Jonah, there's nobody in my office. I'm standing in it."
+     ],
+     "vo": "lind_f542a65bff"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "He's at the boy's file. He's just holding it. Sara, I think he's crying."
+     ],
+     "vo": "pell_7a88eaf14d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "He's describing me. Right now. From twenty-eight years ago."
+     ],
+     "vo": "daniel_7c6f730e3d"
+    },
+    {
+     "command": "if",
+     "args": [
+      "pell1"
+     ],
+     "then": 17,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell2"
+     ],
+     "then": 18,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell3"
+     ],
+     "then": 19,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell4"
+     ],
+     "then": 20,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "pell_all"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "toast",
+     "args": [
+      "The treadle plate is down. The morgue door will hold."
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That'll hold it. And that was loud."
+     ],
+     "vo": "daniel_10be512361"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "p"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Doctor Lind to the ward, please. Doctor Lind to the ward."
+     ],
+     "vo": "pa_cd65c9a507"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Paging a doctor who's been gone twenty-eight years."
+     ],
+     "vo": "daniel_70940a536d"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Lift fuse. Top shelf, like she said."
+     ],
+     "vo": "daniel_ef8befbd00"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Fit the fuse in the service lift panel at the east end of the corridor."
+     ]
+    }
+   ]
+  }
+ ]
+}

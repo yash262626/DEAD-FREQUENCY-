@@ -1,0 +1,1712 @@
+{
+ "number": 11,
+ "title": "EVERY VOICE EVER LOST",
+ "subtitle": "SUBLEVEL 7 — THE ARCHIVE",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "B",
+   "kind": "use",
+   "props": {
+    "block": "true",
+    "p": "shelf",
+    "prompt": "Search the shelf — Box 19"
+   },
+   "sequence": 1,
+   "lines": -1
+  },
+  {
+   "symbol": "G",
+   "kind": "ghost",
+   "props": {
+    "r": "8",
+    "text": "BOX 19\nSTACK E — ROW 3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "J",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "pell_end",
+    "if": "pell_all",
+    "r": "12",
+    "title": "Pell — the forty-second"
+   },
+   "sequence": -1,
+   "lines": 2
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {
+    "msg": "Deep lift. 'APERTURE LEVEL — KEYCARD AND VOICEPRINT.' The control panel is beside the doors.",
+    "needflag": "c11_lift"
+   },
+   "sequence": 3,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "door",
+   "props": {
+    "code": "0243",
+    "label": "VAULT D — DIRECTOR — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev7",
+    "title": "Dr. Voss — for Daniel"
+   },
+   "sequence": -1,
+   "lines": 5
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "consume": "false",
+    "fail": "Deep lift control. 'DIRECTOR'S KEYCARD AND VOICEPRINT REQUIRED.' I need her card — and her voice.",
+    "if": "u:c11_k1",
+    "need": "tape_reel",
+    "p": "terminal",
+    "prompt": "Deep lift control — play the voiceprint"
+   },
+   "sequence": 6,
+   "lines": -1
+  },
+  {
+   "symbol": "W",
+   "kind": "note",
+   "props": {
+    "flag": "mira_p5",
+    "text": "Loop eleven thousand and something. I've stopped counting.\n\nEvelyn asked me tonight why I keep writing in this. I told her: so that if anyone ever comes, they'll know we didn't just stand here.\n\nWe tried. We tried eleven thousand times.",
+    "title": "Mira's notebook — page 5 of 5"
+   },
+   "sequence": 7,
+   "lines": -1
+  },
+  {
+   "symbol": "Y",
+   "kind": "door",
+   "props": {
+    "code": "5119",
+    "label": "VAULT S — SECURITY — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Z",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "d",
+   "kind": "note",
+   "props": {
+    "flag": "c11_duarte",
+    "text": "STATEMENT OF CPL. INES DUARTE, POST ONE\nSEALED BY ORDER OF THE DIRECTORATE — 18 OCT 1998\n\nAt approximately 02:46 Technician M. Solace came up in the service lift carrying the Director's son. She was crying. She put him in my arms and pinned a card to his blanket. The card said: HIS NAME IS DANIEL. DON'T LET THEM BRING HIM BACK HERE.\n\nShe said: 'Drive. Don't stop. Don't turn the radio on.'\n\nShe went back down. I watched the lights in the shaft go out floor by floor, like something was eating them.\n\nI drove. I did not turn the radio on. At the bottom of the mountain it turned itself on, and it was her voice, saying thank you.\n\nI did not stop.\n\nThe boy was placed with the county. I asked that his name be changed. I asked that nobody ever tell him where he came from.\n\nI am told the family is called Arlen.",
+    "title": "Sealed statement — Cpl. I. Duarte"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "note",
+   "props": {
+    "text": "VAULT D — DIRECTOR\n\nCombination per Dr. Voss: 'It opens at the moment it all ends.'\n\n(Below, in Hale's hand:)\nThat's not a combination, Evelyn. That's a threat.\n\n(Below that, in hers:)\nIt's both, Marcus. Most things are.",
+    "title": "Taped to the Director's vault"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "ghost",
+   "props": {
+    "r": "9",
+    "text": "VAULT S\nHALE, M.  —  5 1 1 9"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "tape",
+   "props": {
+    "flag": "hale_truth",
+    "title": "Marcus Hale — last report"
+   },
+   "sequence": 13,
+   "lines": 15
+  },
+  {
+   "symbol": "j",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "pell4",
+    "r": "12",
+    "title": "Pell — the stranger (4 of 4)"
+   },
+   "sequence": -1,
+   "lines": 16
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "archive_key"
+   },
+   "sequence": 21,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "HELIX-9 ARCHIVE — INDEX\n\nStacks A–E ........ project records 1991–1998\nStack A, row 3 .... voiceprint reels (staff copies)\nBox 19 ............ RUN 19 (empty — removed by order)\nVault S ........... security. Hale only.\nVault D ........... Director. Voss only.\n\nThe deep lift to the Aperture level runs from the east end of the stacks. It answers to the Director's keycard AND the Director's voice. Copies of her voiceprint are filed with the reels in Stack A for exactly this reason.\n(Hale objected. Hale was overruled.)\n\nThe archive keycard: the duty archivist keeps it in the stacks, 'somewhere sensible', which in practice means anywhere.",
+    "title": "Archive index card"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "item",
+   "props": {
+    "id": "tape_reel"
+   },
+   "sequence": 24,
+   "lines": -1
+  },
+  {
+   "symbol": "s",
+   "kind": "item",
+   "props": {
+    "id": "shutdown_key"
+   },
+   "sequence": 25,
+   "lines": -1
+  },
+  {
+   "symbol": "z",
+   "kind": "prop",
+   "props": {
+    "block": "true",
+    "p": "shelf"
+   },
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "################################",
+  "#....#........G#......#........#",
+  "#.S..D...n.....#..h...#..T..s..#",
+  "#....#....L....#..L...#...L....#",
+  "#.L..#.......V.#......#........#",
+  "#....#..d...e..#......#.......W#",
+  "######D###########Y#######Q#####",
+  "#................g.............#",
+  "#.zzzz.zzzz.zzzz.zzzz.zzzz..H..#",
+  "#....P....j....Z........P.....U#",
+  "#.zzzz.zzzz.zzzz.zzzz.zzzz..L..M",
+  "#.....r......................J.#",
+  "#.zzzz.zzzz.zzzz.zzzz.zBzz.k...#",
+  "#H.......L..........L..........#",
+  "################################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "G",
+   "cell": {
+    "x": 14,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 5,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 9,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 18,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 25,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "s",
+   "cell": {
+    "x": 28,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 10,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 18,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 26,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 2,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 13,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "d",
+   "cell": {
+    "x": 8,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 12,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "W",
+   "cell": {
+    "x": 30,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 6,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "Y",
+   "cell": {
+    "x": 18,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 26,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 17,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 2,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 3,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 4,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 5,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 7,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 8,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 9,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 10,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 12,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 13,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 14,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 15,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 17,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 18,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 19,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 20,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 22,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 23,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 24,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 25,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 28,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 5,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 10,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "Z",
+   "cell": {
+    "x": 15,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 24,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 30,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 2,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 3,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 4,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 5,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 7,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 8,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 9,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 10,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 12,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 13,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 14,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 15,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 17,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 18,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 19,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 20,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 22,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 23,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 24,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 25,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 28,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 31,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 6,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "J",
+   "cell": {
+    "x": 29,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 2,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 3,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 4,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 5,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 7,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 8,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 9,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 10,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 12,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 13,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 14,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 15,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 17,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 18,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 19,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 20,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 22,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 23,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 24,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 25,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 27,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 1,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 9,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 20,
+    "y": 13
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"Z\",\"mode\":\"ambush\"}]",
+  "amb_db": "-30",
+  "amb_loop": "hum",
+  "face": "-90",
+  "music": "drone_b",
+  "pal": "archive"
+ },
+ "walkthrough": [
+  "n",
+  "[\"radio\",\"j\"]",
+  "[\"radio\",\"J\"]",
+  "d",
+  "e",
+  "Y",
+  "h",
+  "Q",
+  "W",
+  "T",
+  "s",
+  "B",
+  "k",
+  "r",
+  "U",
+  "M"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Current time: zero two — forty-three."
+     ],
+     "vo": "pa_f40e4bfbe4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The Archive. Every page this place ever printed, every tape it ever cut."
+     ],
+     "vo": "daniel_ba0c6f5b4a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hale kept a vault down here. So did she. If there's a truth in this mountain, it's on a shelf."
+     ],
+     "vo": "daniel_2bfabb2ecb"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "It has learned how you hide and where you go. Now it waits for you."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The deep lift needs the archive keycard and the Director's voiceprint. Read the index card. Look for the vaults."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "journal",
+     "args": [
+      "Run 19 — operational order",
+      "RUN 19 — OPERATIONAL ORDER\nAuthorised: E. Voss, Director\nSecurity sign-off: REFUSED — M. Hale\n\nHale: 'I will not sign. There is a child on this level, and a thing on this channel that asks for him by a name he doesn't have yet. If you run it, Evelyn, run it without him.'\n\nVoss (pencil): 'Mira takes him up at 02:40. You have my word.'\n\nRun commenced: 02:40.\nNo record of the child leaving the level before 02:43."
+     ]
+    },
+    {
+     "command": "give",
+     "args": [
+      "battery"
+     ]
+    },
+    {
+     "command": "give",
+     "args": [
+      "medkit"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "pickup",
+      "-6"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Taken: Power cell, Medkit"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'Run it without him.' Hale tried. Hale was the only one who tried."
+     ],
+     "vo": "daniel_8ebd326e9c"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "Tunde. I asked him his name."
+     ],
+     "vo": "pell_f58e96354a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "And?"
+     ],
+     "vo": "okafor_8ff36896f8"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "He said Arlen. Then he said, 'Is anyone still there?' — and he wasn't. He just wasn't, Tunde. Like a station going off the air."
+     ],
+     "vo": "pell_5ab436dd3b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "...Forty-two."
+     ],
+     "vo": "okafor_01c02d3f49"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "What?"
+     ],
+     "vo": "pell_2342ed5242"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "I've counted forty-two all night. Now I know who the extra one was."
+     ],
+     "vo": "okafor_570f864f28"
+    },
+    {
+     "command": "ach",
+     "args": [
+      "pell"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "The forty-second",
+      "In 1998, Jonah Pell followed a man in an orange jacket through HELIX-9 — the open-plan office, Lind's records, the Signal Room, the Archive. He asked the man his name. The man said Arlen.\n\nOkafor had counted forty-two people all night. The forty-second was me."
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "They could see me. All night, in nineteen ninety-eight, they could see me walking through their building."
+     ],
+     "vo": "daniel_bc59444c9c"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Current time: zero two — forty-three."
+     ],
+     "vo": "pa_f40e4bfbe4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Last stop. Whatever's at the bottom, it's been waiting since before I was born."
+     ],
+     "vo": "daniel_9dec41f21a"
+    },
+    {
+     "command": "ifnot",
+     "args": [
+      "shutdown_key"
+     ],
+     "then": 4,
+     "else": -1
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Her vault. I never opened her vault. Too late now."
+     ],
+     "vo": "daniel_c0ae5e4c5d"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Danny."
+     ],
+     "vo": "evelyn_7cfdad18d4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "If you're hearing this, you found the vault. Which means you're grown, and you came back. Which means I failed at the one thing I asked of anyone. I asked them never to let you come back."
+     ],
+     "vo": "evelyn_234783e7d9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "So I'll assume you're as stubborn as I am, and I'll say what I need to say."
+     ],
+     "vo": "evelyn_8a399ed91e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "I'm sorry. I brought you down here because you slept. That's the truth. It's a small, selfish truth, and it's the worst thing I ever did."
+     ],
+     "vo": "evelyn_1ffb9200d6"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "It wants you because you were the first one who ever heard it without being afraid. You laughed at it. Nobody had ever laughed at it."
+     ],
+     "vo": "evelyn_4beba87fce"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "There's a key with this tape. It collapses the Aperture. Everything in the line goes silent — it, and everything that's left of us. If you turn it, we're gone. All of us. Mira too. That's all right. That's allowed."
+     ],
+     "vo": "evelyn_f0e703c3b1"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "But if you're braver than I was — if you've gathered our real voices, if you know who to trust — there is a third way. Don't open the door. Don't just close it. Answer it. Send us back down the line, all of us together. And don't do it alone."
+     ],
+     "vo": "evelyn_f83eda923f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "It can't wear a choir. It can only wear the lonely."
+     ],
+     "vo": "evelyn_750e1c40d5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Little light. Signal and answer. I love you. I've always loved you. Go home."
+     ],
+     "vo": "evelyn_95f73b9098"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "click",
+      "0"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (REEL)",
+      "Voss, Evelyn. Director. Authorise deep-lift descent."
+     ],
+     "vo": "evelyn_6e035a4f84"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Voiceprint accepted. Good evening, Doctor Voss."
+     ],
+     "vo": "pa_33b41b118b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Her voice off a reel, opening a door for a stranger. That's exactly what it does."
+     ],
+     "vo": "daniel_b8fa09fbed"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c11_lift"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "U"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The deep lift is open. East end of the stacks."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p1"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p2"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p3"
+     ],
+     "then": 10,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p4"
+     ],
+     "then": 11,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p5"
+     ],
+     "then": 12,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "mira_all"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "notebook"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's every page. If she left one more, it's where she is."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "ach",
+     "args": [
+      "hale"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "h"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE? (103.7 MHz)",
+      "Arlen. Don't waste time down there. The chamber. Get to the chamber."
+     ],
+     "vo": "hale_61c65c6412"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hale's dead. He died at two fifty-one, in nineteen ninety-eight. I just heard him say so."
+     ],
+     "vo": "daniel_507101e2e7"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "LISTENER (DANIEL'S VOICE, 103.7 MHz)",
+      "Then who have you been talking to, Daniel?"
+     ],
+     "vo": "listener_70127cfc6d"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "You. It was always you. The uplink. The chamber. Everything 'Hale' wanted, you wanted."
+     ],
+     "vo": "daniel_7a075204a5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Do the opposite. Whatever it tells me — do the opposite."
+     ],
+     "vo": "daniel_b63c68d428"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c6_told"
+     ],
+     "then": 14,
+     "else": -1
+    },
+    {
+     "command": "journal",
+     "args": [
+      "Hale",
+      "The Hale on 103.7 was never Hale. Marcus Hale died at 02:51 on 17 October 1998. His last order: if you hear me on the radio after tonight, it isn't me. Do the opposite.\n\nIt wanted the uplink fixed. It wants me at the chamber. It wants the Door open."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "And everything I told it, back in the tunnels — it kept every word."
+     ],
+     "vo": "daniel_004a966092"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "Hale. Two-fifty, seventeenth of October. This is my last report, so I'll make it a good one."
+     ],
+     "vo": "hale_7111b2ba7f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "At two forty-nine I sealed the containment bulkhead with twenty-three people behind it. Mira Solace looked at me through the glass while I did it. I want that on the record. I want somebody to know I saw her face."
+     ],
+     "vo": "hale_784cd1d453"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "It didn't matter. It isn't behind the bulkhead. It's in the line. It's in every set in this mountain. I sealed twenty-three people in for nothing."
+     ],
+     "vo": "hale_859f0af29f"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "So here's my last order. It's for whoever finds this, whenever that is."
+     ],
+     "vo": "hale_418478e021"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "If you hear me on the radio after tonight — it isn't me. I'm dead. I'm dead at two fifty-one, and I've made my peace with it."
+     ],
+     "vo": "hale_d1ebbd38d5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "Whatever I tell you on that channel, do the opposite. If I tell you to open a door, you leave it shut. If I tell you to switch something on, you cut the cable."
+     ],
+     "vo": "hale_d7eb4dd861"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "Kate, if this ever finds you: I kept my word as long as I could."
+     ],
+     "vo": "hale_8c9576e361"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (TAPE)",
+      "...It's here. It's using my voice in the corridor. Sounds just like me. Funny. I never liked my voice."
+     ],
+     "vo": "hale_3735bf6526"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "I followed him down to the Archive. He's in the stacks, looking for Box nineteen."
+     ],
+     "vo": "pell_04e5e6587d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Jonah. Come back up. Please."
+     ],
+     "vo": "okafor_be73fc2713"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (1998)",
+      "He has her eyes, Tunde. The Director's. That same way of standing still when he listens."
+     ],
+     "vo": "pell_cfb325da4a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Her eyes."
+     ],
+     "vo": "daniel_19d869e984"
+    },
+    {
+     "command": "if",
+     "args": [
+      "pell1"
+     ],
+     "then": 17,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell2"
+     ],
+     "then": 18,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell3"
+     ],
+     "then": 19,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "pell4"
+     ],
+     "then": 20,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "pell_all"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's all four of Pell's calls. Something else is waiting on 89.1, down in the Archive."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Archive keycard. 'Somewhere sensible.' Under a box of 1994 payroll."
+     ],
+     "vo": "daniel_70806916e0"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "u:c11_r1"
+     ],
+     "then": 22,
+     "else": 23
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Keycard and voiceprint. The deep-lift control is at the east end of the stacks."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "The deep lift also wants the Director's voice. The index card says Stack A."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "A reel. 'VOSS, E. — VOICEPRINT — DO NOT LOAN.' Her voice, on a spool, in a box."
+     ],
+     "vo": "daniel_4af4a84da3"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "shutdown_key"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "The shutdown key",
+      "Evelyn's key. It collapses the Aperture: everything in the line goes silent for ever. It — and everything that's left of them. Mira too.\n\nOr: the third way. Don't open it. Don't just close it. Answer it — with their real voices, all together, and not alone."
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "A key. Brass, warm, like somebody's been holding it for twenty-eight years."
+     ],
+     "vo": "daniel_31d9fd1b03"
+    }
+   ]
+  }
+ ]
+}

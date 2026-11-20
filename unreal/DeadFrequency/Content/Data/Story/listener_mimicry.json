@@ -1,0 +1,55 @@
+{
+ "lines": [
+  {
+   "speaker": "MIRA?",
+   "text": "Daniel? I'm right here. Just follow my voice.",
+   "vo": "mira_b02f8d2f15"
+  },
+  {
+   "speaker": "EVELYN?",
+   "text": "It's safe now. You can come out.",
+   "vo": "evelyn_57d93eba20"
+  },
+  {
+   "speaker": "DANIEL?",
+   "text": "Hello? ...Hello? Is somebody there?",
+   "vo": "daniel_eea9b4494b"
+  },
+  {
+   "speaker": "MARCUS?",
+   "text": "Arlen. Stay where you are. I'm coming to you.",
+   "vo": "marcus_207b4e6903"
+  },
+  {
+   "speaker": "MIRA?",
+   "text": "Please. Please don't leave me alone down here.",
+   "vo": "mira_8a15a24cd1"
+  }
+ ],
+ "newGamePlus": [
+  {
+   "ending": "A",
+   "speaker": "DANIEL?",
+   "text": "I'm sorry. I'm so sorry.",
+   "vo": "daniel_48cacfff04"
+  },
+  {
+   "ending": "B",
+   "speaker": "DANIEL?",
+   "text": "Everyone comes home.",
+   "vo": "daniel_833afdf3c1"
+  },
+  {
+   "ending": "C",
+   "speaker": "DANIEL?",
+   "text": "Daniel. Whatever happens. Do not open the door.",
+   "vo": "daniel_a21c65576b"
+  },
+  {
+   "ending": "D",
+   "speaker": "MIRA?",
+   "text": "Signal, Danny.",
+   "vo": "mira_ab9b14eb93"
+  }
+ ]
+}

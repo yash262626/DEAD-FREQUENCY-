@@ -1,0 +1,1686 @@
+{
+ "number": 1,
+ "title": "THE ARRIVAL",
+ "subtitle": "OCTOBER 17, 2026",
+ "preSequence": 0,
+ "startSequence": 1,
+ "resumeSequence": -1,
+ "groups": {},
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "trig",
+   "props": {
+    "r": "2.2"
+   },
+   "sequence": 2,
+   "lines": -1
+  },
+  {
+   "symbol": "2",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "3",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "A",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "e": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "C",
+   "kind": "door",
+   "props": {
+    "lock": "comms_key",
+    "msg": "Card reader. 'COMMS ANNEX — SECURITY ISSUE ONLY.' The security office should have a card."
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "E",
+   "kind": "door",
+   "props": {
+    "msg": "Mag-lock. Dead without power. I need the generator running first.",
+    "needflag": "power1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "K",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "N",
+   "kind": "note",
+   "props": {
+    "ngp": "true",
+    "text": "NORTHLINE RECOVERY — DISPATCH SLIP\n\nJob: HELIX-9, beacon reactivation\nTechnician: requested by name — ARLEN, D.\nDispatcher: P. Kessler\n\n(Paper-clipped to the slip, handwritten:)\nTwenty-eight years. It finally asked for him.\nGod forgive me. — P.K.",
+    "title": "Northline dispatch slip"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "door",
+   "props": {
+    "code": "0042",
+    "label": "LOST PROPERTY CABINET — CODE"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_hale1",
+    "title": "Security log — Hale, Oct 12 1998"
+   },
+   "sequence": -1,
+   "lines": 3
+  },
+  {
+   "symbol": "W",
+   "kind": "door",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "a",
+   "kind": "note",
+   "props": {
+    "text": "22:10  Dr. Voss in. Says don't wait up. Nineteenth night running.\n23:40  Solace (signals) in, carrying the director's kid again. Fourteen months old and he's got more clearance than I do.\n01:05  Radio on the desk keeps opening the squelch by itself. Logged it. Hale says ignore it.\n02:31  Hale just went down at a run. Didn't sign.\n02:40  Somebody is on channel two and it is my voice. I am not on channel two.",
+    "title": "Gate Log — Oct 16, 1998"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "prop",
+   "props": {
+    "p": "console"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "medkit"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "f",
+   "kind": "prop",
+   "props": {
+    "p": "coat"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "item",
+   "props": {
+    "id": "comms_key"
+   },
+   "sequence": 4,
+   "lines": -1
+  },
+  {
+   "symbol": "i",
+   "kind": "item",
+   "props": {
+    "id": "radio"
+   },
+   "sequence": 5,
+   "lines": -1
+  },
+  {
+   "symbol": "j",
+   "kind": "item",
+   "props": {
+    "id": "fuse"
+   },
+   "sequence": 7,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "bottle",
+    "n": "2"
+   },
+   "sequence": 8,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "prop",
+   "props": {
+    "p": "monitor"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "TO: All posts\nFROM: Hale\n\nThree rules. They are not suggestions.\n\n1. Nothing below sublevel two is opened without the Director AND me, in person, in the same room.\n2. If you hear a colleague on the radio and cannot see that colleague, you do not act on what you hear. You come and find me.\n3. Nobody uses a receiver alone. Ever. It knows when you are alone.\n\nI don't care how it sounds. I care that you go home.\n— M.H.",
+    "title": "Memo — M. Hale, Chief of Security"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "o",
+   "kind": "use",
+   "props": {
+    "fail": "Dead. The fuse carrier is empty — there'll be spares in a storeroom.",
+    "need": "fuse",
+    "p": "generator",
+    "prompt": "Fit fuse and start generator"
+   },
+   "sequence": 9,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "note",
+   "props": {
+    "text": "LOST PROPERTY — SECURITY CLOAKROOM\n\nUnclaimed:\n  3 gloves (odd)\n  1 thermos, dented\n  1 paperback, water-damaged\n  1 child's mitten, red — DO NOT THROW AWAY. The Director will ask.\n\nCabinet combination: the number of people on site tonight.\n(Hale's idea. He says it keeps the night shift counting.)",
+    "title": "Lost property — security"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "use",
+   "props": {
+    "p": "recorder",
+    "prompt": "Press PLAY"
+   },
+   "sequence": 10,
+   "lines": -1
+  },
+  {
+   "symbol": "t",
+   "kind": "note",
+   "props": {
+    "text": "NORTHLINE RECOVERY — FIELD WORK ORDER\n\nSite: HELIX-9 (decommissioned 1998). Mountain District 4.\nTechnician: D. ARLEN, emergency communications.\n\nTasks:\n 1. Restore auxiliary power.\n 2. Repair the emergency uplink in the Communications Centre.\n 3. Locate and recover any research records.\n 4. Report on the status of the 1998 staff. (41 persons. No remains were ever logged.)\n 5. Re-establish contact with the surface. Exit.\n\nNote from dispatch: the site beacon woke up three weeks ago and requested a communications engineer.\nIt requested you by name.\nWe assume a database fault. Good luck.",
+    "title": "Work Order NR-2026-1017"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "u",
+   "kind": "note",
+   "props": {
+    "flag": "c1_mitten",
+    "text": "A small red mitten, hand-knitted, one thumb chewed soft. Sewn inside the cuff, a name tape in blue thread:\n\nD. VOSS",
+    "title": "A child's mitten"
+   },
+   "sequence": 11,
+   "lines": -1
+  },
+  {
+   "symbol": "w",
+   "kind": "trig",
+   "props": {
+    "if": "u:c1_i1",
+    "r": "2.5"
+   },
+   "sequence": 12,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "first_signal",
+    "r": "16",
+    "title": "Gate post, 1998"
+   },
+   "sequence": -1,
+   "lines": 13
+  },
+  {
+   "symbol": "y",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "##############################",
+  "#S...t#a.c.V#H.H.b#....o######",
+  "#.....D.....D.....D.....######",
+  "#..A..#..R..#..i..#..R..######",
+  "#N....#.....#...x.#.....######",
+  "###D######E###################",
+  "#....#..........F.........w..#",
+  "#.j..#......1.........y...2..#",
+  "#.A..########K########C#######",
+  "#.k..#######...n.#####....m.##",
+  "############.L...#####.L..3.##",
+  "############..T.h#####.r....##",
+  "############.....#####......##",
+  "##############W###############",
+  "##########..f..f..f.#.L.######",
+  "##########.L...q....Q.u.######",
+  "##########.H......e.#.b.######",
+  "##############################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 1,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "t",
+   "cell": {
+    "x": 5,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "a",
+   "cell": {
+    "x": 7,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 9,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 11,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 13,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 15,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 17,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "o",
+   "cell": {
+    "x": 23,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 6,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 12,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 18,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 3,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 9,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "i",
+   "cell": {
+    "x": 15,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "R",
+   "cell": {
+    "x": 21,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "N",
+   "cell": {
+    "x": 1,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 16,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 3,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "E",
+   "cell": {
+    "x": 10,
+    "y": 5
+   }
+  },
+  {
+   "symbol": "F",
+   "cell": {
+    "x": 16,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 26,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 2,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 12,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 22,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "2",
+   "cell": {
+    "x": 26,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 2,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "K",
+   "cell": {
+    "x": 13,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "C",
+   "cell": {
+    "x": 22,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 2,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 15,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 26,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 23,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "3",
+   "cell": {
+    "x": 26,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 14,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 16,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 23,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "W",
+   "cell": {
+    "x": 14,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 12,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 15,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "f",
+   "cell": {
+    "x": 18,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 22,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 15,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 20,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 22,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 11,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 18,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 22,
+    "y": 16
+   }
+  }
+ ],
+ "props": {
+  "amb_db": "-26",
+  "amb_loop": "hum",
+  "dark": "true",
+  "ext_mode": "storm",
+  "exterior": "true",
+  "face": "-90",
+  "music": "drone_a",
+  "pal": "entrance"
+ },
+ "walkthrough": [
+  "i",
+  "[\"radio\",\"x\"]",
+  "j",
+  "o",
+  "E",
+  "1",
+  "w",
+  "h",
+  "W",
+  "Q",
+  "u",
+  "C",
+  "r"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "cam",
+     "args": [
+      "@far",
+      "@gate",
+      "0"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "loop",
+     "args": [
+      "cine",
+      "rain",
+      "-12"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@far",
+      "@gate",
+      "7",
+      "@road1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH (KESSLER)",
+      "Northline to Arlen. You at the gate yet?"
+     ],
+     "vo": "dispatch_b34742927e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "At the gate. Snow gave up about a mile back. Now it's just rain."
+     ],
+     "vo": "daniel_bb3251f0de"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH (KESSLER)",
+      "Beacon's still pinging. Same message every ninety seconds, three weeks running."
+     ],
+     "vo": "dispatch_ed3e07a53d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Read it to me."
+     ],
+     "vo": "daniel_ba40d02560"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@road2",
+      "@door",
+      "6",
+      "@truck"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH (KESSLER)",
+      "'Request communications technician. Arlen, Daniel.' Over and over. Your name, Danny. From a box nobody's touched since nineteen ninety-eight."
+     ],
+     "vo": "dispatch_f2eb72ae9d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Somebody typed my name into a database once, and the database got lonely. That's all it is."
+     ],
+     "vo": "daniel_7e9fb3fb83"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DISPATCH (KESSLER)",
+      "That's what I keep telling myself. Four hours, Danny. Check in on the hour."
+     ],
+     "vo": "dispatch_eb55331efa"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "On the hour."
+     ],
+     "vo": "daniel_873ccd70ca"
+    },
+    {
+     "command": "cam",
+     "args": [
+      "@low",
+      "@door",
+      "5",
+      "@road2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "thunder",
+      "-4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...The blast door's open. Nobody said the blast door would be open."
+     ],
+     "vo": "daniel_d285226f3f"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.2"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "cine"
+     ]
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "door",
+      "-2",
+      "0.7"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "false",
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Twenty-eight years of dust, and the emergency lamps still think someone's coming home."
+     ],
+     "vo": "daniel_3c6b193bfb"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Right. Power, uplink, records, out. Four hours, and I'm back above the snow line."
+     ],
+     "vo": "daniel_908c1a3880"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "WASD move · Shift sprint · Ctrl crouch · Q/E lean · T flashlight · F interact · Tab journal"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Restore auxiliary power. The generator is past the checkpoint."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "2",
+      "watch"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "-2",
+      "0.5",
+      "2"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2.6"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_down",
+      "-4"
+     ]
+    },
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.5"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "despawn"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.4"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "…Someone was standing there. At the end of the hall. Someone tall."
+     ],
+     "vo": "daniel_7d3797afbd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Trick of the light. Old ballasts. Keep moving, Arlen."
+     ],
+     "vo": "daniel_74ab2741a7"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (TAPE)",
+      "Security log, Hale. Twelfth of October."
+     ],
+     "vo": "marcus_fa687e369e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (TAPE)",
+      "Voss calls it 'the correspondent'. Like it's a pen pal. The signals team call it the Listener, and I think they've got the better of it."
+     ],
+     "vo": "marcus_f579af969b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (TAPE)",
+      "It doesn't talk. It repeats. It takes whatever you give it and hands it back in your own mouth."
+     ],
+     "vo": "marcus_600aa995a4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (TAPE)",
+      "Last night it asked the night shift for somebody. By name. A name that isn't on my roster."
+     ],
+     "vo": "marcus_8039b710f4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (TAPE)",
+      "'Arlen.' Nobody here called Arlen."
+     ],
+     "vo": "marcus_cf6e95a9b4"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "4",
+      "0.65",
+      "K"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "4",
+      "0.65",
+      "K"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "2",
+      "0.6",
+      "K"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "2.5"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Something just walked past that door. Slowly. Like it was listening for me."
+     ],
+     "vo": "daniel_c9df37dee6"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Enter the communications annex at the end of the corridor."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "HX-7 field receiver. Same model I trained on."
+     ],
+     "vo": "daniel_36720c3118"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "…Cell's still holding a charge. After twenty-eight years. That isn't possible."
+     ],
+     "vo": "daniel_ec7a8c5db1"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "R / Right-click: receiver on-off.   Mouse wheel / ← →: tune."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Try the receiver. The dial is marked at 89.1 MHz."
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "88"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "Eighty-eight point zero. It sits under its band. It can't hear this one. Remember it."
+     ],
+     "vo": "daniel_4674c32f93"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's me. Again."
+     ],
+     "vo": "daniel_2ed410abdb"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "88.0",
+      "A transmission in my own voice, below the Listener's band: 'Eighty-eight point zero. It can't hear this one. Remember it.'\n\nI've been here before. I don't remember it. Something does."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Ceramic fuse. Thirty amp. The auxiliary generator will take that."
+     ],
+     "vo": "daniel_cd9ea36a21"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "toast",
+     "args": [
+      "G: throw a bottle. Sound travels down here. So does attention."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "2"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "amb",
+      "hum",
+      "-16"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "There. Auxiliary bus is live."
+     ],
+     "vo": "daniel_49aadac821"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Welcome back. Auxiliary power restored. Current time — zero two — forty-three. Staff on site — forty-two."
+     ],
+     "vo": "pa_d71e573728"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Forty-two. …The work order said forty-one."
+     ],
+     "vo": "daniel_66f2e1ac2b"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The checkpoint's inner door has power now. Go deeper."
+     ]
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "o"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "music",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "click",
+      "2"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "static",
+      "static",
+      "-22"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "VOICE (TAPE)",
+      "Daniel… if you are hearing this, it means the signal has already found you."
+     ],
+     "vo": "voice_90e655e708"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "101.3"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (RADIO)",
+      "You shouldn't have come here."
+     ],
+     "vo": "daniel_de4a6b5021"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "static"
+     ]
+    },
+    {
+     "command": "pulse",
+     "args": []
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.6"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "2",
+      "0.6",
+      "C"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "4",
+      "0.6",
+      "C"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "step",
+      "6",
+      "0.55",
+      "y"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "0.5"
+     ]
+    },
+    {
+     "command": "look",
+     "args": [
+      "C"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "…Hello?",
+      "2"
+     ],
+     "vo": "daniel_2f0e02a9d0"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "3"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "4"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "static",
+      "-2"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "3",
+      "m",
+      "3",
+      "",
+      "1.5",
+      "1.2"
+     ]
+    },
+    {
+     "command": "monitor",
+     "args": [
+      "[\"SIGNAL IDENTIFIED\",\"SUBJECT: DANIEL ARLEN\",\"STATUS: ALREADY INSIDE\"]",
+      "2.2"
+     ]
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "0.05"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "title2"
+     ]
+    },
+    {
+     "command": "title",
+     "args": [
+      ""
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "A kid's mitten. 'D. Voss.'"
+     ],
+     "vo": "daniel_df8229d8d7"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Who brings a kid into a place like this?"
+     ],
+     "vo": "daniel_212c11c67a"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "whisper",
+      "-18",
+      "1.3"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Forty-two. The PA said forty-two, not forty-one."
+     ],
+     "vo": "daniel_004b6c79c7"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "101.3"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "0"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (101.3 MHz)",
+      "Daniel…"
+     ],
+     "vo": "daniel_792deb9211"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Who is this? This channel is — who's transmitting?"
+     ],
+     "vo": "daniel_e080e256c1"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL? (101.3 MHz)",
+      "Daniel. Whatever happens. Do not open the door."
+     ],
+     "vo": "daniel_95de41dff7"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's my voice."
+     ],
+     "vo": "daniel_4ec2f0443d"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That is my voice."
+     ],
+     "vo": "daniel_f2705e5ee1"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "journal",
+     "args": [
+      "101.3 MHz — the warning",
+      "My own voice, on a frequency with no carrier behind it.\n\n\"Daniel. Whatever happens. Do not open the door.\"\n\nI heard it once before. Three years ago, on a dead channel, the night of Harrow Pass. It told me to hold the rescue team. I held them. Four people died waiting.\n\nNobody else ever heard that tape."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find a way into the communications annex."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "GUARD (1998)",
+      "Post Two to Hale. Chief, the lower doors just cycled. By themselves."
+     ],
+     "vo": "guard_d912c0144d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (1998)",
+      "Say again, Two."
+     ],
+     "vo": "marcus_d5feda1b2a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "GUARD (1998)",
+      "They opened, sir. All of them. There's nobody down there to open them."
+     ],
+     "vo": "guard_800da6a782"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MARCUS (1998)",
+      "Then close them. And Two — if you hear me tell you to open anything tonight, it isn't me."
+     ],
+     "vo": "marcus_b0d79c8298"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "That's… that's not a recording. That's live carrier. From nineteen ninety-eight."
+     ],
+     "vo": "daniel_ac2d14a456"
+    },
+    {
+     "command": "ach",
+     "args": [
+      "first_signal"
+     ]
+    }
+   ]
+  }
+ ]
+}

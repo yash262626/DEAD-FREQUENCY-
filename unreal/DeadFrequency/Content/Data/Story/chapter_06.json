@@ -1,0 +1,1216 @@
+{
+ "number": 6,
+ "title": "NO WAY BACK",
+ "subtitle": "SUBLEVEL 4 — FLOOD TUNNELS",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {
+  "valves": 1
+ },
+ "legend": [
+  {
+   "symbol": "8",
+   "kind": "radio",
+   "props": {
+    "f": "88",
+    "flag": "ss3",
+    "ngp": "true",
+    "r": "14",
+    "title": "88.0 — the second signal (3 of 6)"
+   },
+   "sequence": -1,
+   "lines": 2
+  },
+  {
+   "symbol": "A",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "c": "0.5,0.95,0.85,1",
+    "e": "0.9",
+    "r": "9"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "B",
+   "kind": "door",
+   "props": {
+    "msg": "Collapsed on the other side. There's no way back.",
+    "sealed": "true"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "G",
+   "kind": "door",
+   "props": {
+    "msg": "Floodgate. The water on the far side is holding it shut. Drain the section first.",
+    "needflag": "solved_valves"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_okafor",
+    "title": "Okafor — personal"
+   },
+   "sequence": -1,
+   "lines": 9
+  },
+  {
+   "symbol": "W",
+   "kind": "door",
+   "props": {
+    "msg": "Office door. There's a wall of water behind it. Drain the section first.",
+    "needflag": "solved_valves"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Y",
+   "kind": "use",
+   "props": {
+    "p": "ladder",
+    "prompt": "Climb toward the Communications Centre"
+   },
+   "sequence": 10,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "note",
+   "props": {
+    "flag": "c6_memo",
+    "text": "DIRECTORATE OF SIGNAL RESEARCH\nLIAISON OFFICE — EYES ONLY — 16 OCT 1998\n\nTo: Dr. E. Voss, Director, HELIX-9\nRe: Phase III / Subject D\n\nThe Directorate has reviewed your reports on Subject D. A listener who requires no equipment is of greater strategic value than the Aperture itself.\n\nOn completion of Run 19, Subject D will be transferred to Directorate care for continued study. Transport is arranged for 06:00, 17 October.\n\nThis is not a request.\n\n— Liaison (signature illegible)\n\n(Across the page, in Evelyn Voss's handwriting, pressed hard enough to tear:)\nOVER MY DEAD BODY.",
+    "title": "Directorate memo — liaison's briefcase"
+   },
+   "sequence": 11,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "ghost",
+   "props": {
+    "r": "7",
+    "text": "SHE SAID NO"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "h",
+   "kind": "note",
+   "props": {
+    "text": "SUBLEVEL 4 — EMERGENCY ORDER\nTime: 02:47, 17 Oct 1998\n\nContainment protocol is in effect.\nThe sublevel 4 bulkhead closes at 02:49.\n\nAnyone not through by 02:49 stays where they are.\nNo exceptions. Not for rank. Not for me.\n\nDo not open it again for any voice. ANY voice. Including mine.\n\n— M. Hale",
+    "title": "Containment order — 02:47"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "item",
+   "props": {
+    "id": "medkit"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "radio",
+   "props": {
+    "f": "96.1",
+    "r": "18",
+    "title": "Mira — the bulkhead"
+   },
+   "sequence": -1,
+   "lines": 13
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "FLOOD SECTION 4 — DRAINAGE\n\nIn the event of flooding, set the three drain valves to their marked positions and the pumps will clear the section in under a minute.\n\nPositions are marked on each valve housing in luminous paint.\n\n(Pencil:) The paint's faded to nothing. Haddad's trick — put your set on the last channel, 107.9, and the marks come back. Don't stay on it long. It's the loud one.",
+    "title": "Pump room procedure"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "trig",
+   "props": {
+    "r": "2.2"
+   },
+   "sequence": 14,
+   "lines": -1
+  },
+  {
+   "symbol": "u",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "valves",
+    "label": "Drain valves",
+    "p": "valve",
+    "prompt": "Turn the west valve",
+    "target": "3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "v",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "valves",
+    "label": "Drain valves",
+    "p": "valve",
+    "prompt": "Turn the centre valve",
+    "target": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "w",
+   "kind": "use",
+   "props": {
+    "cycle": "4",
+    "group": "valves",
+    "label": "Drain valves",
+    "p": "valve",
+    "prompt": "Turn the east valve",
+    "target": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "ghost",
+   "props": {
+    "r": "6",
+    "text": "III"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "y",
+   "kind": "ghost",
+   "props": {
+    "r": "6",
+    "text": "I"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "z",
+   "kind": "ghost",
+   "props": {
+    "r": "6",
+    "text": "II"
+   },
+   "sequence": -1,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "##############################",
+  "#.8.#.........#######.......Y#",
+  "B.S.D....A....#.....#..T..L..#",
+  "#...#.........#..m..#........#",
+  "#####........n#..P..#....H...#",
+  "#...#####.#####.....#........#",
+  "#.e.#####.#####..A..##.#######",
+  "#.H.D.....D.........#..q.....#",
+  "#...#####.#####.....G..h..P..#",
+  "#####.....###########........#",
+  "#H.......V#........###########",
+  "#....A....#..L...g.###########",
+  "#.x..y..z.W.......b###########",
+  "#.u..v..w.#..k.....###########",
+  "##############################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "8",
+   "cell": {
+    "x": 2,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "Y",
+   "cell": {
+    "x": 28,
+    "y": 1
+   }
+  },
+  {
+   "symbol": "B",
+   "cell": {
+    "x": 0,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 4,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 9,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 23,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 26,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 17,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 13,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 17,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 25,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 2,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 17,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 2,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 4,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 10,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 23,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "G",
+   "cell": {
+    "x": 20,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "h",
+   "cell": {
+    "x": 23,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 26,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 1,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 9,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 5,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 13,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 17,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 2,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 5,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "z",
+   "cell": {
+    "x": 8,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "W",
+   "cell": {
+    "x": 10,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 18,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 2,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "v",
+   "cell": {
+    "x": 5,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 8,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 13,
+    "y": 13
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"P\",\"mode\":\"patrol\"}]",
+  "amb_db": "-18",
+  "amb_loop": "drip",
+  "face": "-90",
+  "music": "drone_b",
+  "pal": "flooded"
+ },
+ "walkthrough": [
+  "n",
+  "[\"radio\",\"m\"]",
+  "u",
+  "u",
+  "u",
+  "v",
+  "w",
+  "w",
+  "W",
+  "b",
+  "G",
+  "q",
+  "T",
+  "Y"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "impact",
+      "4",
+      "0.7"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "splash",
+      "0"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "—the stairs— the whole stairwell just went."
+     ],
+     "vo": "daniel_d2e93f2d39"
+    },
+    {
+     "command": "lock",
+     "args": [
+      "B"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Okay. That's... okay. No way back up. Only forward."
+     ],
+     "vo": "daniel_5e9e56aa9b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Flood tunnels. Every step's going to sound like a slap."
+     ],
+     "vo": "daniel_8700adf357"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Water makes every footstep louder. Move slowly."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Find a way through the flood tunnels toward the Communications Centre."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "0"
+     ]
+    },
+    {
+     "command": "loop3d",
+     "args": [
+      "pumps",
+      "tram",
+      "u",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Pumps are taking it. Listen to that — the whole section's draining."
+     ],
+     "vo": "daniel_851cea6a79"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "v"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "And everything down here just heard the pumps start."
+     ],
+     "vo": "daniel_715938bc81"
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "The floodgate in the pool room should give now."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "The briefcase in the drowned office. 'Transport at six.' The liaison signed it."
+     ],
+     "vo": "daniel_1152b3ebda"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL (88.0 MHz)",
+      "The signature is illegible. The handwriting isn't. Put it next to the dispatch slip."
+     ],
+     "vo": "daniel_6aadcae726"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Kessler. That's Kessler's hand."
+     ],
+     "vo": "daniel_1f43df58fb"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ss1"
+     ],
+     "then": 3,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss2"
+     ],
+     "then": 4,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss3"
+     ],
+     "then": 5,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss4"
+     ],
+     "then": 6,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss5"
+     ],
+     "then": 7,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "ss6"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "ach",
+     "args": [
+      "static_between"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "88.0 is quiet now. Every message is in the journal."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (TAPE)",
+      "Okafor. Personal. If somebody finds this, give it to my wife. Adaeze Okafor. Halden. Corner House, the blue door."
+     ],
+     "vo": "okafor_ba28a1fe57"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (TAPE)",
+      "Ada. It talks in my voice now. Not to me — to the others. Pell came to my office at midnight because I called him on the radio. I never called him."
+     ],
+     "vo": "okafor_820ce587af"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (TAPE)",
+      "Tonight I'm going to sit in the pump room where it's loud, until Evelyn needs me for the run. Then I go down with the others."
+     ],
+     "vo": "okafor_2331fe8034"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (TAPE)",
+      "I love you. That isn't a thing it can take. I've never once said it on a radio. I made sure."
+     ],
+     "vo": "okafor_2d17dbc2a7"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "splash",
+      "-2"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "metal",
+      "-4",
+      "0.8"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Out of the water. Up. Comms is up."
+     ],
+     "vo": "daniel_7908c74609"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Okafor never said it on the radio. So it can't say it back."
+     ],
+     "vo": "daniel_69db30d645"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "'Subject D.' 'A listener who requires no equipment.' They wanted somebody's kid."
+     ],
+     "vo": "daniel_bc39d33fa2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Transport at six in the morning. She was getting him out before they could take him."
+     ],
+     "vo": "daniel_3c61dbe89c"
+    },
+    {
+     "command": "if",
+     "args": [
+      "ngp"
+     ],
+     "then": 12,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "The liaison's signature. I've seen that handwriting. On a dispatch slip, in the gatehouse."
+     ],
+     "vo": "daniel_97968ccdab"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Daniel? Are you still there? I lost you when the power came on. Everything got so loud."
+     ],
+     "vo": "mira_e5eca739bd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "I'm here. Tunnels under the power station. Wet to the knees."
+     ],
+     "vo": "daniel_5b30ea3a3a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "The flood section. Keep your feet slow. Water carries."
+     ],
+     "vo": "mira_7179aa70d0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira, I'm talking to Hale. He says if I fix the uplink we can call for extraction. All of you."
+     ],
+     "vo": "daniel_a420314c71"
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Marcus is talking to you."
+     ],
+     "vo": "mira_c5e999c390"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "On one-oh-three-seven. He's been helping."
+     ],
+     "vo": "daniel_b9d51d3695"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Marcus Hale closed the containment bulkhead at two forty-nine with twenty-three people on the wrong side of it. I was one of them."
+     ],
+     "vo": "mira_223b4cf676"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "I'd only just come back down. I'd been up to the surface — I'd taken something up there I had to get out — and I came back for Evelyn, and he shut it."
+     ],
+     "vo": "mira_8cab29e6b4"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "He looked right at me through the glass, and he shut it."
+     ],
+     "vo": "mira_c3d384516c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Why would he do that?"
+     ],
+     "vo": "daniel_bb6c93e878"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Because it was in here with us. Because twenty-three is a smaller number than forty-one."
+     ],
+     "vo": "mira_a5354b593e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (96.1 MHz)",
+      "Be careful what you fix for him, Daniel."
+     ],
+     "vo": "mira_2aff0b226d"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c6_mira"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "splash",
+      "0",
+      "0.7",
+      "P"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "seek",
+      "m"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Something moved in the water. Something heard her too."
+     ],
+     "vo": "daniel_a7f62131e5"
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Drain the section. The pump room is down the west passage, past the bulkhead door."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Arlen. You've been on the girl's channel."
+     ],
+     "vo": "hale_575241b2d1"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c6_mira"
+     ],
+     "then": 15,
+     "else": 16
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Listen to me. She's been down there a long time. It's been in there with her a long time. It wears people, Arlen. It wears her."
+     ],
+     "vo": "hale_a9b9308e0c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Get to the Communications Centre. Fix the uplink. Then we can all argue about who's to blame."
+     ],
+     "vo": "hale_31ae143cdb"
+    },
+    {
+     "command": "if",
+     "args": [
+      "c6_mira"
+     ],
+     "then": 17,
+     "else": -1
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Two voices on two channels, and each of them sure the other one's the monster."
+     ],
+     "vo": "daniel_e8e3495ffa"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c6_hale"
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "She says you sealed twenty-three people in with that thing."
+     ],
+     "vo": "daniel_0aa3693fc2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "I did. And I'd do it again. Ask her who opened the Door in the first place."
+     ],
+     "vo": "hale_802e48a3ee"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "She's scared, Hale. She sounds like she's been scared for a long time."
+     ],
+     "vo": "daniel_d6d9515a73"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "She has. Ask her who opened the Door in the first place."
+     ],
+     "vo": "hale_0198e0e1fe"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "choice",
+     "args": [
+      "Hale is waiting on 103.7."
+     ],
+     "options": [
+      {
+       "label": "Tell him what Mira said.",
+       "sequence": 18
+      },
+      {
+       "label": "Say nothing.",
+       "sequence": 19
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c6_told"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "She said twenty-three is a smaller number than forty-one. She said you looked right at her."
+     ],
+     "vo": "daniel_d37b55c291"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "...Did she. Good to know, Arlen. Good to know."
+     ],
+     "vo": "hale_23f809ec96"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c6_silent"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...Copy that. Moving."
+     ],
+     "vo": "daniel_9fe6d320ce"
+    }
+   ]
+  }
+ ]
+}

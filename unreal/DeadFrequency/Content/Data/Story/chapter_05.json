@@ -1,0 +1,1536 @@
+{
+ "number": 5,
+ "title": "THE VOICES",
+ "subtitle": "SUBLEVEL 4 — POWER STATION",
+ "preSequence": -1,
+ "startSequence": 0,
+ "resumeSequence": -1,
+ "groups": {
+  "brk": 1,
+  "brk_fail": 4
+ },
+ "legend": [
+  {
+   "symbol": "1",
+   "kind": "trig",
+   "props": {
+    "r": "2.2"
+   },
+   "sequence": 5,
+   "lines": -1
+  },
+  {
+   "symbol": "A",
+   "kind": "light",
+   "props": {
+    "always": "true",
+    "c": "1,0.6,0.25,1",
+    "e": "0.8",
+    "r": "9"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "M",
+   "kind": "door",
+   "props": {
+    "msg": "Tunnel door. It needs main power and primed hydraulics. It won't budge.",
+    "needflag": "c5_ready"
+   },
+   "sequence": 6,
+   "lines": -1
+  },
+  {
+   "symbol": "O",
+   "kind": "door",
+   "props": {
+    "lock": "crank",
+    "msg": "Workshop shutter. Hand-cranked — and the crank's missing."
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "Q",
+   "kind": "note",
+   "props": {
+    "flag": "mira_p2",
+    "text": "Loop 214.\n\nThe notebook stays. Nothing else does. The coats go back on their hooks. The coffee in Evelyn's mug is warm again every time.\n\nI've stopped drinking it. It tastes like the first time.",
+    "title": "Mira's notebook — page 2 of 5"
+   },
+   "sequence": 7,
+   "lines": -1
+  },
+  {
+   "symbol": "T",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ev3",
+    "title": "Dr. Voss — Run 7"
+   },
+   "sequence": -1,
+   "lines": 13
+  },
+  {
+   "symbol": "U",
+   "kind": "use",
+   "props": {
+    "fail": "The tunnel door's hydraulic accumulator. Bone dry — it needs a can of fluid.",
+    "need": "fluid",
+    "p": "generator",
+    "prompt": "Refill and prime the accumulator"
+   },
+   "sequence": 14,
+   "lines": -1
+  },
+  {
+   "symbol": "a",
+   "kind": "note",
+   "props": {
+    "text": "MAINTENANCE SHAFT — LOG\n\n17/10  01:55  Ladder inspection. Rungs 40–44 loose. Tagged.\n17/10  02:20  Heard someone climbing below me. Called down. Nobody below me. Called down again. Heard my own voice call back up.\n17/10  02:44  Power station dark. Turbines spun down in under a minute. That is not possible. They take twenty.\n\nNot going back down. Not tonight. — A. Ruiz",
+    "title": "Shaft maintenance log"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "b",
+   "kind": "prop",
+   "props": {
+    "p": "table"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "c",
+   "kind": "item",
+   "props": {
+    "id": "crank"
+   },
+   "sequence": 17,
+   "lines": -1
+  },
+  {
+   "symbol": "e",
+   "kind": "item",
+   "props": {
+    "id": "battery"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "g",
+   "kind": "mark",
+   "props": {},
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "i",
+   "kind": "use",
+   "props": {
+    "p": "breaker",
+    "prompt": "Close breaker A",
+    "seq": "brk",
+    "step": "2"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "j",
+   "kind": "use",
+   "props": {
+    "p": "breaker",
+    "prompt": "Close breaker B",
+    "seq": "brk",
+    "step": "4"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "k",
+   "kind": "use",
+   "props": {
+    "p": "breaker",
+    "prompt": "Close breaker C",
+    "seq": "brk",
+    "step": "1"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "l",
+   "kind": "use",
+   "props": {
+    "p": "breaker",
+    "prompt": "Close breaker D",
+    "seq": "brk",
+    "step": "3"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "m",
+   "kind": "item",
+   "props": {
+    "id": "medkit"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "n",
+   "kind": "note",
+   "props": {
+    "text": "TURBINE FAULT BOARD — A. RUIZ\n\nT1  nominal\nT2  'talks' at spin-down. Logged as BEARING NOISE per Hale.\nT3  nominal\nT4  rattles. Actual bearing noise.\nT5  says my name. Logged as BEARING NOISE per Hale.\nT6  nominal\n\nHale says if it isn't bearing noise it's my imagination, and my imagination isn't on the maintenance schedule.",
+    "title": "Turbine fault board"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "q",
+   "kind": "note",
+   "props": {
+    "text": "MAIN BUS — COLD RESTART\n\nBreakers A, B, C, D must be closed in the correct order or the board trips and resets.\n\nORDER: [card torn off]\n\n(Pencil, underneath:)\nHale says don't post it any more. Says it READS.\nAsk Ruiz. Ruiz knows it.",
+    "title": "Main bus restart card"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "r",
+   "kind": "radio",
+   "props": {
+    "f": "89.1",
+    "flag": "c5_order",
+    "r": "16",
+    "title": "Breaker gallery, 1998"
+   },
+   "sequence": -1,
+   "lines": 18
+  },
+  {
+   "symbol": "u",
+   "kind": "prop",
+   "props": {
+    "p": "turbine"
+   },
+   "sequence": -1,
+   "lines": -1
+  },
+  {
+   "symbol": "w",
+   "kind": "trig",
+   "props": {
+    "if": "c5_ready",
+    "r": "2"
+   },
+   "sequence": 19,
+   "lines": -1
+  },
+  {
+   "symbol": "x",
+   "kind": "tape",
+   "props": {
+    "flag": "tape_ruiz",
+    "title": "Ruiz — workshop"
+   },
+   "sequence": -1,
+   "lines": 20
+  },
+  {
+   "symbol": "y",
+   "kind": "item",
+   "props": {
+    "id": "fluid"
+   },
+   "sequence": 21,
+   "lines": -1
+  }
+ ],
+ "map": [
+  "##############################",
+  "#....#.......................#",
+  "#.S..D...u.....u.....u.......#",
+  "#....#.g....L...........L....#",
+  "#.A..#..A....P....A....P..A..M",
+  "#....#.......................#",
+  "#...a#...u.....u..y..u.......#",
+  "##.###.......w...............#",
+  "#....########D################",
+  "#.e..#........Q#.H...........#",
+  "#....#..1..A...#..q..A...r...#",
+  "#..H.#.........D.............#",
+  "#c...#..T..V...#.............#",
+  "#.F..#.........#..i..j..k..l.#",
+  "##########O###################",
+  "######...U.....###############",
+  "######.b...L.n.###############",
+  "######.x.....m.###############",
+  "##############################"
+ ],
+ "cellSize": 200.0,
+ "placements": [
+  {
+   "symbol": "S",
+   "cell": {
+    "x": 2,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 5,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 9,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 15,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 21,
+    "y": 2
+   }
+  },
+  {
+   "symbol": "g",
+   "cell": {
+    "x": 7,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 12,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 24,
+    "y": 3
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 2,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 8,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 13,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 18,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "P",
+   "cell": {
+    "x": 23,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 26,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "M",
+   "cell": {
+    "x": 29,
+    "y": 4
+   }
+  },
+  {
+   "symbol": "a",
+   "cell": {
+    "x": 4,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 9,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 15,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "y",
+   "cell": {
+    "x": 18,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "u",
+   "cell": {
+    "x": 21,
+    "y": 6
+   }
+  },
+  {
+   "symbol": "w",
+   "cell": {
+    "x": 13,
+    "y": 7
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 13,
+    "y": 8
+   }
+  },
+  {
+   "symbol": "e",
+   "cell": {
+    "x": 2,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "Q",
+   "cell": {
+    "x": 14,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 17,
+    "y": 9
+   }
+  },
+  {
+   "symbol": "1",
+   "cell": {
+    "x": 8,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 11,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "q",
+   "cell": {
+    "x": 18,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "A",
+   "cell": {
+    "x": 21,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "r",
+   "cell": {
+    "x": 25,
+    "y": 10
+   }
+  },
+  {
+   "symbol": "H",
+   "cell": {
+    "x": 3,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "D",
+   "cell": {
+    "x": 15,
+    "y": 11
+   }
+  },
+  {
+   "symbol": "c",
+   "cell": {
+    "x": 1,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "T",
+   "cell": {
+    "x": 8,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "V",
+   "cell": {
+    "x": 11,
+    "y": 12
+   }
+  },
+  {
+   "symbol": "F",
+   "cell": {
+    "x": 2,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "i",
+   "cell": {
+    "x": 18,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "j",
+   "cell": {
+    "x": 21,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "k",
+   "cell": {
+    "x": 24,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "l",
+   "cell": {
+    "x": 27,
+    "y": 13
+   }
+  },
+  {
+   "symbol": "O",
+   "cell": {
+    "x": 10,
+    "y": 14
+   }
+  },
+  {
+   "symbol": "U",
+   "cell": {
+    "x": 9,
+    "y": 15
+   }
+  },
+  {
+   "symbol": "b",
+   "cell": {
+    "x": 7,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "L",
+   "cell": {
+    "x": 11,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "n",
+   "cell": {
+    "x": 13,
+    "y": 16
+   }
+  },
+  {
+   "symbol": "x",
+   "cell": {
+    "x": 7,
+    "y": 17
+   }
+  },
+  {
+   "symbol": "m",
+   "cell": {
+    "x": 13,
+    "y": 17
+   }
+  }
+ ],
+ "props": {
+  "ai": "[{\"at\":\"P\",\"ifnot\":\"solved_brk\",\"mode\":\"patrol\"},{\"at\":\"g\",\"if\":\"solved_brk\",\"mode\":\"patrol\"}]",
+  "amb_db": "-30",
+  "amb_loop": "drip",
+  "dark": "true",
+  "face": "-90",
+  "music": "drone_d",
+  "pal": "power"
+ },
+ "walkthrough": [
+  "1",
+  "Q",
+  "T",
+  "[\"radio\",\"r\"]",
+  "k",
+  "i",
+  "l",
+  "j",
+  "y",
+  "c",
+  "O",
+  "x",
+  "U",
+  "w",
+  "M"
+ ],
+ "sequences": [
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Turbine hall. Six of them, each the size of a house, and not one turning."
+     ],
+     "vo": "daniel_403b8f9179"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "clicks",
+      "-4",
+      "0.6",
+      "P"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "And that clicking. I know that clicking."
+     ],
+     "vo": "daniel_912d2f6298"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Crouch to move quietly. Throw a bottle (G) to pull its attention somewhere else."
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Cross the turbine hall to the power station control room. Stay away from the clicking."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "4"
+     ]
+    },
+    {
+     "command": "lights",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "amb",
+      "hum",
+      "-14"
+     ]
+    },
+    {
+     "command": "noise_mult",
+     "args": [
+      "0.45"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.5"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "PA",
+      "Main power restored. Good morning, HELIX-9."
+     ],
+     "vo": "pa_b883e7e1c2"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "89.1"
+     ]
+    },
+    {
+     "command": "loop",
+     "args": [
+      "static",
+      "static",
+      "-14"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (ECHO)",
+      "—carrier's holding at one-oh-seven-nine—"
+     ],
+     "vo": "okafor_4116a50e4e"
+    },
+    {
+     "command": "line",
+     "args": [
+      "PELL (ECHO)",
+      "—not on the open channel, not any more—"
+     ],
+     "vo": "pell_712df32f83"
+    },
+    {
+     "command": "line",
+     "args": [
+      "LIND (ECHO)",
+      "—take him off the mountain, Evelyn—"
+     ],
+     "vo": "lind_eca15c74da"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (ECHO)",
+      "—nobody opens the Door. Nobody—"
+     ],
+     "vo": "hale_c5d8886235"
+    },
+    {
+     "command": "line",
+     "args": [
+      "MIRA (ECHO)",
+      "—Danny, look. Look at all the lights—"
+     ],
+     "vo": "mira_7cb729abbf"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DUARTE (ECHO)",
+      "—somebody is on channel two and it is my voice—"
+     ],
+     "vo": "duarte_556925899d"
+    },
+    {
+     "command": "line",
+     "args": [
+      "VOICES",
+      "—can anyone hear me — can anyone hear me — can anyone—"
+     ],
+     "vo": "voices_c8d5682c5d"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "unloop",
+     "args": [
+      "static"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Every voice that ever went through this place. It's all still in the wires."
+     ],
+     "vo": "daniel_e820ef56e9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Turbines are loud now. Good. Loud is good. Nothing hears me over that."
+     ],
+     "vo": "daniel_1a14389236"
+    },
+    {
+     "command": "toast",
+     "args": [
+      "Running machinery masks your footsteps."
+     ]
+    },
+    {
+     "command": "checkpoint",
+     "args": [
+      "V"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "if",
+     "args": [
+      "c5_hyd"
+     ],
+     "then": 2,
+     "else": 3
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c5_ready"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Main power is up and the door is primed. The tunnel door is at the east end of the turbine hall."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Main power is up. The tunnel door's hydraulics still need priming — Ruiz's workshop, under the control room."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "alarm",
+      "-10"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Wrong order. The board's tripped. Everything's reset — and that was loud."
+     ],
+     "vo": "daniel_302cafeb3d"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "radio_on",
+     "args": [
+      "true",
+      "103.7"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "glitch",
+      "-6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "—on this channel. Whoever's in my power station. Identify yourself."
+     ],
+     "vo": "hale_ac61309fe0"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Arlen. Daniel Arlen, Northline Recovery. Who is this?"
+     ],
+     "vo": "daniel_1bbb936492"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Marcus Hale. Chief of security."
+     ],
+     "vo": "hale_603e5f9da2"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hale. Your memo's still on the wall upstairs. Three rules."
+     ],
+     "vo": "daniel_ec10b11c08"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Then you've read more than most of my people ever did. Where are you, exactly?"
+     ],
+     "vo": "hale_c0f8ae8400"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Control room. The main bus is dead."
+     ],
+     "vo": "daniel_454a9fc236"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Restart it. The breaker gallery is through the east door. Then get yourself to the Communications Centre."
+     ],
+     "vo": "hale_97a4a9addd"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "And the tunnel door's hydraulic. Ruiz kept its accumulator in her workshop, under this room. There's fluid in the turbine-hall stores."
+     ],
+     "vo": "hale_6ad52fd934"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "If you can get the uplink running, we call for extraction. All of us."
+     ],
+     "vo": "hale_3db439b943"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "All of you. How many of you are down here?"
+     ],
+     "vo": "daniel_60f5001193"
+    },
+    {
+     "command": "line",
+     "args": [
+      "HALE (103.7 MHz)",
+      "Enough. Move, Arlen. And keep that set off unless you need it. It hears the carrier."
+     ],
+     "vo": "hale_309dd66d62"
+    },
+    {
+     "command": "radio_on",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Mira said he sealed them in. He sounds like a man who'd do it, too."
+     ],
+     "vo": "daniel_dab8a7ff94"
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c5_hale"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Restore main power (breaker gallery) and prime the tunnel door's hydraulics (Ruiz's workshop) — in either order."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "door",
+      "4",
+      "0.6"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Through — through — shut it, SHUT IT—"
+     ],
+     "vo": "daniel_9769eb4460"
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "impact",
+      "2",
+      "0.9"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.6"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "...It stopped. It stopped at the door."
+     ],
+     "vo": "daniel_be1247c358"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "It doesn't need doors. Why did it stop at the door?"
+     ],
+     "vo": "daniel_f444009e30"
+    },
+    {
+     "command": "fade",
+     "args": [
+      "true",
+      "1.5"
+     ]
+    },
+    {
+     "command": "next",
+     "args": []
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p1"
+     ],
+     "then": 8,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p2"
+     ],
+     "then": 9,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p3"
+     ],
+     "then": 10,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p4"
+     ],
+     "then": 11,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "if",
+     "args": [
+      "mira_p5"
+     ],
+     "then": 12,
+     "else": -1
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "mira_all"
+     ]
+    },
+    {
+     "command": "ach",
+     "args": [
+      "notebook"
+     ]
+    },
+    {
+     "command": "toast",
+     "args": [
+      "That's every page. If she left one more, it's where she is."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Run seven. Oh-two-forty, local. For the file."
+     ],
+     "vo": "evelyn_cba55bb942"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "We have been receiving the echo carrier for two years. Old broadcasts, delayed and smeared. A weather report from nineteen fifty. A dispatcher in a city that hasn't been built yet."
+     ],
+     "vo": "evelyn_b96e7f34d5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Tonight, for the first time, we transmitted. One word, on one-oh-seven-nine. 'Hello.'"
+     ],
+     "vo": "evelyn_fe4ee35592"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Eleven seconds later, something said it back."
+     ],
+     "vo": "evelyn_591f5fa90b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Not an echo. The timing's wrong for an echo. It waited. It chose when."
+     ],
+     "vo": "evelyn_b635f4c370"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "Marcus wants the array shut down. I told him he's frightened of the first real conversation in the history of our species."
+     ],
+     "vo": "evelyn_572b9b151c"
+    },
+    {
+     "command": "line",
+     "args": [
+      "EVELYN (TAPE)",
+      "He told me it isn't a conversation if only one of you is talking."
+     ],
+     "vo": "evelyn_7e394498b1"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "sfx",
+     "args": [
+      "power_up",
+      "-4",
+      "0.6"
+     ]
+    },
+    {
+     "command": "flag",
+     "args": [
+      "c5_hyd"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Accumulator's primed. The tunnel door has hydraulics again."
+     ],
+     "vo": "daniel_fce50b880e"
+    },
+    {
+     "command": "if",
+     "args": [
+      "power5"
+     ],
+     "then": 15,
+     "else": 16
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "flag",
+     "args": [
+      "c5_ready"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "Power's up and the door is primed. The tunnel door is at the east end of the turbine hall."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "obj",
+     "args": [
+      "Door's primed. Now the main bus — the breaker gallery is east of the control room."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hand crank. For a shutter, or a lift, or a very small car."
+     ],
+     "vo": "daniel_0ae6902891"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (1998)",
+      "Ruiz to control. I'm in the breaker gallery. Read me the restart order, I don't trust my memory tonight."
+     ],
+     "vo": "ruiz_e2d08a1a7b"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "Same as always, Ana. C. Then A. Then D. Then B."
+     ],
+     "vo": "okafor_d77c6babd5"
+    },
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (1998)",
+      "C, A, D, B. Say it again."
+     ],
+     "vo": "ruiz_b7c4754f78"
+    },
+    {
+     "command": "line",
+     "args": [
+      "OKAFOR (1998)",
+      "C, A, D, B. Why are you whispering?"
+     ],
+     "vo": "okafor_73a50c7b54"
+    },
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (1998)",
+      "Because the turbines are off, and something in here keeps saying it back to me."
+     ],
+     "vo": "ruiz_389fd51be9"
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "C, A, D, B."
+     ],
+     "vo": "daniel_c459805fda"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "cine",
+     "args": [
+      "true"
+     ]
+    },
+    {
+     "command": "listener",
+     "args": [
+      "spawn",
+      "g",
+      "watch"
+     ]
+    },
+    {
+     "command": "look",
+     "args": [
+      "g",
+      "2.2"
+     ]
+    },
+    {
+     "command": "cam",
+     "args": [
+      "w",
+      "g",
+      "2.5",
+      "",
+      "1.6",
+      "2.4"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Oh no."
+     ],
+     "vo": "daniel_d325ca3e10"
+    },
+    {
+     "command": "listener",
+     "args": [
+      "face"
+     ]
+    },
+    {
+     "command": "sfx",
+     "args": [
+      "screech",
+      "6",
+      "1",
+      "g"
+     ]
+    },
+    {
+     "command": "shake",
+     "args": [
+      "0.8"
+     ]
+    },
+    {
+     "command": "wait",
+     "args": [
+      "1.2"
+     ]
+    },
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "No, no, no — it saw me — it SAW me—"
+     ],
+     "vo": "daniel_c144766060"
+    },
+    {
+     "command": "camoff",
+     "args": []
+    },
+    {
+     "command": "listener",
+     "args": [
+      "hunt"
+     ]
+    },
+    {
+     "command": "cine",
+     "args": [
+      "false"
+     ]
+    },
+    {
+     "command": "obj",
+     "args": [
+      "RUN. The tunnel door — east end of the turbine hall."
+     ]
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (TAPE)",
+      "Ruiz. Workshop. Two-ten. I'm recording this so I don't lose my mind."
+     ],
+     "vo": "ruiz_bf4ab4a900"
+    },
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (TAPE)",
+      "The turbines say my name when they spin down. Not a noise that sounds like my name. My name. In my father's voice."
+     ],
+     "vo": "ruiz_43af8eb022"
+    },
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (TAPE)",
+      "He used to call me in from the yard on his CB. 'Ana. Ana, dinner.' Every night for twelve years."
+     ],
+     "vo": "ruiz_54e1ddff17"
+    },
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (TAPE)",
+      "That's how it works, I think. It doesn't need to be in the room. Somebody, somewhere, just has to have said your name into a radio once."
+     ],
+     "vo": "ruiz_590af73a9a"
+    },
+    {
+     "command": "line",
+     "args": [
+      "RUIZ (TAPE)",
+      "Everybody's had their name said into a radio once."
+     ],
+     "vo": "ruiz_8f1af8aa2b"
+    }
+   ]
+  },
+  {
+   "steps": [
+    {
+     "command": "line",
+     "args": [
+      "DANIEL",
+      "Hydraulic fluid. Five litres, sealed. Heavier than it looks."
+     ],
+     "vo": "daniel_635cb897cb"
+    }
+   ]
+  }
+ ]
+}
